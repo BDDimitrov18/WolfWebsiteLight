@@ -1,0 +1,285 @@
+@import "tailwindcss";
+
+/* ============================================================
+   WOLF — Design Tokens (§5)
+   Brand: land-surveying / cadastral / geodesy.
+   Derived from the desktop app: deep navy ink, burnt-ember
+   accent (the compass pivot), warm paper/cream surfaces.
+   ============================================================ */
+
+@theme {
+  /* ---- Ink (deep navy) ------------------------------------ */
+  --color-ink-950: #090d15;
+  --color-ink-900: #0e1422;
+  --color-ink-850: #111829;
+  --color-ink-800: #141c2b;
+  --color-ink-700: #1c2434;
+  --color-ink-600: #283247;
+  --color-ink-500: #3a465f;
+  --color-ink-400: #5a6883;
+  --color-ink-300: #8593ad;
+
+  /* ---- Ember (burnt orange — the pivot dot) --------------- */
+  --color-ember-700: #a84d22;
+  --color-ember-600: #c25e2a;
+  --color-ember-500: #d97a40;
+  --color-ember-400: #ed9a57;
+  --color-ember-300: #f4b77e;
+  --color-ember-200: #f9d4ad;
+
+  /* ---- Paper (warm cream surfaces) ----------------------- */
+  --color-paper-50: #fdfbf7;
+  --color-paper-100: #f7f2ea;
+  --color-paper-200: #efe6d7;
+  --color-paper-300: #e3d6c2;
+  --color-paper-400: #cdba9e;
+
+  /* ---- Surveyor accents (secondary, sparing use) --------- */
+  --color-survey-500: #4f7d8c; /* muted teal — the "archive/blue" mode echo */
+  --color-survey-400: #6fa0ae;
+
+  /* ---- Semantic ------------------------------------------ */
+  --color-background: var(--color-ink-900);
+  --color-foreground: var(--color-paper-100);
+
+  /* ---- Type families ------------------------------------- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* ---- Type scale eyebrow -------------------------------- */
+  --text-eyebrow: 0.78rem;
+
+  /* ---- Radius -------------------------------------------- */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  /* ---- Shadows (warm-tinted, never pure black) ----------- */
+  --shadow-ambient: 0 1px 2px rgba(9, 13, 21, 0.4),
+    0 12px 40px -12px rgba(9, 13, 21, 0.55);
+  --shadow-frame: 0 30px 60px -30px rgba(9, 13, 21, 0.7),
+    0 8px 24px -12px rgba(9, 13, 21, 0.45);
+  --shadow-ember: 0 10px 30px -8px rgba(194, 94, 42, 0.45);
+
+  /* ---- Easing -------------------------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    /* Fluid heading sizes */
+    --fs-display: clamp(2.05rem, 1rem + 4.6vw, 5.4rem);
+    --fs-h2: clamp(1.75rem, 1.2rem + 2.4vw, 3.1rem);
+    --fs-h3: clamp(1.25rem, 1rem + 0.9vw, 1.6rem);
+    --fs-lead: clamp(1.05rem, 0.98rem + 0.45vw, 1.3rem);
+  }
+
+  * {
+    border-color: color-mix(in srgb, var(--color-ink-500) 60%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-900);
+    color: var(--color-paper-100);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv05" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-ember-500);
+    color: var(--color-ink-950);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  /* Focus ring — keyboard accessible */
+  :focus-visible {
+    outline: 2px solid var(--color-ember-400);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* ============================================================
+   Reusable primitives
+   ============================================================ */
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-eyebrow);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-ember-400);
+  }
+
+  .display {
+    font-size: var(--fs-display);
+  }
+
+  .lead {
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--color-paper-100) 78%, transparent);
+  }
+
+  /* Grain + topographic paper texture used on light panels */
+  .paper-grain {
+    background-image:
+      radial-gradient(
+        circle at 1px 1px,
+        color-mix(in srgb, var(--color-ink-700) 9%, transparent) 1px,
+        transparent 0
+      );
+    background-size: 22px 22px;
+  }
+
+  /* Hairline coordinate grid (dark sections) */
+  .coord-grid {
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-ink-400) 12%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-ink-400) 12%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 64px 64px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    line-height: 1;
+    border-radius: var(--radius-md);
+    padding: 0.95rem 1.5rem;
+    transition: transform 0.35s var(--ease-out-expo),
+      box-shadow 0.35s var(--ease-out-expo),
+      background-color 0.25s ease, color 0.25s ease;
+    will-change: transform;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-primary {
+    background-color: var(--color-ember-500);
+    color: var(--color-ink-950);
+    box-shadow: var(--shadow-ember);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-ember-400);
+  }
+
+  .btn-ghost {
+    background-color: color-mix(in srgb, var(--color-paper-100) 6%, transparent);
+    color: var(--color-paper-100);
+    border: 1px solid color-mix(in srgb, var(--color-paper-100) 16%, transparent);
+  }
+  .btn-ghost:hover {
+    background-color: color-mix(in srgb, var(--color-paper-100) 12%, transparent);
+  }
+}
+
+/* ============================================================
+   Keyframes (transform/opacity only — GPU friendly)
+   ============================================================ */
+
+@keyframes wolf-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -1.4%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes wolf-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes wolf-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+.animate-drift {
+  animation: wolf-drift 16s ease-in-out infinite;
+}
+.animate-sweep {
+  transform-origin: center;
+  animation: wolf-sweep 32s linear infinite;
+}
+.animate-pulse-pivot {
+  transform-origin: center;
+  animation: wolf-pulse 3.4s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------
+   CSS scroll-driven reveal — robust progressive enhancement.
+   Content is ALWAYS visible by default (opacity 1); where the
+   browser supports scroll timelines and motion is allowed, it
+   fades/rises in as it enters the viewport. No JS, no observer.
+   ------------------------------------------------------------ */
+@keyframes reveal-rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: none; }
+}
+
+.reveal-css {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal-css {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 22%;
+    }
+  }
+}

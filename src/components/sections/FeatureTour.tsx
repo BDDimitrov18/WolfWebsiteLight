@@ -114,9 +114,17 @@ export function FeatureTour() {
           title={t("features.title")}
           subtitle={t("features.subtitle")}
         />
+      </Container>
 
+      {/* The tour breaks out of the standard container: on large screens
+          the sticky frame should dominate the viewport, not sit inside a
+          1280px column. */}
+      <div className="mx-auto w-full max-w-[105rem] px-5 sm:px-8 lg:px-10">
         {/* ================= Desktop: sticky frame + scrolling stations ================= */}
-        <div ref={rootRef} className="mt-16 hidden lg:grid lg:grid-cols-[5fr_7fr] lg:gap-12">
+        <div
+          ref={rootRef}
+          className="mt-16 hidden lg:grid lg:grid-cols-[minmax(20rem,2fr)_3fr] lg:gap-12 xl:grid-cols-[minmax(22rem,1fr)_2fr] xl:gap-16"
+        >
           {/* Left: stations */}
           <div>
             {TOUR.map((row, i) => {
@@ -155,9 +163,9 @@ export function FeatureTour() {
             })}
           </div>
 
-          {/* Right: sticky instrument frame */}
+          {/* Right: sticky instrument frame — vertically centered in the viewport */}
           <div>
-            <div className="sticky top-28">
+            <div className="sticky top-1/2 -translate-y-1/2">
               <div className="mb-3 flex items-center justify-between font-mono text-xs tracking-[0.18em] text-ink-400">
                 <span ref={tagRef} className="uppercase text-ember-400" />
                 <span>
@@ -232,7 +240,7 @@ export function FeatureTour() {
             );
           })}
         </div>
-      </Container>
+      </div>
     </Section>
   );
 }

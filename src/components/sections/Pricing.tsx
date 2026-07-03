@@ -20,7 +20,7 @@ export function Pricing() {
   const cards = t<Card[]>("pricing.cards");
 
   return (
-    <Section id="pricing" className="bg-ink-900">
+    <Section id="pricing" hud={t("pricing.eyebrow")} className="bg-ink-900">
       <Container>
         <SectionHeading
           eyebrow={t("pricing.eyebrow")}
@@ -36,7 +36,7 @@ export function Pricing() {
           {cards.map((card) => (
             <RevealItem key={card.name} className="h-full">
               <article
-                className="relative flex h-full flex-col rounded-2xl border p-7"
+                className="relative flex h-full flex-col rounded-2xl border p-7 transition-all duration-500 hover:-translate-y-2 hover:border-ember-500/50"
                 style={{
                   borderColor: card.featured
                     ? "color-mix(in srgb, var(--color-ember-500) 55%, transparent)"

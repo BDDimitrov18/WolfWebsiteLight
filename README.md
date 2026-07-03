@@ -3,8 +3,9 @@
 Marketing site + documentation scaffold for **Wolf**, a multi-user management
 system for surveying, cadastral and legal-documentation practices (Bulgaria).
 
-Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4** and
-**Framer Motion**. Bilingual **BG / EN** with a language toggle. Fully
+Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**,
+**GSAP** (ScrollTrigger + SplitText), **Lenis** smooth scrolling and a
+**Three.js** hero scene. Bilingual **BG / EN** with a language toggle. Fully
 responsive and reduced-motion / no-JS safe.
 
 All product copy is grounded in `../Wolf.Desktop/PROJECT_OVERVIEW.md`
@@ -25,20 +26,31 @@ npm run start      # serve the production build
 src/
   app/
     layout.tsx            Root layout — fonts (Inter / Playfair / IBM Plex Mono),
-                          LocaleProvider, metadata, no-JS fallback
-    page.tsx              Landing page (composes the sections)
+                          LocaleProvider + ExperienceProvider, metadata,
+                          no-JS fallback, grain overlay
+    page.tsx              Landing page (sections + Cursor + CoordReadout)
     globals.css           Design tokens (§5): palette, type scale, spacing,
-                          radius, shadows + CSS scroll-reveal utilities
+                          radius, shadows + experience-layer CSS (Lenis,
+                          intro gating with failsafe, marquee, cursor, grain)
     docs/                 /docs scaffold (getting-started, model, filters, reports)
   components/
-    layout/               Navbar, Footer, Logo, LanguageToggle
-    sections/             Hero, TrustBar, Pillars, FeatureTour, TitleChain,
-                          Architecture, Pricing, CTA
+    providers/            ExperienceProvider — Lenis smooth scroll driven by the
+                          GSAP ticker, capability flags, preloader hand-off
+    three/                TerrainCanvas / TerrainScene — the "living survey"
+                          Three.js hero terrain (code-split, client-only)
+    layout/               Navbar (hide-on-scroll + progress hairline), Footer,
+                          Logo, LanguageToggle
+    sections/             Hero, TrustBar (marquee + counters), Pillars (tilt),
+                          FeatureTour (sticky-frame tour), TitleChain,
+                          Architecture (scrub-drawn net), Pricing, CTA
     motifs/               Geodesy SVG motifs (compass, contour lines,
                           triangulation, crosshair, compass rose, ideal-parts)
-    ui/                   Section, Reveal, ScreenshotFrame
+    ui/                   Section, Reveal (GSAP), SplitHeading, Magnetic,
+                          Counter, Marquee, TiltCard, Cursor, CoordReadout,
+                          Preloader, ScreenshotFrame
     docs/                 DocsShell, DocsSidebar, DocArticle
   lib/
+    gsap.ts               Central GSAP registration (ScrollTrigger, SplitText)
     i18n/                 LocaleProvider + BG/EN dictionaries (all copy)
     docs/                 Bilingual docs content (data-driven, easy to extend)
 public/
@@ -77,10 +89,26 @@ are reusable as-is.
 current locale and setter. Locale is persisted to `localStorage` and seeded
 from the browser language (BG default).
 
+## The experience layer
+
+- **Preloader** — instrument-calibration plate (coordinates tick to Sofia),
+  once per tab session, hands off into the hero intro.
+- **Hero** — Three.js triangulated terrain with survey-station points, an
+  ember LiDAR sweep and mouse parallax; SplitText headline choreography.
+- **Scroll** — Lenis smooth scrolling synced to GSAP ScrollTrigger; the
+  feature tour keeps a sticky product frame that crossfades per station.
+- **Microinteractions** — magnetic buttons, tilt cards, reticle cursor
+  (mouse-grade pointers only), count-up stats, module marquee, and a fixed
+  coordinate HUD that ticks northing/easting as you traverse the page.
+
 ## Accessibility & performance
 
-- `prefers-reduced-motion` honoured — reveals render statically, no animation.
-- No-JS fallback ensures all content is visible (see `layout.tsx` `<noscript>`).
-- Scroll-reveal uses CSS scroll-driven animations (`.reveal-css`) — content is
-  always visible by default; the animation is pure progressive enhancement.
+- `prefers-reduced-motion` honoured everywhere — no preloader, static terrain
+  frame, instant reveals, no marquee/cursor.
+- No-JS fallback: content ships visible in the HTML; intro-hidden elements are
+  gated behind an `html.js` class **plus a CSS failsafe** that force-reveals
+  after 2.8 s even if scripts crash.
+- Three.js is code-split and client-only; the render loop pauses when the
+  hero is offscreen or the tab is hidden; DPR is clamped; geometry is halved
+  on mobile. No WebGL → SVG contours remain as the backdrop.
 - All routes are statically prerendered.

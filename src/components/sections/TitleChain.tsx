@@ -1,8 +1,12 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { gsap } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { SplitHeading } from "@/components/ui/SplitHeading";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { IdealPartsGlyph } from "@/components/motifs/GeodesyMotifs";
 
 interface Step {
@@ -10,13 +14,62 @@ interface Step {
   value: string;
 }
 
+/**
+ * The notarial-paper band. The plot→document→owner→PoA chain assembles
+ * itself as it scrolls in: the spine grows downward and each link snaps
+ * on with its station badge.
+ */
 export function TitleChain() {
   const t = useT();
+  const { locale } = useLocale();
   const steps = t<Step[]>("titleChain.steps");
+  const chainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = chainRef.current;
+    if (!root) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      const items = gsap.utils.toArray<HTMLElement>("[data-chain-item]", root);
+      const badges = gsap.utils.toArray<HTMLElement>("[data-chain-badge]", root);
+      const spine = root.querySelector<HTMLElement>("[data-chain-spine]");
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: root, start: "top 75%", once: true },
+        defaults: { ease: "expo.out" },
+      });
+      if (spine)
+        tl.fromTo(
+          spine,
+          { scaleY: 0, transformOrigin: "top center" },
+          { scaleY: 1, duration: 1.4, ease: "power2.inOut" },
+          0,
+        );
+      tl.fromTo(
+        items,
+        { autoAlpha: 0, x: 36 },
+        { autoAlpha: 1, x: 0, duration: 0.9, stagger: 0.16 },
+        0.1,
+      ).fromTo(
+        badges,
+        { scale: 0 },
+        {
+          scale: 1,
+          duration: 0.7,
+          stagger: 0.16,
+          ease: "back.out(2.2)",
+        },
+        0.22,
+      );
+    }, root);
+    return () => ctx.revert();
+  }, [locale]);
 
   return (
     <Section
       id="title-chain"
+      hud={t("titleChain.eyebrow")}
       className="paper-grain text-ink-900"
       // light "paper" band — a notarial-deed contrast to the dark sections
     >
@@ -35,13 +88,16 @@ export function TitleChain() {
               <span className="inline-block h-px w-8 bg-current opacity-60" />
               {t("titleChain.eyebrow")}
             </p>
-            <Reveal>
-              <h2
-                className="text-balance font-display"
-                style={{ fontSize: "var(--fs-h2)", color: "var(--color-ink-900)" }}
-              >
-                {t("titleChain.title")}
-              </h2>
+            <SplitHeading
+              key={`tc-${locale}`}
+              as="h2"
+              mode="scroll"
+              className="text-balance font-display"
+              style={{ fontSize: "var(--fs-h2)", color: "var(--color-ink-900)" }}
+            >
+              {t("titleChain.title")}
+            </SplitHeading>
+            <Reveal delay={0.1}>
               <p
                 className="mt-5 max-w-xl text-pretty leading-relaxed"
                 style={{ color: "color-mix(in srgb, var(--color-ink-700) 85%, transparent)" }}
@@ -52,7 +108,7 @@ export function TitleChain() {
           </div>
 
           {/* Animated ownership chain */}
-          <div className="relative">
+          <div className="relative" ref={chainRef}>
             <div
               className="rounded-2xl border bg-paper-50 p-6 sm:p-8"
               style={{
@@ -71,16 +127,19 @@ export function TitleChain() {
                 {/* connecting spine */}
                 <span
                   aria-hidden
+                  data-chain-spine
                   className="absolute left-[1.15rem] top-2 bottom-2 w-px"
                   style={{ background: "color-mix(in srgb, var(--color-ember-500) 45%, transparent)" }}
                 />
                 {steps.map((s, i) => (
                   <li
                     key={s.label}
-                    className="reveal-css relative flex items-center gap-4 rounded-xl border bg-paper-100 px-4 py-3.5"
+                    data-chain-item
+                    className="relative flex items-center gap-4 rounded-xl border bg-paper-100 px-4 py-3.5 transition-colors duration-300 hover:border-ember-500/50"
                     style={{ borderColor: "color-mix(in srgb, var(--color-ink-700) 12%, transparent)" }}
                   >
                     <span
+                      data-chain-badge
                       className="relative z-10 flex h-9 w-9 flex-none items-center justify-center rounded-full font-mono text-sm font-semibold"
                       style={{
                         background: "var(--color-ember-500)",

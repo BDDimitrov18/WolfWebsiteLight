@@ -44,6 +44,7 @@ const bg = {
     floatA: "Поръчка → дейности → задачи",
     floatB: "Парцел → документ → собственик",
     coord: "42.6977° N · 23.3219° E",
+    scroll: "Скролирайте",
   },
   trust: {
     title: "Една система за целия жизнен цикъл на поръчката",
@@ -333,6 +334,7 @@ const en: typeof bg = {
     floatA: "Order → activities → tasks",
     floatB: "Plot → document → owner",
     coord: "42.6977° N · 23.3219° E",
+    scroll: "Scroll",
   },
   trust: {
     title: "One system for the whole order lifecycle",

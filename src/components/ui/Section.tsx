@@ -1,4 +1,9 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { useLocale } from "@/lib/i18n/LocaleProvider";
+import { SplitHeading } from "@/components/ui/SplitHeading";
+import { Reveal } from "@/components/ui/Reveal";
 
 /** Standard horizontal container. */
 export function Container({
@@ -20,14 +25,18 @@ export function Section({
   children,
   id,
   className = "",
+  hud,
 }: {
   children: ReactNode;
   id?: string;
   className?: string;
+  /** Label shown in the fixed coordinate HUD while this section is in view. */
+  hud?: string;
 }) {
   return (
     <section
       id={id}
+      data-hud={hud}
       className={`relative scroll-mt-24 py-24 sm:py-28 lg:py-36 ${className}`}
     >
       {children}
@@ -35,7 +44,7 @@ export function Section({
   );
 }
 
-/** Section header: mono eyebrow + display heading + lead. */
+/** Section header: mono eyebrow + split-reveal display heading + lead. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -49,6 +58,7 @@ export function SectionHeading({
   align?: "left" | "center";
   tone?: "light" | "dark";
 }) {
+  const { locale } = useLocale();
   const headColor =
     tone === "light" ? "var(--color-paper-50)" : "var(--color-ink-900)";
   const subColor =
@@ -69,16 +79,21 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2
+      <SplitHeading
+        key={`sh-${locale}`}
+        as="h2"
+        mode="scroll"
         className="text-balance"
         style={{ fontSize: "var(--fs-h2)", color: headColor }}
       >
         {title}
-      </h2>
+      </SplitHeading>
       {subtitle && (
-        <p className="mt-5 text-pretty lead" style={{ color: subColor }}>
-          {subtitle}
-        </p>
+        <Reveal delay={0.12}>
+          <p className="mt-5 text-pretty lead" style={{ color: subColor }}>
+            {subtitle}
+          </p>
+        </Reveal>
       )}
     </div>
   );

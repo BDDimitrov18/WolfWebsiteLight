@@ -8,6 +8,8 @@ import { TitleChain } from "@/components/sections/TitleChain";
 import { Architecture } from "@/components/sections/Architecture";
 import { Pricing } from "@/components/sections/Pricing";
 import { CTA } from "@/components/sections/CTA";
+import { Cursor } from "@/components/ui/Cursor";
+import { CoordReadout } from "@/components/ui/CoordReadout";
 
 export default function Home() {
   return (
@@ -24,6 +26,9 @@ export default function Home() {
         <CTA />
       </main>
       <Footer />
+      {/* Experience chrome: reticle cursor + instrument HUD (desktop) */}
+      <Cursor />
+      <CoordReadout />
     </>
   );
 }

@@ -188,6 +188,8 @@
   }
 
   .btn {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -200,6 +202,24 @@
       box-shadow 0.35s var(--ease-out-expo),
       background-color 0.25s ease, color 0.25s ease;
     will-change: transform;
+  }
+  /* Sheen sweep on the primary action */
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-130%) skewX(-18deg);
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 70%
+    );
+    transition: transform 0.75s var(--ease-out-expo);
+    pointer-events: none;
+  }
+  .btn-primary:hover::after {
+    transform: translateX(130%) skewX(-18deg);
   }
   .btn:hover {
     transform: translateY(-2px);
@@ -259,27 +279,157 @@
   animation: wolf-pulse 3.4s ease-in-out infinite;
 }
 
-/* ------------------------------------------------------------
-   CSS scroll-driven reveal — robust progressive enhancement.
-   Content is ALWAYS visible by default (opacity 1); where the
-   browser supports scroll timelines and motion is allowed, it
-   fades/rises in as it enters the viewport. No JS, no observer.
-   ------------------------------------------------------------ */
+/* Used by the mobile menu mount transition. */
 @keyframes reveal-rise {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: none; }
 }
 
-.reveal-css {
-  opacity: 1;
+/* ============================================================
+   Experience layer (GSAP + Lenis + cursor + HUD)
+   ============================================================ */
+
+/* ---- Lenis smooth scroll (recommended base styles) -------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .reveal-css {
-      animation: reveal-rise linear both;
-      animation-timeline: view();
-      animation-range: entry 5% cover 22%;
-    }
+/* ---- JS-gated intro states --------------------------------
+   Elements that the hero intro choreographs carry `.intro-hide`.
+   They are hidden ONLY once JS has proven it runs (html.js is set
+   by an inline script before paint), and a failsafe keyframe
+   force-reveals them after 2.8s even if every script after that
+   point crashed. No JS → fully visible, always. */
+html.js .intro-hide {
+  opacity: 0;
+  animation: intro-failsafe 0.01s linear 2.8s forwards;
+}
+@keyframes intro-failsafe {
+  to {
+    opacity: 1;
   }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .intro-hide {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+/* SplitText masking: each line clips inside its wrapper while rising */
+.split-mask .split-line-wrap {
+  overflow: clip;
+}
+
+/* ---- Marquee ---------------------------------------------- */
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-dur, 46s) linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ---- Custom reticle cursor (mouse-grade pointers only) ----- */
+@media (pointer: fine) {
+  html.wolf-cursor,
+  html.wolf-cursor a,
+  html.wolf-cursor button,
+  html.wolf-cursor label,
+  html.wolf-cursor [role="button"] {
+    cursor: none;
+  }
+  html.wolf-cursor input,
+  html.wolf-cursor textarea,
+  html.wolf-cursor select {
+    cursor: auto;
+  }
+}
+
+/* ---- Film grain (static, GPU-cheap) ------------------------ */
+.grain-overlay {
+  position: fixed;
+  inset: -50%;
+  z-index: 80;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+}
+
+/* ---- Nav link underline sweep ------------------------------ */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-ember-400);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* ---- Hero scroll cue: travelling dash ----------------------- */
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-110%);
+  }
+  100% {
+    transform: translateY(220%);
+  }
+}
+.scroll-cue-dash {
+  animation: scroll-cue 1.9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue-dash {
+    animation: none;
+  }
+}
+
+/* ---- Scroll progress hairline (navbar) --------------------- */
+.scroll-progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(
+    90deg,
+    var(--color-ember-600),
+    var(--color-ember-400)
+  );
 }

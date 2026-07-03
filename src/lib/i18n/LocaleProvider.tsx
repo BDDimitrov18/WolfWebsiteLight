@@ -15,8 +15,8 @@ type Dict = (typeof dictionaries)["bg"];
 
 /**
  * Translation accessor. Overloaded so that the bare call returns `string`
- * (avoids framer-motion's children type widening the generic via context),
- * while `t<T>(path)` returns the typed value for arrays/objects.
+ * (keeps JSX children typing tight), while `t<T>(path)` returns the
+ * typed value for arrays/objects.
  */
 export interface Translate {
   (path: string): string;

@@ -206,10 +206,12 @@ export function CompassRose({ className, ...props }: SVGProps<SVGSVGElement>) {
           const major = i % 6 === 0;
           const a = (i / ticks.length) * Math.PI * 2;
           const r1 = major ? 78 : 84;
-          const x1 = 100 + Math.cos(a) * r1;
-          const y1 = 100 + Math.sin(a) * r1;
-          const x2 = 100 + Math.cos(a) * 92;
-          const y2 = 100 + Math.sin(a) * 92;
+          // Rounded: Math.sin/cos results can differ in the last ulp between
+          // JS engines (Node SSR vs browser) → hydration mismatch otherwise.
+          const x1 = +(100 + Math.cos(a) * r1).toFixed(3);
+          const y1 = +(100 + Math.sin(a) * r1).toFixed(3);
+          const x2 = +(100 + Math.cos(a) * 92).toFixed(3);
+          const y2 = +(100 + Math.sin(a) * 92).toFixed(3);
           return (
             <line
               key={i}

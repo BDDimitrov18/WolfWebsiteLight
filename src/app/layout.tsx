@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
+import { ExperienceProvider } from "@/components/providers/ExperienceProvider";
 import { asset } from "@/lib/asset";
 
 // All three families carry Cyrillic so Bulgarian copy renders natively.
@@ -57,12 +58,22 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full">
+        {/* Runs before anything paints: proves JS works so `.intro-hide`
+            elements may start hidden (see globals.css — with a failsafe). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add("js");`,
+          }}
+        />
         {/* Resilience: if JS is disabled, scroll-reveal content (rendered
             with initial opacity:0) must still be visible. */}
         <noscript>
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
-        <LocaleProvider>{children}</LocaleProvider>
+        <LocaleProvider>
+          <ExperienceProvider>{children}</ExperienceProvider>
+        </LocaleProvider>
+        <div aria-hidden className="grain-overlay" />
       </body>
     </html>
   );

@@ -1,16 +1,43 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
+import { gsap } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { CompassMark, ContourLines } from "@/components/motifs/GeodesyMotifs";
 
 export function CTA() {
   const t = useT();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const contourRef = useRef<HTMLDivElement>(null);
+
+  // Contours drift upward slowly as the section scrolls through.
+  useEffect(() => {
+    const el = contourRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el,
+        { yPercent: 12 },
+        {
+          yPercent: -10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el.parentElement,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        },
+      );
+    }, el);
+    return () => ctx.revert();
+  }, []);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -23,7 +50,7 @@ export function CTA() {
   };
 
   return (
-    <Section id="contact" className="relative overflow-hidden">
+    <Section id="contact" hud={t("cta.eyebrow")} className="relative overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
@@ -32,7 +59,13 @@ export function CTA() {
             "linear-gradient(160deg, var(--color-ink-800), var(--color-ink-950))",
         }}
       />
-      <ContourLines className="pointer-events-none absolute -bottom-1/3 left-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 text-ink-500 opacity-40" />
+      <div
+        ref={contourRef}
+        aria-hidden
+        className="pointer-events-none absolute -bottom-1/3 left-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2"
+      >
+        <ContourLines className="h-full w-full text-ink-500 opacity-40" />
+      </div>
 
       <Container>
         <div
@@ -78,9 +111,11 @@ export function CTA() {
               className="w-full flex-1 rounded-md border bg-ink-950/60 px-4 py-3 text-sm text-paper-50 placeholder:text-ink-400 focus:border-ember-400"
               style={{ borderColor: "color-mix(in srgb, var(--color-paper-100) 16%, transparent)" }}
             />
-            <button type="submit" className="btn btn-primary">
-              {sent ? "✓" : t("cta.send")}
-            </button>
+            <Magnetic>
+              <button type="submit" className="btn btn-primary w-full">
+                {sent ? "✓" : t("cta.send")}
+              </button>
+            </Magnetic>
           </form>
 
           <div className="mt-5 flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-6">

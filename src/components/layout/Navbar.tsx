@@ -1,23 +1,76 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
 
+/**
+ * Fixed navbar that gets out of the way: slides up while you scroll
+ * down, returns the moment you scroll back. An ember hairline along its
+ * bottom edge charts overall page progress.
+ */
 export function Navbar() {
   const t = useT();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const progressRef = useRef<HTMLSpanElement>(null);
+  const openRef = useRef(open);
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
 
+  // Solid backdrop once past the fold edge.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Hide on scroll-down / reveal on scroll-up + progress hairline.
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const yTo = gsap.quickTo(header, "yPercent", {
+      duration: 0.6,
+      ease: "expo.out",
+    });
+
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const goingDown = y > lastY + 4;
+      const goingUp = y < lastY - 4;
+      if (!openRef.current) {
+        if (goingDown && y > 420) yTo(reduce ? 0 : -110);
+        else if (goingUp || y <= 420) yTo(0);
+      }
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const st = ScrollTrigger.create({
+      trigger: document.body,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        if (progressRef.current)
+          progressRef.current.style.transform = `scaleX(${self.progress})`;
+      },
+    });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      st.kill();
+      gsap.killTweensOf(header);
+    };
   }, []);
 
   // Lock scroll while the mobile menu is open.
@@ -36,20 +89,18 @@ export function Navbar() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <motion.div
-        initial={false}
-        animate={{
-          backgroundColor: scrolled
+    <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 will-change-transform">
+      <div
+        className="relative border-b backdrop-blur-md transition-colors duration-400"
+        style={{
+          borderBottomWidth: 1,
+          background: scrolled
             ? "color-mix(in srgb, var(--color-ink-950) 82%, transparent)"
-            : "rgba(0,0,0,0)",
+            : "transparent",
           borderColor: scrolled
             ? "color-mix(in srgb, var(--color-paper-100) 9%, transparent)"
-            : "rgba(0,0,0,0)",
+            : "transparent",
         }}
-        transition={{ duration: 0.4 }}
-        className="border-b backdrop-blur-md"
-        style={{ borderBottomWidth: 1 }}
       >
         <Container>
           <nav className="flex h-16 items-center justify-between gap-4">
@@ -60,7 +111,7 @@ export function Navbar() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="text-sm text-ink-300 transition-colors hover:text-paper-50"
+                  className="nav-link text-sm text-ink-300 transition-colors hover:text-paper-50"
                 >
                   {l.label}
                 </Link>
@@ -87,49 +138,48 @@ export function Navbar() {
             </div>
           </nav>
         </Container>
-      </motion.div>
+
+        {/* Page progress hairline */}
+        <span ref={progressRef} aria-hidden className="scroll-progress" />
+      </div>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
-            className="md:hidden"
-            style={{
-              background: "var(--color-ink-950)",
-              borderBottom: "1px solid color-mix(in srgb, var(--color-paper-100) 9%, transparent)",
-            }}
-          >
-            <Container>
-              <div className="flex flex-col gap-1 py-4">
-                {links.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="rounded-md px-3 py-3 text-base text-paper-100 transition-colors hover:bg-ink-800"
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-                <div className="mt-3 flex items-center justify-between px-3">
-                  <LanguageToggle />
-                  <Link
-                    href="/#contact"
-                    onClick={() => setOpen(false)}
-                    className="btn btn-primary h-9 px-4 py-0 text-sm"
-                  >
-                    {t("nav.cta")}
-                  </Link>
-                </div>
+      {open && (
+        <div
+          className="md:hidden"
+          style={{
+            background: "var(--color-ink-950)",
+            borderBottom:
+              "1px solid color-mix(in srgb, var(--color-paper-100) 9%, transparent)",
+            animation: "reveal-rise 0.3s var(--ease-out-expo) both",
+          }}
+        >
+          <Container>
+            <div className="flex flex-col gap-1 py-4">
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-3 text-base text-paper-100 transition-colors hover:bg-ink-800"
+                >
+                  {l.label}
+                </Link>
+              ))}
+              <div className="mt-3 flex items-center justify-between px-3">
+                <LanguageToggle />
+                <Link
+                  href="/#contact"
+                  onClick={() => setOpen(false)}
+                  className="btn btn-primary h-9 px-4 py-0 text-sm"
+                >
+                  {t("nav.cta")}
+                </Link>
               </div>
-            </Container>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+          </Container>
+        </div>
+      )}
     </header>
   );
 }

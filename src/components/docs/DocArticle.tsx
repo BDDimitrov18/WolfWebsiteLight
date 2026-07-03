@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
-import { getDocPage, type DocBlock } from "@/lib/docs/content";
+import { DOC_PAGES, getDocPage, type DocBlock, type DocPage } from "@/lib/docs/content";
 import { Reveal } from "@/components/ui/Reveal";
 import { ScreenshotFrame } from "@/components/ui/ScreenshotFrame";
 
@@ -43,7 +43,10 @@ export function DocArticle({ slug }: { slug: string }) {
           ))}
         </div>
 
-        <div className="mt-14 border-t border-ink-700 pt-6">
+        {/* Prev / next station pager */}
+        <Pager slug={slug} />
+
+        <div className="mt-8 border-t border-ink-700 pt-6">
           <Link
             href="/"
             className="font-mono text-xs tracking-wide text-ink-400 transition-colors hover:text-paper-50"
@@ -76,6 +79,109 @@ export function DocArticle({ slug }: { slug: string }) {
         </aside>
       )}
     </div>
+  );
+}
+
+/**
+ * Station-to-station navigation: the docs read like a survey traverse,
+ * so the pager carries the same language — a numbered station, a
+ * bearing arrow that slides on hover, an ember edge lighting up.
+ */
+function Pager({ slug }: { slug: string }) {
+  const { locale, t } = useLocale();
+  const idx = DOC_PAGES.findIndex((p) => p.slug === slug);
+  if (idx === -1) return null;
+  const prev = idx > 0 ? DOC_PAGES[idx - 1] : undefined;
+  const next = idx < DOC_PAGES.length - 1 ? DOC_PAGES[idx + 1] : undefined;
+  if (!prev && !next) return null;
+
+  const href = (p: DocPage) => (p.slug ? `/docs/${p.slug}` : "/docs");
+  const station = (p: DocPage) =>
+    `${String(DOC_PAGES.indexOf(p) + 1).padStart(2, "0")} / ${String(DOC_PAGES.length).padStart(2, "0")}`;
+
+  return (
+    <nav
+      aria-label={`${t("docs.prev")} / ${t("docs.next")}`}
+      className="mt-14 grid gap-4 sm:grid-cols-2"
+    >
+      {prev ? (
+        <Link
+          href={href(prev)}
+          rel="prev"
+          className="group relative flex flex-col gap-2.5 overflow-hidden rounded-xl border p-5 transition-all duration-300 hover:-translate-y-0.5"
+          style={{
+            borderColor: "color-mix(in srgb, var(--color-paper-100) 10%, transparent)",
+            background: "color-mix(in srgb, var(--color-ink-800) 55%, transparent)",
+          }}
+        >
+          <span
+            aria-hidden
+            className="absolute inset-y-0 left-0 w-0.5 origin-top scale-y-0 bg-ember-500 transition-transform duration-500 ease-out group-hover:scale-y-100"
+          />
+          <span className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-400 transition-colors group-hover:text-ember-400">
+            <PagerArrow dir="prev" />
+            {t("docs.prev")}
+            <span className="ml-auto text-ink-500">{station(prev)}</span>
+          </span>
+          <span className="font-display text-lg leading-snug text-paper-100/85 transition-colors group-hover:text-paper-50">
+            {prev.title[locale]}
+          </span>
+        </Link>
+      ) : (
+        <span aria-hidden className="hidden sm:block" />
+      )}
+
+      {next && (
+        <Link
+          href={href(next)}
+          rel="next"
+          className="group relative flex flex-col gap-2.5 overflow-hidden rounded-xl border p-5 text-right transition-all duration-300 hover:-translate-y-0.5"
+          style={{
+            borderColor: "color-mix(in srgb, var(--color-ember-500) 32%, transparent)",
+            background:
+              "linear-gradient(135deg, color-mix(in srgb, var(--color-ember-600) 10%, transparent), color-mix(in srgb, var(--color-ink-800) 55%, transparent) 55%)",
+          }}
+        >
+          <span
+            aria-hidden
+            className="absolute inset-y-0 right-0 w-0.5 origin-bottom scale-y-0 bg-ember-500 transition-transform duration-500 ease-out group-hover:scale-y-100"
+          />
+          <span className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ember-400/90">
+            <span className="mr-auto text-ink-500">{station(next)}</span>
+            {t("docs.next")}
+            <PagerArrow dir="next" />
+          </span>
+          <span className="font-display text-lg leading-snug text-paper-50">
+            {next.title[locale]}
+          </span>
+        </Link>
+      )}
+    </nav>
+  );
+}
+
+function PagerArrow({ dir }: { dir: "prev" | "next" }) {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden
+      className={`flex-none transition-transform duration-300 ${
+        dir === "next"
+          ? "group-hover:translate-x-1"
+          : "rotate-180 group-hover:-translate-x-1"
+      }`}
+    >
+      <path
+        d="M2 8h11M9 3.5 13.5 8 9 12.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 

@@ -71,7 +71,7 @@ export const DOC_PAGES: DocPage[] = [
             },
             {
               t: "Готово",
-              d: "Данните на кантората се зареждат при входа, затова после всичко — търсене, филтри, списъци — реагира мигновено.",
+              d: "Данните на практиката се зареждат при входа, затова после всичко — търсене, филтри, списъци — реагира мигновено.",
             },
           ],
         },
@@ -154,7 +154,7 @@ export const DOC_PAGES: DocPage[] = [
     navKey: "orders",
     title: { bg: "Поръчки — работният екран", en: "Orders — the core screen" },
     intro: {
-      bg: "Всичко в Wolf започва от поръчката: възлагането на клиента, работата по него и плащането. Екранът „Поръчки“ е таблицата, в която живее цялата кантора.",
+      bg: "Всичко в Wolf започва от поръчката: възлагането на клиента, работата по него и плащането. Екранът „Поръчки“ е таблицата, в която живее цялата практика.",
       en: "Everything in Wolf starts from the order: the client's commission, the work on it and the payment. The Orders screen is the grid the whole firm lives in.",
     },
     blocks: {
@@ -263,7 +263,7 @@ export const DOC_PAGES: DocPage[] = [
     navKey: "archive",
     title: { bg: "Активни и архив", en: "Active & archive" },
     intro: {
-      bg: "Приключените поръчки не се трият — архивират се. Архивът пази пълната история на кантората и остава на един клик разстояние.",
+      bg: "Приключените поръчки не се трият — архивират се. Архивът пази пълната история на практиката и остава на един клик разстояние.",
       en: "Finished orders aren't deleted — they're archived. The archive keeps the firm's full history and stays one click away.",
     },
     blocks: {
@@ -318,7 +318,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "callout",
-          text: "Архивът не е кошче — той е паметта на кантората. Стара поръчка отпреди години се намира за секунди с филтрите: по имот, клиент, собственик или населено място.",
+          text: "Архивът не е кошче — той е паметта на практиката. Стара поръчка отпреди години се намира за секунди с филтрите: по имот, клиент, собственик или населено място.",
         },
       ],
       en: [
@@ -842,7 +842,7 @@ export const DOC_PAGES: DocPage[] = [
     navKey: "admin",
     title: { bg: "Администрация", en: "Administration" },
     intro: {
-      bg: "Прегледът на управителя: табло с финансите на кантората, статистика по служители и контрол на достъпа.",
+      bg: "Прегледът на управителя: табло с финансите на практиката, статистика по служители и контрол на достъпа.",
       en: "The manager's view: a dashboard with the firm's finances, per-employee statistics and access control.",
     },
     blocks: {

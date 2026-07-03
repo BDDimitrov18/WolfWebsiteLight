@@ -1,0 +1,114 @@
+"use client";
+
+import { useEffect } from "react";
+import { createPortal } from "react-dom";
+import Image from "next/image";
+import { gsap } from "@/lib/gsap";
+
+/**
+ * Full-screen viewer for product screenshots. The dense desktop UI is
+ * unreadable at column width — this shows it at (almost) full size.
+ * Closes on backdrop click, ✕ or Escape.
+ */
+export function Lightbox({
+  src,
+  alt,
+  title,
+  onClose,
+}: {
+  src: string;
+  alt: string;
+  title?: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce) {
+      gsap.fromTo(
+        "[data-lightbox-panel]",
+        { autoAlpha: 0, scale: 0.965 },
+        { autoAlpha: 1, scale: 1, duration: 0.45, ease: "expo.out" },
+      );
+      gsap.fromTo(
+        "[data-lightbox-backdrop]",
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.3 },
+      );
+    }
+
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[90] flex items-center justify-center p-4 sm:p-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label={alt}
+      data-lenis-prevent
+    >
+      <div
+        data-lightbox-backdrop
+        className="absolute inset-0"
+        style={{
+          background: "color-mix(in srgb, var(--color-ink-950) 88%, transparent)",
+          backdropFilter: "blur(8px)",
+        }}
+        onClick={onClose}
+        aria-hidden
+      />
+      <figure
+        data-lightbox-panel
+        className="relative flex max-h-full w-full max-w-6xl flex-col overflow-hidden rounded-xl border"
+        style={{
+          borderColor: "color-mix(in srgb, var(--color-paper-100) 14%, transparent)",
+          background: "var(--color-ink-900)",
+          boxShadow: "var(--shadow-frame)",
+        }}
+      >
+        <div
+          className="flex items-center justify-between gap-3 border-b px-4 py-2.5"
+          style={{
+            borderColor: "color-mix(in srgb, var(--color-paper-100) 9%, transparent)",
+            background: "var(--color-ink-950)",
+          }}
+        >
+          <span className="truncate font-mono text-xs tracking-wide text-ink-300">
+            {title ?? alt}
+          </span>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="flex h-8 w-8 flex-none items-center justify-center rounded-md border border-ink-600 text-paper-100 transition-colors hover:border-ember-500/60 hover:text-ember-300"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div className="relative min-h-0 flex-1 overflow-auto">
+          <Image
+            src={src}
+            alt={alt}
+            width={1919}
+            height={1032}
+            sizes="95vw"
+            className="h-auto w-full"
+            priority
+          />
+        </div>
+      </figure>
+    </div>,
+    document.body,
+  );
+}

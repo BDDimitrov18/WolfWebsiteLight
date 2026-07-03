@@ -4,6 +4,9 @@ Per the brief: every feature claim in the site was checked against the source
 of truth, `../Wolf.Desktop/PROJECT_OVERVIEW.md`. Section references (§) point
 into that document. ✅ = directly supported. ⚠️ = flagged (see notes).
 
+*Updated after the product-first copy revision (tech framing → product
+outcomes) and the docs completion.*
+
 ## Hero
 | Claim | Source | |
 |---|---|---|
@@ -16,58 +19,74 @@ into that document. ✅ = directly supported. ⚠️ = flagged (see notes).
 | Claim | Source | |
 |---|---|---|
 | 20+ working screens | §10 ("20+ major screens") | ✅ |
-| 100+ API endpoints | §6.2 ("~100+ endpoints") | ✅ |
-| **0 ms — UI served from cache** | §7.3 (in-memory cache, "the UI is instant") | ⚠️ Illustrative phrasing, not a measured latency. Conveys the instant, cache-served UI; not a literal benchmark. |
-| 58 automated tests | §3.5, §9.1 | ✅ |
+| 5 ready-made Excel reports | §8.11 (All Tasks, Obligations, Task-Type Payment, Monthly per-employee, Client statistics export) | ✅ |
+| 100% real-time on every screen | §8.13 ("Real-time multi-user sync across every screen") | ✅ |
+| "1 system instead of folders and spreadsheets" | §1, §2 (single LOB system) | ⚠️ Marketing framing of §1; "instead of folders and spreadsheets" describes the intended replacement, not a documented migration feature. |
 
 ## Pillars / Why Wolf
 | Claim | Source | |
 |---|---|---|
-| Real-time for everyone (SignalR) | §4.3, §7.4 | ✅ |
-| Instant interface — full dataset in memory, materialized indexes, O(1) | §7.3 | ✅ |
-| Native to Windows — self-contained Avalonia, no .NET install, auto-update | §1, §3.2, §7.5 | ✅ |
-| Excel reports to .xlsx, no Office needed | §3.2, §8.11 | ✅ |
+| Everyone sees the same thing — colleague's change appears instantly, no reload | §4.3, §7.4, §8.13 | ✅ |
+| No waiting — instant search/filters/lists even with thousands of records | §7.3 (in-memory cache, O(1) indexes, virtualization §8.13) | ✅ |
+| Takes care of itself — installs in minutes, auto-updates | §3.2, §7.5 | ✅ ("minutes" is a reasonable characterization of a self-contained installer, not a measured figure) |
+| Reports your accountant can open — .xlsx, no Office install | §3.2, §8.11 | ✅ |
 
 ## Feature tour
 | Claim | Source | |
 |---|---|---|
-| Orders: virtualized grid, create/edit/archive, search, color-coded stars, auto-calc payment status, detail panel (activities/clients/plots/invoices) | §8.3 | ✅ |
+| Orders: one grid, create/edit/archive, search, per-employee stars, auto-calc payment status, detail panel | §8.3 | ✅ |
 | Title chain: plot ↔ document ↔ owner ↔ PoA, ideal parts, cadastral fields, deed types | §5.2, §8.9 | ✅ |
 | Calendar: monthly grid, overdue indicators, today's-tasks bell, employee switcher | §8.6 | ✅ |
 | Filters: quick toggles, status dropdowns, text searches, multi-selects, active-filters indicator | §8.3 | ✅ |
 | Reports: All Tasks, Obligations, Task-Type Payment, monthly per-employee; .xlsx | §8.11 | ✅ |
-| Dashboard: summary cards, financial overview, status breakdown, top 5 employees, recent orders, admin-only, debounced refresh | §8.7 | ✅ |
+| Teamwork: simultaneous work, instant propagation, conflict warning instead of data loss | §4.3 (optimistic concurrency, "friendly 409"), §7.4, §6.4 (audit log) | ✅ |
+| Dashboard: summary cards, financial overview, status breakdown, top 5 employees, recent orders, admin-only | §8.7 | ✅ |
 | Clients: searchable list, all-time financials, per-order breakdown, Excel export, legal type | §8.4 | ✅ |
 
-## Architecture
+## How it works (formerly Architecture)
 | Claim | Source | |
 |---|---|---|
-| 3-tier: native desktop ⇄ REST/WebSocket API ⇄ PostgreSQL; C#/.NET 8 | §3.1, §4.1 | ✅ |
-| Avalonia 11 · MVVM; in-memory cache; SignalR client; Velopack auto-update | §3.2, §7 | ✅ |
-| ASP.NET Core 8; REST controllers; JWT; SignalR hub; audit log; repository | §3.3, §6 | ✅ |
-| EF Core 8 · Npgsql; 22 domain entities; optimistic concurrency via xmin; indexed FKs | §3.4, §5 | ✅ |
-| Role-based authorization (Admin / standard user) | §6.1 | ✅ |
-| JWT 24-hour expiry, HMAC-SHA256 signed | §6.1 | ✅ |
-| Dockerized server + auto-updating LAN clients | §3.5, §9.3 | ✅ |
+| Desktop app on every workstation; installs in minutes; auto-updates | §1, §3.2, §7.5 | ✅ |
+| Data lives on a server in your own office; team connects over the network | §1, §9.3 (LAN, dedicated host) | ✅ |
+| "No third-party cloud, no per-month fees to someone else" | §9.3 (self-hosted deployment model) | ⚠️ Accurate for the documented deployment (self-hosted LAN), but hosting/electricity/support costs still exist; this contrasts with SaaS subscriptions, not with all costs. |
+| One database holds everything + a log of who changed what | §5, §6.4 (file audit log per mutation) | ✅ |
+| Sign-in with username/password, role-based access | §6.1, §8.1 | ✅ |
+| Audit trail of every change | §6.3–6.4 ("every mutation is both audited and broadcast") | ✅ |
 
-## Documentation pages
-All content (getting started, order→activity→task model, filters, reports) is
-paraphrased from §2, §7.1, §8.3, §8.6, §8.11. ✅
+## Documentation pages (now complete)
+| Page | Sources |
+|---|---|
+| Getting started | §1, §2, §7.1, §7.5, §8.1, §8.2 |
+| Orders — the core screen | §8.3 (grid, create/edit, archive & save, folder open, payment auto-calc, stars, pinning, detail tabs, concurrency message) |
+| Model: order → activity → task | §2, §5.1–5.2, §8.10 |
+| Plots & ownership documents | §8.9 (cadastral fields, uniqueness, shared indicator, smart linking, document fields, ownership editor: owner autocomplete, ideal parts, way of acquiring, PoA) |
+| Clients & invoices | §8.4, §8.8 |
+| Calendar & scheduling | §8.6, §8.2 (bell) |
+| Filters & search | §8.3 (advanced order filters, Ctrl+F §8.2) |
+| Reports & exports | §8.11 (five reports incl. client stats export; filtering; .xlsx to desktop, auto-open) |
+| Administration | §8.5, §8.7, §8.12, §6.1 (roles) |
+
+All doc content is paraphrased from the sections above. ✅
+One simplification: the docs say reports open in "any Excel, LibreOffice or
+Google Sheets" — the source only states .xlsx generation without Office
+(§3.2); compatibility of .xlsx with those apps is common knowledge, not a
+tested claim.
 
 ## Flagged lines (could not fully verify against §2)
-1. **"0 ms — UI served from cache"** (stats bar) — illustrative, not a measured
-   figure. Supported in spirit by §7.3. Reword to "instant" if a literal claim
-   is undesirable.
-2. **"Designed and built in Bulgaria"** (footer) — the product is built *for* a
+1. **"1 system instead of folders and spreadsheets"** (stats bar) — marketing
+   framing; see above.
+2. **"No third-party cloud, no per-month fees"** (How it works) — see above;
+   contrasts with SaaS, does not mean zero operating cost.
+3. **"Designed and built in Bulgaria"** (footer) — the product is built *for* a
    Bulgarian firm and is Bulgarian-language (§1), but the document does not
    explicitly state the developer's location. Brand statement, not a product
    spec.
-3. **Pricing card line-items** — "Data migration and training", "Priority
+4. **Pricing card line-items** — "Data migration and training", "Priority
    support", "Maintenance agreement", "Custom reports" are **commercial /
    service offerings**, presented under Pricing/Deployment. They are not product
    capabilities described in the source and should be confirmed against the
    actual commercial offer before launch.
-4. **Version "1.0.16"** (footer) matches the document header (§ title). Note the
+5. **Version "1.0.16"** (footer) matches the document header (§ title). Note the
    bundled `LoginScreen.png` shows `v1.0.15` — a screenshot from a slightly
    earlier build. Swap the screenshot or accept the minor mismatch.
 

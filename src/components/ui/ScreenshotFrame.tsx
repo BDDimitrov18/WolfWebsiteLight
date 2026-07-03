@@ -1,12 +1,18 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { asset } from "@/lib/asset";
+import { useT } from "@/lib/i18n/LocaleProvider";
+import { Lightbox } from "@/components/ui/Lightbox";
 
 /**
- * App-window chrome around a product screenshot.
+ * App-window chrome around a product screenshot. Click to open the
+ * full-size lightbox — the desktop UI is dense, so the inline frame is
+ * a preview, not the reading copy.
  *
  * `slot` is the clearly-named placeholder key (Deliverables §10): drop a
  * file named `<slot>.png` into /public/screenshots to replace the image.
- * The supplied screenshots are already wired in via `src`.
  */
 export function ScreenshotFrame({
   src,
@@ -23,51 +29,81 @@ export function ScreenshotFrame({
   priority?: boolean;
   placeholderNote?: string;
 }) {
+  const t = useT();
+  const [open, setOpen] = useState(false);
   const resolved = asset(src ?? `/screenshots/${slot}.png`);
-  return (
-    <figure
-      className="group relative overflow-hidden rounded-xl border"
-      style={{
-        borderColor: "color-mix(in srgb, var(--color-paper-100) 12%, transparent)",
-        background: "var(--color-ink-850)",
-        boxShadow: "var(--shadow-frame)",
-      }}
-      data-screenshot-slot={slot}
-    >
-      {/* Title bar */}
-      <div
-        className="flex items-center gap-2 border-b px-4 py-2.5"
-        style={{
-          borderColor: "color-mix(in srgb, var(--color-paper-100) 9%, transparent)",
-          background: "var(--color-ink-900)",
-        }}
-      >
-        <span className="flex gap-1.5" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-full bg-ember-500/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-ink-400/60" />
-          <span className="h-2.5 w-2.5 rounded-full bg-ink-400/40" />
-        </span>
-        <span className="ml-2 font-mono text-xs tracking-wide text-ink-300">
-          {title}
-        </span>
-      </div>
 
-      {/* Image / slot */}
-      <div className="relative aspect-[16/9] w-full">
-        <Image
+  return (
+    <>
+      <figure
+        className="group relative overflow-hidden rounded-xl border"
+        style={{
+          borderColor: "color-mix(in srgb, var(--color-paper-100) 12%, transparent)",
+          background: "var(--color-ink-850)",
+          boxShadow: "var(--shadow-frame)",
+        }}
+        data-screenshot-slot={slot}
+      >
+        {/* Title bar */}
+        <div
+          className="flex items-center gap-2 border-b px-4 py-2.5"
+          style={{
+            borderColor: "color-mix(in srgb, var(--color-paper-100) 9%, transparent)",
+            background: "var(--color-ink-900)",
+          }}
+        >
+          <span className="flex gap-1.5" aria-hidden="true">
+            <span className="h-2.5 w-2.5 rounded-full bg-ember-500/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-400/60" />
+            <span className="h-2.5 w-2.5 rounded-full bg-ink-400/40" />
+          </span>
+          <span className="ml-2 truncate font-mono text-xs tracking-wide text-ink-300">
+            {title}
+          </span>
+        </div>
+
+        {/* Image — native app aspect, nothing cropped, click to enlarge */}
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label={`${t("features.zoomHint")}: ${alt}`}
+          className="relative block aspect-[1919/1032] w-full cursor-zoom-in"
+        >
+          <Image
+            src={resolved}
+            alt={alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 60vw"
+            priority={priority}
+            className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+          />
+          {/* Zoom affordance */}
+          <span
+            className="pointer-events-none absolute bottom-2.5 right-2.5 flex items-center gap-1.5 rounded-md px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider text-paper-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{ background: "color-mix(in srgb, var(--color-ink-950) 82%, transparent)" }}
+          >
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <circle cx="6" cy="6" r="4.4" stroke="currentColor" strokeWidth="1.4" />
+              <path d="M9.4 9.4 12.6 12.6M6 4v4M4 6h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+            </svg>
+            {t("features.zoomHint")}
+          </span>
+          {placeholderNote && (
+            <span className="pointer-events-none absolute bottom-2.5 left-2.5 rounded bg-ink-950/70 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-ink-300 opacity-0 transition-opacity group-hover:opacity-100">
+              {placeholderNote}: {slot}
+            </span>
+          )}
+        </button>
+      </figure>
+
+      {open && (
+        <Lightbox
           src={resolved}
           alt={alt}
-          fill
-          sizes="(max-width: 1024px) 100vw, 60vw"
-          priority={priority}
-          className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+          title={title}
+          onClose={() => setOpen(false)}
         />
-        {placeholderNote && (
-          <figcaption className="pointer-events-none absolute bottom-2 right-2 rounded bg-ink-950/70 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-ink-300 opacity-0 transition-opacity group-hover:opacity-100">
-            {placeholderNote}: {slot}
-          </figcaption>
-        )}
-      </div>
-    </figure>
+      )}
+    </>
   );
 }

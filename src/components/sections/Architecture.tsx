@@ -89,7 +89,7 @@ export function Architecture() {
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs tracking-wider text-ink-400">
-                      TIER {i + 1}
+                      0{i + 1}
                     </span>
                     <span
                       className="rounded-full px-2.5 py-1 font-mono text-[11px] tracking-wide text-ember-300"

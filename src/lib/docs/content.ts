@@ -1,9 +1,9 @@
 /**
- * Docs content (BG / EN) — a scaffold wired for future expansion
- * (Deliverables §10). Sourced from Wolf.Desktop/PROJECT_OVERVIEW.md.
+ * Docs content (BG / EN) — the full product documentation.
+ * Grounded in Wolf.Desktop/PROJECT_OVERVIEW.md (§8, feature by feature).
  *
- * Add a page by appending to DOC_PAGES and the registry below; the
- * sidebar and routing read from this single source.
+ * Add a page by appending to DOC_PAGES and creating a matching route in
+ * src/app/docs/<slug>/page.tsx; the sidebar reads from this single source.
  */
 import type { Locale } from "@/lib/i18n/dictionaries";
 
@@ -13,177 +13,588 @@ export type DocBlock =
   | { type: "ul"; items: string[] }
   | { type: "steps"; items: { t: string; d: string }[] }
   | { type: "callout"; text: string }
-  | { type: "code"; text: string };
+  | { type: "code"; text: string }
+  | { type: "img"; slot: string; alt: string; title?: string };
 
 export interface DocPage {
   slug: string; // "" = index
-  navKey: "gettingStarted" | "model" | "filters" | "reports";
+  navKey:
+    | "gettingStarted"
+    | "orders"
+    | "model"
+    | "plots"
+    | "clients"
+    | "calendar"
+    | "filters"
+    | "reports"
+    | "admin";
   title: Record<Locale, string>;
   intro: Record<Locale, string>;
   blocks: Record<Locale, DocBlock[]>;
 }
 
 export const DOC_PAGES: DocPage[] = [
-  // ----------------------------------------------------------------
+  // ================================================================
+  // Getting started
+  // ================================================================
   {
     slug: "",
     navKey: "gettingStarted",
     title: { bg: "Първи стъпки", en: "Getting started" },
     intro: {
-      bg: "Wolf е многопотребителска система за управление на геодезическа, кадастрална и правна практика. Това ръководство покрива основните понятия и работни потоци.",
-      en: "Wolf is a multi-user management system for surveying, cadastral and legal practices. This guide covers the core concepts and workflows.",
+      bg: "Wolf е многопотребителска система за управление на геодезическа, кадастрална и правна практика. Това ръководство ви превежда от инсталацията до ежедневната работа.",
+      en: "Wolf is a multi-user management system for surveying, cadastral and legal practices. This guide takes you from installation to day-to-day work.",
     },
     blocks: {
       bg: [
-        { type: "h2", id: "what", text: "Какво представлява Wolf" },
+        { type: "h2", id: "what", text: "Какво прави Wolf" },
         {
           type: "p",
-          text: "Wolf управлява пълния жизнен цикъл на клиентските поръчки: дейностите и задачите по тях, служителите, които ги изпълняват, клиентите, които ги възлагат, поземлените парцели и документите за собственост, фактурирането и отчетите.",
+          text: "Wolf управлява пълния жизнен цикъл на клиентските поръчки: дейностите и задачите по тях, служителите, които ги изпълняват, клиентите, които ги възлагат, поземлените имоти и документите за собственост, фактурирането и справките.",
         },
         {
           type: "p",
-          text: "Продуктът е родно Windows приложение, което комуникира с централен сървър (REST API + синхронизация в реално време) върху база данни PostgreSQL. Множество служители работят едновременно; промените на един потребител се появяват веднага при всички останали.",
+          text: "Приложението стои на компютъра на всеки служител и се свързва към сървър във вашия офис. Целият екип работи едновременно — промяната на един колега се появява на екрана на всички останали в реално време.",
         },
         { type: "h2", id: "install", text: "Инсталиране и вход" },
         {
           type: "steps",
           items: [
-            { t: "Стартиране", d: "Приложението проверява за обновления чрез Velopack и зарежда данните на брандиран splash екран." },
-            { t: "Вход", d: "Въведете потребителско име и парола. Токенът (JWT) носи вашите роли и идентификатор на служител." },
-            { t: "Зареждане на кеша", d: "Целият работен набор се зарежда в паметта чрез 18 паралелни заявки за мигновен интерфейс." },
+            {
+              t: "Инсталация",
+              d: "Стартирайте инсталатора на всяко работно място. Отнема минути; занапред приложението се обновява само, щом излезе нова версия.",
+            },
+            {
+              t: "Вход",
+              d: "Въведете потребителското име и паролата, дадени от вашия администратор. Профилът определя какво виждате — служител или администратор.",
+            },
+            {
+              t: "Готово",
+              d: "Данните на кантората се зареждат при входа, затова после всичко — търсене, филтри, списъци — реагира мигновено.",
+            },
+          ],
+        },
+        { type: "h2", id: "layout", text: "Главният прозорец" },
+        {
+          type: "ul",
+          items: [
+            "Странична лента с икони и живи броячи (поръчки, имоти, клиенти)",
+            "Екраните се отварят като табове — може да държите няколко отворени едновременно",
+            "Камбана „задачи за днес“ с брояч и списък за бърз преход",
+            "Ctrl+F отваря филтрите за поръчки отвсякъде",
           ],
         },
         { type: "h2", id: "modes", text: "Режими активни / архив" },
         {
           type: "p",
-          text: "Превключвателят активни/архив сменя цялото приложение между само активни поръчки (оранжева тема) и всички поръчки включително архивираните (синя тема). Това засяга всеки списък, статистика и брояч.",
+          text: "Превключвателят активни/архив сменя цялото приложение между само активни поръчки (оранжева тема) и всички поръчки, включително архивираните (синя тема). Засяга всеки списък, статистика и брояч — веднага личи в кой режим сте по цвета.",
         },
         {
           type: "callout",
-          text: "Този раздел е скеле, подготвено за разширяване. Съдържанието е извлечено от PROJECT_OVERVIEW.md.",
+          text: "Следваща стъпка: разгледайте екрана „Поръчки“ — центърът на ежедневната работа.",
         },
       ],
       en: [
-        { type: "h2", id: "what", text: "What Wolf is" },
+        { type: "h2", id: "what", text: "What Wolf does" },
         {
           type: "p",
           text: "Wolf manages the full lifecycle of customer orders: the activities and tasks performed on them, the employees who carry them out, the clients who commission them, the land plots and ownership documents, invoicing and reporting.",
         },
         {
           type: "p",
-          text: "The product is a native Windows application that talks to a central server (REST API + real-time push) over a PostgreSQL database. Many staff work simultaneously; one user's changes appear on every other screen in real time.",
+          text: "The application sits on each employee's computer and connects to a server in your own office. The whole team works simultaneously — one colleague's change appears on everyone else's screen in real time.",
         },
         { type: "h2", id: "install", text: "Installing & signing in" },
         {
           type: "steps",
           items: [
-            { t: "Startup", d: "The app checks for updates via Velopack and loads data on a branded splash screen." },
-            { t: "Login", d: "Enter username and password. The JWT carries your roles and employee id." },
-            { t: "Cache load", d: "The entire working dataset loads into memory via 18 parallel calls for an instant UI." },
+            {
+              t: "Install",
+              d: "Run the installer on each workstation. It takes minutes; from then on the app updates itself whenever a new version ships.",
+            },
+            {
+              t: "Sign in",
+              d: "Enter the username and password provided by your administrator. Your account determines what you see — employee or administrator.",
+            },
+            {
+              t: "Ready",
+              d: "The firm's data loads at sign-in, which is why everything afterwards — search, filters, lists — responds instantly.",
+            },
+          ],
+        },
+        { type: "h2", id: "layout", text: "The main window" },
+        {
+          type: "ul",
+          items: [
+            "Icon sidebar with live count badges (orders, plots, clients)",
+            "Screens open as tabs — keep several open at once",
+            "A \"today's tasks\" bell with a count and a jump list",
+            "Ctrl+F opens the order filters from anywhere",
           ],
         },
         { type: "h2", id: "modes", text: "Active / archive modes" },
         {
           type: "p",
-          text: "The active/archive toggle switches the whole app between active orders only (orange theme) and all orders incl. archived (blue theme). It affects every list, statistic and badge.",
+          text: "The active/archive toggle switches the whole app between active orders only (orange theme) and all orders including archived (blue theme). It affects every list, statistic and badge — the colour always tells you which mode you're in.",
         },
         {
           type: "callout",
-          text: "This section is a scaffold wired for future expansion. Content is sourced from PROJECT_OVERVIEW.md.",
+          text: "Next: explore the Orders screen — the centre of day-to-day work.",
         },
       ],
     },
   },
 
-  // ----------------------------------------------------------------
+  // ================================================================
+  // Orders — the core screen
+  // ================================================================
+  {
+    slug: "orders",
+    navKey: "orders",
+    title: { bg: "Поръчки — работният екран", en: "Orders — the core screen" },
+    intro: {
+      bg: "Всичко в Wolf започва от поръчката: възлагането на клиента, работата по него и плащането. Екранът „Поръчки“ е таблицата, в която живее цялата кантора.",
+      en: "Everything in Wolf starts from the order: the client's commission, the work on it and the payment. The Orders screen is the grid the whole firm lives in.",
+    },
+    blocks: {
+      bg: [
+        { type: "img", slot: "OrdersScreen", alt: "Екранът Поръчки", title: "Wolf — Поръчки" },
+        { type: "h2", id: "grid", text: "Таблицата с поръчки" },
+        {
+          type: "p",
+          text: "Всяка поръчка се вижда с номер, име, статус, статус на плащане, цена, аванс, коментари, имоти и създател. Търсенето по име е мигновено, а бърз филтър по статус стеснява списъка с един клик.",
+        },
+        { type: "h2", id: "create", text: "Създаване и редакция" },
+        {
+          type: "ul",
+          items: [
+            "Формата покрива име, цена, аванс, статус, коментари и път до папката на поръчката",
+            "„Архивирай и запази“ приключва поръчка с един клик",
+            "Бутонът за папката отваря файловете на поръчката директно в Explorer",
+            "Архивиране и връщане от архива — с потвърждение",
+          ],
+        },
+        { type: "h2", id: "payment", text: "Статус на плащане — автоматичен" },
+        {
+          type: "p",
+          text: "Не отбелязвате ръчно кой е платил. Системата сравнява аванса с цената и сама показва Платено, Аванс или Неплатено — на реда на поръчката и във всички справки.",
+        },
+        { type: "h2", id: "stars", text: "Звезди и закачане" },
+        {
+          type: "p",
+          text: "Всеки служител маркира своите поръчки със звезди в избран от него цвят — палитрата е обща за екипа, а филтърът по цвят показва само вашите. Когато преминете към поръчка от календара или камбаната, а филтрите я скриват, тя временно се „закача“ най-отгоре с индикатор.",
+        },
+        { type: "h2", id: "detail", text: "Панелът с детайли" },
+        {
+          type: "p",
+          text: "Избраната поръчка разгръща табове с всичко по нея:",
+        },
+        {
+          type: "ul",
+          items: [
+            "Дейности и задачи — работната разбивка с изпълнители, срокове и плащания",
+            "Клиенти — кой е възложил поръчката, с роля и бърза връзка към статистиката му",
+            "Имоти и документи — парцелите по поръчката и документите за собственост",
+            "Фактури — фактурите по поръчката с добавяне и редакция",
+          ],
+        },
+        { type: "h2", id: "conflict", text: "Ако двама редактират едно и също" },
+        {
+          type: "callout",
+          text: "Ако колега е записал промяна по същата поръчка преди вас, Wolf ще ви предупреди и ще ви помоли да презаредите записа — никой не изтрива работата на другия, без да разбере.",
+        },
+      ],
+      en: [
+        { type: "img", slot: "OrdersScreen", alt: "The Orders screen", title: "Wolf — Orders" },
+        { type: "h2", id: "grid", text: "The orders grid" },
+        {
+          type: "p",
+          text: "Each order shows its number, name, status, payment status, price, advance, comments, plots and creator. Search by name is instant, and a quick status filter narrows the list in one click.",
+        },
+        { type: "h2", id: "create", text: "Creating & editing" },
+        {
+          type: "ul",
+          items: [
+            "The form covers name, price, advance, status, comments and the order's folder path",
+            "\"Archive & save\" closes out an order in one click",
+            "The folder button opens the order's files directly in Explorer",
+            "Archive and unarchive — with confirmation",
+          ],
+        },
+        { type: "h2", id: "payment", text: "Payment status — automatic" },
+        {
+          type: "p",
+          text: "You never mark who has paid by hand. The system compares the advance against the price and shows Paid, Advance or Unpaid by itself — on the order row and in every report.",
+        },
+        { type: "h2", id: "stars", text: "Stars & pinning" },
+        {
+          type: "p",
+          text: "Each employee stars their own orders in a colour of their choosing — the palette is shared across the team, and the colour filter shows just yours. When you jump to an order from the calendar or the bell and the filters would hide it, it is temporarily pinned to the top with an indicator.",
+        },
+        { type: "h2", id: "detail", text: "The detail panel" },
+        {
+          type: "p",
+          text: "The selected order unfolds into tabs with everything about it:",
+        },
+        {
+          type: "ul",
+          items: [
+            "Activities & tasks — the work breakdown with executants, deadlines and payments",
+            "Clients — who commissioned the order, with their role and a quick link to their statistics",
+            "Plots & documents — the order's parcels and their ownership documents",
+            "Invoices — the order's invoices with add and edit",
+          ],
+        },
+        { type: "h2", id: "conflict", text: "If two people edit the same thing" },
+        {
+          type: "callout",
+          text: "If a colleague saved a change to the same order before you, Wolf warns you and asks you to reload the record — nobody overwrites anyone's work without knowing.",
+        },
+      ],
+    },
+  },
+
+  // ================================================================
+  // Model: order → activity → task
+  // ================================================================
   {
     slug: "model",
     navKey: "model",
     title: { bg: "Модел: поръчка → дейност → задача", en: "Model: order → activity → task" },
     intro: {
-      bg: "Същината на Wolf е йерархията поръчка → дейности → задачи, свързана с парцели, документи за собственост и собственици.",
+      bg: "Същината на Wolf е йерархията поръчка → дейности → задачи, свързана с имоти, документи за собственост и собственици.",
       en: "The heart of Wolf is the order → activities → tasks hierarchy, linked to plots, ownership documents and owners.",
     },
     blocks: {
       bg: [
-        { type: "h2", id: "order", text: "Поръчка (работна поръчка)" },
+        { type: "h2", id: "order", text: "Поръчка" },
         {
           type: "p",
-          text: "Поръчката е централният транзакционен запис: име, цена, аванс, статус на плащане, статус (активна/архивирана) и създател. Касае един или повече парцели.",
+          text: "Поръчката е централният запис: име, цена, аванс, статус на плащане, статус (активна/архивирана) и създател. Касае един или повече имота и един или повече клиенти.",
         },
         { type: "h2", id: "activity", text: "Дейности и задачи" },
         {
           type: "p",
-          text: "Поръчката се разбива на дейности (работни фази, които могат да са вложени йерархично) и гранулирани задачи. Всяка задача се възлага на изпълнител, по избор контролирана от служител-контрольор, с начални/крайни дати, продължителност, плащания и данъци.",
+          text: "Поръчката се разбива на дейности (работни фази, които могат да се влагат една в друга) и конкретни задачи. Всяка задача има изпълнител, по избор и контрольор — втори служител, който проверява работата — плюс начална и крайна дата, продължителност, плащане и данък.",
         },
         {
           type: "ul",
           items: [
-            "Дейност → дейност (самопрепращаща се за вложени фази)",
-            "Задачата сочи към двама служители: изпълнител и контрольор (QA)",
-            "Статуси на задачите: възложена / завършена / котировка",
+            "Дейност в дейност — за вложени работни фази",
+            "Задачата сочи към двама души: изпълнител и контрольор (проверка на качеството)",
+            "Статуси на задачите: възложена / завършена / котировка — те захранват календара и просрочията",
+            "Типовете дейности и задачи са настройваеми и се създават в движение, докато пишете",
           ],
         },
         { type: "h2", id: "title", text: "Веригата на собствеността" },
         {
           type: "p",
-          text: "Тройната връзка свързва парцел, собственик, документ и пълномощно, като записва идеалните части (дробна собственост), начина на придобиване и тип на собствеността.",
+          text: "Тройната връзка свързва имот, собственик, документ и пълномощно, като записва идеалните части (дробна собственост), начина на придобиване и типа на собствеността. Това е специализираното сърце на кадастралния модел — нещо, което общите системи не покриват.",
         },
         {
           type: "code",
-          text: "Поръчка → Дейности → Задачи\nПарцел ↔ Документ ↔ Собственик ↔ Пълномощно (идеална част 1/3)",
+          text: "Поръчка → Дейности → Задачи\nИмот ↔ Документ ↔ Собственик ↔ Пълномощно (идеална част 1/3)",
+        },
+        {
+          type: "callout",
+          text: "Пълното описание на работата с имоти и документи е в раздел „Имоти и документи“.",
         },
       ],
       en: [
-        { type: "h2", id: "order", text: "Order (request)" },
+        { type: "h2", id: "order", text: "Order" },
         {
           type: "p",
-          text: "The order is the central transactional record: name, price, advance, payment status, status (active/archived) and creator. It concerns one or more plots.",
+          text: "The order is the central record: name, price, advance, payment status, status (active/archived) and creator. It concerns one or more plots and one or more clients.",
         },
         { type: "h2", id: "activity", text: "Activities & tasks" },
         {
           type: "p",
-          text: "An order breaks into activities (work phases, which can nest hierarchically) and granular tasks. Each task is assigned to an executant, optionally supervised by a controller employee, with start/finish dates, durations, payments and taxes.",
+          text: "An order breaks into activities (work phases, which can nest inside each other) and concrete tasks. Each task has an executant, optionally a controller — a second employee who checks the work — plus start and finish dates, duration, payment and tax.",
         },
         {
           type: "ul",
           items: [
-            "Activity → activity (self-referencing for nested phases)",
-            "A task references two employees: executant and controller (QA)",
-            "Task statuses: assigned / completed / quotation",
+            "Activities inside activities — for nested work phases",
+            "A task points at two people: executant and controller (quality check)",
+            "Task statuses: assigned / completed / quotation — these feed the calendar and overdue logic",
+            "Activity and task types are configurable and can be created on the fly as you type",
           ],
         },
         { type: "h2", id: "title", text: "The chain of ownership" },
         {
           type: "p",
-          text: "The three-way junction ties together plot, owner, document and power of attorney, recording the ideal parts (fractional ownership), the way of acquiring and the type of ownership.",
+          text: "The three-way relationship ties together plot, owner, document and power of attorney, recording the ideal parts (fractional ownership), the way of acquiring and the type of ownership. This is the specialized heart of the cadastral model — something generic systems never cover.",
         },
         {
           type: "code",
           text: "Order → Activities → Tasks\nPlot ↔ Document ↔ Owner ↔ Power of attorney (ideal part 1/3)",
         },
+        {
+          type: "callout",
+          text: "The full guide to working with plots and documents is in the \"Plots & documents\" section.",
+        },
       ],
     },
   },
 
-  // ----------------------------------------------------------------
+  // ================================================================
+  // Plots & ownership documents
+  // ================================================================
+  {
+    slug: "plots",
+    navKey: "plots",
+    title: { bg: "Имоти и документи за собственост", en: "Plots & ownership documents" },
+    intro: {
+      bg: "Специализираният модул на Wolf: пълни кадастрални данни за всеки имот и коректно записана верига на собствеността — документи, собственици, идеални части и пълномощни.",
+      en: "Wolf's specialized module: full cadastral data for every plot and a correctly recorded chain of ownership — documents, owners, ideal parts and powers of attorney.",
+    },
+    blocks: {
+      bg: [
+        { type: "img", slot: "PlotsTab", alt: "Екранът Имоти", title: "Wolf — Имоти" },
+        { type: "h2", id: "plots", text: "Имоти (парцели)" },
+        {
+          type: "p",
+          text: "Всеки имот носи пълните си кадастрални данни: кадастрален номер, УПИ, квартал, населено място, община, улица, местност и предназначение. Системата пази номерата уникални и не допуска дублирани записи.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Самостоятелен списък на всички имоти с търсене",
+            "Един имот може да участва в няколко поръчки — индикатор показва „споделен с други поръчки“",
+            "Добавяне, редакция и изтриване с валидация на полетата",
+          ],
+        },
+        { type: "h2", id: "smart", text: "Умно свързване на имот към поръчка" },
+        {
+          type: "p",
+          text: "Когато добавяте имот към поръчка и започнете да пишете номера му, Wolf разпознава съществуващ имот и го попълва автоматично — данните се въвеждат веднъж и се преизползват. Ако имотът е нов, се създава на място.",
+        },
+        { type: "h2", id: "docs", text: "Документи за собственост" },
+        { type: "img", slot: "DocumentsTab", alt: "Екранът Документи", title: "Wolf — Документи" },
+        {
+          type: "p",
+          text: "Документът записва всичко от правната страна: тип (нотариален акт, договор за делба, покупко-продажба, завещание, общински или държавен акт за собственост…), номер, издател, том, регистър, дело, дата на издаване, дата на вписване и тип собственост.",
+        },
+        { type: "h2", id: "editor", text: "Редакторът на собственост" },
+        {
+          type: "p",
+          text: "За документ, свързан с имот, редакторът управлява целите връзки собственик по собственик:",
+        },
+        {
+          type: "ul",
+          items: [
+            "Собственик — пишете име и системата предлага съществуващ или създава нов",
+            "Идеална част — дробната собственост на този собственик (например 1/3)",
+            "Начин на придобиване и тип на собствеността",
+            "Пълномощно по избор — номер, дата и издател",
+            "Редовете се добавят и махат свободно; връзките се записват и изтриват коректно",
+          ],
+        },
+        {
+          type: "callout",
+          text: "Така веригата имот ↔ документ ↔ собственик ↔ пълномощно остава пълна и проследима за всеки имот по всяка поръчка.",
+        },
+      ],
+      en: [
+        { type: "img", slot: "PlotsTab", alt: "The Plots screen", title: "Wolf — Plots" },
+        { type: "h2", id: "plots", text: "Plots (parcels)" },
+        {
+          type: "p",
+          text: "Every plot carries its full cadastral data: cadastral number, UPI (regulated plot number), neighbourhood, city, municipality, street, locality and designation. The system keeps numbers unique and prevents duplicate records.",
+        },
+        {
+          type: "ul",
+          items: [
+            "A standalone, searchable list of all plots",
+            "One plot can take part in several orders — an indicator shows \"shared with other orders\"",
+            "Add, edit and delete with field validation",
+          ],
+        },
+        { type: "h2", id: "smart", text: "Smart plot linking" },
+        {
+          type: "p",
+          text: "When you add a plot to an order and start typing its number, Wolf recognizes an existing plot and fills it in automatically — data is entered once and reused. If the plot is new, it is created on the spot.",
+        },
+        { type: "h2", id: "docs", text: "Ownership documents" },
+        { type: "img", slot: "DocumentsTab", alt: "The Documents screen", title: "Wolf — Documents" },
+        {
+          type: "p",
+          text: "A document records the full legal side: type (notarial deed, split agreement, purchase contract, testament, municipal or state ownership act…), number, issuer, tome, register, case, date of issue, date of registration and type of ownership.",
+        },
+        { type: "h2", id: "editor", text: "The ownership editor" },
+        {
+          type: "p",
+          text: "For a document linked to a plot, the editor manages the complete relationships owner by owner:",
+        },
+        {
+          type: "ul",
+          items: [
+            "Owner — start typing a name and the system suggests an existing one or creates a new one",
+            "Ideal part — this owner's fractional share (e.g. 1/3)",
+            "Way of acquiring and type of ownership",
+            "An optional power of attorney — number, date and issuer",
+            "Rows are added and removed freely; the relationships are saved and deleted correctly",
+          ],
+        },
+        {
+          type: "callout",
+          text: "This keeps the plot ↔ document ↔ owner ↔ power-of-attorney chain complete and traceable for every plot on every order.",
+        },
+      ],
+    },
+  },
+
+  // ================================================================
+  // Clients & invoices
+  // ================================================================
+  {
+    slug: "clients",
+    navKey: "clients",
+    title: { bg: "Клиенти и фактури", en: "Clients & invoices" },
+    intro: {
+      bg: "Кой възлага работата, колко е платил и колко дължи — с разбивка по поръчки и експорт за счетоводството.",
+      en: "Who commissions the work, what they've paid and what they owe — broken down by order and exportable for accounting.",
+    },
+    blocks: {
+      bg: [
+        { type: "img", slot: "ClientsTab", alt: "Екранът Клиенти", title: "Wolf — Клиенти" },
+        { type: "h2", id: "list", text: "Списъкът с клиенти" },
+        {
+          type: "p",
+          text: "Търсене по име, телефон или имейл. Картата на клиента пази имена, телефон, имейл, адрес и правен тип — физическо лице, фирма, държава или община.",
+        },
+        { type: "h2", id: "stats", text: "Статистика на клиента" },
+        { type: "img", slot: "ClientStatisticsTab", alt: "Статистика на клиента", title: "Wolf — Статистика на клиент" },
+        {
+          type: "p",
+          text: "За всеки клиент — финансово обобщение за цялото време: платено, неплатено и общо, брой активни, архивирани и общо поръчки, и таблица с разбивка по поръчка с ролята на клиента и плащането.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Преход към всяка поръчка направо от разбивката",
+            "Експорт на цялата статистика в Excel на работния плот",
+            "Числата следват режима активни/архив",
+          ],
+        },
+        { type: "h2", id: "invoices", text: "Фактури" },
+        { type: "img", slot: "InvoicesTab", alt: "Екранът Фактури", title: "Wolf — Фактури" },
+        {
+          type: "p",
+          text: "Всички фактури на едно място с търсене по номер, сума или поръчка. Добавяне и редакция с номер, сума и избор на поръчка; бутонът за преход отваря поръчката директно на нейния таб „Фактури“.",
+        },
+      ],
+      en: [
+        { type: "img", slot: "ClientsTab", alt: "The Clients screen", title: "Wolf — Clients" },
+        { type: "h2", id: "list", text: "The client list" },
+        {
+          type: "p",
+          text: "Search by name, phone or email. The client card holds names, phone, email, address and legal type — individual, company, state or municipality.",
+        },
+        { type: "h2", id: "stats", text: "Client statistics" },
+        { type: "img", slot: "ClientStatisticsTab", alt: "Client statistics", title: "Wolf — Client statistics" },
+        {
+          type: "p",
+          text: "For every client — an all-time financial summary: paid, unpaid and total, counts of active, archived and total orders, and a per-order breakdown table with the client's role and the payment.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Jump to any order straight from the breakdown",
+            "Export the whole statistic to Excel on the desktop",
+            "The numbers follow the active/archive mode",
+          ],
+        },
+        { type: "h2", id: "invoices", text: "Invoices" },
+        { type: "img", slot: "InvoicesTab", alt: "The Invoices screen", title: "Wolf — Invoices" },
+        {
+          type: "p",
+          text: "All invoices in one place, searchable by number, sum or order. Add and edit with number, sum and an order picker; the jump button opens the order directly on its Invoices tab.",
+        },
+      ],
+    },
+  },
+
+  // ================================================================
+  // Calendar
+  // ================================================================
+  {
+    slug: "calendar",
+    navKey: "calendar",
+    title: { bg: "Календар и планиране", en: "Calendar & scheduling" },
+    intro: {
+      bg: "Кой какво трябва да свърши и до кога — месечен изглед на задачите с открояване на днешните и просрочените.",
+      en: "Who has to do what, and by when — a monthly view of tasks highlighting today's and the overdue.",
+    },
+    blocks: {
+      bg: [
+        { type: "img", slot: "Callendar", alt: "Календарът", title: "Wolf — Календар" },
+        { type: "h2", id: "grid", text: "Месечната решетка" },
+        {
+          type: "p",
+          text: "Задачите се групират по краен срок върху месечна решетка с брой задачи на ден. Днешният ден е откроен, а задачи с изтекъл срок, които не са завършени, се показват като просрочени.",
+        },
+        { type: "h2", id: "nav", text: "Навигация" },
+        {
+          type: "ul",
+          items: [
+            "Предишен / следващ месец и бутон „днес“",
+            "Клик върху задача отваря нейната поръчка на точното място — с автоматично превъртане и закачане",
+            "Администраторите превключват календара между служителите",
+          ],
+        },
+        { type: "h2", id: "bell", text: "Камбаната „задачи за днес“" },
+        {
+          type: "p",
+          text: "В горната лента на приложението камбаната показва броя на вашите незавършени задачи с краен срок днес. Списъкът в нея прави прехода към конкретната задача с един клик — където и да се намирате в приложението.",
+        },
+      ],
+      en: [
+        { type: "img", slot: "Callendar", alt: "The calendar", title: "Wolf — Calendar" },
+        { type: "h2", id: "grid", text: "The monthly grid" },
+        {
+          type: "p",
+          text: "Tasks are grouped by due date on a monthly grid with per-day counts. Today is highlighted, and tasks past their deadline that aren't completed show as overdue.",
+        },
+        { type: "h2", id: "nav", text: "Navigation" },
+        {
+          type: "ul",
+          items: [
+            "Previous / next month and a \"today\" button",
+            "Clicking a task opens its order at exactly the right spot — with auto-scroll and pinning",
+            "Administrators can switch the calendar between employees",
+          ],
+        },
+        { type: "h2", id: "bell", text: "The \"today's tasks\" bell" },
+        {
+          type: "p",
+          text: "In the app's top bar, the bell shows the count of your unfinished tasks due today. Its list jumps to the specific task in one click — wherever you are in the application.",
+        },
+      ],
+    },
+  },
+
+  // ================================================================
+  // Filters & search
+  // ================================================================
   {
     slug: "filters",
     navKey: "filters",
     title: { bg: "Филтри и търсене", en: "Filters & search" },
     intro: {
-      bg: "Специален раздел с филтри прецизира кои поръчки виждате — чрез бързи превключватели, падащи менюта и текстови търсения.",
-      en: "A dedicated filters tab narrows which orders you see — via quick toggles, dropdowns and text searches.",
+      bg: "Специален раздел с филтри прецизира кои поръчки виждате — чрез бързи превключватели, падащи менюта и текстови търсения. Отваря се отвсякъде с Ctrl+F.",
+      en: "A dedicated filters tab narrows which orders you see — via quick toggles, dropdowns and text searches. Opens from anywhere with Ctrl+F.",
     },
     blocks: {
       bg: [
+        { type: "img", slot: "FiltersOrders", alt: "Филтрите за поръчки", title: "Wolf — Филтри" },
         { type: "h2", id: "toggles", text: "Бързи превключватели" },
         {
           type: "ul",
           items: [
             "Маркирани (със звезда)",
             "Просрочени",
-            "Лични",
+            "Лични (моите поръчки)",
             "За днес",
             "За тази седмица",
           ],
@@ -191,102 +602,196 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dropdowns", text: "Падащи менюта и текст" },
         {
           type: "p",
-          text: "Падащи менюта по статус на архив, статус на задача и статус на плащане. Текстови търсения по номер на поръчка, име, коментар, населено място, номер на парцел, УПИ и квартал.",
+          text: "Падащи менюта по статус на архив, статус на задача и статус на плащане. Текстови търсения по номер на поръчка, име, коментар, населено място, номер на имот, УПИ и квартал.",
         },
         { type: "h2", id: "multi", text: "Множествен избор" },
         {
           type: "ul",
           items: [
             "Клиенти и собственици",
-            "Служители (създател / изпълнител / контрольор)",
+            "Служители — по създател, изпълнител или контрольор",
             "Цветове на звездите",
           ],
         },
         {
           type: "callout",
-          text: "Текстовите филтри се прилагат при enter/blur, превключвателите — мигновено. Индикатор показва активните филтри; бутон ги нулира.",
+          text: "Превключвателите действат мигновено, текстовите полета — при Enter. Индикатор показва, че има активни филтри; един бутон връща всичко в начално положение.",
         },
       ],
       en: [
+        { type: "img", slot: "FiltersOrders", alt: "The order filters", title: "Wolf — Filters" },
         { type: "h2", id: "toggles", text: "Quick toggles" },
         {
           type: "ul",
-          items: ["Starred", "Overdue", "Personal", "For today", "For this week"],
+          items: ["Starred", "Overdue", "Personal (my orders)", "For today", "For this week"],
         },
         { type: "h2", id: "dropdowns", text: "Dropdowns & text" },
         {
           type: "p",
-          text: "Dropdowns for archive status, task status and payment status. Text searches by order number, name, comment, settlement, plot number, UPI and neighborhood.",
+          text: "Dropdowns for archive status, task status and payment status. Text searches by order number, name, comment, settlement, plot number, UPI and neighbourhood.",
         },
         { type: "h2", id: "multi", text: "Multi-select" },
         {
           type: "ul",
           items: [
             "Clients and owners",
-            "Employees (creator / executant / controller)",
+            "Employees — by creator, executant or controller",
             "Star colours",
           ],
         },
         {
           type: "callout",
-          text: "Text filters apply on enter/blur, toggles apply live. An indicator shows active filters; a button resets them.",
+          text: "Toggles apply instantly, text fields on Enter. An indicator shows when filters are active; one button resets everything.",
         },
       ],
     },
   },
 
-  // ----------------------------------------------------------------
+  // ================================================================
+  // Reports & exports
+  // ================================================================
   {
     slug: "reports",
     navKey: "reports",
     title: { bg: "Справки и отчети", en: "Reports & exports" },
     intro: {
-      bg: "Wolf генерира аналитични справки директно в .xlsx, с богато филтриране и автоматично отваряне след експорт.",
-      en: "Wolf generates analytical reports directly to .xlsx, with rich filtering and automatic open after export.",
+      bg: "Wolf генерира готови справки директно в Excel — с богато филтриране, запис на работния плот и автоматично отваряне.",
+      en: "Wolf generates ready-made reports directly to Excel — with rich filtering, saved to the desktop and opened automatically.",
     },
     blocks: {
       bg: [
+        { type: "img", slot: "InqueriesTab", alt: "Екранът Справки", title: "Wolf — Справки" },
         { type: "h2", id: "reports", text: "Вградени справки" },
         {
           type: "ul",
           items: [
             "Всички задачи — йерархия служител → поръчка → дейност → задача с продължителности и плащания",
-            "Задължения — задачи с клиенти, парцели, собственици и плащане",
+            "Задължения — задачи със съответните клиенти, имоти, собственици и плащане",
             "Плащане по тип задача — разходи, групирани по тип, с разбивка по служител",
-            "Месечно плащане по служител — много листове, по един на служител",
+            "Месечно плащане по служител — по един лист на служител, обобщено по тип задача",
+            "Статистика на клиент — експорт от екрана на клиента",
           ],
         },
         { type: "h2", id: "filters", text: "Филтриране на справките" },
         {
           type: "p",
-          text: "Всяка справка поддържа период, служители, статус на плащане, типове дейности и задачи, статуси на задачи, избор на всички и търсене в списъците с филтри. Справките са съобразени с режима активни/архив.",
+          text: "Всяка справка се стеснява по период, служители, статус на плащане, типове дейности и задачи и статуси на задачи — с „избери всички“ и търсене вътре в списъците. Справките следват режима активни/архив.",
         },
         { type: "h2", id: "format", text: "Формат и експорт" },
         {
           type: "p",
-          text: "Файловете .xlsx се генерират чрез DocumentFormat.OpenXml — без нужда от инсталиран Office — записват се на работния плот и се отварят автоматично.",
+          text: "Файловете са форматирани .xlsx — отварят се във всеки Excel, LibreOffice или Google Sheets, без нужда от инсталиран Office на компютъра. Записват се на работния плот и се отварят автоматично след генериране.",
         },
       ],
       en: [
+        { type: "img", slot: "InqueriesTab", alt: "The Reports screen", title: "Wolf — Reports" },
         { type: "h2", id: "reports", text: "Built-in reports" },
         {
           type: "ul",
           items: [
             "All tasks — employee → order → activity → task hierarchy with durations and payments",
-            "Obligations — tasks with clients, plots, owners and payment",
-            "Task-type payment — costs grouped by type, with per-employee breakdown",
-            "Monthly per-employee payment — multi-sheet, one per employee",
+            "Obligations — tasks with their clients, plots, owners and payment",
+            "Task-type payment — costs grouped by type, with a per-employee breakdown",
+            "Monthly per-employee payment — one sheet per employee, aggregated by task type",
+            "Client statistics — exported from the client's screen",
           ],
         },
         { type: "h2", id: "filters", text: "Filtering reports" },
         {
           type: "p",
-          text: "Each report supports date range, employees, payment status, activity and task types, task statuses, select-all and search within filter lists. Reports are mode-aware (active/archive).",
+          text: "Every report narrows by date range, employees, payment status, activity and task types and task statuses — with select-all and search inside the filter lists. Reports follow the active/archive mode.",
         },
         { type: "h2", id: "format", text: "Format & export" },
         {
           type: "p",
-          text: "The .xlsx files are generated via DocumentFormat.OpenXml — no Office install required — saved to the desktop and opened automatically.",
+          text: "The files are styled .xlsx — they open in any Excel, LibreOffice or Google Sheets, with no Office install required on the machine. They are saved to the desktop and opened automatically after generation.",
+        },
+      ],
+    },
+  },
+
+  // ================================================================
+  // Administration
+  // ================================================================
+  {
+    slug: "admin",
+    navKey: "admin",
+    title: { bg: "Администрация", en: "Administration" },
+    intro: {
+      bg: "Прегледът на управителя: табло с финансите на кантората, статистика по служители и контрол на достъпа.",
+      en: "The manager's view: a dashboard with the firm's finances, per-employee statistics and access control.",
+    },
+    blocks: {
+      bg: [
+        { type: "img", slot: "AdminPanel", alt: "Таблото за управление", title: "Wolf — Табло" },
+        { type: "h2", id: "dashboard", text: "Табло за управление" },
+        {
+          type: "p",
+          text: "Обобщение на цялата практика на един екран: брой поръчки (общо, активни, архивирани), клиенти, дейности и уникални имоти; финансов преглед с приходи, аванси, неплатени суми и общо фактурирано; топ 5 служители по обем работа и последните поръчки.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Интерактивен филтър по статус с преход към всяка поръчка",
+            "Числата се обновяват в реално време, докато екипът работи",
+          ],
+        },
+        { type: "h2", id: "employees", text: "Служители и статистика" },
+        { type: "img", slot: "Employees", alt: "Екранът Служители", title: "Wolf — Служители" },
+        {
+          type: "p",
+          text: "Списък на екипа с търсене — включително външни изпълнители. За всеки служител: общо дейности и задачи, плащания, завършени и чакащи задачи, брой уникални поръчки, плюс разбивки по дейност и задача с преход към поръчката.",
+        },
+        { type: "img", slot: "EmployeesStatistics", alt: "Статистика на служител", title: "Wolf — Статистика на служител" },
+        { type: "h2", id: "roles", text: "Роли и достъп" },
+        {
+          type: "ul",
+          items: [
+            "Администратор — вижда таблото, статистиката на служителите, календара на всеки и създава потребителски профили",
+            "Служител — работи с поръчки, имоти, клиенти и календара си, без администраторските екрани",
+          ],
+        },
+        { type: "h2", id: "profile", text: "Личен профил" },
+        { type: "img", slot: "PersonalTab", alt: "Личният профил", title: "Wolf — Профил" },
+        {
+          type: "p",
+          text: "Всеки служител има собствен изглед: статистика за периода (този месец, миналия, последните 3, всичко), процент завършени задачи, дневни, седмични и месечни графики на обема работа и списък на последно завършените задачи.",
+        },
+      ],
+      en: [
+        { type: "img", slot: "AdminPanel", alt: "The management dashboard", title: "Wolf — Dashboard" },
+        { type: "h2", id: "dashboard", text: "Management dashboard" },
+        {
+          type: "p",
+          text: "The whole practice summarized on one screen: order counts (total, active, archived), clients, activities and unique plots; a financial overview with revenue, advances, outstanding sums and total invoiced; the top 5 employees by workload and the most recent orders.",
+        },
+        {
+          type: "ul",
+          items: [
+            "An interactive status filter with a jump to any order",
+            "The numbers update in real time while the team works",
+          ],
+        },
+        { type: "h2", id: "employees", text: "Employees & statistics" },
+        { type: "img", slot: "Employees", alt: "The Employees screen", title: "Wolf — Employees" },
+        {
+          type: "p",
+          text: "A searchable list of the team — external contractors included. For every employee: total activities and tasks, payments, completed and pending tasks, count of unique orders, plus activity and task breakdowns with a jump to the order.",
+        },
+        { type: "img", slot: "EmployeesStatistics", alt: "Employee statistics", title: "Wolf — Employee statistics" },
+        { type: "h2", id: "roles", text: "Roles & access" },
+        {
+          type: "ul",
+          items: [
+            "Administrator — sees the dashboard, employee statistics, everyone's calendar and creates user accounts",
+            "Employee — works with orders, plots, clients and their own calendar, without the admin screens",
+          ],
+        },
+        { type: "h2", id: "profile", text: "Personal profile" },
+        { type: "img", slot: "PersonalTab", alt: "The personal profile", title: "Wolf — Profile" },
+        {
+          type: "p",
+          text: "Every employee gets their own view: statistics per period (this month, last month, last 3, all time), task completion percentage, daily, weekly and monthly workload charts and a list of recently completed tasks.",
         },
       ],
     },

@@ -116,7 +116,7 @@ export function FeatureTour() {
         />
 
         {/* ================= Desktop: sticky frame + scrolling stations ================= */}
-        <div ref={rootRef} className="mt-16 hidden lg:grid lg:grid-cols-2 lg:gap-16">
+        <div ref={rootRef} className="mt-16 hidden lg:grid lg:grid-cols-[5fr_7fr] lg:gap-12">
           {/* Left: stations */}
           <div>
             {TOUR.map((row, i) => {

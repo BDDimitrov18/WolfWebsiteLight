@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { getDocPage, type DocBlock } from "@/lib/docs/content";
 import { Reveal } from "@/components/ui/Reveal";
+import { ScreenshotFrame } from "@/components/ui/ScreenshotFrame";
 
 export function DocArticle({ slug }: { slug: string }) {
   const { locale, t } = useLocale();
@@ -143,6 +144,16 @@ function Block({ block }: { block: DocBlock }) {
         <pre className="overflow-x-auto rounded-xl border border-ink-700 bg-ink-950 p-4 font-mono text-sm leading-relaxed text-ember-200">
           {block.text}
         </pre>
+      );
+    case "img":
+      return (
+        <div className="my-2">
+          <ScreenshotFrame
+            slot={block.slot}
+            alt={block.alt}
+            title={block.title ?? block.alt}
+          />
+        </div>
       );
   }
 }

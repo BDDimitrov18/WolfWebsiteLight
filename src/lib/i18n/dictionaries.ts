@@ -26,7 +26,7 @@ const bg = {
   nav: {
     product: "Продукт",
     features: "Възможности",
-    architecture: "Архитектура",
+    architecture: "Как работи",
     pricing: "Цени",
     docs: "Документация",
     cta: "Заявете демо",
@@ -52,9 +52,9 @@ const bg = {
       "От възлагането на клиента до фактурата и отчета — без таблици, без дублиране, без чакане.",
     stats: [
       { value: "20+", label: "работни екрана" },
-      { value: "100+", label: "API крайни точки" },
-      { value: "0 ms", label: "интерфейс от кеша" },
-      { value: "58", label: "автоматизирани теста" },
+      { value: "5", label: "готови справки в Excel" },
+      { value: "100%", label: "реално време на всеки екран" },
+      { value: "1", label: "система вместо папки и таблици" },
     ],
   },
   pillars: {
@@ -64,20 +64,20 @@ const bg = {
       "Моделирането на собствеността — парцел ↔ документ ↔ собственик ↔ пълномощно с дробни идеални части — е същината, която общите инструменти не покриват.",
     items: [
       {
-        title: "Реално време за всички",
-        body: "Промяна, направена от един служител, се появява на екрана на всеки друг — мигновено, чрез SignalR.",
+        title: "Всички виждат едно и също",
+        body: "Промяната на колегата се появява на вашия екран в секундата, в която е направена — без презареждане и без „кой има последната версия“.",
       },
       {
-        title: "Мигновен интерфейс",
-        body: "Целият работен набор се зарежда в паметта при вход с материализирани индекси за O(1) търсене.",
+        title: "Без чакане",
+        body: "Търсене, филтри и списъци реагират мигновено — дори с хиляди поръчки, парцели и задачи.",
       },
       {
-        title: "Родно за Windows",
-        body: "Самостоятелно приложение на Avalonia — без инсталация на .NET, с автоматични обновления.",
+        title: "Грижи се само за себе си",
+        body: "Обикновено Windows приложение: инсталира се за минути и се обновява автоматично при нова версия.",
       },
       {
-        title: "Excel отчети",
-        body: "Финансови и оперативни справки, генерирани директно в .xlsx — без нужда от Office.",
+        title: "Справки, готови за счетоводителя",
+        body: "Финансовите и оперативните справки излизат директно като .xlsx файлове — отварят се навсякъде, без инсталиран Office.",
       },
     ],
   },
@@ -87,11 +87,12 @@ const bg = {
     subtitle:
       "Заснемане, трасиране, делба, кадастрален проект — работните потоци на кантората, дигитализирани.",
     placeholderNote: "Заместител за екранна снимка",
+    zoomHint: "Увеличи",
     items: {
       orders: {
         tag: "Поръчки",
         title: "Поръчки — централният екран",
-        body: "Виртуализирана таблица с поръчки: статус, плащане, цена, аванс, парцели и създател. Създаване, редакция, архивиране, търсене в реално време, цветно маркиране със звезди и автоматично изчислен статус на плащане.",
+        body: "Всички поръчки на кантората в една таблица: статус, плащане, цена, аванс, парцели и създател. Създаване, редакция, архивиране, търсене в реално време, цветни звезди по служител и автоматично изчислен статус на плащане.",
         bullets: [
           "Звезди по служител с палитра и цветови филтър",
           "Статус на плащане: платено / аванс / неплатено",
@@ -139,19 +140,19 @@ const bg = {
         ],
       },
       realtime: {
-        tag: "Синхронизация",
-        title: "Многопотребителска работа в реално време",
-        body: "Всяка промяна на сървъра излъчва събитие до всички останали клиенти. Кешът се обновява, индексите се преизграждат, екраните се актуализират — без презареждане.",
+        tag: "Екипна работа",
+        title: "Целият екип върху едни и същи данни",
+        body: "Работите едновременно с колегите си по едни и същи поръчки. Промените се появяват при всички веднага, а ако двама редактират един запис, системата предупреждава — вместо да губи данни.",
         bullets: [
-          "Автоматично преподключване и пълна ресинхронизация",
-          "Оптимистично заключване срещу конфликти",
-          "Одит лог на всяка промяна",
+          "Връзката се възстановява сама след прекъсване",
+          "Защита от взаимно презаписване на промени",
+          "Дневник кой какво е променил и кога",
         ],
       },
       clients: {
         tag: "Клиенти",
         title: "Клиенти и статистика",
-        body: "Търсим списък с клиенти и финансово обобщение за цялото време: платено, неплатено, общо, брой поръчки и разбивка по поръчка с експорт в Excel.",
+        body: "Пълен списък на клиентите с търсене и финансово обобщение за цялото време: платено, неплатено, общо, брой поръчки и разбивка по поръчка с експорт в Excel.",
         bullets: [
           "Правен тип: физическо лице / фирма / държава / община",
           "Преход към поръчка от справката",
@@ -182,31 +183,31 @@ const bg = {
     ],
   },
   architecture: {
-    eyebrow: "Архитектура",
-    title: "Три слоя, един споделен договор",
+    eyebrow: "Как работи",
+    title: "Вашите данни, във вашия офис",
     subtitle:
-      "Роден десктоп клиент ⇄ REST/WebSocket API ⇄ PostgreSQL. C# / .NET 8 навсякъде.",
+      "Wolf работи в мрежата на кантората: настолно приложение на всяко работно място, свързано към ваш сървър. Без чужди облаци, без месечни такси към трети страни.",
     layers: [
       {
-        name: "Wolf Desktop",
-        tech: "Avalonia 11 · MVVM",
-        body: "Целият интерфейс, изгледи, кеш в паметта, SignalR клиент и автообновяване чрез Velopack.",
+        name: "Работното място",
+        tech: "Windows",
+        body: "Настолно приложение на компютъра на всеки служител. Инсталира се за минути и се обновява само, щом излезе нова версия.",
       },
       {
-        name: "Wolf API",
-        tech: "ASP.NET Core 8",
-        body: "REST контролери, JWT удостоверяване, SignalR хъб, одит лог и repository шаблон.",
+        name: "Вашият сървър",
+        tech: "Офис мрежа",
+        body: "Всички данни живеят на машина във вашия офис. Екипът се свързва по мрежата — бързо и без абонамент за чужд облак.",
       },
       {
-        name: "PostgreSQL",
-        tech: "EF Core 8 · Npgsql",
-        body: "22 домейн ентитета, оптимистично заключване чрез xmin, индексирани външни ключове.",
+        name: "Паметта на кантората",
+        tech: "База данни",
+        body: "Една база пази поръчките, имотите, документите и фактурите от първия ден — заедно с дневник кой какво е променил.",
       },
     ],
     bullets: [
-      "Ролева авторизация (Admin / стандартен потребител)",
-      "JWT със 24-часова валидност, подписан с HMAC-SHA256",
-      "Docker сървър + автообновяващи се клиенти в LAN",
+      "Вход с потребител и парола, права по роли",
+      "Автоматични обновления на всички работни места",
+      "Одитен дневник на всяка промяна",
     ],
   },
   pricing: {
@@ -234,8 +235,8 @@ const bg = {
         period: "",
         body: "Внедряване за един офис: сървър, клиенти и обучение на екипа.",
         features: [
-          "Сървър в Docker + PostgreSQL",
-          "Автообновяващи се клиенти в LAN",
+          "Сървър във вашия офис",
+          "Инсталация на всички работни места",
           "Миграция на данни и обучение",
           "Реална синхронизация за целия екип",
         ],
@@ -276,7 +277,7 @@ const bg = {
     company: "Компания",
     links: {
       features: "Възможности",
-      architecture: "Архитектура",
+      architecture: "Как работи",
       pricing: "Цени",
       docs: "Документация",
       gettingStarted: "Първи стъпки",
@@ -316,7 +317,7 @@ const en: typeof bg = {
   nav: {
     product: "Product",
     features: "Features",
-    architecture: "Architecture",
+    architecture: "How it works",
     pricing: "Pricing",
     docs: "Docs",
     cta: "Book a demo",
@@ -342,9 +343,9 @@ const en: typeof bg = {
       "From a client's commission to the invoice and the report — no spreadsheets, no duplication, no waiting.",
     stats: [
       { value: "20+", label: "working screens" },
-      { value: "100+", label: "API endpoints" },
-      { value: "0 ms", label: "UI served from cache" },
-      { value: "58", label: "automated tests" },
+      { value: "5", label: "ready-made Excel reports" },
+      { value: "100%", label: "real-time on every screen" },
+      { value: "1", label: "system instead of folders and spreadsheets" },
     ],
   },
   pillars: {
@@ -354,20 +355,20 @@ const en: typeof bg = {
       "The ownership modeling — plot ↔ document ↔ owner ↔ power of attorney with fractional ideal parts — is the core that generic tools never cover.",
     items: [
       {
-        title: "Real-time for everyone",
-        body: "A change made by one member of staff appears on every other screen — instantly, over SignalR.",
+        title: "Everyone sees the same thing",
+        body: "A colleague's change appears on your screen the second it's made — no reloading, no \"who has the latest version\".",
       },
       {
-        title: "Instant interface",
-        body: "The entire working dataset loads into memory on login with materialized indexes for O(1) lookups.",
+        title: "No waiting",
+        body: "Search, filters and lists respond instantly — even with thousands of orders, plots and tasks.",
       },
       {
-        title: "Native to Windows",
-        body: "A self-contained Avalonia app — no .NET install required, with automatic updates.",
+        title: "Takes care of itself",
+        body: "A plain Windows application: installs in minutes and updates itself whenever a new version ships.",
       },
       {
-        title: "Excel reports",
-        body: "Financial and operational reports generated directly to .xlsx — no Office needed.",
+        title: "Reports your accountant can open",
+        body: "Financial and operational reports come out as ready .xlsx files — they open anywhere, no Office install needed.",
       },
     ],
   },
@@ -377,11 +378,12 @@ const en: typeof bg = {
     subtitle:
       "Survey, staking-out, partition, cadastral project — the firm's workflows, digitized.",
     placeholderNote: "Screenshot placeholder",
+    zoomHint: "Enlarge",
     items: {
       orders: {
         tag: "Orders",
         title: "Orders — the core screen",
-        body: "A virtualized orders grid: status, payment, price, advance, plots and creator. Create, edit, archive, real-time search, color-coded starring and an auto-calculated payment status.",
+        body: "Every order in the firm in one grid: status, payment, price, advance, plots and creator. Create, edit, archive, real-time search, per-employee colored stars and an auto-calculated payment status.",
         bullets: [
           "Per-employee stars with a palette and color filter",
           "Payment status: paid / advance / unpaid",
@@ -429,13 +431,13 @@ const en: typeof bg = {
         ],
       },
       realtime: {
-        tag: "Sync",
-        title: "Multi-user, real-time",
-        body: "Every server mutation broadcasts an event to all other clients. The cache updates, indexes rebuild, screens refresh — with no reload.",
+        tag: "Teamwork",
+        title: "The whole team on the same data",
+        body: "You and your colleagues work the same orders at the same time. Changes appear for everyone instantly, and if two people edit one record the system warns — instead of losing data.",
         bullets: [
-          "Auto-reconnect and full resync on drop",
-          "Optimistic concurrency against conflicts",
-          "Audit log on every mutation",
+          "The connection recovers by itself after a drop",
+          "Protection against overwriting each other's changes",
+          "A log of who changed what, and when",
         ],
       },
       clients: {
@@ -472,31 +474,31 @@ const en: typeof bg = {
     ],
   },
   architecture: {
-    eyebrow: "Architecture",
-    title: "Three tiers, one shared contract",
+    eyebrow: "How it works",
+    title: "Your data, in your office",
     subtitle:
-      "Native desktop client ⇄ REST/WebSocket API ⇄ PostgreSQL. C# / .NET 8 throughout.",
+      "Wolf runs on the firm's own network: a desktop app on every workstation, connected to your server. No third-party cloud, no per-month fees to someone else.",
     layers: [
       {
-        name: "Wolf Desktop",
-        tech: "Avalonia 11 · MVVM",
-        body: "All UI, view-models, the in-memory cache, the SignalR client and auto-update via Velopack.",
+        name: "The workstation",
+        tech: "Windows",
+        body: "A desktop application on each employee's computer. Installs in minutes and updates itself whenever a new version ships.",
       },
       {
-        name: "Wolf API",
-        tech: "ASP.NET Core 8",
-        body: "REST controllers, JWT authentication, a SignalR hub, audit logging and the repository pattern.",
+        name: "Your server",
+        tech: "Office network",
+        body: "All data lives on a machine in your own office. The team connects over the network — fast, and with no cloud subscription.",
       },
       {
-        name: "PostgreSQL",
-        tech: "EF Core 8 · Npgsql",
-        body: "22 domain entities, optimistic concurrency via xmin, indexed foreign keys.",
+        name: "The firm's memory",
+        tech: "Database",
+        body: "One database holds the orders, plots, documents and invoices from day one — along with a log of who changed what.",
       },
     ],
     bullets: [
-      "Role-based authorization (Admin / standard user)",
-      "JWT with 24-hour expiry, HMAC-SHA256 signed",
-      "Dockerized server + auto-updating LAN clients",
+      "Sign-in with username and password, role-based access",
+      "Automatic updates on every workstation",
+      "An audit trail of every change",
     ],
   },
   pricing: {
@@ -520,8 +522,8 @@ const en: typeof bg = {
         period: "",
         body: "A single-office deployment: server, clients and team training.",
         features: [
-          "Dockerized server + PostgreSQL",
-          "Auto-updating LAN clients",
+          "A server in your own office",
+          "Installed on every workstation",
           "Data migration and training",
           "Real-time sync for the whole team",
         ],
@@ -558,7 +560,7 @@ const en: typeof bg = {
     company: "Company",
     links: {
       features: "Features",
-      architecture: "Architecture",
+      architecture: "How it works",
       pricing: "Pricing",
       docs: "Documentation",
       gettingStarted: "Getting started",

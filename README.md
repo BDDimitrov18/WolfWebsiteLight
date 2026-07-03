@@ -28,10 +28,10 @@ src/
     layout.tsx            Root layout — fonts (Inter / Playfair / IBM Plex Mono),
                           LocaleProvider + ExperienceProvider, metadata,
                           no-JS fallback, grain overlay
-    page.tsx              Landing page (sections + Cursor + CoordReadout)
+    page.tsx              Landing page (sections + CoordReadout)
     globals.css           Design tokens (§5): palette, type scale, spacing,
                           radius, shadows + experience-layer CSS (Lenis,
-                          intro gating with failsafe, marquee, cursor, grain)
+                          intro gating with failsafe, marquee, grain)
     docs/                 /docs scaffold (getting-started, model, filters, reports)
   components/
     providers/            ExperienceProvider — Lenis smooth scroll driven by the
@@ -46,7 +46,7 @@ src/
     motifs/               Geodesy SVG motifs (compass, contour lines,
                           triangulation, crosshair, compass rose, ideal-parts)
     ui/                   Section, Reveal (GSAP), SplitHeading, Magnetic,
-                          Counter, Marquee, TiltCard, Cursor, CoordReadout,
+                          Counter, Marquee, TiltCard, CoordReadout,
                           Preloader, ScreenshotFrame
     docs/                 DocsShell, DocsSidebar, DocArticle
   lib/
@@ -97,14 +97,14 @@ from the browser language (BG default).
   ember LiDAR sweep and mouse parallax; SplitText headline choreography.
 - **Scroll** — Lenis smooth scrolling synced to GSAP ScrollTrigger; the
   feature tour keeps a sticky product frame that crossfades per station.
-- **Microinteractions** — magnetic buttons, tilt cards, reticle cursor
-  (mouse-grade pointers only), count-up stats, module marquee, and a fixed
-  coordinate HUD that ticks northing/easting as you traverse the page.
+- **Microinteractions** — magnetic buttons, tilt cards, count-up stats,
+  module marquee, and a fixed coordinate HUD that ticks northing/easting
+  as you traverse the page.
 
 ## Accessibility & performance
 
 - `prefers-reduced-motion` honoured everywhere — no preloader, static terrain
-  frame, instant reveals, no marquee/cursor.
+  frame, instant reveals, no marquee.
 - No-JS fallback: content ships visible in the HTML; intro-hidden elements are
   gated behind an `html.js` class **plus a CSS failsafe** that force-reveals
   after 2.8 s even if scripts crash.

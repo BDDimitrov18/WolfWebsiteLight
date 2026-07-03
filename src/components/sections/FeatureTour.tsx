@@ -166,7 +166,7 @@ export function FeatureTour() {
                   {String(TOUR.length).padStart(2, "0")}
                 </span>
               </div>
-              <div className="relative" data-cursor="view">
+              <div className="relative">
                 {TOUR.map((row, i) => {
                   const f = t<FeatureItem>(`features.items.${row.key}`);
                   return (

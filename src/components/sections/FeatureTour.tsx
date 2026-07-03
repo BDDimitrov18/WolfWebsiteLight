@@ -163,9 +163,12 @@ export function FeatureTour() {
             })}
           </div>
 
-          {/* Right: sticky instrument frame — vertically centered in the viewport */}
+          {/* Right: sticky instrument frame. The wrapper is viewport-height
+              and sticks at top-0 with its content flex-centered — this
+              centers the frame while stuck WITHOUT a translate, which would
+              shift it up into the section heading before sticking. */}
           <div>
-            <div className="sticky top-1/2 -translate-y-1/2">
+            <div className="sticky top-0 flex h-screen flex-col justify-center">
               <div className="mb-3 flex items-center justify-between font-mono text-xs tracking-[0.18em] text-ink-400">
                 <span ref={tagRef} className="uppercase text-ember-400" />
                 <span>

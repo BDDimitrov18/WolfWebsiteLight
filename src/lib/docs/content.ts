@@ -21,6 +21,7 @@ export interface DocPage {
   navKey:
     | "gettingStarted"
     | "orders"
+    | "archive"
     | "model"
     | "plots"
     | "clients"
@@ -249,6 +250,129 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "callout",
           text: "If a colleague saved a change to the same order before you, Wolf warns you and asks you to reload the record — nobody overwrites anyone's work without knowing.",
+        },
+      ],
+    },
+  },
+
+  // ================================================================
+  // Active & archive
+  // ================================================================
+  {
+    slug: "archive",
+    navKey: "archive",
+    title: { bg: "Активни и архив", en: "Active & archive" },
+    intro: {
+      bg: "Приключените поръчки не се трият — архивират се. Архивът пази пълната история на кантората и остава на един клик разстояние.",
+      en: "Finished orders aren't deleted — they're archived. The archive keeps the firm's full history and stays one click away.",
+    },
+    blocks: {
+      bg: [
+        {
+          type: "img",
+          slot: "ArchiveModeOrders",
+          alt: "Поръчки в режим „Всички“ — активни и архивирани заедно",
+          title: "Wolf — Поръчки · Всички",
+        },
+        { type: "h2", id: "toggle", text: "Всички / Активни / Архивирани" },
+        {
+          type: "p",
+          text: "На екрана „Поръчки“ трите бутона превключват с един клик кои поръчки виждате: само активните, само архивираните или целия регистър наведнъж. На снимката по-горе е изгледът „Всички“ — активни и приключени поръчки една до друга, всяка със своя статус.",
+        },
+        { type: "h2", id: "mode", text: "Режимът засяга цялото приложение" },
+        {
+          type: "p",
+          text: "Превключването между „само активни“ и „всички, включително архива“ не е локален филтър — то сменя режима на цялото приложение, заедно с цветовата тема, така че винаги виждате в кой режим работите.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Списъците и търсенето показват съответния набор от поръчки",
+            "Статистиките на клиенти и служители преизчисляват числата си",
+            "Броячите в страничната лента и таблото следват режима",
+            "Справките в Excel се генерират според активния режим",
+          ],
+        },
+        { type: "h2", id: "archive", text: "Архивиране на поръчка" },
+        {
+          type: "steps",
+          items: [
+            {
+              t: "От списъка",
+              d: "Изберете поръчката и я архивирайте — системата иска потвърждение, преди да я премести.",
+            },
+            {
+              t: "Или с един клик при запис",
+              d: "Във формата за редакция бутонът „Архивирай и запази“ приключва поръчката и я архивира едновременно.",
+            },
+          ],
+        },
+        {
+          type: "p",
+          text: "Архивираната поръчка запазва всичко: дейности и задачи, клиенти, имоти, документи за собственост и фактури. Нищо не се губи — само излиза от ежедневния изглед.",
+        },
+        { type: "h2", id: "restore", text: "Връщане от архива" },
+        {
+          type: "p",
+          text: "Ако по имот се наложи нова работа, поръчката се връща от архива също с потвърждение — с цялата си история непокътната.",
+        },
+        {
+          type: "callout",
+          text: "Архивът не е кошче — той е паметта на кантората. Стара поръчка отпреди години се намира за секунди с филтрите: по имот, клиент, собственик или населено място.",
+        },
+      ],
+      en: [
+        {
+          type: "img",
+          slot: "ArchiveModeOrders",
+          alt: "Orders in \"All\" view — active and archived side by side",
+          title: "Wolf — Orders · All",
+        },
+        { type: "h2", id: "toggle", text: "All / Active / Archived" },
+        {
+          type: "p",
+          text: "On the Orders screen, three buttons switch what you see in one click: only active orders, only archived ones, or the whole register at once. The shot above shows the \"All\" view — active and finished orders side by side, each with its status.",
+        },
+        { type: "h2", id: "mode", text: "The mode affects the whole app" },
+        {
+          type: "p",
+          text: "Switching between \"active only\" and \"everything, archive included\" isn't a local filter — it changes the mode of the entire application, colour theme included, so you always see which mode you're working in.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Lists and search show the corresponding set of orders",
+            "Client and employee statistics recalculate their numbers",
+            "The sidebar badges and the dashboard follow the mode",
+            "Excel reports generate according to the active mode",
+          ],
+        },
+        { type: "h2", id: "archive", text: "Archiving an order" },
+        {
+          type: "steps",
+          items: [
+            {
+              t: "From the list",
+              d: "Select the order and archive it — the system asks for confirmation before moving it.",
+            },
+            {
+              t: "Or in one click while saving",
+              d: "In the edit form, the \"Archive & save\" button closes out the order and archives it at the same time.",
+            },
+          ],
+        },
+        {
+          type: "p",
+          text: "An archived order keeps everything: activities and tasks, clients, plots, ownership documents and invoices. Nothing is lost — it just leaves the day-to-day view.",
+        },
+        { type: "h2", id: "restore", text: "Bringing an order back" },
+        {
+          type: "p",
+          text: "If new work comes up on a plot, the order is unarchived — also with confirmation — with its whole history intact.",
+        },
+        {
+          type: "callout",
+          text: "The archive isn't a recycle bin — it's the firm's memory. An order from years ago is found in seconds with the filters: by plot, client, owner or settlement.",
         },
       ],
     },

@@ -58,6 +58,7 @@ outcomes) and the docs completion.*
 |---|---|
 | Getting started | §1, §2, §7.1, §7.5, §8.1, §8.2 |
 | Orders — the core screen | §8.3 (grid, create/edit, archive & save, folder open, payment auto-calc, stars, pinning, detail tabs, concurrency message) |
+| Active & archive | §8.2 (mode toggle, theme change, mode-aware lists/stats/badges), §8.3 (archive/unarchive with confirmation, "Archive & save"); the All/Active/Archived buttons are visible in the supplied `ArchiveModeOrders.png` |
 | Model: order → activity → task | §2, §5.1–5.2, §8.10 |
 | Plots & ownership documents | §8.9 (cadastral fields, uniqueness, shared indicator, smart linking, document fields, ownership editor: owner autocomplete, ideal parts, way of acquiring, PoA) |
 | Clients & invoices | §8.4, §8.8 |

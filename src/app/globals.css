@@ -331,25 +331,6 @@ html.js .intro-hide {
   overflow: clip;
 }
 
-/* ---- Marquee ---------------------------------------------- */
-@keyframes marquee-scroll {
-  to {
-    transform: translateX(-50%);
-  }
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee-scroll var(--marquee-dur, 46s) linear infinite;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-}
 
 /* ---- Film grain (static, GPU-cheap) ------------------------ */
 .grain-overlay {

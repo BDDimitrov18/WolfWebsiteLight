@@ -62,6 +62,15 @@ const bg = {
     title: "Специализирана, не обща CRM система",
     subtitle:
       "Моделирането на собствеността — парцел ↔ документ ↔ собственик ↔ пълномощно с дробни идеални части — е същината, която общите инструменти не покриват.",
+    featured: {
+      title: "Всеки отчита своята работа",
+      body: "Wolf се различава от другите системи по това, че всеки служител отчита работата си поотделно. Виждате не само общото производство на практиката, а и самостоятелния принос на всеки — основа за по-коректно разпределение на възнагражденията спрямо труда и за по-точна отчетност на фирмата.",
+      points: [
+        "Цветни звезди и задачи по служител",
+        "Месечна справка по служител в Excel",
+        "Класация на служителите на таблото",
+      ],
+    },
     items: [
       {
         title: "Всички виждат едно и също",
@@ -355,6 +364,15 @@ const en: typeof bg = {
     title: "A specialized system, not a generic CRM",
     subtitle:
       "The ownership modeling — plot ↔ document ↔ owner ↔ power of attorney with fractional ideal parts — is the core that generic tools never cover.",
+    featured: {
+      title: "Every person accounts for their own work",
+      body: "What sets Wolf apart is that every member of staff reports their work individually. You see not just the firm's overall output but each person's own contribution — the basis for distributing remuneration more fairly against the work done, and for sharper firm-level accountability.",
+      points: [
+        "Colored stars and tasks per employee",
+        "Monthly per-employee report in Excel",
+        "Employee leaderboard on the dashboard",
+      ],
+    },
     items: [
       {
         title: "Everyone sees the same thing",

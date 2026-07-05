@@ -10,11 +10,16 @@ interface Item {
   body: string;
 }
 
+interface Featured extends Item {
+  points: string[];
+}
+
 const ICONS = ["sync", "bolt", "window", "sheet"] as const;
 
 export function Pillars() {
   const t = useT();
   const items = t<Item[]>("pillars.items");
+  const featured = t<Featured>("pillars.featured");
 
   return (
     <Section id="why" hud={t("pillars.eyebrow")}>
@@ -25,7 +30,46 @@ export function Pillars() {
           subtitle={t("pillars.subtitle")}
         />
 
-        <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* The headline differentiator: individual work accounting */}
+        <RevealGroup className="mt-14">
+          <RevealItem>
+            <TiltCard>
+              <article
+                className="group relative overflow-hidden rounded-xl border p-6 transition-colors duration-300 hover:border-ember-500/50 sm:p-8"
+                style={{
+                  borderColor: "color-mix(in srgb, var(--color-ember-500) 30%, transparent)",
+                  background:
+                    "linear-gradient(135deg, color-mix(in srgb, var(--color-ember-600) 10%, transparent), color-mix(in srgb, var(--color-ink-800) 60%, transparent) 55%)",
+                }}
+              >
+                <div className="grid gap-6 lg:grid-cols-[3fr_2fr] lg:gap-10">
+                  <div>
+                    <span
+                      className="flex h-11 w-11 items-center justify-center rounded-lg text-ember-400 transition-transform duration-500 group-hover:scale-110 group-hover:text-ember-300"
+                      style={{ background: "color-mix(in srgb, var(--color-ember-500) 14%, transparent)" }}
+                    >
+                      <PersonCheckIcon />
+                    </span>
+                    <h3 className="mt-5 text-xl" style={{ color: "var(--color-paper-50)" }}>
+                      {featured.title}
+                    </h3>
+                    <p className="mt-2 leading-relaxed text-ink-300">{featured.body}</p>
+                  </div>
+                  <ul className="flex flex-col justify-center gap-3 border-t border-ink-700 pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+                    {featured.points.map((point) => (
+                      <li key={point} className="flex items-start gap-3 text-sm text-ink-200">
+                        <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-ember-500" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            </TiltCard>
+          </RevealItem>
+        </RevealGroup>
+
+        <RevealGroup className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item, i) => (
             <RevealItem key={item.title} className="h-full">
               <TiltCard className="h-full">
@@ -55,6 +99,25 @@ export function Pillars() {
         </RevealGroup>
       </Container>
     </Section>
+  );
+}
+
+function PersonCheckIcon() {
+  return (
+    <svg
+      width={22}
+      height={22}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="9" cy="7.5" r="3.5" />
+      <path d="M3 20c.6-3.4 3-5.5 6-5.5s5.4 2.1 6 5.5" />
+      <path d="m15 8.5 2.2 2.2L21.5 6" />
+    </svg>
   );
 }
 

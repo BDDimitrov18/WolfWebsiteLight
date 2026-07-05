@@ -93,7 +93,7 @@ const bg = {
     eyebrow: "Обиколка на продукта",
     title: "Всеки екран, изграден за реалната работа",
     subtitle:
-      "Заснемане, трасиране, делба, кадастрален проект — работните потоци на проектантската практика, дигитализирани.",
+      "Каквато и да е услугата — заснемане, трасиране, делба, кадастрален проект или нещо съвсем друго — работният ѝ поток минава през едни и същи ясни екрани.",
     zoomHint: "Увеличи",
     items: {
       orders: {
@@ -392,7 +392,7 @@ const en: typeof bg = {
     eyebrow: "Product tour",
     title: "Every screen built for the real work",
     subtitle:
-      "Survey, staking-out, partition, cadastral project — the firm's workflows, digitized.",
+      "Whatever the service — a survey, staking-out, partition, cadastral project or something else entirely — its workflow runs through the same clear screens.",
     zoomHint: "Enlarge",
     items: {
       orders: {

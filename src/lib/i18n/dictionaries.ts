@@ -60,7 +60,7 @@ const bg = {
     eyebrow: "Защо Wolf",
     title: "Специализирана, не обща CRM система",
     subtitle:
-      "Общите CRM системи подреждат контакти и сделки. Wolf е изградена около реалната работа на проектантската практика — поръчки, имоти, документи и плащания, свързани така, както са свързани в действителност.",
+      "Wolf покрива основата, която всяка система дава — клиенти, поръчки, фактури и справки — и добавя специфичното за проектантската практика: имоти и документи за собственост, свързани с работата така, както са свързани в действителност.",
     featured: {
       title: "Всеки отчита своята работа",
       body: "Всеки служител отчита работата си поотделно — и освен общото производство се вижда и приносът на всеки. Обективна основа за по-коректно разпределение на ресурсите и възнагражденията.",
@@ -72,8 +72,8 @@ const bg = {
     },
     items: [
       {
-        title: "Всички виждат едно и също",
-        body: "Промяната на колегата се появява на вашия екран в секундата, в която е направена — без презареждане и без „кой има последната версия“.",
+        title: "Целият екип, по една поръчка",
+        body: "Няколко души работят едновременно по един проект — дори по една и съща дейност. Промяната на колегата се появява на вашия екран в мига, в който е направена, а системата пази от взаимно презаписване.",
       },
       {
         title: "Без чакане",
@@ -359,7 +359,7 @@ const en: typeof bg = {
     eyebrow: "Why Wolf",
     title: "A specialized system, not a generic CRM",
     subtitle:
-      "A generic CRM organizes contacts and deals. Wolf is built around the real work of a design practice — orders, properties, documents and payments, connected the way they are connected in reality.",
+      "Wolf covers the base every system gives you — clients, orders, invoices and reports — and adds what is specific to a design practice: properties and ownership documents, linked to the work the way they are linked in reality.",
     featured: {
       title: "Every person accounts for their own work",
       body: "Each member of staff reports their work individually — so beyond the overall output, each person's contribution is visible. An objective basis for allocating resources and remuneration more fairly.",
@@ -371,8 +371,8 @@ const en: typeof bg = {
     },
     items: [
       {
-        title: "Everyone sees the same thing",
-        body: "A colleague's change appears on your screen the second it's made — no reloading, no \"who has the latest version\".",
+        title: "The whole team, on one order",
+        body: "Several people work on the same project at once — even on the same activity. A colleague's change appears on your screen the moment it's made, and the system protects you from overwriting each other.",
       },
       {
         title: "No waiting",

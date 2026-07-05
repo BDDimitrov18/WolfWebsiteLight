@@ -29,7 +29,8 @@ outcomes) and the docs completion.*
 |---|---|---|
 | Featured: every employee reports their own work individually; you see individual as well as overall output | §8.3 (per-employee priority stars), §8.11 (monthly per-employee report, one sheet per employee), §6.3–6.4 (audit log of who changed what) | ✅ (the "stars" are described to visitors as a personal priority marker per order — owner's framing, 2026-07-05) |
 | …used for fairer distribution of remuneration against work done, and for firm accountability | Owner's statement (2026-07-05): this is the intended purpose of individual accounting; not a computed payroll feature in §8 | ⚠️ Purpose framing supplied by the owner — the product provides the per-employee data; it does not itself calculate remuneration. |
-| Everyone sees the same thing — colleague's change appears instantly, no reload | §4.3, §7.4, §8.13 | ✅ |
+| The whole team on one order — simultaneous work, even on the same activity; changes appear instantly; protected from overwriting each other | §4.3 (optimistic concurrency, simultaneous editing, "friendly 409"), §7.4, §8.13 | ✅ |
+| Subtitle: covers the base (clients, orders, invoices, reports) + adds practice-specific (properties, ownership documents) | §2, §8.3–8.11 (base modules), §5.2/§8.9 (ownership specifics) | ✅ |
 | No waiting — instant search/filters/lists even with thousands of records | §7.3 (in-memory cache, O(1) indexes, virtualization §8.13) | ✅ |
 | Takes care of itself — installs in minutes, auto-updates | §3.2, §7.5 | ✅ ("minutes" is a reasonable characterization of a self-contained installer, not a measured figure) |
 | Reports your accountant can open — .xlsx, no Office install | §3.2, §8.11 | ✅ |

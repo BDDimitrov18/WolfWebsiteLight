@@ -20,14 +20,12 @@ export function ScreenshotFrame({
   slot,
   title = "Wolf",
   priority = false,
-  placeholderNote,
 }: {
   src?: string;
   alt: string;
   slot: string;
   title?: string;
   priority?: boolean;
-  placeholderNote?: string;
 }) {
   const t = useT();
   const [open, setOpen] = useState(false);
@@ -88,11 +86,6 @@ export function ScreenshotFrame({
             </svg>
             {t("features.zoomHint")}
           </span>
-          {placeholderNote && (
-            <span className="pointer-events-none absolute bottom-2.5 left-2.5 rounded bg-ink-950/70 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-ink-300 opacity-0 transition-opacity group-hover:opacity-100">
-              {placeholderNote}: {slot}
-            </span>
-          )}
         </button>
       </figure>
 

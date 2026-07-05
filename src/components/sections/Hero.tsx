@@ -182,7 +182,6 @@ export function Hero() {
             alt={t("features.items.orders.title")}
             title="Wolf — Поръчки"
             priority
-            placeholderNote={t("features.placeholderNote")}
           />
           <Chip data-side="left" className="-left-3 top-10 sm:-left-8" label={t("hero.floatA")} />
           <Chip data-side="right" className="-right-3 bottom-10 sm:-right-8" label={t("hero.floatB")} />

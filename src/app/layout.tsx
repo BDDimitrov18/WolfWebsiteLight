@@ -34,15 +34,16 @@ export const metadata: Metadata = {
   },
   description:
     "Wolf — многопотребителска система за управление на геодезическа, кадастрална и правна практика. Поръчки, дейности, парцели, документи за собственост, фактури и отчети в реално време.",
-  metadataBase: new URL("https://wolf.bg"),
+  metadataBase: new URL("https://bddimitrov18.github.io"),
   openGraph: {
     title: "Wolf — Software for surveying, cadastre & legal documentation",
     description:
       "One native Windows system for orders, plots, ownership documents, invoicing and real-time reporting.",
     type: "website",
+    images: [{ url: asset("/og.png"), width: 1200, height: 630, alt: "Wolf" }],
   },
   icons: {
-    icon: asset("/brand/wolf_logo_black_transparent.png"),
+    icon: asset("/favicon.png"),
   },
 };
 

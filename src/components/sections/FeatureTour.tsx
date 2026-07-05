@@ -191,7 +191,6 @@ export function FeatureTour() {
                         slot={row.slot}
                         alt={f.title}
                         title={`Wolf — ${f.tag}`}
-                        placeholderNote={t("features.placeholderNote")}
                       />
                     </div>
                   );
@@ -236,7 +235,6 @@ export function FeatureTour() {
                     slot={row.slot}
                     alt={f.title}
                     title={`Wolf — ${f.tag}`}
-                    placeholderNote={t("features.placeholderNote")}
                   />
                 </Reveal>
               </div>

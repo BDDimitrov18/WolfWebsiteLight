@@ -95,7 +95,6 @@ const bg = {
     title: "Всеки екран, изграден за реалната работа",
     subtitle:
       "Заснемане, трасиране, делба, кадастрален проект — работните потоци на проектантската практика, дигитализирани.",
-    placeholderNote: "Заместител за екранна снимка",
     zoomHint: "Увеличи",
     items: {
       orders: {
@@ -294,7 +293,6 @@ const bg = {
       reports: "Справки",
       contact: "Контакти",
       demo: "Заявете демо",
-      privacy: "Поверителност",
     },
     rights: "Всички права запазени.",
     version: "Описана версия 1.0.16",
@@ -397,7 +395,6 @@ const en: typeof bg = {
     title: "Every screen built for the real work",
     subtitle:
       "Survey, staking-out, partition, cadastral project — the firm's workflows, digitized.",
-    placeholderNote: "Screenshot placeholder",
     zoomHint: "Enlarge",
     items: {
       orders: {
@@ -588,7 +585,6 @@ const en: typeof bg = {
       reports: "Reports",
       contact: "Contact",
       demo: "Book a demo",
-      privacy: "Privacy",
     },
     rights: "All rights reserved.",
     version: "Documented version 1.0.16",

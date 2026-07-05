@@ -1,14 +1,23 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { CompassRose } from "@/components/motifs/GeodesyMotifs";
 
+const noopSubscribe = () => () => {};
+
 export function Footer() {
   const t = useT();
-  const year = 2026; // build year (Date.now unavailable at runtime here)
+  // Prerendered HTML carries the build year; the client reads the real
+  // year so the static export never goes stale.
+  const year = useSyncExternalStore(
+    noopSubscribe,
+    () => new Date().getFullYear(),
+    () => 2026,
+  );
 
   const cols = [
     {
@@ -33,7 +42,6 @@ export function Footer() {
       links: [
         { href: "/#contact", label: t("footer.links.demo") },
         { href: "/#contact", label: t("footer.links.contact") },
-        { href: "/#contact", label: t("footer.links.privacy") },
       ],
     },
   ];

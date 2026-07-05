@@ -49,7 +49,7 @@ export function TiltCard({
       });
     };
     const onLeave = () => {
-      gsap.to(el, { rotationX: 0, rotationY: 0, duration: 0.9, ease: "elastic.out(1, 0.4)" });
+      gsap.to(el, { rotationX: 0, rotationY: 0, duration: 0.7, ease: "power3.out" });
       gsap.to(glare, { opacity: 0, duration: 0.5 });
     };
 

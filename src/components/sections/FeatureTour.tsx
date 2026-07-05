@@ -17,7 +17,7 @@ interface FeatureItem {
 // Each feature → its screenshot slot. Drop <slot>.png into /public/screenshots.
 const TOUR: { key: string; slot: string }[] = [
   { key: "orders", slot: "OrdersScreen" },
-  { key: "titleChain", slot: "PlotsTab" },
+  { key: "titleChain", slot: "PlotsAndDocsInOrderTab" },
   { key: "calendar", slot: "Callendar" },
   { key: "filters", slot: "FiltersOrders" },
   { key: "reports", slot: "InqueriesTab" },

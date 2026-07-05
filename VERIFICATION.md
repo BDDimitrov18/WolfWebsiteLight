@@ -19,7 +19,7 @@ outcomes) and the docs completion.*
 | Claim | Source | |
 |---|---|---|
 | 20+ working screens | §10 ("20+ major screens") | ✅ |
-| 5 ready-made Excel reports | §8.11 (All Tasks, Obligations, Task-Type Payment, Monthly per-employee, Client statistics export) | ✅ |
+| "Excel — ready-made & custom reports" | §8.11 (5 ready-made reports: All Tasks, Obligations, Task-Type Payment, Monthly per-employee, Client statistics export; all filterable, so the user tailors output) | ⚠️ "Custom" here means user-driven filtering/parameters on the shipped reports, not an arbitrary report builder — confirm scope before claiming free-form custom reports. |
 | 100% real-time on every screen | §8.13 ("Real-time multi-user sync across every screen") | ✅ |
 | "1 system instead of folders and spreadsheets" | §1, §2 (single LOB system) | ⚠️ Marketing framing of §1; "instead of folders and spreadsheets" describes the intended replacement, not a documented migration feature. |
 

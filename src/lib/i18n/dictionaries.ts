@@ -54,7 +54,7 @@ const bg = {
       "От възлагането на клиента до фактурата и отчета — без таблици, без дублиране, без чакане.",
     stats: [
       { value: "20+", label: "работни екрана" },
-      { value: "5", label: "готови справки в Excel" },
+      { value: "Excel", label: "готови и персонализирани справки" },
       { value: "100%", label: "реално време на всеки екран" },
       { value: "1", label: "система вместо папки и таблици" },
     ],
@@ -356,7 +356,7 @@ const en: typeof bg = {
       "From a client's commission to the invoice and the report — no spreadsheets, no duplication, no waiting.",
     stats: [
       { value: "20+", label: "working screens" },
-      { value: "5", label: "ready-made Excel reports" },
+      { value: "Excel", label: "ready-made & custom reports" },
       { value: "100%", label: "real-time on every screen" },
       { value: "1", label: "system instead of folders and spreadsheets" },
     ],

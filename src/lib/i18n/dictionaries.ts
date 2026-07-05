@@ -192,9 +192,9 @@ const bg = {
   },
   architecture: {
     eyebrow: "Как работи",
-    title: "Вашите данни, във вашия офис",
+    title: "Вашите данни, при вашите условия",
     subtitle:
-      "Wolf работи в мрежата на практиката: настолно приложение на всяко работно място, свързано към ваш сървър. Без чужди облаци, без месечни такси към трети страни.",
+      "Настолно приложение на всяко работно място, свързано към общ сървър. Къде живее той, решавате вие — машина във вашия офис или в облака. И в двата случая базата данни е ваша.",
     layers: [
       {
         name: "Работното място",
@@ -203,8 +203,8 @@ const bg = {
       },
       {
         name: "Вашият сървър",
-        tech: "Офис мрежа",
-        body: "Всички данни живеят на машина във вашия офис. Екипът се свързва по мрежата — бързо и без абонамент за чужд облак.",
+        tech: "Офис или облак",
+        body: "Данните живеят на сървър, който вие контролирате — машина в офиса или в облака, по ваш избор. Екипът се свързва по мрежата, без обвързване с чужда платформа.",
       },
       {
         name: "Паметта на практиката",
@@ -238,12 +238,12 @@ const bg = {
         featured: false,
       },
       {
-        name: "Кантора",
+        name: "Практика",
         price: "По заявка",
         period: "",
         body: "Внедряване за един офис: сървър, клиенти и обучение на екипа.",
         features: [
-          "Сървър във вашия офис",
+          "Сървър във вашия офис или в облака",
           "Инсталация на всички работни места",
           "Миграция на данни и обучение",
           "Реална синхронизация за целия екип",
@@ -492,9 +492,9 @@ const en: typeof bg = {
   },
   architecture: {
     eyebrow: "How it works",
-    title: "Your data, in your office",
+    title: "Your data, on your terms",
     subtitle:
-      "Wolf runs on the firm's own network: a desktop app on every workstation, connected to your server. No third-party cloud, no per-month fees to someone else.",
+      "A desktop app on every workstation, connected to a shared server. Where it lives is your call — a machine in your office or in the cloud. Either way, the database is yours.",
     layers: [
       {
         name: "The workstation",
@@ -503,8 +503,8 @@ const en: typeof bg = {
       },
       {
         name: "Your server",
-        tech: "Office network",
-        body: "All data lives on a machine in your own office. The team connects over the network — fast, and with no cloud subscription.",
+        tech: "Office or cloud",
+        body: "The data lives on a server you control — a machine in the office or in the cloud, your choice. The team connects over the network, with no platform lock-in.",
       },
       {
         name: "The firm's memory",
@@ -539,7 +539,7 @@ const en: typeof bg = {
         period: "",
         body: "A single-office deployment: server, clients and team training.",
         features: [
-          "A server in your own office",
+          "A server in your office or in the cloud",
           "Installed on every workstation",
           "Data migration and training",
           "Real-time sync for the whole team",

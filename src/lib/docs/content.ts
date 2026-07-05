@@ -55,7 +55,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "p",
-          text: "Приложението стои на компютъра на всеки служител и се свързва към сървър във вашия офис. Целият екип работи едновременно — промяната на един колега се появява на екрана на всички останали в реално време.",
+          text: "Приложението стои на компютъра на всеки служител и се свързва към общ сървър — машина във вашия офис или в облака, по ваш избор. Целият екип работи едновременно — промяната на един колега се появява на екрана на всички останали в реално време.",
         },
         { type: "h2", id: "install", text: "Инсталиране и вход" },
         {
@@ -103,7 +103,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "p",
-          text: "The application sits on each employee's computer and connects to a server in your own office. The whole team works simultaneously — one colleague's change appears on everyone else's screen in real time.",
+          text: "The application sits on each employee's computer and connects to a shared server — a machine in your office or in the cloud, your choice. The whole team works simultaneously — one colleague's change appears on everyone else's screen in real time.",
         },
         { type: "h2", id: "install", text: "Installing & signing in" },
         {

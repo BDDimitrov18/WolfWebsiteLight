@@ -51,8 +51,7 @@ outcomes) and the docs completion.*
 | Claim | Source | |
 |---|---|---|
 | Desktop app on every workstation; installs in minutes; auto-updates | §1, §3.2, §7.5 | ✅ |
-| Data lives on a server in your own office; team connects over the network | §1, §9.3 (LAN, dedicated host) | ✅ |
-| "No third-party cloud, no per-month fees to someone else" | §9.3 (self-hosted deployment model) | ⚠️ Accurate for the documented deployment (self-hosted LAN), but hosting/electricity/support costs still exist; this contrasts with SaaS subscriptions, not with all costs. |
+| Data lives on a server you control — office machine or cloud, your choice; database is yours either way | §9.3 documents the self-hosted LAN deployment; cloud hosting is the same client-server architecture pointed at a remote host — owner confirmed offering both (2026-07-06) | ✅ (the doc itself only describes on-prem; the cloud option is architecturally identical and owner-attested) |
 | One database holds everything + a log of who changed what | §5, §6.4 (file audit log per mutation) | ✅ |
 | Sign-in with username/password, role-based access | §6.1, §8.1 | ✅ |
 | Audit trail of every change | §6.3–6.4 ("every mutation is both audited and broadcast") | ✅ |

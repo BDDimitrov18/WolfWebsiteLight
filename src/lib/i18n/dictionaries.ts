@@ -43,6 +43,10 @@ const bg = {
     note: "Изградено за геодезически, кадастрални и правни практики в България.",
     floatA: "Поръчка → дейности → задачи",
     floatB: "Имот → документ → собственик",
+    docChips: [
+      { title: "Нотариален акт", meta: "КИ 68134.905.211" },
+      { title: "Скица на имот", meta: "1/2 идеална част" },
+    ],
     coord: "42.6977° N · 23.3219° E",
     scroll: "Скролирайте",
   },
@@ -343,6 +347,10 @@ const en: typeof bg = {
     note: "Built for surveying, cadastral and legal firms in Bulgaria.",
     floatA: "Order → activities → tasks",
     floatB: "Plot → document → owner",
+    docChips: [
+      { title: "Notarial deed", meta: "ID 68134.905.211" },
+      { title: "Plot sketch", meta: "1/2 ideal part" },
+    ],
     coord: "42.6977° N · 23.3219° E",
     scroll: "Scroll",
   },

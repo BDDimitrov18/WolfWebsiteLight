@@ -85,11 +85,12 @@ tested claim.
    Bulgarian firm and is Bulgarian-language (§1), but the document does not
    explicitly state the developer's location. Brand statement, not a product
    spec.
-4. **Pricing** — the full price list (Solo €39/mo · Standard €99/mo · Pro
-   €249/mo · Enterprise custom; per-seat €39+€8/user/mo; one-time licenses
-   €1,200/€3,500/€8,500 with ~18% optional annual maintenance; EUR excl. 20%
-   VAT; annual billing, monthly ~20% higher) was supplied verbatim by the
-   owner on 2026-07-06. Commercial terms, not derivable from PROJECT_OVERVIEW.
+4. **Pricing** — the price list (Solo €10/mo · Standard €25/mo · Pro €50/mo ·
+   Enterprise custom; one-time licenses €500/€800/€1,000 with ~18% optional
+   annual maintenance — €90/€145/€180; EUR excl. 20% VAT; annual billing,
+   monthly ~20% higher) was supplied by the owner (revised 2026-07-06; the
+   earlier per-seat model was dropped with the revision). Commercial terms,
+   not derivable from PROJECT_OVERVIEW.
 5. **Version "1.0.16"** (footer) matches the document header (§ title). Note the
    bundled `LoginScreen.png` shows `v1.0.15` — a screenshot from a slightly
    earlier build. Swap the screenshot or accept the minor mismatch.

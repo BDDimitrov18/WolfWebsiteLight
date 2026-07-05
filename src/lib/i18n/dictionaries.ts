@@ -180,6 +180,7 @@ const bg = {
   },
   titleChain: {
     eyebrow: "Специализираният модул",
+    chainLabel: "имот ↔ документ ↔ собственик ↔ пълномощно",
     title: "Веригата на собствеността, моделирана коректно",
     body: "Един имот има множество документи. Един документ свързва множество собственици. Всеки собственик държи идеална част и може да бъде представляван чрез пълномощно. Wolf записва точно тази тройна връзка.",
     steps: [
@@ -479,6 +480,7 @@ const en: typeof bg = {
   },
   titleChain: {
     eyebrow: "The specialized module",
+    chainLabel: "plot ↔ document ↔ owner ↔ PoA",
     title: "The chain of ownership, modeled correctly",
     body: "A plot has many documents. A document links many owners. Each owner holds an ideal part and may be represented by a power of attorney. Wolf records exactly this three-way relationship.",
     steps: [

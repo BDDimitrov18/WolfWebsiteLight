@@ -118,7 +118,7 @@ export function TitleChain() {
             >
               <div className="mb-6 flex items-center justify-between">
                 <span className="font-mono text-xs uppercase tracking-[0.18em] text-ink-500">
-                  plot ↔ document ↔ owner ↔ PoA
+                  {t("titleChain.chainLabel")}
                 </span>
                 <IdealPartsGlyph className="h-8 w-8 text-ink-700" />
               </div>

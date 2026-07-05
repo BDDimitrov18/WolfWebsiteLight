@@ -64,6 +64,7 @@ const INK_FOG = 0x0e1422; // --color-ink-900
 const LINE_COL = 0x3a465f; // --color-ink-500
 const STATION_COL = 0xc9d2e4; // cool paper
 const EMBER = 0xed9a57; // --color-ember-400
+const PARCEL_COL = 0xd8c9b4; // warm survey-paper — parcels read as drawn on the map
 
 /** Soft round sprite so points render as glows, not squares. */
 function makePointTexture(): THREE.Texture {
@@ -79,6 +80,104 @@ function makePointTexture(): THREE.Texture {
   const tex = new THREE.CanvasTexture(c);
   tex.needsUpdate = true;
   return tex;
+}
+
+/**
+ * Tiny "ownership document" card: dark plate, ember border, suggested
+ * text lines and a seal. Abstract on purpose — it must read as
+ * "a document", not be readable.
+ */
+function makeDocTexture(): THREE.Texture {
+  const c = document.createElement("canvas");
+  c.width = 320;
+  c.height = 240;
+  const ctx = c.getContext("2d")!;
+  ctx.beginPath();
+  if (typeof ctx.roundRect === "function") ctx.roundRect(6, 6, 308, 228, 24);
+  else ctx.rect(6, 6, 308, 228);
+  ctx.fillStyle = "rgba(11,16,27,0.92)";
+  ctx.fill();
+  ctx.strokeStyle = "rgba(237,154,87,0.9)";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  // title line
+  ctx.fillStyle = "rgba(247,242,234,0.75)";
+  ctx.fillRect(36, 44, 156, 13);
+  // body lines
+  ctx.fillStyle = "rgba(160,172,196,0.45)";
+  ctx.fillRect(36, 88, 248, 9);
+  ctx.fillRect(36, 116, 220, 9);
+  ctx.fillRect(36, 144, 236, 9);
+  // ember seal with check
+  ctx.beginPath();
+  ctx.arc(264, 192, 22, 0, Math.PI * 2);
+  ctx.strokeStyle = "rgba(237,154,87,0.95)";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(253, 192);
+  ctx.lineTo(261, 200);
+  ctx.lineTo(276, 183);
+  ctx.stroke();
+  const tex = new THREE.CanvasTexture(c);
+  tex.needsUpdate = true;
+  return tex;
+}
+
+// A cadastral parcel: jittered lattice cell with its centroid.
+interface Parcel {
+  corners: [number, number][]; // [x, z] in draw order
+  cx: number;
+  cz: number;
+}
+
+/** Irregular parcel block in the mid-foreground — deterministic like the terrain. */
+function buildParcels(): Parcel[] {
+  const xs = [-21, -12, -3, 7, 17];
+  const zs = [-3, -11, -19, -27];
+  const grid = zs.map((z, j) =>
+    xs.map(
+      (x, i) =>
+        [
+          x + (hash2(i * 3.1, j * 5.7) - 0.5) * 3.2,
+          z + (hash2(i * 7.9, j * 2.3) - 0.5) * 3.0,
+        ] as [number, number],
+    ),
+  );
+  const parcels: Parcel[] = [];
+  for (let j = 0; j < zs.length - 1; j++) {
+    for (let i = 0; i < xs.length - 1; i++) {
+      // drop a few cells so the block reads organic, not checkerboard
+      if (hash2(i * 11.3, j * 17.7) < 0.22) continue;
+      const corners = [grid[j][i], grid[j][i + 1], grid[j + 1][i + 1], grid[j + 1][i]];
+      const cx = corners.reduce((s, p) => s + p[0], 0) / 4;
+      const cz = corners.reduce((s, p) => s + p[1], 0) / 4;
+      parcels.push({ corners, cx, cz });
+    }
+  }
+  return parcels;
+}
+
+/** Boundary of a parcel as line-segment pairs hugging the terrain. */
+function parcelOutline(p: Parcel, lift: number): number[] {
+  const out: number[] = [];
+  for (let e = 0; e < 4; e++) {
+    const [ax, az] = p.corners[e];
+    const [bx, bz] = p.corners[(e + 1) % 4];
+    const len = Math.hypot(bx - ax, bz - az);
+    const steps = Math.max(2, Math.ceil(len / 1.1));
+    for (let s = 0; s < steps; s++) {
+      const t0 = s / steps;
+      const t1 = (s + 1) / steps;
+      const x0 = ax + (bx - ax) * t0;
+      const z0 = az + (bz - az) * t0;
+      const x1 = ax + (bx - ax) * t1;
+      const z1 = az + (bz - az) * t1;
+      out.push(x0, terrainHeight(x0, z0) + lift, z0);
+      out.push(x1, terrainHeight(x1, z1) + lift, z1);
+    }
+  }
+  return out;
 }
 
 export default function TerrainScene({ className = "" }: { className?: string }) {
@@ -212,6 +311,171 @@ export default function TerrainScene({ className = "" }: { className?: string })
     const scan = new THREE.Line(scanGeo, scanMat);
     scene.add(scan);
 
+    // ---- Cadastral parcels: the land, subdivided ----
+    const parcels = buildParcels();
+
+    // Three parcels carry the product story: boundary lit, document attached.
+    // Anchors match actual (jittered) centroids that project inside the
+    // above-the-fold viewport: lower-left, right flank, bottom-center.
+    const featuredAt: [number, number][] = mobile
+      ? [[2, -15]]
+      : [
+          [-7, -14],
+          [13, -22],
+          [2, -15],
+        ];
+    // Chip world positions solved against the camera so they float in the
+    // clear zones beside the hero copy (canvas is taller than the viewport
+    // — the whole hero section — so "low on screen" means high in world y).
+    const chipAnchors: [number, number, number][] = [
+      [-5.7, 4.72, -6],
+      [5.8, 4.5, -6],
+    ];
+    const featured = featuredAt
+      .map((q) => {
+        let best: Parcel | null = null;
+        let bd = Infinity;
+        for (const p of parcels) {
+          const d = Math.hypot(p.cx - q[0], p.cz - q[1]);
+          if (d < bd) {
+            bd = d;
+            best = p;
+          }
+        }
+        return best;
+      })
+      .filter((p, i, arr): p is Parcel => !!p && arr.indexOf(p) === i);
+
+    // Quiet parcels: one merged LineSegments draw
+    const quietPos: number[] = [];
+    for (const p of parcels) {
+      if (featured.includes(p)) continue;
+      quietPos.push(...parcelOutline(p, 0.07));
+    }
+    const quietGeo = new THREE.BufferGeometry();
+    quietGeo.setAttribute("position", new THREE.Float32BufferAttribute(quietPos, 3));
+    const quietMat = new THREE.LineBasicMaterial({
+      color: PARCEL_COL,
+      transparent: true,
+      opacity: 0.2,
+    });
+    scene.add(new THREE.LineSegments(quietGeo, quietMat));
+
+    // Featured parcels: own material (pulsed by the scan) + faint ember fill
+    const docTex = mobile ? null : makeDocTexture();
+    interface Marker {
+      cx: number;
+      lineMat: THREE.LineBasicMaterial;
+      fillMat: THREE.MeshBasicMaterial;
+      leaderMat: THREE.LineBasicMaterial | null;
+      sprite: THREE.Sprite | null;
+      baseY: number;
+      phase: number;
+      pulse: number;
+    }
+    const markers: Marker[] = [];
+    const featuredDisposables: (THREE.BufferGeometry | THREE.Material | THREE.Texture)[] = [];
+
+    featured.forEach((p, idx) => {
+      const lineGeo = new THREE.BufferGeometry();
+      lineGeo.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(parcelOutline(p, 0.09), 3),
+      );
+      const lineMat = new THREE.LineBasicMaterial({
+        color: EMBER,
+        transparent: true,
+        opacity: 0.5,
+        blending: THREE.AdditiveBlending,
+      });
+      scene.add(new THREE.LineSegments(lineGeo, lineMat));
+
+      // fill: bilinear 4×4 patch over the quad, hugging the terrain
+      const N = 4;
+      const fillPos: number[] = [];
+      const fillIdx: number[] = [];
+      const [c0, c1, c2, c3] = p.corners;
+      for (let j = 0; j <= N; j++) {
+        for (let i = 0; i <= N; i++) {
+          const u = i / N;
+          const v = j / N;
+          const x =
+            (1 - u) * (1 - v) * c0[0] + u * (1 - v) * c1[0] + u * v * c2[0] + (1 - u) * v * c3[0];
+          const z =
+            (1 - u) * (1 - v) * c0[1] + u * (1 - v) * c1[1] + u * v * c2[1] + (1 - u) * v * c3[1];
+          fillPos.push(x, terrainHeight(x, z) + 0.05, z);
+        }
+      }
+      for (let j = 0; j < N; j++) {
+        for (let i = 0; i < N; i++) {
+          const a = j * (N + 1) + i;
+          fillIdx.push(a, a + 1, a + N + 1, a + 1, a + N + 2, a + N + 1);
+        }
+      }
+      const fillGeo = new THREE.BufferGeometry();
+      fillGeo.setAttribute("position", new THREE.Float32BufferAttribute(fillPos, 3));
+      fillGeo.setIndex(fillIdx);
+      const fillMat = new THREE.MeshBasicMaterial({
+        color: EMBER,
+        transparent: true,
+        opacity: 0.05,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+      });
+      scene.add(new THREE.Mesh(fillGeo, fillMat));
+      featuredDisposables.push(lineGeo, lineMat, fillGeo, fillMat);
+
+      // Document chip on a slanted cartographic leader line (desktop only,
+      // first two parcels only).
+      let sprite: THREE.Sprite | null = null;
+      let leaderMat: THREE.LineBasicMaterial | null = null;
+      const groundY = terrainHeight(p.cx, p.cz);
+      const [chipX, baseY, chipZ] = chipAnchors[idx] ?? [p.cx, groundY + 2, p.cz];
+      if (docTex && idx < chipAnchors.length) {
+        const spriteMat = new THREE.SpriteMaterial({
+          map: docTex,
+          transparent: true,
+          opacity: 0.78,
+          depthWrite: false,
+          fog: false, // keep the ember/ink colors true at depth
+        });
+        sprite = new THREE.Sprite(spriteMat);
+        sprite.scale.set(1.8, 1.35, 1);
+        sprite.position.set(chipX, baseY, chipZ);
+        scene.add(sprite);
+
+        const leaderGeo = new THREE.BufferGeometry();
+        leaderGeo.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(
+            [p.cx, groundY + 0.1, p.cz, chipX, baseY - 0.8, chipZ],
+            3,
+          ),
+        );
+        leaderMat = new THREE.LineBasicMaterial({
+          color: EMBER,
+          transparent: true,
+          opacity: 0.4,
+          blending: THREE.AdditiveBlending,
+        });
+        scene.add(new THREE.Line(leaderGeo, leaderMat));
+        featuredDisposables.push(spriteMat, leaderGeo, leaderMat);
+      }
+
+      markers.push({
+        cx: p.cx,
+        lineMat,
+        fillMat,
+        leaderMat,
+        sprite,
+        baseY,
+        phase: idx * 2.4,
+        pulse: 0,
+      });
+    });
+    if (docTex) featuredDisposables.push(docTex);
+
     const updateScan = (t: number) => {
       // sweep x across the terrain every 11s, with a soft in/out
       const cycle = (t % 11) / 11;
@@ -225,6 +489,18 @@ export default function TerrainScene({ className = "" }: { className?: string })
       // fade in/out at the edges of the sweep
       const edge = Math.min(cycle, 1 - cycle);
       scanMat.opacity = THREE.MathUtils.clamp(edge * 10, 0, 1) * 0.5;
+
+      // The pass "registers" featured parcels: boundary and fill flare as
+      // the sweep crosses them, then settle back.
+      const strength = scanMat.opacity / 0.5;
+      for (const m of markers) {
+        const target =
+          THREE.MathUtils.clamp(1 - Math.abs(x - m.cx) / 4.5, 0, 1) * strength;
+        m.pulse += (target - m.pulse) * 0.12; // ease so the flare decays softly
+        m.lineMat.opacity = 0.5 + m.pulse * 0.45;
+        m.fillMat.opacity = 0.05 + m.pulse * 0.1;
+        if (m.leaderMat) m.leaderMat.opacity = 0.4 + m.pulse * 0.35;
+      }
     };
 
     // ---- Mouse parallax ----
@@ -254,6 +530,14 @@ export default function TerrainScene({ className = "" }: { className?: string })
         (5.4 + Math.sin(t * 0.22) * 0.25 - target.y * 0.9 - camera.position.y) * 0.03;
       camera.lookAt(0, 1.2, -14);
       emberMat.opacity = 0.75 + Math.sin(t * 1.7) * 0.2;
+      // document chips bob like the hero's floating UI chips
+      for (const m of markers) {
+        if (!m.sprite) continue;
+        m.sprite.position.y = m.baseY + Math.sin(t * 0.8 + m.phase) * 0.12;
+        const s = 1 + m.pulse * 0.1;
+        m.sprite.scale.set(1.8 * s, 1.35 * s, 1);
+        (m.sprite.material as THREE.SpriteMaterial).opacity = 0.78 + m.pulse * 0.22;
+      }
       renderer.render(scene, camera);
     };
 
@@ -322,6 +606,9 @@ export default function TerrainScene({ className = "" }: { className?: string })
       emberMat.dispose();
       scanGeo.dispose();
       scanMat.dispose();
+      quietGeo.dispose();
+      quietMat.dispose();
+      for (const d of featuredDisposables) d.dispose();
       pointTex.dispose();
       renderer.dispose();
       host.removeChild(renderer.domElement);

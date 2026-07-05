@@ -40,7 +40,7 @@ const bg = {
     lead: "Wolf събира поръчките, имотите, документите за собственост, фактурите и задачите на практиката на едно място — и целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
     ctaSecondary: "Разгледайте възможностите",
-    note: "Изградено за всички проектантски практики в България.",
+    note: "Изградено за проектантски практики в България.",
     floatA: "Поръчка → дейности → задачи",
     floatB: "Имот → документ → собственик",
     docChips: [
@@ -339,7 +339,7 @@ const en: typeof bg = {
     lead: "Wolf brings your orders, properties, ownership documents, invoices and tasks into one place — and the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
     ctaSecondary: "Explore the features",
-    note: "Built for every design practice in Bulgaria.",
+    note: "Built for design practices in Bulgaria.",
     floatA: "Order → activities → tasks",
     floatB: "Plot → document → owner",
     docChips: [

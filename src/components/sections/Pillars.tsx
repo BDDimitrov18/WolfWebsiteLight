@@ -14,7 +14,7 @@ interface Featured extends Item {
   points: string[];
 }
 
-const ICONS = ["sync", "bolt", "window", "sheet"] as const;
+const ICONS = ["sync", "stopwatch", "selfcare", "sheet"] as const;
 
 export function Pillars() {
   const t = useT();
@@ -22,8 +22,22 @@ export function Pillars() {
   const featured = t<Featured>("pillars.featured");
 
   return (
-    <Section id="why" hud={t("pillars.eyebrow")}>
-      <Container>
+    <Section id="why" hud={t("pillars.eyebrow")} className="relative overflow-hidden">
+      {/* Cadastral graph paper: a faint dot grid fading toward the edges */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(color-mix(in srgb, var(--color-paper-100) 9%, transparent) 1px, transparent 1px)",
+          backgroundSize: "26px 26px",
+          maskImage:
+            "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent 78%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent 78%)",
+        }}
+      />
+      <Container className="relative">
         <SectionHeading
           eyebrow={t("pillars.eyebrow")}
           title={t("pillars.title")}
@@ -110,7 +124,7 @@ function PersonCheckIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.6}
+      strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -121,6 +135,11 @@ function PersonCheckIcon() {
   );
 }
 
+/**
+ * Icons in the site's instrument language: thin strokes, small datum
+ * dots and tick details — drawn for these four pillars, not picked
+ * from a generic set.
+ */
 function PillarIcon({ name }: { name: (typeof ICONS)[number] }) {
   const common = {
     width: 22,
@@ -128,37 +147,48 @@ function PillarIcon({ name }: { name: (typeof ICONS)[number] }) {
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
-    strokeWidth: 1.6,
+    strokeWidth: 1.5,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
   };
   switch (name) {
     case "sync":
+      // two arcs around a shared datum: everyone reads the same point
       return (
         <svg {...common}>
-          <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
-          <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
-          <path d="M21 3v5h-5M3 21v-5h5" />
+          <path d="M4.5 10.2A8 8 0 0 1 18 6.9" />
+          <path d="M18.6 3.4v3.6H15" />
+          <path d="M19.5 13.8A8 8 0 0 1 6 17.1" />
+          <path d="M5.4 20.6V17H9" />
+          <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none" />
         </svg>
       );
-    case "bolt":
+    case "stopwatch":
       return (
         <svg {...common}>
-          <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" />
+          <circle cx="12" cy="13.6" r="6.9" />
+          <path d="M12 10v3.8l2.9 1.7" />
+          <path d="M9.9 2.9h4.2M12 2.9v3.5" />
+          <path d="m18.4 6.9 1.4-1.4" />
         </svg>
       );
-    case "window":
+    case "selfcare":
+      // closes its own loop: installs and updates itself
       return (
         <svg {...common}>
-          <rect x="3" y="4" width="18" height="16" rx="2" />
-          <path d="M3 9h18M7 6.5h.01" />
+          <path d="M19.5 12a7.5 7.5 0 1 1-2.1-5.2" />
+          <path d="M19.9 3.6v3.6h-3.6" />
+          <path d="m8.9 12.3 2.2 2.2 4-4.4" />
         </svg>
       );
     case "sheet":
+      // spreadsheet with a header row, a column and a tiny bar chart
       return (
         <svg {...common}>
-          <rect x="4" y="3" width="16" height="18" rx="2" />
-          <path d="M8 8h8M8 12h8M8 16h5" />
+          <rect x="4.2" y="3.4" width="15.6" height="17.2" rx="2" />
+          <path d="M4.2 8.8h15.6M9.8 8.8v11.8" />
+          <path d="M6.6 6.1h4" />
+          <path d="M13 17.4v-2.6M16.2 17.4v-5" />
         </svg>
       );
   }

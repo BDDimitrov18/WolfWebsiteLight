@@ -60,14 +60,14 @@ const bg = {
     eyebrow: "Защо Wolf",
     title: "Специализирана, не обща CRM система",
     subtitle:
-      "Моделирането на собствеността — имот ↔ документ ↔ собственик ↔ пълномощно с дробни идеални части — е същината, която общите инструменти не покриват.",
+      "Общите CRM системи подреждат контакти и сделки. Wolf е изградена около реалната работа на проектантската практика — поръчки, имоти, документи и плащания, свързани така, както са свързани в действителност.",
     featured: {
       title: "Всеки отчита своята работа",
-      body: "Wolf се различава от другите системи по това, че всеки служител отчита работата си поотделно. Виждате не само общото производство на практиката, а и самостоятелния принос на всеки — основа за по-коректно разпределение на възнагражденията спрямо труда и за по-точна отчетност на фирмата.",
+      body: "Всеки служител отчита работата си поотделно — и освен общото производство се вижда и приносът на всеки. Обективна основа за по-коректно разпределение на ресурсите и възнагражденията.",
       points: [
-        "Цветни звезди и задачи по служител",
+        "Всеки служител отбелязва личния си приоритет по поръчките",
         "Месечна справка по служител в Excel",
-        "Класация на служителите на таблото",
+        "Дневник кой какво е променил и кога",
       ],
     },
     items: [
@@ -99,9 +99,9 @@ const bg = {
       orders: {
         tag: "Поръчки",
         title: "Поръчки — централният екран",
-        body: "Всички поръчки на практиката в една таблица: статус, плащане, цена, аванс, имоти и създател. Създаване, редакция, архивиране, търсене в реално време, цветни звезди по служител и автоматично изчислен статус на плащане.",
+        body: "Всички поръчки на практиката в една таблица: статус, плащане, цена, аванс, имоти и създател. Създаване, редакция, архивиране, търсене в реално време, личен приоритет за всеки служител и автоматично изчислен статус на плащане.",
         bullets: [
-          "Звезди по служител с палитра и цветови филтър",
+          "Личен приоритет по поръчка — с цвят и филтър за всеки служител",
           "Статус на плащане: платено / аванс / неплатено",
           "Панел с детайли: дейности, клиенти, имоти, фактури",
         ],
@@ -359,14 +359,14 @@ const en: typeof bg = {
     eyebrow: "Why Wolf",
     title: "A specialized system, not a generic CRM",
     subtitle:
-      "The ownership modeling — plot ↔ document ↔ owner ↔ power of attorney with fractional ideal parts — is the core that generic tools never cover.",
+      "A generic CRM organizes contacts and deals. Wolf is built around the real work of a design practice — orders, properties, documents and payments, connected the way they are connected in reality.",
     featured: {
       title: "Every person accounts for their own work",
-      body: "What sets Wolf apart is that every member of staff reports their work individually. You see not just the firm's overall output but each person's own contribution — the basis for distributing remuneration more fairly against the work done, and for sharper firm-level accountability.",
+      body: "Each member of staff reports their work individually — so beyond the overall output, each person's contribution is visible. An objective basis for allocating resources and remuneration more fairly.",
       points: [
-        "Colored stars and tasks per employee",
+        "Each person marks their own priority on orders",
         "Monthly per-employee report in Excel",
-        "Employee leaderboard on the dashboard",
+        "A log of who changed what, and when",
       ],
     },
     items: [
@@ -398,9 +398,9 @@ const en: typeof bg = {
       orders: {
         tag: "Orders",
         title: "Orders — the core screen",
-        body: "Every order in the firm in one grid: status, payment, price, advance, plots and creator. Create, edit, archive, real-time search, per-employee colored stars and an auto-calculated payment status.",
+        body: "Every order in the firm in one grid: status, payment, price, advance, plots and creator. Create, edit, archive, real-time search, a personal priority marker for each employee and an auto-calculated payment status.",
         bullets: [
-          "Per-employee stars with a palette and color filter",
+          "Personal priority per order — with a color and filter for each employee",
           "Payment status: paid / advance / unpaid",
           "Detail panel: activities, clients, plots, invoices",
         ],

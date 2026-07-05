@@ -88,14 +88,13 @@ export interface DocLabel {
 }
 
 const DEFAULT_LABELS: DocLabel[] = [
-  { title: "Нотариален акт", meta: "КИ 68134.905.211" },
-  { title: "Скица на имот", meta: "1/2 идеална част" },
+  { title: "Проект № 2418", meta: "Имот 68134.905.211" },
+  { title: "Проект № 2431", meta: "Имот 68134.902.77" },
 ];
 
 /**
- * Small "ownership document" card: dark plate, ember border, a real
- * document-type title and cadastral meta line, plus a seal — the thing
- * Wolf attaches to a parcel.
+ * Small project card pinned to a parcel: project + number on top, the
+ * plot it concerns at the bottom, sealed — how Wolf ties work to land.
  */
 function makeDocTexture(label: DocLabel): THREE.Texture {
   const c = document.createElement("canvas");
@@ -110,30 +109,30 @@ function makeDocTexture(label: DocLabel): THREE.Texture {
   ctx.strokeStyle = "rgba(237,154,87,0.55)";
   ctx.lineWidth = 4;
   ctx.stroke();
-  // document type
+  // project + number
   ctx.fillStyle = "rgba(237,154,87,0.95)";
   ctx.font = '600 26px "IBM Plex Mono", monospace';
   ctx.fillText(label.title.toUpperCase(), 36, 70);
   // hairline
   ctx.fillStyle = "rgba(237,154,87,0.25)";
   ctx.fillRect(36, 90, 248, 2);
-  // cadastral meta
-  ctx.fillStyle = "rgba(247,242,234,0.78)";
-  ctx.font = '400 25px "IBM Plex Sans", sans-serif';
-  ctx.fillText(label.meta, 36, 138);
   // one abstract body line
   ctx.fillStyle = "rgba(160,172,196,0.35)";
-  ctx.fillRect(36, 168, 172, 8);
+  ctx.fillRect(36, 122, 172, 8);
+  // the plot the project concerns, at the bottom
+  ctx.fillStyle = "rgba(247,242,234,0.78)";
+  ctx.font = '400 23px "IBM Plex Sans", sans-serif';
+  ctx.fillText(label.meta, 36, 202);
   // ember seal with check
   ctx.beginPath();
-  ctx.arc(268, 188, 20, 0, Math.PI * 2);
+  ctx.arc(268, 158, 20, 0, Math.PI * 2);
   ctx.strokeStyle = "rgba(237,154,87,0.85)";
   ctx.lineWidth = 4;
   ctx.stroke();
   ctx.beginPath();
-  ctx.moveTo(258, 188);
-  ctx.lineTo(265, 195);
-  ctx.lineTo(279, 180);
+  ctx.moveTo(258, 158);
+  ctx.lineTo(265, 165);
+  ctx.lineTo(279, 150);
   ctx.stroke();
   const tex = new THREE.CanvasTexture(c);
   tex.needsUpdate = true;

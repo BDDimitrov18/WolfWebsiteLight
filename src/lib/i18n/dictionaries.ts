@@ -44,8 +44,8 @@ const bg = {
     floatA: "Поръчка → дейности → задачи",
     floatB: "Имот → документ → собственик",
     docChips: [
-      { title: "Нотариален акт", meta: "КИ 68134.905.211" },
-      { title: "Скица на имот", meta: "1/2 идеална част" },
+      { title: "Проект № 2418", meta: "Имот 68134.905.211" },
+      { title: "Проект № 2431", meta: "Имот 68134.902.77" },
     ],
     coord: "42.6977° N · 23.3219° E",
     scroll: "Скролирайте",
@@ -348,8 +348,8 @@ const en: typeof bg = {
     floatA: "Order → activities → tasks",
     floatB: "Plot → document → owner",
     docChips: [
-      { title: "Notarial deed", meta: "ID 68134.905.211" },
-      { title: "Plot sketch", meta: "1/2 ideal part" },
+      { title: "Project No. 2418", meta: "Plot 68134.905.211" },
+      { title: "Project No. 2431", meta: "Plot 68134.902.77" },
     ],
     coord: "42.6977° N · 23.3219° E",
     scroll: "Scroll",

@@ -5,7 +5,7 @@ import { FEATURE_KEYS } from "@/lib/i18n/dictionaries";
 import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Marquee } from "@/components/ui/Marquee";
-import { Crosshair } from "@/components/motifs/GeodesyMotifs";
+import { ContourLines, Crosshair } from "@/components/motifs/GeodesyMotifs";
 
 /**
  * The origin story: a slow marquee of the system's modules (every word
@@ -18,7 +18,18 @@ export function Story() {
   const modules = FEATURE_KEYS.map((k) => t(`features.items.${k}.tag`));
 
   return (
-    <Section className="border-y border-ink-700 bg-ink-850 py-16 sm:py-20">
+    <Section className="relative overflow-hidden border-y border-ink-700 bg-ink-850 py-16 sm:py-20">
+      {/* Terrain backdrop: the same contour language as the rest of the site */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <ContourLines className="absolute -right-1/4 -top-1/3 h-[170%] w-[85%] text-ink-500 opacity-25" />
+        <div
+          className="absolute -left-40 bottom-0 h-96 w-[36rem] rounded-full opacity-30 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(closest-side, color-mix(in srgb, var(--color-ember-600) 14%, transparent), transparent)",
+          }}
+        />
+      </div>
       {/* ---- Module marquee ---- */}
       <Marquee className="mb-14 border-b border-ink-700/70 pb-10" duration={38}>
         {modules.map((m) => (
@@ -31,7 +42,7 @@ export function Story() {
         ))}
       </Marquee>
 
-      <Container>
+      <Container className="relative">
         <div className="grid gap-10 lg:grid-cols-[minmax(16rem,2fr)_3fr] lg:gap-16">
           <Reveal>
             <p className="eyebrow mb-4">{t("story.eyebrow")}</p>
@@ -48,8 +59,10 @@ export function Story() {
             <p className="text-pretty text-lg leading-relaxed text-ink-200">
               {t("story.body")}
             </p>
-            <p className="mt-6 flex items-baseline gap-3 font-display text-lg italic text-paper-50">
-              <span aria-hidden className="h-px w-8 flex-none translate-y-[-0.2em] bg-ember-500" />
+            <p
+              className="mt-8 border-t pt-6 font-display text-xl text-paper-50"
+              style={{ borderColor: "color-mix(in srgb, var(--color-ember-500) 35%, transparent)" }}
+            >
               {t("story.closer")}
             </p>
           </Reveal>

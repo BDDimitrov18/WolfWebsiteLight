@@ -48,16 +48,11 @@ const bg = {
       { title: "Проект № 2431", meta: "Имот 68134.902.77" },
     ],
   },
-  trust: {
-    title: "Една система за целия жизнен цикъл на поръчката",
-    subtitle:
-      "От възлагането на клиента до фактурата и отчета — без таблици, без дублиране, без чакане.",
-    stats: [
-      { value: "20+", label: "работни екрана" },
-      { value: "Excel", label: "готови и персонализирани справки" },
-      { value: "100%", label: "реално време на всеки екран" },
-      { value: "1", label: "система вместо папки и таблици" },
-    ],
+  story: {
+    eyebrow: "Историята",
+    title: "Създадена в една реална практика",
+    body: "Wolf започна в семейната ни проектантска практика — със задача всеки в екипа да отчита работата си и всяка поръчка да се вижда, от възлагането до плащането. Две години системата работи всеки ден и се усъвършенства по заявките на хората, които я ползват — докато всяко действие стане бързо и естествено. За това време направи приноса на всеки видим и неведнъж откри неразплатени суми, които иначе щяха да се изгубят.",
+    closer: "Wolf не е построена по спецификация, а по нуждите на едно работещо бюро.",
   },
   pillars: {
     eyebrow: "Защо Wolf",
@@ -350,16 +345,11 @@ const en: typeof bg = {
       { title: "Project No. 2431", meta: "Plot 68134.902.77" },
     ],
   },
-  trust: {
-    title: "One system for the whole order lifecycle",
-    subtitle:
-      "From a client's commission to the invoice and the report — no spreadsheets, no duplication, no waiting.",
-    stats: [
-      { value: "20+", label: "working screens" },
-      { value: "Excel", label: "ready-made & custom reports" },
-      { value: "100%", label: "real-time on every screen" },
-      { value: "1", label: "system instead of folders and spreadsheets" },
-    ],
+  story: {
+    eyebrow: "The story",
+    title: "Built inside a working practice",
+    body: "Wolf began in our family's design practice — with one task: every person accounts for their own work, and every order is visible from commission to payment. For two years the system has run daily, refined at the request of the people who use it — until every action became quick and natural. In that time it made each person's contribution measurable and more than once caught unpaid sums that would otherwise have slipped away.",
+    closer: "Wolf wasn't built to a specification — it was built around the needs of a working office.",
   },
   pillars: {
     eyebrow: "Why Wolf",

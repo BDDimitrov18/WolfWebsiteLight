@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
-import { TrustBar } from "@/components/sections/TrustBar";
+import { Story } from "@/components/sections/Story";
 import { Pillars } from "@/components/sections/Pillars";
 import { FeatureTour } from "@/components/sections/FeatureTour";
 import { TitleChain } from "@/components/sections/TitleChain";
@@ -15,7 +15,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <TrustBar />
+        <Story />
         <Pillars />
         <FeatureTour />
         <TitleChain />

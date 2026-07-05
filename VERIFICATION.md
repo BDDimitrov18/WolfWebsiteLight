@@ -15,13 +15,14 @@ outcomes) and the docs completion.*
 | "real-time sync across every member of staff" | §4.3, §6.3, §7.4 (SignalR) | ✅ |
 | Tagline "traced down to the ideal part" | §5.2 (ideal parts / fractional ownership) | ✅ |
 
-## Stats bar
+## Story band (replaced the stats bar)
 | Claim | Source | |
 |---|---|---|
-| 20+ working screens | §10 ("20+ major screens") | ✅ |
-| "Excel — ready-made & custom reports" | §8.11 (5 ready-made reports: All Tasks, Obligations, Task-Type Payment, Monthly per-employee, Client statistics export; all filterable, so the user tailors output) | ⚠️ "Custom" here means user-driven filtering/parameters on the shipped reports, not an arbitrary report builder — confirm scope before claiming free-form custom reports. |
-| 100% real-time on every screen | §8.13 ("Real-time multi-user sync across every screen") | ✅ |
-| "1 system instead of folders and spreadsheets" | §1, §2 (single LOB system) | ⚠️ Marketing framing of §1; "instead of folders and spreadsheets" describes the intended replacement, not a documented migration feature. |
+| Began in the founders' family design practice | Owner's statement (2026-07-05): commissioned by the owner's father for his practice | ⚠️ Biographical claim, not verifiable against PROJECT_OVERVIEW — attested by the owner. |
+| Two years of daily production use | Owner's statement (2026-07-05); §1 describes a production LOB system | ⚠️ Duration attested by the owner ("used for 2 years"). Wording deliberately means *use*, not development time (core build was ~3–4 months, not stated on the site). |
+| Refined at the request of its users | Owner's statement (2026-07-05): tweaks were requested and implemented throughout the 2 years of use | ⚠️ Attested by the owner. |
+| "More than once caught unpaid sums" | Owner's statement (2026-07-05): "It caught unpaid money many times" | ⚠️ Attested by the owner; supported indirectly by §8.3/§8.11 (auto-calculated payment status, Obligations report). |
+| Made each person's contribution measurable | §8.3 (per-employee stars), §8.11 (monthly per-employee report), §8.7 (top 5 employees) + owner's statement | ✅ |
 
 ## Pillars / Why Wolf
 | Claim | Source | |

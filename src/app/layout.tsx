@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Sans, Playfair_Display, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
 import { ExperienceProvider } from "@/components/providers/ExperienceProvider";
 import { asset } from "@/lib/asset";
 
 // All three families carry Cyrillic so Bulgarian copy renders natively.
-const inter = Inter({
-  variable: "--font-inter",
+// Body sans + mono come from the same superfamily (IBM Plex).
+const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
   subsets: ["latin", "latin-ext", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -55,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="bg"
-      className={`${inter.variable} ${playfair.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${plexSans.variable} ${playfair.variable} ${plexMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full">

@@ -63,7 +63,7 @@ const bg = {
       "Wolf покрива основата, която всяка система дава — клиенти, поръчки, фактури и справки — и добавя специфичното за проектантската практика: имоти и документи за собственост, свързани с работата така, както са свързани в действителност.",
     featured: {
       title: "Всеки отчита своята работа",
-      body: "Wolf съчетава две неща, които рядко вървят заедно: целият екип работи по общи поръчки, а приносът на всеки се вижда поотделно. Структурата поръчка → дейност → задача с изпълнител го прави естествено — работата е обща, задачите са лични, а разпределението на ресурсите стъпва на обективна основа.",
+      body: "Wolf съчетава безпроблемно екипната работа с личната отчетност: целият екип работи по общи поръчки, а приносът на всеки се вижда поотделно. Структурата поръчка → дейност → задача с изпълнител го прави естествено — работата е обща, задачите са лични, а разпределението на ресурсите стъпва на обективна основа.",
       points: [
         "Всеки служител отбелязва личния си приоритет по поръчките",
         "Месечна справка по служител в Excel",
@@ -362,7 +362,7 @@ const en: typeof bg = {
       "Wolf covers the base every system gives you — clients, orders, invoices and reports — and adds what is specific to a design practice: properties and ownership documents, linked to the work the way they are linked in reality.",
     featured: {
       title: "Every person accounts for their own work",
-      body: "Wolf combines two things that rarely go together: the whole team works on shared orders, while each person's contribution stays visible on its own. The order → activity → task structure, each task with its owner, makes that seamless — the work is shared, the tasks are personal, and resource allocation rests on an objective basis.",
+      body: "Wolf seamlessly combines teamwork with individual accountability: the whole team works on shared orders, while each person's contribution stays visible on its own. The order → activity → task structure, each task with its owner, makes it natural — the work is shared, the tasks are personal, and resource allocation rests on an objective basis.",
       points: [
         "Each person marks their own priority on orders",
         "Monthly per-employee report in Excel",

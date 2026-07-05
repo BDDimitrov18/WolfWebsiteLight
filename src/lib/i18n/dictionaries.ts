@@ -47,6 +47,8 @@ const bg = {
       { title: "Проект № 2418", meta: "Имот 68134.905.211" },
       { title: "Проект № 2431", meta: "Имот 68134.902.77" },
     ],
+    shotCaption:
+      "Екранът „Поръчки“ в Wolf — всяка поръчка на практиката със статус, плащане и срокове. Кликнете, за да го разгледате отблизо.",
   },
   story: {
     eyebrow: "Историята",
@@ -344,6 +346,8 @@ const en: typeof bg = {
       { title: "Project No. 2418", meta: "Plot 68134.905.211" },
       { title: "Project No. 2431", meta: "Plot 68134.902.77" },
     ],
+    shotCaption:
+      "The Orders screen in Wolf — every order in the practice with its status, payment and deadlines. Click to take a closer look.",
   },
   story: {
     eyebrow: "The story",

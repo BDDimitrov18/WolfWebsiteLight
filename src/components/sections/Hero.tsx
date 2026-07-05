@@ -170,6 +170,10 @@ export function Hero() {
           />
           <Chip data-side="left" className="-left-3 top-10 sm:-left-8" label={t("hero.floatA")} />
           <Chip data-side="right" className="-right-3 bottom-10 sm:-right-8" label={t("hero.floatB")} />
+          {/* The product reveal needs a sentence of context */}
+          <p className="mx-auto mt-5 max-w-xl text-center text-sm leading-relaxed text-ink-300">
+            {t("hero.shotCaption")}
+          </p>
         </div>
       </Container>
     </section>

@@ -8,7 +8,6 @@ import { TitleChain } from "@/components/sections/TitleChain";
 import { Architecture } from "@/components/sections/Architecture";
 import { Pricing } from "@/components/sections/Pricing";
 import { CTA } from "@/components/sections/CTA";
-import { CoordReadout } from "@/components/ui/CoordReadout";
 
 export default function Home() {
   return (
@@ -25,8 +24,6 @@ export default function Home() {
         <CTA />
       </main>
       <Footer />
-      {/* Experience chrome: instrument HUD (desktop) */}
-      <CoordReadout />
     </>
   );
 }

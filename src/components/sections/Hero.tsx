@@ -111,9 +111,6 @@ export function Hero() {
           >
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-ember-500" />
             {t("hero.eyebrow")}
-            <span className="hidden font-mono text-ink-400 sm:inline">
-              · {t("hero.coord")}
-            </span>
           </p>
 
           <SplitHeading
@@ -158,19 +155,6 @@ export function Hero() {
           <p data-hero-intro className="intro-hide mt-6 text-sm text-ink-400">
             {t("hero.note")}
           </p>
-        </div>
-
-        {/* Scroll cue */}
-        <div
-          data-hero-intro
-          className="intro-hide absolute bottom-7 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2.5"
-        >
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-400">
-            {t("hero.scroll")}
-          </span>
-          <span className="block h-10 w-px overflow-hidden bg-ink-600/60">
-            <span className="scroll-cue-dash block h-4 w-px bg-ember-400" />
-          </span>
         </div>
       </Container>
 

@@ -31,14 +31,14 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Wolf — Софтуер за геодезия, кадастър и правна документация",
+    default: "Wolf — Софтуер за управление на проектантска практика",
     template: "%s · Wolf",
   },
   description:
-    "Wolf — многопотребителска система за управление на геодезическа, кадастрална и правна практика. Поръчки, дейности, имоти, документи за собственост, фактури и отчети в реално време.",
+    "Wolf — многопотребителска система за управление на проектантска практика. Поръчки, дейности, имоти, документи за собственост, фактури и отчети в реално време.",
   metadataBase: new URL("https://bddimitrov18.github.io"),
   openGraph: {
-    title: "Wolf — Software for surveying, cadastre & legal documentation",
+    title: "Wolf — Design practice management software",
     description:
       "One native Windows system for orders, plots, ownership documents, invoicing and real-time reporting.",
     type: "website",

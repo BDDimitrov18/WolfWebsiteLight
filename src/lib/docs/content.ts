@@ -43,8 +43,8 @@ export const DOC_PAGES: DocPage[] = [
     navKey: "gettingStarted",
     title: { bg: "Първи стъпки", en: "Getting started" },
     intro: {
-      bg: "Wolf е многопотребителска система за управление на геодезическа, кадастрална и правна практика. Това ръководство ви превежда от инсталацията до ежедневната работа.",
-      en: "Wolf is a multi-user management system for surveying, cadastral and legal practices. This guide takes you from installation to day-to-day work.",
+      bg: "Wolf е многопотребителска система за управление на проектантска практика. Това ръководство ви превежда от инсталацията до ежедневната работа.",
+      en: "Wolf is a multi-user management system for design practices. This guide takes you from installation to day-to-day work.",
     },
     blocks: {
       bg: [

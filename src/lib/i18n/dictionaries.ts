@@ -19,9 +19,9 @@ export const FEATURE_KEYS = [
 
 const bg = {
   meta: {
-    title: "Wolf — Софтуер за геодезия, кадастър и правна документация",
+    title: "Wolf — Софтуер за управление на проектантска практика",
     description:
-      "Wolf е многопотребителска система за управление на геодезическа, кадастрална и правна практика — поръчки, дейности, имоти, документи за собственост, фактуриране и отчети в реално време.",
+      "Wolf е многопотребителска система за управление на проектантска практика — поръчки, дейности, имоти, документи за собственост, фактуриране и отчети в реално време.",
   },
   nav: {
     product: "Продукт",
@@ -33,22 +33,20 @@ const bg = {
     menu: "Меню",
   },
   hero: {
-    eyebrow: "Система за управление на геодезическа практика",
+    eyebrow: "Система за управление на проектантска практика",
     titleA: "Цялата ви практика",
     titleB: "в една система —",
     titleC: "в реално време.",
     lead: "Wolf събира поръчките, имотите, документите за собственост, фактурите и задачите на практиката на едно място — и целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
     ctaSecondary: "Разгледайте възможностите",
-    note: "Изградено за геодезически, кадастрални и правни практики в България.",
+    note: "Изградено за всички проектантски практики в България.",
     floatA: "Поръчка → дейности → задачи",
     floatB: "Имот → документ → собственик",
     docChips: [
       { title: "Проект № 2418", meta: "Имот 68134.905.211" },
       { title: "Проект № 2431", meta: "Имот 68134.902.77" },
     ],
-    coord: "42.6977° N · 23.3219° E",
-    scroll: "Скролирайте",
   },
   trust: {
     title: "Една система за целия жизнен цикъл на поръчката",
@@ -282,7 +280,7 @@ const bg = {
     privacy: "Никога няма да споделим вашите данни.",
   },
   footer: {
-    tagline: "Система за управление на геодезическа, кадастрална и правна практика.",
+    tagline: "Система за управление на проектантска практика.",
     madeIn: "Проектирано и разработено в България.",
     product: "Продукт",
     resources: "Ресурси",
@@ -323,9 +321,9 @@ const bg = {
 // English mirrors the Bulgarian structure 1:1.
 const en: typeof bg = {
   meta: {
-    title: "Wolf — Software for surveying, cadastre & legal documentation",
+    title: "Wolf — Design practice management software",
     description:
-      "Wolf is a multi-user management system for surveying, cadastral and legal practices — orders, activities, plots, ownership documents, invoicing and real-time reporting.",
+      "Wolf is a multi-user management system for design practices — orders, activities, plots, ownership documents, invoicing and real-time reporting.",
   },
   nav: {
     product: "Product",
@@ -337,22 +335,20 @@ const en: typeof bg = {
     menu: "Menu",
   },
   hero: {
-    eyebrow: "Surveying practice management system",
+    eyebrow: "Design practice management system",
     titleA: "Your whole practice",
     titleB: "in one system —",
     titleC: "in real time.",
     lead: "Wolf brings your orders, properties, ownership documents, invoices and tasks into one place — and the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
     ctaSecondary: "Explore the features",
-    note: "Built for surveying, cadastral and legal firms in Bulgaria.",
+    note: "Built for every design practice in Bulgaria.",
     floatA: "Order → activities → tasks",
     floatB: "Plot → document → owner",
     docChips: [
       { title: "Project No. 2418", meta: "Plot 68134.905.211" },
       { title: "Project No. 2431", meta: "Plot 68134.902.77" },
     ],
-    coord: "42.6977° N · 23.3219° E",
-    scroll: "Scroll",
   },
   trust: {
     title: "One system for the whole order lifecycle",
@@ -578,7 +574,7 @@ const en: typeof bg = {
     privacy: "We'll never share your details.",
   },
   footer: {
-    tagline: "Management system for surveying, cadastral and legal practices.",
+    tagline: "Management system for design practices.",
     madeIn: "Designed and built in Bulgaria.",
     product: "Product",
     resources: "Resources",

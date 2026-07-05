@@ -21,7 +21,7 @@ const TOUR: { key: string; slot: string }[] = [
   { key: "calendar", slot: "Callendar" },
   { key: "filters", slot: "FiltersOrders" },
   { key: "reports", slot: "InqueriesTab" },
-  { key: "dashboard", slot: "AdminPanel" },
+  { key: "dashboard", slot: "AdminBoard" },
 ];
 
 /**

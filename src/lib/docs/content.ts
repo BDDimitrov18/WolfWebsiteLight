@@ -847,16 +847,16 @@ export const DOC_PAGES: DocPage[] = [
     },
     blocks: {
       bg: [
-        { type: "img", slot: "AdminPanel", alt: "Таблото за управление", title: "Wolf — Табло" },
+        { type: "img", slot: "AdminBoard", alt: "Таблото за управление", title: "Wolf — Табло" },
         { type: "h2", id: "dashboard", text: "Табло за управление" },
         {
           type: "p",
-          text: "Обобщение на цялата практика на един екран: брой поръчки (общо, активни, архивирани), клиенти, дейности и уникални имоти; финансов преглед с приходи, аванси, неплатени суми и общо фактурирано; топ 5 служители по обем работа и последните поръчки.",
+          text: "Ключовите числа на практиката на един екран: неразплатени суми, общо фактурирано, активни поръчки и просрочени задачи. Отдолу — дейностите по месеци, задачите по статус, вземанията (кой дължи, колко и от преди колко дни) и натовареността на екипа с активните и завършените задачи на всеки служител.",
         },
         {
           type: "ul",
           items: [
-            "Интерактивен филтър по статус с преход към всяка поръчка",
+            "Всяко вземане води директно към поръчката си",
             "Числата се обновяват в реално време, докато екипът работи",
           ],
         },
@@ -883,16 +883,16 @@ export const DOC_PAGES: DocPage[] = [
         },
       ],
       en: [
-        { type: "img", slot: "AdminPanel", alt: "The management dashboard", title: "Wolf — Dashboard" },
+        { type: "img", slot: "AdminBoard", alt: "The management dashboard", title: "Wolf — Dashboard" },
         { type: "h2", id: "dashboard", text: "Management dashboard" },
         {
           type: "p",
-          text: "The whole practice summarized on one screen: order counts (total, active, archived), clients, activities and unique plots; a financial overview with revenue, advances, outstanding sums and total invoiced; the top 5 employees by workload and the most recent orders.",
+          text: "The practice's key numbers on one screen: outstanding sums, total invoiced, active orders and overdue tasks. Below — monthly activity, tasks by status, receivables (who owes, how much and since when) and the team's workload with each person's active and completed tasks.",
         },
         {
           type: "ul",
           items: [
-            "An interactive status filter with a jump to any order",
+            "Every receivable jumps straight to its order",
             "The numbers update in real time while the team works",
           ],
         },

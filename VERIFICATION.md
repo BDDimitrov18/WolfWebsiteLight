@@ -22,7 +22,7 @@ outcomes) and the docs completion.*
 | Two years of daily production use | Owner's statement (2026-07-05); §1 describes a production LOB system | ⚠️ Duration attested by the owner ("used for 2 years"). Wording deliberately means *use*, not development time (core build was ~3–4 months, not stated on the site). |
 | Refined at the request of its users | Owner's statement (2026-07-05): tweaks were requested and implemented throughout the 2 years of use | ⚠️ Attested by the owner. |
 | "More than once caught unpaid sums" | Owner's statement (2026-07-05): "It caught unpaid money many times" | ⚠️ Attested by the owner; supported indirectly by §8.3/§8.11 (auto-calculated payment status, Obligations report). |
-| Made each person's contribution measurable | §8.3 (per-employee stars), §8.11 (monthly per-employee report), §8.7 (top 5 employees) + owner's statement | ✅ |
+| Made each person's contribution measurable | §8.3 (per-employee stars), §8.11 (monthly per-employee report), dashboard team-workload panel (2026-07-06 rebuild) + owner's statement | ✅ |
 
 ## Pillars / Why Wolf
 | Claim | Source | |
@@ -44,7 +44,7 @@ outcomes) and the docs completion.*
 | Filters: quick toggles, status dropdowns, text searches, multi-selects, active-filters indicator | §8.3 | ✅ |
 | Reports: All Tasks, Obligations, Task-Type Payment, monthly per-employee; .xlsx | §8.11 | ✅ |
 | Teamwork: simultaneous work, instant propagation, conflict warning instead of data loss | §4.3 (optimistic concurrency, "friendly 409"), §7.4, §6.4 (audit log) | ✅ |
-| Dashboard: summary cards, financial overview, status breakdown, top 5 employees, recent orders, admin-only | §8.7 | ✅ |
+| Dashboard: KPI cards (outstanding, invoiced, active orders, overdue tasks), monthly activity, tasks by status, receivables with jump-to-order, team workload, admin-only, real-time | Dashboard rebuilt 2026-07-06 (supersedes §8.7's top-5/recent-orders description); verified against the supplied `AdminBoard.png` screenshot of the new build | ✅ |
 | Clients: searchable list, all-time financials, per-order breakdown, Excel export, legal type | §8.4 | ✅ |
 
 ## How it works (formerly Architecture)

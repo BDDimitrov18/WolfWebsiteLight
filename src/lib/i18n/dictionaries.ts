@@ -169,10 +169,10 @@ const bg = {
       dashboard: {
         tag: "Табло",
         title: "Табло за управление",
-        body: "Обобщаващи карти, финансов преглед, разбивка по статус, топ 5 служители и последни поръчки — с интерактивен филтър и плавно обновяване при масови промени.",
+        body: "Неразплатено, фактурирано, активни поръчки и просрочени задачи — на един поглед. Отдолу: дейностите по месеци, задачите по статус, вземанията с преход към всяка поръчка и натовареността на екипа. Обновява се в реално време.",
         bullets: [
-          "Приходи, аванси, неплатени, общо фактурирано",
-          "Брой поръчки, клиенти, дейности, уникални имоти",
+          "Вземания — кой дължи, колко и от преди колко дни",
+          "Натовареност на екипа: активни и завършени задачи по служител",
           "Достъп само за администратори",
         ],
       },
@@ -468,10 +468,10 @@ const en: typeof bg = {
       dashboard: {
         tag: "Dashboard",
         title: "Management dashboard",
-        body: "Summary cards, a financial overview, status breakdown, top 5 employees and recent orders — with an interactive filter and debounced refresh under bulk changes.",
+        body: "Outstanding, invoiced, active orders and overdue tasks — at a glance. Below: monthly activity, tasks by status, receivables with a jump to any order, and the team's workload. Updates in real time.",
         bullets: [
-          "Revenue, advances, outstanding, total invoiced",
-          "Counts of orders, clients, activities, unique plots",
+          "Receivables — who owes, how much and since when",
+          "Team workload: active and completed tasks per person",
           "Admin-only access",
         ],
       },

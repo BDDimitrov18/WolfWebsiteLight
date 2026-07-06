@@ -289,7 +289,7 @@ const bg = {
     author: "Божидар Димитров",
     product: "Продукт",
     resources: "Ресурси",
-    company: "Компания",
+    company: "Контакти",
     links: {
       features: "Възможности",
       architecture: "Как работи",
@@ -632,7 +632,7 @@ const en: typeof bg = {
     author: "Bozhidar Dimitrov",
     product: "Product",
     resources: "Resources",
-    company: "Company",
+    company: "Contacts",
     links: {
       features: "Features",
       architecture: "How it works",

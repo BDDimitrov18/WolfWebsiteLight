@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
+import { sendGAEvent } from "@next/third-parties/google";
 import { gsap } from "@/lib/gsap";
+import { GA_ID } from "@/lib/analytics";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -42,6 +44,8 @@ export function CTA() {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!email) return;
+    // The one conversion that matters on this site.
+    if (GA_ID) sendGAEvent("event", "demo_request", { location: "cta" });
     // No backend yet — hand off to the mail client so the demo CTA works.
     const subject = encodeURIComponent("Wolf — demo request");
     const body = encodeURIComponent(`Email: ${email}`);

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, Playfair_Display, IBM_Plex_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
 import { ExperienceProvider } from "@/components/providers/ExperienceProvider";
 import { asset } from "@/lib/asset";
+import { GA_ID } from "@/lib/analytics";
 
 // All three families carry Cyrillic so Bulgarian copy renders natively.
 // Body sans + mono come from the same superfamily (IBM Plex).
@@ -78,6 +80,7 @@ export default function RootLayout({
         </LocaleProvider>
         <div aria-hidden className="grain-overlay" />
       </body>
+      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   );
 }

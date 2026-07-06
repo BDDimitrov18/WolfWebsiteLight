@@ -86,11 +86,12 @@ tested claim.
    explicitly state the developer's location. Brand statement, not a product
    spec.
 4. **Pricing** — the price list (Solo €10/mo · Standard €25/mo · Pro €50/mo ·
-   Enterprise custom; one-time licenses €500/€800/€1,000 with ~18% optional
-   annual maintenance — €90/€145/€180; EUR excl. 20% VAT; annual billing,
-   monthly ~20% higher) was supplied by the owner (revised 2026-07-06; the
-   earlier per-seat model was dropped with the revision). Commercial terms,
-   not derivable from PROJECT_OVERVIEW.
+   Enterprise custom; one-time licenses €360/€900/€1,800 — a uniform 3× the
+   annual subscription — with ~18% optional annual maintenance €65/€160/€325;
+   EUR excl. 20% VAT; annual billing, monthly ~20% higher) was set by the
+   owner (subscription prices 2026-07-06; one-time ladder restructured to the
+   3× multiple on the owner's approval, same date; the earlier per-seat model
+   was dropped). Commercial terms, not derivable from PROJECT_OVERVIEW.
 5. **Version "1.0.16"** (footer) matches the document header (§ title). Note the
    bundled `LoginScreen.png` shows `v1.0.15` — a screenshot from a slightly
    earlier build. Swap the screenshot or accept the minor mismatch.

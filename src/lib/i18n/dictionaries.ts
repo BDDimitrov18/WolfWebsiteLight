@@ -281,10 +281,12 @@ const bg = {
     emailPlaceholder: "вие@praktika.bg",
     send: "Изпрати",
     privacy: "Никога няма да споделим вашите данни.",
+    talk: "Предпочитате да поговорим?",
   },
   footer: {
     tagline: "Система за управление на проектантска практика.",
     madeIn: "Проектирано и разработено в България.",
+    author: "Божидар Димитров",
     product: "Продукт",
     resources: "Ресурси",
     company: "Компания",
@@ -298,9 +300,45 @@ const bg = {
       reports: "Справки",
       contact: "Контакти",
       demo: "Заявете демо",
+      privacy: "Поверителност",
     },
     rights: "Всички права запазени.",
     version: "Описана версия 1.0.16",
+  },
+  privacyPage: {
+    title: "Политика за поверителност",
+    updated: "Актуализирана: юли 2026 г.",
+    intro:
+      "Тази страница описва какви данни събира сайтът на Wolf и как се използват. Администратор на данните е Божидар Дамянов Димитров — bddimitrov18@gmail.com, +359 877 139 712.",
+    sections: [
+      {
+        h: "Какво събира този сайт",
+        ps: [
+          "Сайтът е статичен и няма собствен сървър за данни. Формата „Заявете демо“ не изпраща нищо към нас автоматично — тя отваря вашата пощенска програма с предварително попълнено писмо, което вие решавате дали да изпратите.",
+          "Имейл, който ни изпратите, се използва единствено за да ви отговорим и да уговорим демонстрация. Не го споделяме с трети страни и не изпращаме маркетингови съобщения.",
+        ],
+      },
+      {
+        h: "Анализ на посещенията",
+        ps: [
+          "Сайтът използва Google Analytics, за да разберем кои страници се четат и колко посетители имаме. Данните са обобщени — не ги свързваме с конкретни лица.",
+          "Хостингът (GitHub Pages) може да записва стандартни сървърни логове — IP адрес и заявена страница — съгласно политиката за поверителност на GitHub.",
+        ],
+      },
+      {
+        h: "Вашите права",
+        ps: [
+          "Съгласно ОРЗД (GDPR) можете да поискате достъп до данните, които съхраняваме за вас, тяхната корекция или изтриване. Пишете ни на bddimitrov18@gmail.com — отговаряме в разумен срок.",
+          "Ако смятате, че правата ви са нарушени, можете да подадете жалба до Комисията за защита на личните данни (cpdp.bg).",
+        ],
+      },
+      {
+        h: "Данните в самата система Wolf",
+        ps: [
+          "Wolf работи върху база данни, която е собственост на вашата практика и се намира на ваш сървър или във ваш облачен акаунт. Ние нямаме достъп до нея — нито сайтът, нито приложението изпращат ваши работни данни към нас.",
+        ],
+      },
+    ],
   },
   docs: {
     title: "Документация",
@@ -586,10 +624,12 @@ const en: typeof bg = {
     emailPlaceholder: "you@firm.bg",
     send: "Send",
     privacy: "We'll never share your details.",
+    talk: "Prefer to talk?",
   },
   footer: {
     tagline: "Management system for design practices.",
     madeIn: "Designed and built in Bulgaria.",
+    author: "Bozhidar Dimitrov",
     product: "Product",
     resources: "Resources",
     company: "Company",
@@ -603,9 +643,45 @@ const en: typeof bg = {
       reports: "Reports",
       contact: "Contact",
       demo: "Book a demo",
+      privacy: "Privacy",
     },
     rights: "All rights reserved.",
     version: "Documented version 1.0.16",
+  },
+  privacyPage: {
+    title: "Privacy policy",
+    updated: "Updated: July 2026",
+    intro:
+      "This page describes what data the Wolf website collects and how it is used. The data controller is Bozhidar Damyanov Dimitrov — bddimitrov18@gmail.com, +359 877 139 712.",
+    sections: [
+      {
+        h: "What this site collects",
+        ps: [
+          "The site is static and has no data server of its own. The “Book a demo” form sends nothing to us automatically — it opens your mail client with a pre-filled message that you decide whether to send.",
+          "An email you send us is used solely to reply and arrange a demonstration. We do not share it with third parties and we do not send marketing messages.",
+        ],
+      },
+      {
+        h: "Visit analytics",
+        ps: [
+          "The site uses Google Analytics to understand which pages are read and how many visitors we have. The data is aggregate — we do not tie it to individual people.",
+          "The hosting provider (GitHub Pages) may record standard server logs — IP address and requested page — under GitHub's own privacy policy.",
+        ],
+      },
+      {
+        h: "Your rights",
+        ps: [
+          "Under the GDPR you may request access to the data we hold about you, its correction or its deletion. Write to bddimitrov18@gmail.com — we reply within a reasonable time.",
+          "If you believe your rights have been violated, you may lodge a complaint with the Bulgarian Commission for Personal Data Protection (cpdp.bg).",
+        ],
+      },
+      {
+        h: "Data inside the Wolf system itself",
+        ps: [
+          "Wolf runs on a database owned by your practice, hosted on your server or in your own cloud account. We have no access to it — neither the website nor the application sends your working data to us.",
+        ],
+      },
+    ],
   },
   docs: {
     title: "Documentation",

@@ -95,5 +95,11 @@ tested claim.
 5. **Version "1.0.16"** (footer) matches the document header (§ title). Note the
    bundled `LoginScreen.png` shows `v1.0.15` — a screenshot from a slightly
    earlier build. Swap the screenshot or accept the minor mismatch.
+6. **Contact details** (CTA, footer, privacy page) — phone +359 877 139 712,
+   email bddimitrov18@gmail.com, name Bozhidar Damyanov Dimitrov (no company
+   entity) — supplied by the owner 2026-07-06. The demo form's mailto now
+   targets this address (previously hello@wolf.bg, a domain not owned — fixed).
+   The privacy page names the owner as data controller; its GA disclosure
+   anticipates the measurement ID that is wired but not yet supplied.
 
 Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.

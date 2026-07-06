@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { CONTACT } from "@/lib/contact";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { CompassRose } from "@/components/motifs/GeodesyMotifs";
@@ -41,7 +42,8 @@ export function Footer() {
       title: t("footer.company"),
       links: [
         { href: "/#contact", label: t("footer.links.demo") },
-        { href: "/#contact", label: t("footer.links.contact") },
+        { href: CONTACT.phoneHref, label: CONTACT.phoneDisplay, external: true },
+        { href: `mailto:${CONTACT.email}`, label: CONTACT.email, external: true },
       ],
     },
   ];
@@ -69,12 +71,21 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((l, i) => (
                   <li key={`${l.href}-${i}`}>
-                    <Link
-                      href={l.href}
-                      className="text-sm text-ink-300 transition-colors hover:text-paper-50"
-                    >
-                      {l.label}
-                    </Link>
+                    {"external" in l && l.external ? (
+                      <a
+                        href={l.href}
+                        className="text-sm text-ink-300 transition-colors hover:text-paper-50"
+                      >
+                        {l.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={l.href}
+                        className="text-sm text-ink-300 transition-colors hover:text-paper-50"
+                      >
+                        {l.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -84,11 +95,19 @@ export function Footer() {
 
         <div className="flex flex-col items-start justify-between gap-3 border-t border-ink-700 py-6 sm:flex-row sm:items-center">
           <p className="text-xs text-ink-400">
-            © {year} Wolf. {t("footer.rights")}
+            © {year} Wolf · {t("footer.author")}. {t("footer.rights")}
           </p>
-          <p className="font-mono text-xs tracking-wide text-ink-500">
-            {t("footer.version")}
-          </p>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/privacy"
+              className="text-xs text-ink-400 underline-offset-4 transition-colors hover:text-paper-50 hover:underline"
+            >
+              {t("footer.links.privacy")}
+            </Link>
+            <p className="font-mono text-xs tracking-wide text-ink-500">
+              {t("footer.version")}
+            </p>
+          </div>
         </div>
       </Container>
     </footer>

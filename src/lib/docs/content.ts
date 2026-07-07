@@ -25,6 +25,8 @@ export interface DocPage {
     | "model"
     | "plots"
     | "clients"
+    | "invoicing"
+    | "templates"
     | "calendar"
     | "filters"
     | "reports"
@@ -77,12 +79,39 @@ export const DOC_PAGES: DocPage[] = [
         },
         { type: "h2", id: "layout", text: "Главният прозорец" },
         {
+          type: "p",
+          text: "Страничната лента отваря всеки модул на системата. Екраните се отварят като табове — може да държите няколко отворени едновременно, а живите броячи върху иконите се обновяват в реално време, докато екипът работи.",
+        },
+        {
           type: "ul",
           items: [
-            "Странична лента с икони и живи броячи (поръчки, имоти, клиенти)",
-            "Екраните се отварят като табове — може да държите няколко отворени едновременно",
-            "Камбана „задачи за днес“ с брояч и списък за бърз преход",
-            "Ctrl+F отваря филтрите за поръчки отвсякъде",
+            "Табло — финансовият пулс на практиката (за администратори)",
+            "Поръчки — работният екран, център на ежедневието",
+            "Имоти, Документи и Собственици — кадастралният регистър и веригата на собствеността",
+            "Клиенти — възложителите, с финансова статистика за всеки",
+            "Календар — задачите по крайни срокове",
+            "Служители — екипът и личните справки (за администратори)",
+            "Фактури — регистърът на фактурите и PDF генераторът",
+            "Шаблони — бланките на практиката, попълвани автоматично",
+            "Справки — отчетите в Excel",
+          ],
+        },
+        { type: "h2", id: "search", text: "Търсене отвсякъде" },
+        {
+          type: "ul",
+          items: [
+            "Ctrl+K — глобално търсене: поръчки, клиенти, имоти, собственици и документи в един списък; резултатът се отваря направо на мястото си. Тук се търси собственик и по ЕГН.",
+            "Ctrl+F — разширените филтри за поръчки, от всеки екран",
+            "Камбаната „Моите задачи“ показва задачите за днес и просрочените — с преход към всяка с един клик",
+          ],
+        },
+        { type: "h2", id: "notifications", text: "Известия и обновления" },
+        {
+          type: "ul",
+          items: [
+            "Цветни известия потвърждават всяко действие — запис, изтриване, предупреждение или грешка",
+            "Когато излезе нова версия, лента съобщава, че е изтеглена и готова — обновяването е с един клик",
+            "Изтриванията и архивирането винаги искат потвърждение",
           ],
         },
         { type: "h2", id: "modes", text: "Режими активни / архив" },
@@ -125,12 +154,39 @@ export const DOC_PAGES: DocPage[] = [
         },
         { type: "h2", id: "layout", text: "The main window" },
         {
+          type: "p",
+          text: "The sidebar opens every module of the system. Screens open as tabs — keep several open at once — and the live badges on the icons update in real time while the team works.",
+        },
+        {
           type: "ul",
           items: [
-            "Icon sidebar with live count badges (orders, plots, clients)",
-            "Screens open as tabs — keep several open at once",
-            "A \"today's tasks\" bell with a count and a jump list",
-            "Ctrl+F opens the order filters from anywhere",
+            "Dashboard — the practice's financial pulse (administrators)",
+            "Orders — the working screen, the centre of the day",
+            "Plots, Documents and Owners — the cadastral register and the chain of ownership",
+            "Clients — the commissioners, with financial statistics for each",
+            "Calendar — tasks by due date",
+            "Employees — the team and per-person reports (administrators)",
+            "Invoices — the invoice register and the PDF generator",
+            "Templates — the practice's letterheads, filled in automatically",
+            "Reports — the Excel exports",
+          ],
+        },
+        { type: "h2", id: "search", text: "Search from anywhere" },
+        {
+          type: "ul",
+          items: [
+            "Ctrl+K — global search: orders, clients, plots, owners and documents in one list; a result opens right where it lives. This is also where you find an owner by their ID number (ЕГН).",
+            "Ctrl+F — the advanced order filters, from any screen",
+            "The \"My tasks\" bell shows today's and overdue tasks — each one click away",
+          ],
+        },
+        { type: "h2", id: "notifications", text: "Notifications & updates" },
+        {
+          type: "ul",
+          items: [
+            "Colour-coded toasts confirm every action — save, delete, warning or error",
+            "When a new version ships, a banner says it's downloaded and ready — updating is one click",
+            "Deletes and archiving always ask for confirmation",
           ],
         },
         { type: "h2", id: "modes", text: "Active / archive modes" },
@@ -170,8 +226,10 @@ export const DOC_PAGES: DocPage[] = [
           type: "ul",
           items: [
             "Формата покрива име, цена, аванс, статус, коментари и път до папката на поръчката",
+            "След създаване системата предлага да добавите първата дейност веднага",
             "„Архивирай и запази“ приключва поръчка с един клик",
             "Бутонът за папката отваря файловете на поръчката директно в Explorer",
+            "Линк в коментарите се разпознава автоматично и се отваря с клик",
             "Архивиране и връщане от архива — с потвърждение",
           ],
         },
@@ -196,8 +254,12 @@ export const DOC_PAGES: DocPage[] = [
             "Дейности и задачи — работната разбивка с изпълнители, срокове и плащания",
             "Клиенти — кой е възложил поръчката, с роля и бърза връзка към статистиката му",
             "Имоти и документи — имотите по поръчката и документите за собственост",
-            "Фактури — фактурите по поръчката с добавяне и редакция",
+            "Фактури — фактурите по поръчката, плюс „Генерирай фактура“ (готов PDF) и „Генерирай документ“ (от шаблон на практиката)",
           ],
+        },
+        {
+          type: "callout",
+          text: "Генерирането на фактури и на документи от шаблони има собствени раздели — „Фактуриране“ и „Шаблони за документи“.",
         },
         { type: "h2", id: "conflict", text: "Ако двама редактират едно и също" },
         {
@@ -217,8 +279,10 @@ export const DOC_PAGES: DocPage[] = [
           type: "ul",
           items: [
             "The form covers name, price, advance, status, comments and the order's folder path",
+            "After creating, the system offers to add the first activity right away",
             "\"Archive & save\" closes out an order in one click",
             "The folder button opens the order's files directly in Explorer",
+            "A link in the comments is detected automatically and opens on click",
             "Archive and unarchive — with confirmation",
           ],
         },
@@ -243,8 +307,12 @@ export const DOC_PAGES: DocPage[] = [
             "Activities & tasks — the work breakdown with executants, deadlines and payments",
             "Clients — who commissioned the order, with their role and a quick link to their statistics",
             "Plots & documents — the order's parcels and their ownership documents",
-            "Invoices — the order's invoices with add and edit",
+            "Invoices — the order's invoices, plus \"Generate invoice\" (a finished PDF) and \"Generate document\" (from a practice template)",
           ],
+        },
+        {
+          type: "callout",
+          text: "Generating invoices and documents from templates have their own sections — \"Invoicing\" and \"Document templates\".",
         },
         { type: "h2", id: "conflict", text: "If two people edit the same thing" },
         {
@@ -406,7 +474,8 @@ export const DOC_PAGES: DocPage[] = [
           items: [
             "Дейност в дейност — за вложени работни фази",
             "Задачата сочи към двама души: изпълнител и контрольор (проверка на качеството)",
-            "Статуси на задачите: възложена / завършена / котировка — те захранват календара и просрочията",
+            "Статуси на задачите: нова, зададена, в процес, отложена, завършена — те захранват календара, таблото и просрочията",
+            "Всяка задача носи плащане и такса (напр. държавна такса) с коментар — те влизат в справките",
             "Типовете дейности и задачи са настройваеми и се създават в движение, докато пишете",
           ],
         },
@@ -440,7 +509,8 @@ export const DOC_PAGES: DocPage[] = [
           items: [
             "Activities inside activities — for nested work phases",
             "A task points at two people: executant and controller (quality check)",
-            "Task statuses: assigned / completed / quotation — these feed the calendar and overdue logic",
+            "Task statuses: new, assigned, in progress, postponed, completed — these feed the calendar, the dashboard and the overdue logic",
+            "Every task carries a payment and a fee (e.g. a state fee) with a comment — both flow into the reports",
             "Activity and task types are configurable and can be created on the fly as you type",
           ],
         },
@@ -493,6 +563,21 @@ export const DOC_PAGES: DocPage[] = [
           type: "p",
           text: "Когато добавяте имот към поръчка и започнете да пишете номера му, Wolf разпознава съществуващ имот и го попълва автоматично — данните се въвеждат веднъж и се преизползват. Ако имотът е нов, се създава на място.",
         },
+        { type: "h2", id: "ekatte", text: "ЕКАТТЕ — населеното място се попълва само" },
+        {
+          type: "p",
+          text: "Кадастралният номер започва с ЕКАТТЕ кода на населеното място. Wolf разпознава кода още докато пишете и попълва населеното място автоматично — без да го търсите в класификатора.",
+        },
+        { type: "h2", id: "earth", text: "Имотът върху картата — Google Earth" },
+        {
+          type: "p",
+          text: "С един клик Wolf изтегля реалните координати на имота от кадастъра и отваря контура му в Google Earth. Виждате точното местоположение и границите на имота, без да напускате системата и без да пренабирате номера в друг сайт.",
+        },
+        { type: "h2", id: "owners", text: "Собственици" },
+        {
+          type: "p",
+          text: "Отделен екран „Собственици“ пази регистъра на всички собственици — имена, ЕГН и адрес — с търсене и редакция. При въвеждане на собственик по документ системата предлага съществуващите записи, за да не се дублират хора. Глобалното търсене (Ctrl+K) намира собственик и по ЕГН.",
+        },
         { type: "h2", id: "docs", text: "Документи за собственост" },
         { type: "img", slot: "DocumentsTab", alt: "Екранът Документи", title: "Wolf — Документи" },
         {
@@ -539,6 +624,21 @@ export const DOC_PAGES: DocPage[] = [
           type: "p",
           text: "When you add a plot to an order and start typing its number, Wolf recognizes an existing plot and fills it in automatically — data is entered once and reused. If the plot is new, it is created on the spot.",
         },
+        { type: "h2", id: "ekatte", text: "EKATTE — the settlement fills itself in" },
+        {
+          type: "p",
+          text: "A cadastral number starts with the settlement's EKATTE code. Wolf recognizes the code as you type and fills the settlement in automatically — no looking it up in the classifier.",
+        },
+        { type: "h2", id: "earth", text: "The plot on the map — Google Earth" },
+        {
+          type: "p",
+          text: "In one click Wolf pulls the plot's real coordinates from the cadastre and opens its outline in Google Earth. You see the exact location and boundaries without leaving the system or retyping the number into another site.",
+        },
+        { type: "h2", id: "owners", text: "Owners" },
+        {
+          type: "p",
+          text: "A dedicated Owners screen keeps the register of all owners — names, ID number (ЕГН) and address — with search and editing. When entering an owner on a document, the system suggests existing records so people are never duplicated. Global search (Ctrl+K) also finds an owner by ЕГН.",
+        },
         { type: "h2", id: "docs", text: "Ownership documents" },
         { type: "img", slot: "DocumentsTab", alt: "The Documents screen", title: "Wolf — Documents" },
         {
@@ -569,12 +669,12 @@ export const DOC_PAGES: DocPage[] = [
   },
 
   // ================================================================
-  // Clients & invoices
+  // Clients
   // ================================================================
   {
     slug: "clients",
     navKey: "clients",
-    title: { bg: "Клиенти и фактури", en: "Clients & invoices" },
+    title: { bg: "Клиенти", en: "Clients" },
     intro: {
       bg: "Кой възлага работата, колко е платил и колко дължи — с разбивка по поръчки и експорт за счетоводството.",
       en: "Who commissions the work, what they've paid and what they owe — broken down by order and exportable for accounting.",
@@ -587,6 +687,13 @@ export const DOC_PAGES: DocPage[] = [
           type: "p",
           text: "Търсене по име, телефон или имейл. Картата на клиента пази имена, телефон, имейл, адрес и правен тип — физическо лице, фирма, държава или община.",
         },
+        {
+          type: "ul",
+          items: [
+            "Филтърът „Моите клиенти“ показва само възложителите по вашите поръчки",
+            "Клиентът се свързва към поръчка с роля — кой точно е възложителят по всяка",
+          ],
+        },
         { type: "h2", id: "stats", text: "Статистика на клиента" },
         { type: "img", slot: "ClientStatisticsTab", alt: "Статистика на клиента", title: "Wolf — Статистика на клиент" },
         {
@@ -596,16 +703,15 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "ul",
           items: [
+            "Филтри по длъжници и по размер на дълга — бърз отговор кой какво дължи",
             "Преход към всяка поръчка направо от разбивката",
             "Експорт на цялата статистика в Excel на работния плот",
             "Числата следват режима активни/архив",
           ],
         },
-        { type: "h2", id: "invoices", text: "Фактури" },
-        { type: "img", slot: "InvoicesTab", alt: "Екранът Фактури", title: "Wolf — Фактури" },
         {
-          type: "p",
-          text: "Всички фактури на едно място с търсене по номер, сума или поръчка. Добавяне и редакция с номер, сума и избор на поръчка; бутонът за преход отваря поръчката директно на нейния таб „Фактури“.",
+          type: "callout",
+          text: "Фактурите — регистърът и генераторът на PDF фактури — имат собствен раздел: „Фактуриране“, следващата спирка.",
         },
       ],
       en: [
@@ -614,6 +720,13 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "p",
           text: "Search by name, phone or email. The client card holds names, phone, email, address and legal type — individual, company, state or municipality.",
+        },
+        {
+          type: "ul",
+          items: [
+            "The \"My clients\" filter shows only the commissioners of your own orders",
+            "A client links to an order with a role — exactly who commissioned each one",
+          ],
         },
         { type: "h2", id: "stats", text: "Client statistics" },
         { type: "img", slot: "ClientStatisticsTab", alt: "Client statistics", title: "Wolf — Client statistics" },
@@ -624,16 +737,295 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "ul",
           items: [
+            "Filters by debtor and by size of the debt — a quick answer to who owes what",
             "Jump to any order straight from the breakdown",
             "Export the whole statistic to Excel on the desktop",
             "The numbers follow the active/archive mode",
           ],
         },
-        { type: "h2", id: "invoices", text: "Invoices" },
-        { type: "img", slot: "InvoicesTab", alt: "The Invoices screen", title: "Wolf — Invoices" },
+        {
+          type: "callout",
+          text: "Invoices — the register and the PDF invoice generator — have their own section: \"Invoicing\", the next stop.",
+        },
+      ],
+    },
+  },
+
+  // ================================================================
+  // Invoicing — register + PDF generator
+  // ================================================================
+  {
+    slug: "invoicing",
+    navKey: "invoicing",
+    title: { bg: "Фактуриране", en: "Invoicing" },
+    intro: {
+      bg: "Регистър на фактурите по поръчки и генератор, който съставя готова фактура в PDF от данните на поръчката — с автоматичен номер, ДДС, две валути и сума словом.",
+      en: "A register of invoices per order, and a generator that assembles a finished PDF invoice from the order's data — with an automatic number, VAT, dual currency and the amount in words.",
+    },
+    blocks: {
+      bg: [
+        { type: "img", slot: "InvoicesTab", alt: "Екранът Фактури", title: "Wolf — Фактури" },
+        { type: "h2", id: "register", text: "Регистърът на фактурите" },
         {
           type: "p",
-          text: "All invoices in one place, searchable by number, sum or order. Add and edit with number, sum and an order picker; the jump button opens the order directly on its Invoices tab.",
+          text: "Всички фактури на едно място — номер, поръчка и сума, с мигновено търсене по всяко от трите. Фактура се добавя както от екрана „Фактури“, така и от таба „Фактури“ на самата поръчка; бутонът „Към поръчката“ отваря поръчката директно на този таб.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Добавяне, редакция и изтриване — с потвърждение",
+            "Сумите по фактури влизат в статистиките на клиентите и в таблото („Фактурирано“)",
+            "Регистърът следва режима активни/архив",
+          ],
+        },
+        { type: "h2", id: "generator", text: "Генераторът — фактура в PDF" },
+        { type: "img", slot: "InvoiceDraft", alt: "Генериране на фактура с жив преглед", title: "Wolf — Генериране на фактура" },
+        {
+          type: "p",
+          text: "От таба „Фактури“ на поръчката бутонът „Генерирай фактура“ отваря композитора: отляво формата, отдясно жив преглед на самия документ. Прегледът се обновява, докато пишете — каквото виждате, точно това се генерира.",
+        },
+        {
+          type: "steps",
+          items: [
+            {
+              t: "Номер и дати",
+              d: "Номерът се предлага автоматично — следващият пореден от регистъра, допълнен до 10 цифри — и остава редактируем. Задавате дата, данъчно събитие и ДДС ставка (по подразбиране 20%).",
+            },
+            {
+              t: "Получател",
+              d: "Избирате възложителя от клиентите на поръчката — име, адрес и телефон се попълват от системата. ДДС №, идентификационен №, град и МОЛ се дописват на ръка.",
+            },
+            {
+              t: "Редове",
+              d: "Редовете се предлагат от дейностите на поръчката — описание от типа на дейността (с номерата на имотите) и единична цена от възнаграждението. Добавяте и махате редове свободно.",
+            },
+            {
+              t: "Генериране",
+              d: "„Генерирай и отвори PDF“ създава файла и го отваря веднага — готов за печат или изпращане.",
+            },
+          ],
+        },
+        { type: "h2", id: "math", text: "Сметките — автоматични" },
+        {
+          type: "ul",
+          items: [
+            "Данъчна основа, ДДС и сума за плащане се изчисляват ред по ред и в обобщението",
+            "Две валути: фактурата се води в EUR или BGN, а сумата се показва и в другата валута",
+            "Сумата словом се съставя автоматично на български — и може да се редактира при нужда",
+          ],
+        },
+        {
+          type: "callout",
+          text: "Реквизитите на практиката — наименование, ЕИК/ДДС №, IBAN, МОЛ — се настройват при внедряването и се попълват автоматично във всяка фактура.",
+        },
+      ],
+      en: [
+        { type: "img", slot: "InvoicesTab", alt: "The Invoices screen", title: "Wolf — Invoices" },
+        { type: "h2", id: "register", text: "The invoice register" },
+        {
+          type: "p",
+          text: "All invoices in one place — number, order and sum, with instant search by any of the three. An invoice can be added from the Invoices screen or from the order's own Invoices tab; the jump button opens the order directly on that tab.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Add, edit and delete — with confirmation",
+            "Invoice sums flow into client statistics and the dashboard (\"Invoiced\")",
+            "The register follows the active/archive mode",
+          ],
+        },
+        { type: "h2", id: "generator", text: "The generator — a PDF invoice" },
+        { type: "img", slot: "InvoiceDraft", alt: "Generating an invoice with a live preview", title: "Wolf — Generate invoice" },
+        {
+          type: "p",
+          text: "On the order's Invoices tab, \"Generate invoice\" opens the composer: the form on the left, a live preview of the actual document on the right. The preview refreshes as you type — what you see is exactly what gets generated.",
+        },
+        {
+          type: "steps",
+          items: [
+            {
+              t: "Number & dates",
+              d: "The number is suggested automatically — the next sequential one in the register, zero-padded to 10 digits — and stays editable. You set the date, the tax event date and the VAT rate (20% by default).",
+            },
+            {
+              t: "Recipient",
+              d: "Pick the commissioner from the order's clients — name, address and phone fill in from the system. VAT no., ID no., city and accountable person are typed by hand.",
+            },
+            {
+              t: "Line items",
+              d: "Lines are suggested from the order's activities — the description from the activity type (with the plot numbers) and the unit price from the payment. Add and remove lines freely.",
+            },
+            {
+              t: "Generate",
+              d: "\"Generate and open PDF\" creates the file and opens it immediately — ready to print or send.",
+            },
+          ],
+        },
+        { type: "h2", id: "math", text: "The math — automatic" },
+        {
+          type: "ul",
+          items: [
+            "Tax base, VAT and total due are computed per line and in the summary",
+            "Dual currency: the invoice is kept in EUR or BGN, with the total shown in the other currency too",
+            "The amount in words is composed automatically in Bulgarian — and stays editable",
+          ],
+        },
+        {
+          type: "callout",
+          text: "The practice's own details — name, company/VAT number, IBAN, accountable person — are configured at rollout and fill in automatically on every invoice.",
+        },
+      ],
+    },
+  },
+
+  // ================================================================
+  // Document templates
+  // ================================================================
+  {
+    slug: "templates",
+    navKey: "templates",
+    title: { bg: "Шаблони за документи", en: "Document templates" },
+    intro: {
+      bg: "Качете бланките на практиката като .docx шаблони с плейсхолдъри — Wolf ги попълва с данните на всяка поръчка и записва готовия документ направо в нейната папка.",
+      en: "Upload your practice's forms as .docx templates with placeholders — Wolf fills them with any order's data and saves the finished document straight into that order's folder.",
+    },
+    blocks: {
+      bg: [
+        { type: "img", slot: "TemplatesScreen", alt: "Екранът Шаблони", title: "Wolf — Шаблони" },
+        { type: "h2", id: "idea", text: "Как работи" },
+        {
+          type: "p",
+          text: "Шаблонът е обикновен Word документ (.docx), в който на мястото на променливите данни стоят плейсхолдъри като {{order.name}} или {{client.fullname}}. Качвате го веднъж в раздел „Шаблони“ — и всеки от екипа генерира попълнен документ за всяка поръчка: договори, протоколи, писма, декларации.",
+        },
+        {
+          type: "steps",
+          items: [
+            {
+              t: "Създайте бланката",
+              d: "Тръгнете от „Изтегли начален шаблон (.docx)“ — готово скеле с най-често използваните плейсхолдъри — или добавете плейсхолдъри в свой съществуващ документ.",
+            },
+            {
+              t: "Качете я",
+              d: "„+ Качи шаблон (.docx)“ с име, описание и тип данни. Шаблонът се появява при целия екип в реално време.",
+            },
+            {
+              t: "Проверете я",
+              d: "„Провери шаблона“ хваща печатни грешки в плейсхолдърите и проблеми в {{#each}} блоковете, преди да са стигнали до реален документ.",
+            },
+            {
+              t: "Преглед с реални данни",
+              d: "Изберете произволна поръчка и „Преглед“ отваря попълнен пробен документ — включително колко плейсхолдъра са останали празни за нея.",
+            },
+          ],
+        },
+        { type: "h2", id: "tokens", text: "Плейсхолдърите" },
+        {
+          type: "p",
+          text: "Панелът „Налични плейсхолдъри“ показва всички полета, групирани по тема, с копиране в клипборда с един клик. Извадка от най-използваните:",
+        },
+        {
+          type: "code",
+          text: "{{order.id}}  {{order.name}}  {{order.price}}  {{order.unpaid}}\n{{client.fullname}}  {{client.address}}  {{client.phone}}\n{{today}}  {{today.long}}   →  07.07.2026 · 7 юли 2026 г.\n{{#each plots}} {{plot.number}} {{plot.address}} {{/each}}\n{{#each owners}} {{owner.fullname}} {{owner.egn}} {{/each}}",
+        },
+        {
+          type: "p",
+          text: "Списъците — имоти, собственици, възложители, дейности, задачи, фактури — се разгръщат с {{#each …}} … {{/each}}: като поредица от абзаци или като повтарящ се ред в таблица.",
+        },
+        { type: "h2", id: "generate", text: "Генериране за поръчка" },
+        { type: "img", slot: "GenerateDocument", alt: "Генериране на документ от шаблон", title: "Wolf — Генериране на документ" },
+        {
+          type: "p",
+          text: "От екрана на поръчката бутонът „Генерирай документ“ показва наличните шаблони като карти. Избирате шаблон, натискате „Генерирай“ — документът се попълва с актуалните данни на поръчката, записва се в нейната папка и се отваря автоматично.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Файлът се именува шаблон_поръчка_дата — подрежда се сам в папката на поръчката",
+            "Ако плейсхолдър остане без стойност, системата предупреждава кой точно — обикновено печатна грешка",
+            "„Отвори папката“ показва готовия файл в Explorer",
+          ],
+        },
+        { type: "h2", id: "rights", text: "Права и екипна работа" },
+        {
+          type: "ul",
+          items: [
+            "Всеки в екипа вижда и използва всички шаблони",
+            "Променя или изтрива шаблон само създателят му или администратор",
+            "Промяна по шаблон се появява при целия екип в реално време",
+          ],
+        },
+        {
+          type: "callout",
+          text: "Шаблоните спестяват най-досадната част от документооборота: данните се въвеждат веднъж в системата и се попълват безгрешно във всяка бланка — без копиране на ръка.",
+        },
+      ],
+      en: [
+        { type: "img", slot: "TemplatesScreen", alt: "The Templates screen", title: "Wolf — Templates" },
+        { type: "h2", id: "idea", text: "How it works" },
+        {
+          type: "p",
+          text: "A template is a plain Word document (.docx) where the variable data is replaced by placeholders like {{order.name}} or {{client.fullname}}. Upload it once in the Templates section — and anyone on the team generates a filled-in document for any order: contracts, protocols, letters, declarations.",
+        },
+        {
+          type: "steps",
+          items: [
+            {
+              t: "Create the form",
+              d: "Start from \"Download starter template (.docx)\" — a ready scaffold with the most-used placeholders — or add placeholders to an existing document of yours.",
+            },
+            {
+              t: "Upload it",
+              d: "\"+ Upload template (.docx)\" with a name, description and data type. The template appears for the whole team in real time.",
+            },
+            {
+              t: "Validate it",
+              d: "\"Check template\" catches typos in placeholders and problems in {{#each}} blocks before they reach a real document.",
+            },
+            {
+              t: "Preview with real data",
+              d: "Pick any order and \"Preview\" opens a filled-in trial document — including how many placeholders came out empty for it.",
+            },
+          ],
+        },
+        { type: "h2", id: "tokens", text: "The placeholders" },
+        {
+          type: "p",
+          text: "The \"Available placeholders\" panel lists every field, grouped by topic, with one-click copy to clipboard. A sample of the most used:",
+        },
+        {
+          type: "code",
+          text: "{{order.id}}  {{order.name}}  {{order.price}}  {{order.unpaid}}\n{{client.fullname}}  {{client.address}}  {{client.phone}}\n{{today}}  {{today.long}}   →  07.07.2026 · 7 July 2026\n{{#each plots}} {{plot.number}} {{plot.address}} {{/each}}\n{{#each owners}} {{owner.fullname}} {{owner.egn}} {{/each}}",
+        },
+        {
+          type: "p",
+          text: "Lists — plots, owners, commissioners, activities, tasks, invoices — unfold with {{#each …}} … {{/each}}: as a run of paragraphs or as a repeating table row.",
+        },
+        { type: "h2", id: "generate", text: "Generating for an order" },
+        { type: "img", slot: "GenerateDocument", alt: "Generating a document from a template", title: "Wolf — Generate document" },
+        {
+          type: "p",
+          text: "On the order's screen, \"Generate document\" shows the available templates as cards. Pick one, press Generate — the document fills with the order's live data, saves into the order's own folder and opens automatically.",
+        },
+        {
+          type: "ul",
+          items: [
+            "The file is named template_order_date — it files itself in the order's folder",
+            "If a placeholder ends up without a value, the system warns you exactly which one — usually a typo",
+            "\"Open folder\" reveals the finished file in Explorer",
+          ],
+        },
+        { type: "h2", id: "rights", text: "Permissions & teamwork" },
+        {
+          type: "ul",
+          items: [
+            "Everyone on the team sees and uses all templates",
+            "Only its creator or an administrator can modify or delete a template",
+            "A change to a template reaches the whole team in real time",
+          ],
+        },
+        {
+          type: "callout",
+          text: "Templates remove the dullest part of paperwork: data is entered once in the system and lands flawlessly in every form — no copying by hand.",
         },
       ],
     },
@@ -789,11 +1181,24 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "ul",
           items: [
-            "Всички задачи — йерархия служител → поръчка → дейност → задача с продължителности и плащания",
+            "Оборот на задачи — йерархия служител → поръчка → дейност → задача с продължителности и плащания",
             "Задължения — задачи със съответните клиенти, имоти, собственици и плащане",
-            "Плащане по тип задача — разходи, групирани по тип, с разбивка по служител",
-            "Месечно плащане по служител — по един лист на служител, обобщено по тип задача",
+            "Плащания по вид задача — разходи, групирани по тип, с разбивка по служител",
+            "Месечна справка — по един лист на служител, обобщено по тип задача",
+            "Такси (държавни такси) — таксите по задачите за периода, за отчет пред клиента и счетоводството",
             "Статистика на клиент — експорт от екрана на клиента",
+          ],
+        },
+        { type: "h2", id: "business", text: "Бизнес справки" },
+        {
+          type: "p",
+          text: "Освен оперативните справки, две дават поглед върху цялата практика — без филтри, с един клик:",
+        },
+        {
+          type: "ul",
+          items: [
+            "Поръчки и приходи по общини — къде географски е концентрирана работата и откъде идват приходите",
+            "Клиенти: класация и реактивиране — кои възложители носят най-много работа и кои са неактивни от дълго време — готов списък за едно обаждане",
           ],
         },
         { type: "h2", id: "filters", text: "Филтриране на справките" },
@@ -813,11 +1218,24 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "ul",
           items: [
-            "All tasks — employee → order → activity → task hierarchy with durations and payments",
+            "Task turnover — employee → order → activity → task hierarchy with durations and payments",
             "Obligations — tasks with their clients, plots, owners and payment",
-            "Task-type payment — costs grouped by type, with a per-employee breakdown",
-            "Monthly per-employee payment — one sheet per employee, aggregated by task type",
+            "Payments by task type — costs grouped by type, with a per-employee breakdown",
+            "Monthly report — one sheet per employee, aggregated by task type",
+            "Fees (state fees) — the fees on tasks for the period, for the client and for accounting",
             "Client statistics — exported from the client's screen",
+          ],
+        },
+        { type: "h2", id: "business", text: "Business reports" },
+        {
+          type: "p",
+          text: "Beyond the operational reports, two give a view of the whole practice — no filters, one click:",
+        },
+        {
+          type: "ul",
+          items: [
+            "Orders and revenue by municipality — where the work is geographically concentrated and where the revenue comes from",
+            "Clients: ranking and reactivation — which commissioners bring the most work and which have gone quiet — a ready call list",
           ],
         },
         { type: "h2", id: "filters", text: "Filtering reports" },
@@ -851,13 +1269,16 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dashboard", text: "Табло за управление" },
         {
           type: "p",
-          text: "Ключовите числа на практиката на един екран: неразплатени суми, общо фактурирано, активни поръчки и просрочени задачи. Отдолу — дейностите по месеци, задачите по статус, вземанията (кой дължи, колко и от преди колко дни) и натовареността на екипа с активните и завършените задачи на всеки служител.",
+          text: "Ключовите числа на практиката на един екран: неразплатени суми, общо фактурирано, активни поръчки и просрочени задачи. Отдолу — дейностите по месеци, задачите по статус, вземанията и натовареността на екипа.",
         },
         {
           type: "ul",
           items: [
-            "Всяко вземане води директно към поръчката си",
-            "Числата се обновяват в реално време, докато екипът работи",
+            "Картите „Неразплатено“ и „Просрочени задачи“ са кликаеми — отварят списъка на съответните поръчки",
+            "Графики: дейностите по месеци срещу завършените задачи и задачите по статус за последните 12 месеца",
+            "Вземания — кой дължи, колко и от преди колко дни, групирани по давност; всяко вземане води към поръчката си",
+            "Натовареност на екипа — активните и завършените този месец задачи на всеки, с преход към справката му",
+            "Числата се обновяват в реално време, докато екипът работи, и следват режима активни/архив",
           ],
         },
         { type: "h2", id: "employees", text: "Служители и статистика" },
@@ -887,13 +1308,16 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dashboard", text: "Management dashboard" },
         {
           type: "p",
-          text: "The practice's key numbers on one screen: outstanding sums, total invoiced, active orders and overdue tasks. Below — monthly activity, tasks by status, receivables (who owes, how much and since when) and the team's workload with each person's active and completed tasks.",
+          text: "The practice's key numbers on one screen: outstanding sums, total invoiced, active orders and overdue tasks. Below — monthly activity, tasks by status, receivables and the team's workload.",
         },
         {
           type: "ul",
           items: [
-            "Every receivable jumps straight to its order",
-            "The numbers update in real time while the team works",
+            "The \"Outstanding\" and \"Overdue tasks\" cards are clickable — they open the matching order lists",
+            "Charts: monthly activity against completed tasks, and tasks by status over the last 12 months",
+            "Receivables — who owes, how much and since when, grouped by age; each jumps straight to its order",
+            "Team workload — each person's active and this-month-completed tasks, with a jump to their report",
+            "The numbers update in real time while the team works, and follow the active/archive mode",
           ],
         },
         { type: "h2", id: "employees", text: "Employees & statistics" },

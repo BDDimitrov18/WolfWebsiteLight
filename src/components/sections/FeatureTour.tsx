@@ -18,6 +18,8 @@ interface FeatureItem {
 const TOUR: { key: string; slot: string }[] = [
   { key: "orders", slot: "OrdersScreen" },
   { key: "titleChain", slot: "PlotsAndDocsInOrderTab" },
+  { key: "invoicing", slot: "InvoiceDraft" },
+  { key: "templates", slot: "TemplatesScreen" },
   { key: "calendar", slot: "Callendar" },
   { key: "filters", slot: "FiltersOrders" },
   { key: "reports", slot: "InqueriesTab" },

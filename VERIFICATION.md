@@ -43,6 +43,8 @@ outcomes) and the docs completion.*
 | Calendar: monthly grid, overdue indicators, today's-tasks bell, employee switcher | §8.6 | ✅ |
 | Filters: quick toggles, status dropdowns, text searches, multi-selects, active-filters indicator | §8.3 | ✅ |
 | Reports: All Tasks, Obligations, Task-Type Payment, monthly per-employee; .xlsx | §8.11 | ✅ |
+| Invoicing: PDF invoice from order data — auto-suggested sequential number (max+1, 10 digits), VAT (default 20%), dual currency EUR/BGN, amount in words (Bulgarian, auto + editable), line items suggested from activities, live preview = same renderer as the file | Verified in code, 2026-07-07: `Wolf.Invoicing/` (InvoiceComposer, InvoicePdfDocument, CurrencyConverter, BulgarianNumberToWords), `Views/InvoiceDraftView.axaml`, `ViewModels/InvoiceDraftViewModel.cs`. NOTE: uncommitted working-tree feature (post-1.0.24, in-flight release). Supplier details are currently set in code per deployment (`InvoiceComposer.cs`) — the site phrases this as "configured at rollout", which matches practice; do not claim an in-app settings screen. | ✅ |
+| Templates: upload .docx with {{placeholders}} and {{#each}} loops (paragraphs + table rows), linter validation, preview against a real order, starter template download, output into the order's folder (Desktop fallback), unresolved-placeholder warning, creator/admin-only modify, real-time sync | Verified in code, 2026-07-07: `Views/DocumentTemplatesView.axaml`, `Views/GenerateDocumentView.axaml`, `Documents/{DocxMergeEngine,DocxTemplateLinter,StarterTemplateBuilder,OrderMergeContextBuilder,DocumentOutput}.cs`; committed (commits `6e05270`, `fe55fa2`) | ✅ |
 | Teamwork: simultaneous work, instant propagation, conflict warning instead of data loss | §4.3 (optimistic concurrency, "friendly 409"), §7.4, §6.4 (audit log) | ✅ |
 | Dashboard: KPI cards (outstanding, invoiced, active orders, overdue tasks), monthly activity, tasks by status, receivables with jump-to-order, team workload, admin-only, real-time | Dashboard rebuilt 2026-07-06 (supersedes §8.7's top-5/recent-orders description); verified against the supplied `AdminBoard.png` screenshot of the new build | ✅ |
 | Clients: searchable list, all-time financials, per-order breakdown, Excel export, legal type | §8.4 | ✅ |
@@ -64,11 +66,28 @@ outcomes) and the docs completion.*
 | Active & archive | §8.2 (mode toggle, theme change, mode-aware lists/stats/badges), §8.3 (archive/unarchive with confirmation, "Archive & save"); the All/Active/Archived buttons are visible in the supplied `ArchiveModeOrders.png` |
 | Model: order → activity → task | §2, §5.1–5.2, §8.10 |
 | Plots & ownership documents | §8.9 (cadastral fields, uniqueness, shared indicator, smart linking, document fields, ownership editor: owner autocomplete, ideal parts, way of acquiring, PoA) |
-| Clients & invoices | §8.4, §8.8 |
+| Clients | §8.4; "My clients" filter + debtor/debt-size stats filters verified in code 2026-07-07 (commits `f0e2659`, `7f354b5`) |
+| Invoicing (new page) | §8.8 (register); PDF generator verified in code 2026-07-07 (uncommitted `Wolf.Invoicing/` — see feature-tour row above) |
+| Document templates (new page) | Verified in code 2026-07-07 (`DocumentTemplatesView`, `GenerateDocumentView`, merge engine; commits `6e05270`, `fe55fa2`); placeholder catalog quoted from `OrderMergeContextBuilder.cs` |
 | Calendar & scheduling | §8.6, §8.2 (bell) |
 | Filters & search | §8.3 (advanced order filters, Ctrl+F §8.2) |
-| Reports & exports | §8.11 (five reports incl. client stats export; filtering; .xlsx to desktop, auto-open) |
-| Administration | §8.5, §8.7, §8.12, §6.1 (roles) |
+| Reports & exports | §8.11 (base reports; renamed to current UI labels 2026-07-07: „Оборот на задачи“, „Задължения“, „Плащания по вид задача“, „Месечна справка“) + new „Справка такси (държавни такси)“ and the two no-filter business reports („Поръчки и приходи по общини“, „Клиенти: класация и реактивиране“) verified in `Views/InqueriesView.axaml` 2026-07-07 (working tree) |
+| Administration | §8.5, §8.12, §6.1 (roles); dashboard detail (clickable KPI cards, 12-month charts, receivables aging buckets, team workload) verified against `DashboardView.axaml`/`DashboardViewModel.cs` 2026-07-07 |
+
+Additions verified in code on 2026-07-07 (source: `../Wolf.Desktop` working tree
++ recent commits, which are ahead of PROJECT_OVERVIEW.md v1.0.16):
+- **Global search Ctrl+K** over orders, clients, plots, owners (incl. by ЕГН) and
+  documents — `ViewModels/GlobalSearchViewModel.cs` (uncommitted).
+- **Owners screen** („Собственици": names, ЕГН, address) — `Views/OwnersView.axaml`
+  (uncommitted).
+- **EKATTE auto-fill** from the cadastral number prefix — commit `5f98242`.
+- **Google Earth parcel outline** with coordinates from the cadastre — commits
+  `b1861e0`, `cd4f64a`, `3ae8702`.
+- **Task statuses** corrected in docs to нова/зададена/в процес/отложена/завършена
+  (was „възложена/завършена/котировка" per the older overview) — per
+  `DashboardViewModel.cs`.
+- **Clickable links in order comments** — commit `fe4abd5`.
+- **Create-order → "add first activity" prompt** — `MainWindowViewModel.cs`.
 
 All doc content is paraphrased from the sections above. ✅
 One simplification: the docs say reports open in "any Excel, LibreOffice or
@@ -92,9 +111,15 @@ tested claim.
    owner (subscription prices 2026-07-06; one-time ladder restructured to the
    3× multiple on the owner's approval, same date; the earlier per-seat model
    was dropped). Commercial terms, not derivable from PROJECT_OVERVIEW.
-5. **Version "1.0.16"** (footer) matches the document header (§ title). Note the
-   bundled `LoginScreen.png` shows `v1.0.15` — a screenshot from a slightly
-   earlier build. Swap the screenshot or accept the minor mismatch.
+5. **Version "1.0.24"** (footer, updated 2026-07-07) matches the latest app
+   release commit (`c9d1670` Release 1.0.24). The invoice PDF generator, global
+   search and Owners screen described in the docs are in the working tree for
+   the *next* release — bump the footer again when it ships if desired. The
+   bundled `LoginScreen.png` still shows `v1.0.15`.
+7. **Placeholder screenshots** (2026-07-07): `InvoiceDraft.png`,
+   `TemplatesScreen.png`, `GenerateDocument.png` in `public/screenshots/` are
+   branded "снимка очаква се" placeholders, NOT real app screenshots — replace
+   with real captures under the same filenames.
 6. **Contact details** (CTA, footer, privacy page) — phone +359 877 139 712,
    email bddimitrov18@gmail.com, name Bozhidar Damyanov Dimitrov (no company
    entity) — supplied by the owner 2026-07-06. The demo form's mailto now

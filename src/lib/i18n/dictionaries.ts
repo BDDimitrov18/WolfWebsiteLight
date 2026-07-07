@@ -9,6 +9,8 @@ export type Locale = "bg" | "en";
 export const FEATURE_KEYS = [
   "orders",
   "titleChain",
+  "invoicing",
+  "templates",
   "calendar",
   "filters",
   "reports",
@@ -85,7 +87,7 @@ const bg = {
       },
       {
         title: "Справки, готови за счетоводителя",
-        body: "Финансовите и оперативните справки излизат директно като .xlsx файлове — отварят се навсякъде, без инсталиран Office.",
+        body: "Финансовите и оперативните справки излизат директно като .xlsx файлове — отварят се навсякъде, без инсталиран Office. Фактурите излизат като готов PDF.",
       },
     ],
   },
@@ -114,6 +116,26 @@ const bg = {
           "Пълни кадастрални данни: КИ, УПИ, местност, община",
           "Нотариални актове, договори, завещания, актове за собственост",
           "Идеални части (дробна собственост) и пълномощни",
+        ],
+      },
+      invoicing: {
+        tag: "Фактуриране",
+        title: "Фактура в PDF — направо от поръчката",
+        body: "Wolf съставя фактурата от данните на поръчката: редовете се предлагат от дейностите, номерът — автоматично от регистъра, а ДДС, втората валута и сумата словом се изчисляват сами. Живият преглед показва точния документ, преди да натиснете „Генерирай“.",
+        bullets: [
+          "Пореден номер, предложен автоматично — и редактируем",
+          "ДДС, две валути (EUR/BGN) и сума словом — без ръчни сметки",
+          "Прегледът е самият PDF — каквото виждате, това се генерира",
+        ],
+      },
+      templates: {
+        tag: "Шаблони",
+        title: "Вашите бланки, попълнени от системата",
+        body: "Качете свой .docx файл с плейсхолдъри като {{order.name}} и {{client.fullname}} — Wolf го попълва с актуалните данни на всяка поръчка и записва готовия документ направо в нейната папка. С вградена проверка на шаблона и преглед върху реална поръчка.",
+        bullets: [
+          "Договори, протоколи, писма — всяка бланка на практиката",
+          "Списъци с {{#each}} — имоти, собственици и дейности в таблици",
+          "Шаблоните се споделят в екипа в реално време",
         ],
       },
       calendar: {
@@ -303,7 +325,7 @@ const bg = {
       privacy: "Поверителност",
     },
     rights: "Всички права запазени.",
-    version: "Описана версия 1.0.16",
+    version: "Описана версия 1.0.24",
   },
   privacyPage: {
     title: "Политика за поверителност",
@@ -428,7 +450,7 @@ const en: typeof bg = {
       },
       {
         title: "Reports your accountant can open",
-        body: "Financial and operational reports come out as ready .xlsx files — they open anywhere, no Office install needed.",
+        body: "Financial and operational reports come out as ready .xlsx files — they open anywhere, no Office install needed. Invoices come out as a finished PDF.",
       },
     ],
   },
@@ -457,6 +479,26 @@ const en: typeof bg = {
           "Full cadastral data: cadastral no., UPI, locality, municipality",
           "Notarial deeds, contracts, testaments, ownership acts",
           "Ideal parts (fractional ownership) and powers of attorney",
+        ],
+      },
+      invoicing: {
+        tag: "Invoicing",
+        title: "A PDF invoice — straight from the order",
+        body: "Wolf assembles the invoice from the order's data: line items are suggested from the activities, the number comes automatically from the register, and VAT, the second currency and the amount in words are computed for you. A live preview shows the exact document before you hit Generate.",
+        bullets: [
+          "Sequential number suggested automatically — and editable",
+          "VAT, dual currency (EUR/BGN) and amount in words — no manual math",
+          "The preview is the PDF itself — what you see is what gets generated",
+        ],
+      },
+      templates: {
+        tag: "Templates",
+        title: "Your own letterheads, filled in by the system",
+        body: "Upload your own .docx file with placeholders like {{order.name}} and {{client.fullname}} — Wolf fills it with the live data of any order and saves the finished document straight into that order's folder. With built-in template validation and a preview against a real order.",
+        bullets: [
+          "Contracts, protocols, letters — every form your practice uses",
+          "Lists via {{#each}} — plots, owners and activities in tables",
+          "Templates are shared with the team in real time",
         ],
       },
       calendar: {
@@ -646,7 +688,7 @@ const en: typeof bg = {
       privacy: "Privacy",
     },
     rights: "All rights reserved.",
-    version: "Documented version 1.0.16",
+    version: "Documented version 1.0.24",
   },
   privacyPage: {
     title: "Privacy policy",

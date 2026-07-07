@@ -146,6 +146,11 @@ tested claim.
    - Supplier requisites REMAIN hardcoded per deployment (`InvoiceComposer.cs`,
      "to be moved to config later") — the site still says "configured at
      rollout"; do not claim a settings screen.
+   - Money footer totals „Неразплатено“/„Нефактурирано“ are ADMIN-ONLY
+     (`OrdersView.axaml` IsVisible=IsAdmin; owner-reported 2026-07-07, verified
+     in code); the filtered order count stays visible to all roles. The
+     admin-only МАРЖ field (price minus task payments and fees) in the order
+     detail is documented on /docs/orders.
 6. **Contact details** (CTA, footer, privacy page) — phone +359 877 139 712,
    email bddimitrov18@gmail.com, name Bozhidar Damyanov Dimitrov (no company
    entity) — supplied by the owner 2026-07-06. The demo form's mailto now

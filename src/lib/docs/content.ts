@@ -245,7 +245,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "p",
-          text: "Под списъка лентата със суми показва „Неразплатено“ и „Нефактурирано“ за текущия изглед. Двете са и бързи филтри — клик върху „Неразплатено“ оставя само неразплатените поръчки, клик върху „Нефактурирано“ — тези под цената.",
+          text: "Под списъка лентата със суми показва „Неразплатено“ и „Нефактурирано“ за текущия изглед — само за администратори. Двете са и бързи филтри — клик върху „Неразплатено“ оставя само неразплатените поръчки, клик върху „Нефактурирано“ — тези под цената. Броят на филтрираните поръчки се вижда от всички.",
         },
         { type: "h2", id: "create", text: "Създаване и редакция" },
         {
@@ -281,6 +281,7 @@ export const DOC_PAGES: DocPage[] = [
             "Клиенти — кой е възложил поръчката, с роля и бърза връзка към статистиката му",
             "Имоти и документи — имотите по поръчката и документите за собственост",
             "Фактури — нова PDF фактура, въвеждане на съществуваща или свързване на обща фактура от базата; плюс „Генерирай документ“ (от шаблон на практиката)",
+            "МАРЖ — цената минус заплащанията и таксите по задачите (само за администратори)",
           ],
         },
         { type: "h2", id: "colors", text: "Цветове на задачите" },
@@ -307,7 +308,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "p",
-          text: "Under the list, the totals bar shows \"Outstanding\" and \"Uninvoiced\" for the current view. Both double as quick filters — clicking \"Outstanding\" keeps only unpaid orders, clicking \"Uninvoiced\" those billed under their price.",
+          text: "Under the list, the totals bar shows \"Outstanding\" and \"Uninvoiced\" for the current view — administrators only. Both double as quick filters — clicking \"Outstanding\" keeps only unpaid orders, clicking \"Uninvoiced\" those billed under their price. The filtered order count is visible to everyone.",
         },
         { type: "h2", id: "create", text: "Creating & editing" },
         {
@@ -343,6 +344,7 @@ export const DOC_PAGES: DocPage[] = [
             "Clients — who commissioned the order, with their role and a quick link to their statistics",
             "Plots & documents — the order's parcels and their ownership documents",
             "Invoices — a new PDF invoice, entering an existing one, or linking a shared invoice from the database; plus \"Generate document\" (from a practice template)",
+            "MARGIN — the price minus the tasks' payments and fees (administrators only)",
           ],
         },
         { type: "h2", id: "colors", text: "Task colours" },
@@ -1228,7 +1230,7 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "money", text: "Лентата със суми" },
         {
           type: "p",
-          text: "Под списъка с поръчки „Неразплатено“ и „Нефактурирано“ показват сумите за текущия изглед — и са кликаеми: клик включва съответния бърз филтър („Неразплатени“ / „Под цената“) с отметка, докато е активен.",
+          text: "Под списъка с поръчки „Неразплатено“ и „Нефактурирано“ показват сумите за текущия изглед и са кликаеми: клик включва съответния бърз филтър („Неразплатени“ / „Под цената“) с отметка, докато е активен. Сумите се виждат само от администратори; броят на филтрираните поръчки — от всички.",
         },
         { type: "h2", id: "multi", text: "Множествен избор" },
         {
@@ -1264,7 +1266,7 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "money", text: "The totals bar" },
         {
           type: "p",
-          text: "Under the order list, \"Outstanding\" and \"Uninvoiced\" show the sums for the current view — and they're clickable: a click applies the matching quick filter (\"Unsettled\" / \"Under the price\") with a check mark while active.",
+          text: "Under the order list, \"Outstanding\" and \"Uninvoiced\" show the sums for the current view and are clickable: a click applies the matching quick filter (\"Unsettled\" / \"Under the price\") with a check mark while active. The sums are visible to administrators only; the filtered order count to everyone.",
         },
         { type: "h2", id: "multi", text: "Multi-select" },
         {

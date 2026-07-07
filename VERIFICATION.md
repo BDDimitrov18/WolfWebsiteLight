@@ -120,6 +120,32 @@ tested claim.
    `TemplatesScreen.png`, `GenerateDocument.png` in `public/screenshots/` are
    branded "снимка очаква се" placeholders, NOT real app screenshots — replace
    with real captures under the same filenames.
+8. **Invoicing round 2 + help/colors/filters** (2026-07-07, second sweep) — all
+   verified in the app's UNCOMMITTED working tree (HEAD still `c9d1670`
+   Release 1.0.24; +4,244 lines staged for the next release):
+   - Three invoice creation modes („+ Създай фактура“: Генерирай нова (PDF) /
+     Въведи съществуваща / Свържи фактура от базата) — `InvoicesDetailViewModel.cs`.
+   - Server-side atomic numbering (`CreateInvoiceDto.AutoNumber`) — replaces the
+     earlier client-side max+1; docs updated to "issued by the server".
+   - On-demand PDF („Отвори PDF“, no stored file) — `InvoicePdfOpener.cs`.
+   - Shared invoices/shares („обща“/„свързана“ badges, unallocated remainder,
+     „Промени дял“, ⚠ over-allocation warning, cascade-aware delete texts) —
+     `LinkInvoiceView.axaml`, `EditShareView.axaml`, `Invoiceline` entity.
+   - External invoice with optional original-file link — `EditInvoiceView`.
+   - In-app Help „Помощ“ + F1, 6 sections, indexed in Ctrl+K — `HelpView.axaml`,
+     `HelpContent.cs`.
+   - Task-row status colours „⚙ Цветове“, personal per computer, defaults incl.
+     „оферта“ amber — `TaskStatusColorService.cs`; task status list on the site
+     now includes „оферта“.
+   - Filters: „Фактуриране“ dropdown (нефактурирани/частично/под цената/напълно),
+     „Фактура №“ text search, composite „Неразплатени“; clickable money footer
+     „Неразплатено“/„Нефактурирано“ — `OrderFiltersView.axaml`, `OrdersView.axaml`.
+   - Ctrl+K scope now incl. invoices, employees, tasks, app sections; Ctrl+Enter
+     opens in Orders; Shift+double-click sidebar item → floating window —
+     `HelpContent.cs`, `MainWindowViewModel.cs`.
+   - Supplier requisites REMAIN hardcoded per deployment (`InvoiceComposer.cs`,
+     "to be moved to config later") — the site still says "configured at
+     rollout"; do not claim a settings screen.
 6. **Contact details** (CTA, footer, privacy page) — phone +359 877 139 712,
    email bddimitrov18@gmail.com, name Bozhidar Damyanov Dimitrov (no company
    entity) — supplied by the owner 2026-07-06. The demo form's mailto now

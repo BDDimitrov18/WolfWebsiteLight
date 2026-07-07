@@ -121,11 +121,11 @@ const bg = {
       invoicing: {
         tag: "Фактуриране",
         title: "Фактура в PDF — направо от поръчката",
-        body: "Wolf съставя фактурата от данните на поръчката: редовете се предлагат от дейностите, номерът — автоматично от регистъра, а ДДС, втората валута и сумата словом се изчисляват сами. Живият преглед показва точния документ, преди да натиснете „Генерирай“.",
+        body: "Wolf съставя фактурата от данните на поръчката: редовете се предлагат от дейностите, а ДДС, втората валута и сумата словом се изчисляват сами. Живият преглед показва точния документ — каквото виждате, това се генерира.",
         bullets: [
-          "Пореден номер, предложен автоматично — и редактируем",
-          "ДДС, две валути (EUR/BGN) и сума словом — без ръчни сметки",
-          "Прегледът е самият PDF — каквото виждате, това се генерира",
+          "Номерът идва от сървъра — двама души никога не получават един и същ",
+          "Обща фактура: една фактура, разпределена на дялове по няколко поръчки",
+          "PDF се генерира на момента от базата — винаги актуален, без пазени файлове",
         ],
       },
       templates: {
@@ -484,11 +484,11 @@ const en: typeof bg = {
       invoicing: {
         tag: "Invoicing",
         title: "A PDF invoice — straight from the order",
-        body: "Wolf assembles the invoice from the order's data: line items are suggested from the activities, the number comes automatically from the register, and VAT, the second currency and the amount in words are computed for you. A live preview shows the exact document before you hit Generate.",
+        body: "Wolf assembles the invoice from the order's data: line items are suggested from the activities, and VAT, the second currency and the amount in words are computed for you. A live preview shows the exact document — what you see is what gets generated.",
         bullets: [
-          "Sequential number suggested automatically — and editable",
-          "VAT, dual currency (EUR/BGN) and amount in words — no manual math",
-          "The preview is the PDF itself — what you see is what gets generated",
+          "The number comes from the server — two people can never get the same one",
+          "Shared invoices: one invoice split into shares across several orders",
+          "The PDF is rendered on demand from the database — always current, no stored files",
         ],
       },
       templates: {

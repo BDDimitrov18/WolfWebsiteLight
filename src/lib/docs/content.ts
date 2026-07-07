@@ -94,16 +94,27 @@ export const DOC_PAGES: DocPage[] = [
             "Фактури — регистърът на фактурите и PDF генераторът",
             "Шаблони — бланките на практиката, попълвани автоматично",
             "Справки — отчетите в Excel",
+            "Помощ — вграденото ръководство на системата (отваря се и с F1)",
           ],
+        },
+        {
+          type: "p",
+          text: "Shift + двоен клик върху раздел го отваря в отделен плаващ прозорец — удобно за втори монитор.",
         },
         { type: "h2", id: "search", text: "Търсене отвсякъде" },
         {
           type: "ul",
           items: [
-            "Ctrl+K — глобално търсене: поръчки, клиенти, имоти, собственици и документи в един списък; резултатът се отваря направо на мястото си. Тук се търси собственик и по ЕГН.",
+            "Ctrl+K — глобално търсене: поръчки, клиенти, имоти, собственици (включително по ЕГН), документи, фактури, служители, задачи — и самите раздели на приложението, в един списък",
+            "Резултатът се отваря направо на мястото си; с Ctrl+Enter се отваря в „Поръчки“",
             "Ctrl+F — разширените филтри за поръчки, от всеки екран",
             "Камбаната „Моите задачи“ показва задачите за днес и просрочените — с преход към всяка с един клик",
           ],
+        },
+        { type: "h2", id: "help", text: "Вградена помощ" },
+        {
+          type: "p",
+          text: "Разделът „Помощ“ (или F1) е вграденото ръководство на системата: обща фактура и дялове, филтри и лентата със суми, търсенето, звездите и закачените поръчки, статусите на задачите и клавишните комбинации — обяснени със съвети от практиката. Разделите на помощта се намират и през Ctrl+K.",
         },
         { type: "h2", id: "notifications", text: "Известия и обновления" },
         {
@@ -169,16 +180,27 @@ export const DOC_PAGES: DocPage[] = [
             "Invoices — the invoice register and the PDF generator",
             "Templates — the practice's letterheads, filled in automatically",
             "Reports — the Excel exports",
+            "Help — the system's built-in manual (also opens with F1)",
           ],
+        },
+        {
+          type: "p",
+          text: "Shift + double-click on a section opens it in a separate floating window — handy for a second monitor.",
         },
         { type: "h2", id: "search", text: "Search from anywhere" },
         {
           type: "ul",
           items: [
-            "Ctrl+K — global search: orders, clients, plots, owners and documents in one list; a result opens right where it lives. This is also where you find an owner by their ID number (ЕГН).",
+            "Ctrl+K — global search: orders, clients, plots, owners (including by ID number), documents, invoices, employees, tasks — and the app's own sections, in one list",
+            "A result opens right where it lives; Ctrl+Enter opens it in Orders",
             "Ctrl+F — the advanced order filters, from any screen",
             "The \"My tasks\" bell shows today's and overdue tasks — each one click away",
           ],
+        },
+        { type: "h2", id: "help", text: "Built-in help" },
+        {
+          type: "p",
+          text: "The Help section (or F1) is the system's built-in manual: shared invoices and shares, filters and the totals bar, search, stars and pinned orders, task statuses and keyboard shortcuts — explained with practical tips. Help sections are also found via Ctrl+K.",
         },
         { type: "h2", id: "notifications", text: "Notifications & updates" },
         {
@@ -221,6 +243,10 @@ export const DOC_PAGES: DocPage[] = [
           type: "p",
           text: "Всяка поръчка се вижда с номер, име, статус, статус на плащане, цена, аванс, коментари, имоти и създател. Търсенето по име е мигновено, а бърз филтър по статус стеснява списъка с един клик.",
         },
+        {
+          type: "p",
+          text: "Под списъка лентата със суми показва „Неразплатено“ и „Нефактурирано“ за текущия изглед. Двете са и бързи филтри — клик върху „Неразплатено“ оставя само неразплатените поръчки, клик върху „Нефактурирано“ — тези под цената.",
+        },
         { type: "h2", id: "create", text: "Създаване и редакция" },
         {
           type: "ul",
@@ -254,8 +280,13 @@ export const DOC_PAGES: DocPage[] = [
             "Дейности и задачи — работната разбивка с изпълнители, срокове и плащания",
             "Клиенти — кой е възложил поръчката, с роля и бърза връзка към статистиката му",
             "Имоти и документи — имотите по поръчката и документите за собственост",
-            "Фактури — фактурите по поръчката, плюс „Генерирай фактура“ (готов PDF) и „Генерирай документ“ (от шаблон на практиката)",
+            "Фактури — нова PDF фактура, въвеждане на съществуваща или свързване на обща фактура от базата; плюс „Генерирай документ“ (от шаблон на практиката)",
           ],
+        },
+        { type: "h2", id: "colors", text: "Цветове на задачите" },
+        {
+          type: "p",
+          text: "Редовете на задачите се оцветяват по статус — например зададена в синьо, завършена в зелено, оферта в кехлибарено — и се виждат от пръв поглед. Бутонът „⚙ Цветове“ ги настройва по ваш вкус: изборът е личен (на този компютър), прилага се веднага и се връща към стандартните цветове с един клик.",
         },
         {
           type: "callout",
@@ -273,6 +304,10 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "p",
           text: "Each order shows its number, name, status, payment status, price, advance, comments, plots and creator. Search by name is instant, and a quick status filter narrows the list in one click.",
+        },
+        {
+          type: "p",
+          text: "Under the list, the totals bar shows \"Outstanding\" and \"Uninvoiced\" for the current view. Both double as quick filters — clicking \"Outstanding\" keeps only unpaid orders, clicking \"Uninvoiced\" those billed under their price.",
         },
         { type: "h2", id: "create", text: "Creating & editing" },
         {
@@ -307,8 +342,13 @@ export const DOC_PAGES: DocPage[] = [
             "Activities & tasks — the work breakdown with executants, deadlines and payments",
             "Clients — who commissioned the order, with their role and a quick link to their statistics",
             "Plots & documents — the order's parcels and their ownership documents",
-            "Invoices — the order's invoices, plus \"Generate invoice\" (a finished PDF) and \"Generate document\" (from a practice template)",
+            "Invoices — a new PDF invoice, entering an existing one, or linking a shared invoice from the database; plus \"Generate document\" (from a practice template)",
           ],
+        },
+        { type: "h2", id: "colors", text: "Task colours" },
+        {
+          type: "p",
+          text: "Task rows are tinted by status — assigned in blue, completed in green, quotation in amber — visible at a glance. The \"⚙ Colours\" button tunes them to your taste: the choice is personal (per computer), applies instantly and resets to the defaults in one click.",
         },
         {
           type: "callout",
@@ -474,7 +514,7 @@ export const DOC_PAGES: DocPage[] = [
           items: [
             "Дейност в дейност — за вложени работни фази",
             "Задачата сочи към двама души: изпълнител и контрольор (проверка на качеството)",
-            "Статуси на задачите: нова, зададена, в процес, отложена, завършена — те захранват календара, таблото и просрочията",
+            "Статуси на задачите: нова, зададена, в процес, отложена, завършена, оферта — те захранват календара, таблото, просрочията и цветовете на редовете",
             "Всяка задача носи плащане и такса (напр. държавна такса) с коментар — те влизат в справките",
             "Типовете дейности и задачи са настройваеми и се създават в движение, докато пишете",
           ],
@@ -509,7 +549,7 @@ export const DOC_PAGES: DocPage[] = [
           items: [
             "Activities inside activities — for nested work phases",
             "A task points at two people: executant and controller (quality check)",
-            "Task statuses: new, assigned, in progress, postponed, completed — these feed the calendar, the dashboard and the overdue logic",
+            "Task statuses: new, assigned, in progress, postponed, completed, quotation — these feed the calendar, the dashboard, the overdue logic and the row colours",
             "Every task carries a payment and a fee (e.g. a state fee) with a comment — both flow into the reports",
             "Activity and task types are configurable and can be created on the fly as you type",
           ],
@@ -759,8 +799,8 @@ export const DOC_PAGES: DocPage[] = [
     navKey: "invoicing",
     title: { bg: "Фактуриране", en: "Invoicing" },
     intro: {
-      bg: "Регистър на фактурите по поръчки и генератор, който съставя готова фактура в PDF от данните на поръчката — с автоматичен номер, ДДС, две валути и сума словом.",
-      en: "A register of invoices per order, and a generator that assembles a finished PDF invoice from the order's data — with an automatic number, VAT, dual currency and the amount in words.",
+      bg: "Регистър на фактурите по поръчки, генератор на готови PDF фактури от данните на поръчката — с номер от сървъра, ДДС, две валути и сума словом — и общи фактури, разпределени на дялове по няколко поръчки.",
+      en: "A register of invoices per order, a generator of finished PDF invoices from the order's data — with a server-issued number, VAT, dual currency and the amount in words — and shared invoices split into shares across several orders.",
     },
     blocks: {
       bg: [
@@ -773,9 +813,24 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "ul",
           items: [
-            "Добавяне, редакция и изтриване — с потвърждение",
+            "„Отвори PDF“ показва документа, генериран на момента от данните в базата — не се пази файл, който да остарее",
+            "Етикетите „обща“ и „свързана“ отличават общите фактури и техните дялове",
+            "Добавяне, редакция и изтриване — с потвърждение, което обяснява последиците",
             "Сумите по фактури влизат в статистиките на клиентите и в таблото („Фактурирано“)",
             "Регистърът следва режима активни/архив",
+          ],
+        },
+        { type: "h2", id: "ways", text: "Три начина да запишете фактура" },
+        {
+          type: "p",
+          text: "От таба „Фактури“ на поръчката „+ Създай фактура“ предлага три пътя — според това откъде идва фактурата:",
+        },
+        {
+          type: "ul",
+          items: [
+            "Генерирай нова (PDF) — пълният генератор с жив преглед, описан по-долу",
+            "Въведи съществуваща — фактура, издадена извън системата: номер, сума и по избор връзка към оригиналния файл",
+            "Свържи фактура от базата — обща фактура, разпределена на дялове по няколко поръчки",
           ],
         },
         { type: "h2", id: "generator", text: "Генераторът — фактура в PDF" },
@@ -789,7 +844,7 @@ export const DOC_PAGES: DocPage[] = [
           items: [
             {
               t: "Номер и дати",
-              d: "Номерът се предлага автоматично — следващият пореден от регистъра, допълнен до 10 цифри — и остава редактируем. Задавате дата, данъчно събитие и ДДС ставка (по подразбиране 20%).",
+              d: "Номерът се дава от сървъра — следващият пореден, допълнен до 10 цифри — така двама колеги никога не получават един и същ номер. Остава редактируем. Задавате дата на фактурата, дата на данъчното събитие и ДДС ставка (по подразбиране 20%).",
             },
             {
               t: "Получател",
@@ -814,6 +869,21 @@ export const DOC_PAGES: DocPage[] = [
             "Сумата словом се съставя автоматично на български — и може да се редактира при нужда",
           ],
         },
+        { type: "h2", id: "shared", text: "Обща фактура и дялове" },
+        {
+          type: "p",
+          text: "Една фактура често покрива работа по няколко поръчки. Wolf моделира това директно: свързвате фактурата към всяка от поръчките с неин дял от сумата — и всяка поръчка си знае какво е фактурирано по нея.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Диалогът „Свързване на фактура от базата“ търси по номер или поръчка и показва неразпределения остатък на всяка фактура",
+            "Дялът на всяка поръчка се променя по всяко време („Промени дял“)",
+            "На реда на дяла стои сумата „дял по тази поръчка“ — а на общата фактура: общата сума",
+            "Ако дяловете надвишат сумата на фактурата, редът се маркира с ⚠ и точното разминаване",
+            "При изтриване системата казва какво точно ще се случи — кой дял се освобождава обратно или кои свързани дялове ще бъдат изтрити с фактурата",
+          ],
+        },
         {
           type: "callout",
           text: "Реквизитите на практиката — наименование, ЕИК/ДДС №, IBAN, МОЛ — се настройват при внедряването и се попълват автоматично във всяка фактура.",
@@ -829,9 +899,24 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "ul",
           items: [
-            "Add, edit and delete — with confirmation",
+            "\"Open PDF\" shows the document rendered on the spot from the database — no stored file to go stale",
+            "\"Shared\" and \"linked\" badges tell shared invoices and their shares apart",
+            "Add, edit and delete — with a confirmation that explains the consequences",
             "Invoice sums flow into client statistics and the dashboard (\"Invoiced\")",
             "The register follows the active/archive mode",
+          ],
+        },
+        { type: "h2", id: "ways", text: "Three ways to record an invoice" },
+        {
+          type: "p",
+          text: "On the order's Invoices tab, \"+ Create invoice\" offers three paths — depending on where the invoice comes from:",
+        },
+        {
+          type: "ul",
+          items: [
+            "Generate a new one (PDF) — the full generator with live preview, described below",
+            "Enter an existing one — an invoice issued outside the system: number, sum and an optional link to the original file",
+            "Link an invoice from the database — a shared invoice, split into shares across several orders",
           ],
         },
         { type: "h2", id: "generator", text: "The generator — a PDF invoice" },
@@ -845,7 +930,7 @@ export const DOC_PAGES: DocPage[] = [
           items: [
             {
               t: "Number & dates",
-              d: "The number is suggested automatically — the next sequential one in the register, zero-padded to 10 digits — and stays editable. You set the date, the tax event date and the VAT rate (20% by default).",
+              d: "The number is issued by the server — the next sequential one, zero-padded to 10 digits — so two colleagues can never get the same number. It stays editable. You set the invoice date, the tax event date and the VAT rate (20% by default).",
             },
             {
               t: "Recipient",
@@ -868,6 +953,21 @@ export const DOC_PAGES: DocPage[] = [
             "Tax base, VAT and total due are computed per line and in the summary",
             "Dual currency: the invoice is kept in EUR or BGN, with the total shown in the other currency too",
             "The amount in words is composed automatically in Bulgarian — and stays editable",
+          ],
+        },
+        { type: "h2", id: "shared", text: "Shared invoices & shares" },
+        {
+          type: "p",
+          text: "One invoice often covers work on several orders. Wolf models this directly: you link the invoice to each of the orders with its share of the sum — and every order knows what has been invoiced against it.",
+        },
+        {
+          type: "ul",
+          items: [
+            "The \"Link an invoice from the database\" dialog searches by number or order and shows each invoice's unallocated remainder",
+            "An order's share can be changed at any time (\"Change share\")",
+            "A share's row shows \"share on this order\"; the shared invoice shows the full sum",
+            "If the shares exceed the invoice total, the row is flagged with ⚠ and the exact mismatch",
+            "On delete, the system says exactly what will happen — which share is released back, or which linked shares go with the invoice",
           ],
         },
         {
@@ -1118,7 +1218,17 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dropdowns", text: "Падащи менюта и текст" },
         {
           type: "p",
-          text: "Падащи менюта по статус на архив, статус на задача и статус на плащане. Текстови търсения по номер на поръчка, име, коментар, населено място, номер на имот, УПИ и квартал.",
+          text: "Падащи менюта по статус на архив, статус на задача и статус на плащане — включително обобщеното „Неразплатени“ (неплатени и с аванс заедно). Текстови търсения по номер на поръчка, име, коментар, населено място, номер на имот, УПИ, квартал и номер на фактура.",
+        },
+        { type: "h2", id: "invoicing", text: "Филтър по фактуриране" },
+        {
+          type: "p",
+          text: "Отделно меню „Фактуриране“ сравнява фактурираното с цената на всяка поръчка: нефактурирани, частично фактурирани, под цената (двете заедно) или напълно фактурирани. Отговорът на „за какво още не сме издали фактура“ е един клик.",
+        },
+        { type: "h2", id: "money", text: "Лентата със суми" },
+        {
+          type: "p",
+          text: "Под списъка с поръчки „Неразплатено“ и „Нефактурирано“ показват сумите за текущия изглед — и са кликаеми: клик включва съответния бърз филтър („Неразплатени“ / „Под цената“) с отметка, докато е активен.",
         },
         { type: "h2", id: "multi", text: "Множествен избор" },
         {
@@ -1144,7 +1254,17 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dropdowns", text: "Dropdowns & text" },
         {
           type: "p",
-          text: "Dropdowns for archive status, task status and payment status. Text searches by order number, name, comment, settlement, plot number, UPI and neighbourhood.",
+          text: "Dropdowns for archive status, task status and payment status — including the combined \"Unsettled\" (unpaid and advance together). Text searches by order number, name, comment, settlement, plot number, UPI, neighbourhood and invoice number.",
+        },
+        { type: "h2", id: "invoicing", text: "Invoicing filter" },
+        {
+          type: "p",
+          text: "A dedicated \"Invoicing\" menu compares what's been invoiced against each order's price: uninvoiced, partially invoiced, under the price (both together) or fully invoiced. \"What haven't we billed yet?\" is one click.",
+        },
+        { type: "h2", id: "money", text: "The totals bar" },
+        {
+          type: "p",
+          text: "Under the order list, \"Outstanding\" and \"Uninvoiced\" show the sums for the current view — and they're clickable: a click applies the matching quick filter (\"Unsettled\" / \"Under the price\") with a check mark while active.",
         },
         { type: "h2", id: "multi", text: "Multi-select" },
         {

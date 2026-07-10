@@ -235,6 +235,136 @@ export function CompassRose({ className, ...props }: SVGProps<SVGSVGElement>) {
 }
 
 /* ----------------------------------------------------------------
+   Corner marks — the registration crosses drawn at the corners of a
+   survey plan sheet. Wrap any relatively-positioned box to make it
+   read as a drafted cell rather than a generic card.
+   ---------------------------------------------------------------- */
+export function CornerMarks({
+  className = "",
+  size = 14,
+  inset = -7,
+}: {
+  className?: string;
+  size?: number;
+  inset?: number;
+}) {
+  const arm = size / 2;
+  const cross = (
+    <svg
+      viewBox={`0 0 ${size} ${size}`}
+      width={size}
+      height={size}
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d={`M${arm} 0 V${size} M0 ${arm} H${size}`}
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+  const pos = `${inset}px`;
+  return (
+    <span aria-hidden className={`pointer-events-none ${className}`}>
+      <span className="absolute" style={{ top: pos, left: pos }}>{cross}</span>
+      <span className="absolute" style={{ top: pos, right: pos }}>{cross}</span>
+      <span className="absolute" style={{ bottom: pos, left: pos }}>{cross}</span>
+      <span className="absolute" style={{ bottom: pos, right: pos }}>{cross}</span>
+    </span>
+  );
+}
+
+/* ----------------------------------------------------------------
+   Dimension rule — a drafting dimension line: hairline run between
+   two vertical end ticks. Used as a measured section divider. Only
+   axis-aligned strokes, so it stretches to any width cleanly
+   (preserveAspectRatio none + non-scaling strokes).
+   ---------------------------------------------------------------- */
+export function DimensionRule({
+  className = "",
+  ...props
+}: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 400 12"
+      preserveAspectRatio="none"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+      {...props}
+    >
+      <path
+        d="M0.5 0 V12 M399.5 0 V12"
+        stroke="currentColor"
+        strokeWidth="1"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M0.5 6 H399.5"
+        stroke="currentColor"
+        strokeWidth="1"
+        vectorEffect="non-scaling-stroke"
+      />
+    </svg>
+  );
+}
+
+/* ----------------------------------------------------------------
+   Sheet stamp — the round ink stamp of Bulgarian paperwork. Purely
+   decorative (aria-hidden); the ring text is passed in so both
+   locales can stamp their own wording.
+   ---------------------------------------------------------------- */
+export function SheetStamp({
+  ring,
+  center,
+  className,
+  ...props
+}: SVGProps<SVGSVGElement> & { ring: string; center: string }) {
+  return (
+    <svg
+      viewBox="0 0 160 160"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+      {...props}
+    >
+      <circle cx="80" cy="80" r="76" stroke="currentColor" strokeWidth="2" opacity="0.9" />
+      <circle cx="80" cy="80" r="72" stroke="currentColor" strokeWidth="1" opacity="0.7" />
+      <circle cx="80" cy="80" r="46" stroke="currentColor" strokeWidth="1" opacity="0.8" />
+      <defs>
+        <path id="stamp-ring" d="M80 21 a59 59 0 1 1 -0.01 0" fill="none" />
+      </defs>
+      <text
+        fontSize="11.5"
+        letterSpacing="2.6"
+        fill="currentColor"
+        style={{ fontFamily: "var(--font-mono)", textTransform: "uppercase" }}
+      >
+        <textPath href="#stamp-ring" startOffset="0">
+          {ring}
+        </textPath>
+      </text>
+      <text
+        x="80"
+        y="76"
+        textAnchor="middle"
+        fontSize="13"
+        letterSpacing="1.5"
+        fill="currentColor"
+        style={{ fontFamily: "var(--font-mono)", textTransform: "uppercase" }}
+      >
+        {center.split("\n").map((line, i) => (
+          <tspan key={i} x="80" dy={i === 0 ? 0 : 16}>
+            {line}
+          </tspan>
+        ))}
+      </text>
+    </svg>
+  );
+}
+
+/* ----------------------------------------------------------------
    Ideal-parts glyph — fractional ownership (e.g. 1/3), the heart of
    the cadastral title-chain model.
    ---------------------------------------------------------------- */

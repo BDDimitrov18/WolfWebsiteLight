@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { DimensionRule } from "@/components/motifs/GeodesyMotifs";
 
 /** Standard horizontal container. */
 export function Container({
@@ -41,6 +42,43 @@ export function Section({
     >
       {children}
     </section>
+  );
+}
+
+/**
+ * Paper-register section header: mono label + a dimension rule
+ * measured across the full container width — the header row of a
+ * drafted sheet — then the display heading and lead below.
+ */
+export function SheetHeader({
+  label,
+  title,
+  subtitle,
+  align = "left",
+}: {
+  label: string;
+  title: ReactNode;
+  subtitle?: ReactNode;
+  align?: "left" | "center";
+}) {
+  return (
+    <div>
+      <Reveal>
+        <div className="flex items-center gap-5">
+          <p className="eyebrow flex-none">{label}</p>
+          <DimensionRule
+            className="h-3 min-w-0 flex-1"
+            style={{
+              color:
+                "color-mix(in srgb, var(--color-ink-700) 38%, transparent)",
+            }}
+          />
+        </div>
+      </Reveal>
+      <div className="mt-9">
+        <SectionHeading title={title} subtitle={subtitle} tone="dark" align={align} />
+      </div>
+    </div>
   );
 }
 

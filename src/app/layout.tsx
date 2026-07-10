@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, Playfair_Display, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Serif, IBM_Plex_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
@@ -8,7 +8,8 @@ import { asset } from "@/lib/asset";
 import { GA_ID } from "@/lib/analytics";
 
 // All three families carry Cyrillic so Bulgarian copy renders natively.
-// Body sans + mono come from the same superfamily (IBM Plex).
+// One superfamily (IBM Plex) across sans, serif and mono: the voice of
+// engineering documentation — same skeleton in three registers.
 const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
   subsets: ["latin", "latin-ext", "cyrillic"],
@@ -16,10 +17,10 @@ const plexSans = IBM_Plex_Sans({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const plexSerif = IBM_Plex_Serif({
   variable: "--font-serif",
   subsets: ["latin", "latin-ext", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -59,7 +60,8 @@ export default function RootLayout({
   return (
     <html
       lang="bg"
-      className={`${plexSans.variable} ${playfair.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${plexSans.variable} ${plexSerif.variable} ${plexMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body className="min-h-full">

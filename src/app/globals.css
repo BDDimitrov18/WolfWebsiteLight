@@ -1,10 +1,19 @@
 @import "tailwindcss";
 
 /* ============================================================
-   WOLF — Design Tokens (§5)
+   WOLF — Design Tokens
    Brand: land-surveying / cadastral / geodesy.
-   Derived from the desktop app: deep navy ink, burnt-ember
-   accent (the compass pivot), warm paper/cream surfaces.
+
+   Two registers, like the profession itself:
+   — the FIELD (night): deep navy ink, wireframe terrain, the
+     burnt-ember accent of the instrument. Hero, architecture,
+     closing CTA.
+   — the SHEET (paper): warm drafting paper, ink hairlines,
+     millimeter grids, oxide-red annotations — the survey plan
+     the field work becomes. The body of the page.
+   Sections opt into the paper register with `.register-paper`,
+   which re-points the scoped vars (eyebrow, focus ring, lead,
+   borders) so shared primitives adapt without forking.
    ============================================================ */
 
 @theme {
@@ -19,7 +28,9 @@
   --color-ink-400: #5a6883;
   --color-ink-300: #8593ad;
 
-  /* ---- Ember (burnt orange — the pivot dot) --------------- */
+  /* ---- Ember (burnt orange — the pivot dot; deepens to
+          oxide, the surveyor's red pen on paper) ------------ */
+  --color-ember-800: #8a3a15;
   --color-ember-700: #a84d22;
   --color-ember-600: #c25e2a;
   --color-ember-500: #d97a40;
@@ -33,10 +44,6 @@
   --color-paper-200: #efe6d7;
   --color-paper-300: #e3d6c2;
   --color-paper-400: #cdba9e;
-
-  /* ---- Surveyor accents (secondary, sparing use) --------- */
-  --color-survey-500: #4f7d8c; /* muted teal — the "archive/blue" mode echo */
-  --color-survey-400: #6fa0ae;
 
   /* ---- Semantic ------------------------------------------ */
   --color-background: var(--color-ink-900);
@@ -64,10 +71,12 @@
   --shadow-frame: 0 30px 60px -30px rgba(9, 13, 21, 0.7),
     0 8px 24px -12px rgba(9, 13, 21, 0.45);
   --shadow-ember: 0 10px 30px -8px rgba(194, 94, 42, 0.45);
+  /* Elevation on paper: soft warm ink, like a sheet lifted off the table */
+  --shadow-sheet: 0 1px 2px rgba(42, 32, 18, 0.07),
+    0 18px 44px -24px rgba(42, 32, 18, 0.28);
 
   /* ---- Easing -------------------------------------------- */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ============================================================
@@ -111,14 +120,14 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
     text-wrap: balance;
   }
 
-  /* Focus ring — keyboard accessible */
+  /* Focus ring — keyboard accessible; color adapts per register */
   :focus-visible {
-    outline: 2px solid var(--color-ember-400);
+    outline: 2px solid var(--focus-ring, var(--color-ember-400));
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -147,7 +156,7 @@
     font-size: var(--text-eyebrow);
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-ember-400);
+    color: var(--eyebrow-color, var(--color-ember-400));
   }
 
   .display {
@@ -157,7 +166,35 @@
   .lead {
     font-size: var(--fs-lead);
     line-height: 1.55;
-    color: color-mix(in srgb, var(--color-paper-100) 78%, transparent);
+    color: var(--lead-color, color-mix(in srgb, var(--color-paper-100) 78%, transparent));
+  }
+
+  /* ---- The SHEET register ---------------------------------
+     A section drafted on paper: warm surface, ink text, and
+     every scoped primitive re-pointed for light ground. */
+  .register-paper {
+    background-color: var(--color-paper-100);
+    color: var(--color-ink-800);
+    --eyebrow-color: var(--color-ember-800);
+    --lead-color: color-mix(in srgb, var(--color-ink-800) 88%, transparent);
+    --focus-ring: var(--color-ember-700);
+  }
+  .register-paper :where(*) {
+    border-color: color-mix(in srgb, var(--color-ink-700) 22%, transparent);
+  }
+  .register-paper :where(h1, h2, h3, h4) {
+    color: var(--color-ink-900);
+  }
+
+  /* Millimeter drafting grid — the paper register's signature
+     texture: fine 9px pitch with a heavier line every 5th. */
+  .mm-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--color-ink-700) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-700) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to right, color-mix(in srgb, var(--color-ink-700) 4%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-700) 4%, transparent) 1px, transparent 1px);
+    background-size: 45px 45px, 45px 45px, 9px 9px, 9px 9px;
   }
 
   /* Grain + topographic paper texture used on light panels */
@@ -245,17 +282,19 @@
   .btn-ghost:hover {
     background-color: color-mix(in srgb, var(--color-paper-100) 12%, transparent);
   }
+  .register-paper .btn-ghost {
+    background-color: transparent;
+    color: var(--color-ink-800);
+    border-color: color-mix(in srgb, var(--color-ink-700) 35%, transparent);
+  }
+  .register-paper .btn-ghost:hover {
+    background-color: color-mix(in srgb, var(--color-ink-700) 7%, transparent);
+  }
 }
 
 /* ============================================================
    Keyframes (transform/opacity only — GPU friendly)
    ============================================================ */
-
-@keyframes wolf-drift {
-  0% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -1.4%, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
 
 @keyframes wolf-sweep {
   0% { transform: rotate(0deg); }
@@ -267,9 +306,6 @@
   50% { opacity: 1; transform: scale(1.12); }
 }
 
-.animate-drift {
-  animation: wolf-drift 16s ease-in-out infinite;
-}
 .animate-sweep {
   transform-origin: center;
   animation: wolf-sweep 32s linear infinite;
@@ -363,24 +399,6 @@ html.js .intro-hide {
 .nav-link:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left center;
-}
-
-/* ---- Hero scroll cue: travelling dash ----------------------- */
-@keyframes scroll-cue {
-  0% {
-    transform: translateY(-110%);
-  }
-  100% {
-    transform: translateY(220%);
-  }
-}
-.scroll-cue-dash {
-  animation: scroll-cue 1.9s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .scroll-cue-dash {
-    animation: none;
-  }
 }
 
 /* ---- Scroll progress hairline (navbar) --------------------- */

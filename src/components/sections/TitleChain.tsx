@@ -7,7 +7,7 @@ import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
-import { IdealPartsGlyph } from "@/components/motifs/GeodesyMotifs";
+import { CornerMarks, IdealPartsGlyph } from "@/components/motifs/GeodesyMotifs";
 
 interface Step {
   label: string;
@@ -70,21 +70,21 @@ export function TitleChain() {
     <Section
       id="title-chain"
       hud={t("titleChain.eyebrow")}
-      className="paper-grain text-ink-900"
-      // light "paper" band — a notarial-deed contrast to the dark sections
+      className="register-paper relative overflow-hidden"
+      // the deed zone of the sheet: the paper deepens toward paper-200
     >
       <div
         aria-hidden
-        className="absolute inset-0 -z-10"
+        className="pointer-events-none absolute inset-0 paper-grain"
         style={{
           background:
-            "linear-gradient(180deg, var(--color-paper-100), var(--color-paper-200))",
+            "linear-gradient(180deg, transparent, var(--color-paper-200))",
         }}
       />
-      <Container>
+      <Container className="relative">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <div>
-            <p className="eyebrow mb-4 flex items-center gap-3 text-ember-600">
+            <p className="eyebrow mb-4 flex items-center gap-3">
               <span className="inline-block h-px w-8 bg-current opacity-60" />
               {t("titleChain.eyebrow")}
             </p>
@@ -107,15 +107,10 @@ export function TitleChain() {
             </Reveal>
           </div>
 
-          {/* Animated ownership chain */}
+          {/* Animated ownership chain — the deed card */}
           <div className="relative" ref={chainRef}>
-            <div
-              className="rounded-2xl border bg-paper-50 p-6 sm:p-8"
-              style={{
-                borderColor: "color-mix(in srgb, var(--color-ink-700) 14%, transparent)",
-                boxShadow: "0 30px 60px -36px rgba(20,28,43,0.35)",
-              }}
-            >
+            <div className="relative border bg-paper-50 p-6 shadow-sheet sm:p-8">
+              <CornerMarks className="text-ink-700/50" />
               <div className="mb-6 flex items-center justify-between">
                 <span className="font-mono text-xs uppercase tracking-[0.18em] text-ink-500">
                   {t("titleChain.chainLabel")}
@@ -129,21 +124,20 @@ export function TitleChain() {
                   aria-hidden
                   data-chain-spine
                   className="absolute left-[1.15rem] top-2 bottom-2 w-px"
-                  style={{ background: "color-mix(in srgb, var(--color-ember-500) 45%, transparent)" }}
+                  style={{ background: "color-mix(in srgb, var(--color-ember-600) 50%, transparent)" }}
                 />
                 {steps.map((s, i) => (
                   <li
                     key={s.label}
                     data-chain-item
-                    className="relative flex items-center gap-4 rounded-xl border bg-paper-100 px-4 py-3.5 transition-colors duration-300 hover:border-ember-500/50"
-                    style={{ borderColor: "color-mix(in srgb, var(--color-ink-700) 12%, transparent)" }}
+                    className="relative flex items-center gap-4 border bg-paper-100 px-4 py-3.5 transition-colors duration-300 hover:border-ember-700/50"
                   >
                     <span
                       data-chain-badge
                       className="relative z-10 flex h-9 w-9 flex-none items-center justify-center rounded-full font-mono text-sm font-semibold"
                       style={{
-                        background: "var(--color-ember-500)",
-                        color: "var(--color-ink-950)",
+                        background: "var(--color-ember-700)",
+                        color: "var(--color-paper-50)",
                       }}
                     >
                       {i + 1}

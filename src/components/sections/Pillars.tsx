@@ -1,9 +1,9 @@
 "use client";
 
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { Container, Section, SectionHeading } from "@/components/ui/Section";
+import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
-import { TiltCard } from "@/components/ui/TiltCard";
+import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
 interface Item {
   title: string;
@@ -16,98 +16,107 @@ interface Featured extends Item {
 
 const ICONS = ["sync", "stopwatch", "selfcare", "sheet"] as const;
 
+/**
+ * Paper register. The featured pillar is the sheet's primary cell —
+ * a drafted frame with corner registration marks; the four supporting
+ * pillars form one hairline-divided ledger strip rather than four
+ * floating cards.
+ */
 export function Pillars() {
   const t = useT();
   const items = t<Item[]>("pillars.items");
   const featured = t<Featured>("pillars.featured");
 
   return (
-    <Section id="why" hud={t("pillars.eyebrow")} className="relative overflow-hidden">
-      {/* Cadastral graph paper: a faint dot grid fading toward the edges */}
+    <Section id="why" hud={t("pillars.eyebrow")} className="register-paper relative overflow-hidden">
+      {/* Millimeter grid along the sheet's left margin */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 mm-grid"
         style={{
-          backgroundImage:
-            "radial-gradient(color-mix(in srgb, var(--color-paper-100) 9%, transparent) 1px, transparent 1px)",
-          backgroundSize: "26px 26px",
           maskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent 78%)",
+            "radial-gradient(110% 90% at 0% 100%, black 0%, transparent 58%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent 78%)",
+            "radial-gradient(110% 90% at 0% 100%, black 0%, transparent 58%)",
         }}
       />
       <Container className="relative">
-        <SectionHeading
-          eyebrow={t("pillars.eyebrow")}
+        <SheetHeader
+          label={t("pillars.eyebrow")}
           title={t("pillars.title")}
           subtitle={t("pillars.subtitle")}
         />
 
         {/* The headline differentiator: individual work accounting */}
-        <RevealGroup className="mt-14">
+        <RevealGroup className="mt-16">
           <RevealItem>
-            <TiltCard>
-              <article
-                className="group relative overflow-hidden rounded-xl border p-6 transition-colors duration-300 hover:border-ember-500/50 sm:p-8"
-                style={{
-                  borderColor: "color-mix(in srgb, var(--color-ember-500) 30%, transparent)",
-                  background:
-                    "linear-gradient(135deg, color-mix(in srgb, var(--color-ember-600) 10%, transparent), color-mix(in srgb, var(--color-ink-800) 60%, transparent) 55%)",
-                }}
-              >
-                <div className="grid gap-6 lg:grid-cols-[3fr_2fr] lg:gap-10">
-                  <div>
-                    <span
-                      className="flex h-11 w-11 items-center justify-center rounded-lg text-ember-400 transition-transform duration-500 group-hover:scale-110 group-hover:text-ember-300"
-                      style={{ background: "color-mix(in srgb, var(--color-ember-500) 14%, transparent)" }}
-                    >
-                      <PersonCheckIcon />
-                    </span>
-                    <h3 className="mt-5 text-xl" style={{ color: "var(--color-paper-50)" }}>
-                      {featured.title}
-                    </h3>
-                    <p className="mt-2 leading-relaxed text-ink-300">{featured.body}</p>
-                  </div>
-                  <ul className="flex flex-col justify-center gap-3 border-t border-ink-700 pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-                    {featured.points.map((point) => (
-                      <li key={point} className="flex items-start gap-3 text-sm text-ink-200">
-                        <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-ember-500" />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
+            <article className="group relative border bg-paper-50 p-6 shadow-sheet sm:p-9">
+              <CornerMarks className="text-ember-700" />
+              <div className="grid gap-6 lg:grid-cols-[3fr_2fr] lg:gap-12">
+                <div>
+                  <span className="flex h-11 w-11 items-center justify-center border border-ember-700/30 bg-ember-500/10 text-ember-700 transition-transform duration-500 group-hover:scale-110">
+                    <PersonCheckIcon />
+                  </span>
+                  <h3 className="mt-5 text-xl">{featured.title}</h3>
+                  <p
+                    className="mt-3 leading-relaxed"
+                    style={{
+                      color:
+                        "color-mix(in srgb, var(--color-ink-800) 84%, transparent)",
+                    }}
+                  >
+                    {featured.body}
+                  </p>
                 </div>
-              </article>
-            </TiltCard>
+                <ul className="flex flex-col justify-center border-t lg:border-l lg:border-t-0 lg:pl-10">
+                  {featured.points.map((point, i) => (
+                    <li
+                      key={point}
+                      className={`flex items-baseline gap-4 py-3.5 text-sm ${
+                        i > 0 ? "border-t" : "lg:pt-0"
+                      }`}
+                      style={{
+                        color:
+                          "color-mix(in srgb, var(--color-ink-800) 88%, transparent)",
+                      }}
+                    >
+                      <span className="flex-none font-mono text-[0.7rem] text-ember-800">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
           </RevealItem>
         </RevealGroup>
 
-        <RevealGroup className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Supporting pillars: one ledger strip, hairline-divided */}
+        <RevealGroup className="mt-6 grid border-y sm:grid-cols-2 lg:grid-cols-4 lg:border lg:bg-paper-50/40">
           {items.map((item, i) => (
             <RevealItem key={item.title} className="h-full">
-              <TiltCard className="h-full">
-                <article
-                  className="group relative h-full overflow-hidden rounded-xl border p-6 transition-colors duration-300 hover:border-ember-500/40"
+              <article
+                className={`group h-full p-6 transition-colors duration-300 hover:bg-paper-50 ${
+                  i > 0 ? "border-t sm:border-t-0" : ""
+                } ${i % 2 === 1 ? "sm:border-l" : ""} ${
+                  i >= 2 ? "sm:border-t lg:border-t-0" : ""
+                } ${i === 2 ? "lg:border-l" : ""}`}
+              >
+                <span className="flex h-10 w-10 items-center justify-center text-ember-700 transition-colors duration-300 group-hover:text-ember-600">
+                  <PillarIcon name={ICONS[i % ICONS.length]} />
+                </span>
+                <h3 className="mt-5 text-lg">{item.title}</h3>
+                <p
+                  className="mt-2 text-sm leading-relaxed"
                   style={{
-                    borderColor: "color-mix(in srgb, var(--color-paper-100) 10%, transparent)",
-                    background: "color-mix(in srgb, var(--color-ink-800) 60%, transparent)",
+                    color:
+                      "color-mix(in srgb, var(--color-ink-800) 80%, transparent)",
                   }}
                 >
-                  <span
-                    className="flex h-11 w-11 items-center justify-center rounded-lg text-ember-400 transition-transform duration-500 group-hover:scale-110 group-hover:text-ember-300"
-                    style={{ background: "color-mix(in srgb, var(--color-ember-500) 14%, transparent)" }}
-                  >
-                    <PillarIcon name={ICONS[i % ICONS.length]} />
-                  </span>
-                  <h3 className="mt-5 text-lg" style={{ color: "var(--color-paper-50)" }}>
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-300">
-                    {item.body}
-                  </p>
-                </article>
-              </TiltCard>
+                  {item.body}
+                </p>
+              </article>
             </RevealItem>
           ))}
         </RevealGroup>

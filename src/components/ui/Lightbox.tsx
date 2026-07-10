@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
@@ -8,7 +8,9 @@ import { gsap } from "@/lib/gsap";
 /**
  * Full-screen viewer for product screenshots. The dense desktop UI is
  * unreadable at column width — this shows it at (almost) full size.
- * Closes on backdrop click, ✕ or Escape.
+ * Closes on backdrop click, ✕ or Escape. Focus moves into the dialog
+ * on open, Tab is trapped inside it, and focus returns to the opener
+ * on close.
  */
 export function Lightbox({
   src,
@@ -21,9 +23,36 @@ export function Lightbox({
   title?: string;
   onClose: () => void;
 }) {
+  const panelRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
+    const opener =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+    const focusables = () =>
+      Array.from(
+        panelRef.current?.querySelectorAll<HTMLElement>(
+          'button, [href], input, [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      );
+    focusables()[0]?.focus();
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
+      if (e.key === "Tab") {
+        const els = focusables();
+        if (!els.length) return;
+        const first = els[0];
+        const last = els[els.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -45,6 +74,7 @@ export function Lightbox({
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      opener?.focus();
     };
   }, [onClose]);
 
@@ -67,6 +97,7 @@ export function Lightbox({
         aria-hidden
       />
       <figure
+        ref={panelRef}
         data-lightbox-panel
         className="relative flex max-h-full w-full max-w-6xl flex-col overflow-hidden rounded-xl border"
         style={{

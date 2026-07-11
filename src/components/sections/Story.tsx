@@ -32,10 +32,12 @@ export function Story() {
         aria-hidden
         className="pointer-events-none absolute inset-0 mm-grid"
         style={{
+          // Fades fully before the bottom seam so the grid never
+          // hard-stops against the next sheet.
           maskImage:
-            "radial-gradient(120% 100% at 85% 0%, black 0%, transparent 62%)",
+            "radial-gradient(100% 75% at 85% 0%, black 0%, transparent 68%)",
           WebkitMaskImage:
-            "radial-gradient(120% 100% at 85% 0%, black 0%, transparent 62%)",
+            "radial-gradient(100% 75% at 85% 0%, black 0%, transparent 68%)",
         }}
       />
       <Container className="relative">

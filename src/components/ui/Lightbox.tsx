@@ -45,6 +45,13 @@ export function Lightbox({
         if (!els.length) return;
         const first = els[0];
         const last = els[els.length - 1];
+        // Clicking a non-focusable spot parks focus on <body>; pull the
+        // next Tab back into the dialog instead of letting it escape.
+        if (!panelRef.current?.contains(document.activeElement)) {
+          e.preventDefault();
+          first.focus();
+          return;
+        }
         if (e.shiftKey && document.activeElement === first) {
           e.preventDefault();
           last.focus();

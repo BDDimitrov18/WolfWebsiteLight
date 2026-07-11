@@ -159,3 +159,9 @@ tested claim.
    anticipates the measurement ID that is wired but not yet supplied.
 
 Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
+
+7. **Pricing „Препоръчан план“ / "Recommended plan"** (screen-reader label on
+   the featured tier's ★ badge, added with the 2026-07-11 redesign) — a vendor
+   recommendation, not a popularity statistic; the Standard tier was already
+   visually marked as featured (★) before the redesign. No sales-volume claim
+   is made or implied.

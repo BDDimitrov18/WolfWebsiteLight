@@ -67,6 +67,9 @@ export function SplitHeading({
             stagger,
             delay,
             ease: "expo.out",
+            // Un-split once done: the overflow-clip line masks otherwise
+            // shave serif descenders forever at our tight line-height.
+            onComplete: () => self.revert(),
             ...(mode === "scroll"
               ? {
                   scrollTrigger: {

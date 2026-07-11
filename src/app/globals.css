@@ -187,14 +187,21 @@
   }
 
   /* Millimeter drafting grid — the paper register's signature
-     texture: fine 9px pitch with a heavier line every 5th. */
+     texture: fine 9px pitch with a heavier line every 5th. The two
+     pitches sit close in alpha so a mask fades them out together
+     instead of leaving a stepped edge. */
   .mm-grid {
     background-image:
-      linear-gradient(to right, color-mix(in srgb, var(--color-ink-700) 7%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-700) 7%, transparent) 1px, transparent 1px),
-      linear-gradient(to right, color-mix(in srgb, var(--color-ink-700) 4%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-700) 4%, transparent) 1px, transparent 1px);
+      linear-gradient(to right, color-mix(in srgb, var(--color-ink-700) 9%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-700) 9%, transparent) 1px, transparent 1px),
+      linear-gradient(to right, color-mix(in srgb, var(--color-ink-700) 6%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-700) 6%, transparent) 1px, transparent 1px);
     background-size: 45px 45px, 45px 45px, 9px 9px, 9px 9px;
+  }
+
+  /* Adjacent sheets read as one continuous sheet: collapse the seam. */
+  .register-paper + .register-paper {
+    padding-top: 3rem;
   }
 
   /* Grain + topographic paper texture used on light panels */

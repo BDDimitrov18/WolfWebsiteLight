@@ -6,7 +6,7 @@
  * All use `currentColor` so they tint with text color, and are purely
  * decorative (aria-hidden). Animations are transform/opacity only.
  */
-import type { SVGProps } from "react";
+import { useId, type SVGProps } from "react";
 
 /* ----------------------------------------------------------------
    Compass mark — a clean geometric echo of the Wolf logo (a drafting
@@ -314,6 +314,9 @@ export function DimensionRule({
    Sheet stamp — the round ink stamp of Bulgarian paperwork. Purely
    decorative (aria-hidden); the ring text is passed in so both
    locales can stamp their own wording.
+   NOTE for future use: stamp wording must come from dictionaries.ts
+   (both locales) and never read as certification/approval — the
+   site's claims are contract-audited in VERIFICATION.md.
    ---------------------------------------------------------------- */
 export function SheetStamp({
   ring,
@@ -321,6 +324,7 @@ export function SheetStamp({
   className,
   ...props
 }: SVGProps<SVGSVGElement> & { ring: string; center: string }) {
+  const ringId = useId();
   return (
     <svg
       viewBox="0 0 160 160"
@@ -333,7 +337,7 @@ export function SheetStamp({
       <circle cx="80" cy="80" r="72" stroke="currentColor" strokeWidth="1" opacity="0.7" />
       <circle cx="80" cy="80" r="46" stroke="currentColor" strokeWidth="1" opacity="0.8" />
       <defs>
-        <path id="stamp-ring" d="M80 21 a59 59 0 1 1 -0.01 0" fill="none" />
+        <path id={ringId} d="M80 21 a59 59 0 1 1 -0.01 0" fill="none" />
       </defs>
       <text
         fontSize="11.5"
@@ -341,7 +345,7 @@ export function SheetStamp({
         fill="currentColor"
         style={{ fontFamily: "var(--font-mono)", textTransform: "uppercase" }}
       >
-        <textPath href="#stamp-ring" startOffset="0">
+        <textPath href={`#${ringId}`} startOffset="0">
           {ring}
         </textPath>
       </text>

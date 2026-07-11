@@ -245,6 +245,7 @@ const bg = {
     title: "Ясни цени, два начина на плащане",
     subtitle:
       "Абонамент или еднократен лиценз — изберете модела, който пасва на практиката. Всеки план включва пълната функционалност, реалното време и автоматичните обновления.",
+    recommended: "Препоръчан план",
     cards: [
       {
         name: "Solo",
@@ -608,6 +609,7 @@ const en: typeof bg = {
     title: "Clear pricing, two ways to pay",
     subtitle:
       "A subscription or a one-time license — pick the model that fits your practice. Every plan includes the full feature set, real-time sync and automatic updates.",
+    recommended: "Recommended plan",
     cards: [
       {
         name: "Solo",

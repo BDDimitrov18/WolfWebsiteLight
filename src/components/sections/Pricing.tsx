@@ -65,9 +65,9 @@ export function Pricing() {
                   card.featured
                     ? "bg-ember-500/10"
                     : "hover:bg-paper-50"
-                } ${i > 0 ? "border-t sm:border-t-0" : ""} ${
-                  i % 2 === 1 ? "sm:border-l" : ""
-                } ${i >= 2 ? "sm:border-t xl:border-t-0" : ""} ${
+                } ${i === 1 ? "border-t sm:border-t-0" : ""} ${
+                  i >= 2 ? "border-t xl:border-t-0" : ""
+                } ${i % 2 === 1 ? "sm:border-l" : ""} ${
                   i === 2 ? "xl:border-l" : ""
                 }`}
               >
@@ -78,11 +78,9 @@ export function Pricing() {
                       aria-hidden
                       className="absolute inset-x-0 top-0 h-0.5 bg-ember-700"
                     />
-                    <span
-                      className="absolute right-5 top-0 flex h-7 w-7 -translate-y-1/2 items-center justify-center bg-ember-700 font-mono text-[11px] text-paper-50"
-                      title="★"
-                    >
-                      ★
+                    <span className="absolute right-5 top-0 flex h-7 w-7 -translate-y-1/2 items-center justify-center bg-ember-700 font-mono text-[11px] text-paper-50">
+                      <span aria-hidden>★</span>
+                      <span className="sr-only">{t("pricing.recommended")}</span>
                     </span>
                   </>
                 )}

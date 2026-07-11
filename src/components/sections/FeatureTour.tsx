@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { useT } from "@/lib/i18n/LocaleProvider";
+import { useLocale, useT } from "@/lib/i18n/LocaleProvider";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { ScreenshotFrame } from "@/components/ui/ScreenshotFrame";
 import { Reveal } from "@/components/ui/Reveal";
@@ -37,6 +37,7 @@ const TOUR: { key: string; slot: string }[] = [
  */
 export function FeatureTour() {
   const t = useT();
+  const { locale } = useLocale();
   const rootRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
   const tagRef = useRef<HTMLSpanElement>(null);
@@ -71,7 +72,8 @@ export function FeatureTour() {
         );
         blocks.forEach((b, j) =>
           gsap.to(b, {
-            opacity: j === i ? 1 : 0.38,
+            // 0.73 keeps passive stations readable at WCAG AA over paper
+            opacity: j === i ? 1 : 0.73,
             duration: dur,
             ease: "power2.out",
             overwrite: true,
@@ -85,7 +87,7 @@ export function FeatureTour() {
       };
 
       // initial dim state for non-first blocks
-      blocks.forEach((b, j) => gsap.set(b, { opacity: j === 0 ? 1 : 0.38 }));
+      blocks.forEach((b, j) => gsap.set(b, { opacity: j === 0 ? 1 : 0.73 }));
       if (tagRef.current)
         tagRef.current.textContent = blocks[0].getAttribute("data-tour-tag") ?? "";
 
@@ -107,8 +109,10 @@ export function FeatureTour() {
       };
     });
 
+    // Re-run on locale change: the sticky tag/counter are written
+    // imperatively and would otherwise keep the previous language.
     return () => mm.revert();
-  }, []);
+  }, [locale]);
 
   return (
     <Section id="features" hud={t("features.eyebrow")} className="register-paper relative">
@@ -146,7 +150,9 @@ export function FeatureTour() {
                   key={row.key}
                   data-tour-block
                   data-tour-tag={f.tag}
-                  className="relative flex min-h-[78vh] flex-col justify-center py-10 pl-8 pr-6"
+                  className={`relative flex flex-col justify-center py-10 pl-8 pr-6 ${
+                    i === 0 ? "min-h-[62vh]" : "min-h-[78vh]"
+                  }`}
                 >
                   <div className="relative flex items-baseline gap-3">
                     {/* survey point marker on the traverse */}
@@ -203,7 +209,7 @@ export function FeatureTour() {
             <div className="sticky top-0 flex h-screen flex-col justify-center">
               <div className="mb-3 flex items-center justify-between font-mono text-xs tracking-[0.18em]">
                 <span ref={tagRef} className="uppercase text-ember-800" />
-                <span style={{ color: "color-mix(in srgb, var(--color-ink-700) 60%, transparent)" }}>
+                <span style={{ color: "color-mix(in srgb, var(--color-ink-700) 75%, transparent)" }}>
                   <span ref={counterRef} className="text-ink-900">01</span>
                   {" / "}
                   {String(TOUR.length).padStart(2, "0")}

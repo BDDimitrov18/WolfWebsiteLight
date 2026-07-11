@@ -39,7 +39,14 @@ export function PrivacyArticle() {
                 {s.h}
               </h2>
               {s.ps.map((p) => (
-                <p key={p} className="mt-4 text-pretty leading-relaxed text-ink-200">
+                <p
+                  key={p}
+                  className="mt-4 text-pretty leading-relaxed"
+                  style={{
+                    color:
+                      "color-mix(in srgb, var(--color-paper-100) 82%, transparent)",
+                  }}
+                >
                   {p}
                 </p>
               ))}

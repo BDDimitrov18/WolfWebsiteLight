@@ -29,15 +29,16 @@ export function Pillars() {
 
   return (
     <Section id="why" hud={t("pillars.eyebrow")} className="register-paper relative overflow-hidden">
-      {/* Millimeter grid along the sheet's left margin */}
+      {/* Millimeter grid along the sheet's left margin, fading out well
+          before the section seams */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 mm-grid"
         style={{
           maskImage:
-            "radial-gradient(110% 90% at 0% 100%, black 0%, transparent 58%)",
+            "radial-gradient(90% 60% at 0% 30%, black 0%, transparent 68%)",
           WebkitMaskImage:
-            "radial-gradient(110% 90% at 0% 100%, black 0%, transparent 58%)",
+            "radial-gradient(90% 60% at 0% 30%, black 0%, transparent 68%)",
         }}
       />
       <Container className="relative">
@@ -98,9 +99,9 @@ export function Pillars() {
             <RevealItem key={item.title} className="h-full">
               <article
                 className={`group h-full p-6 transition-colors duration-300 hover:bg-paper-50 ${
-                  i > 0 ? "border-t sm:border-t-0" : ""
-                } ${i % 2 === 1 ? "sm:border-l" : ""} ${
-                  i >= 2 ? "sm:border-t lg:border-t-0" : ""
+                  i === 1 ? "border-t sm:border-t-0" : ""
+                } ${i >= 2 ? "border-t lg:border-t-0" : ""} ${
+                  i % 2 === 1 ? "sm:border-l" : ""
                 } ${i === 2 ? "lg:border-l" : ""}`}
               >
                 <span className="flex h-10 w-10 items-center justify-center text-ember-700 transition-colors duration-300 group-hover:text-ember-600">

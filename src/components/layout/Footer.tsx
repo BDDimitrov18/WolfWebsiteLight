@@ -58,7 +58,7 @@ export function Footer() {
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-300">
               {t("footer.tagline")}
             </p>
-            <p className="mt-3 font-mono text-xs tracking-wide text-ink-400">
+            <p className="mt-3 font-mono text-xs tracking-wide text-ink-300">
               {t("footer.madeIn")}
             </p>
           </div>
@@ -104,7 +104,7 @@ export function Footer() {
             >
               {t("footer.links.privacy")}
             </Link>
-            <p className="font-mono text-xs tracking-wide text-ink-500">
+            <p className="font-mono text-xs tracking-wide text-ink-300">
               {t("footer.version")}
             </p>
           </div>

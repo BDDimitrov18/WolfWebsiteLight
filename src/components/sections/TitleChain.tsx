@@ -84,10 +84,8 @@ export function TitleChain() {
       <Container className="relative">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <div>
-            <p className="eyebrow mb-4 flex items-center gap-3">
-              <span className="inline-block h-px w-8 bg-current opacity-60" />
-              {t("titleChain.eyebrow")}
-            </p>
+            {/* title-block grammar, like Story: label above the title */}
+            <p className="eyebrow mb-4">{t("titleChain.eyebrow")}</p>
             <SplitHeading
               key={`tc-${locale}`}
               as="h2"

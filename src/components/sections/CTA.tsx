@@ -150,7 +150,7 @@ export function CTA() {
             </Link>
             <Link
               href="/privacy"
-              className="font-mono text-xs text-ink-500 underline-offset-4 transition-colors hover:text-paper-50 hover:underline"
+              className="font-mono text-xs text-ink-300 underline underline-offset-4 transition-colors hover:text-paper-50"
             >
               {t("cta.privacy")}
             </Link>

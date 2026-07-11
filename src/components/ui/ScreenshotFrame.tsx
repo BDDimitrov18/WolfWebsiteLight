@@ -75,9 +75,10 @@ export function ScreenshotFrame({
             priority={priority}
             className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
           />
-          {/* Zoom affordance */}
+          {/* Zoom affordance: always visible on touch (no hover to reveal
+              it), hover/focus-revealed on fine pointers */}
           <span
-            className="pointer-events-none absolute bottom-2.5 right-2.5 flex items-center gap-1.5 rounded-md px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider text-paper-100 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            className="pointer-events-none absolute bottom-2.5 right-2.5 flex items-center gap-1.5 rounded-md px-2 py-1.5 font-mono text-[10px] uppercase tracking-wider text-paper-100 transition-opacity duration-300 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-focus-within:opacity-100"
             style={{ background: "color-mix(in srgb, var(--color-ink-950) 82%, transparent)" }}
           >
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden>

@@ -15,9 +15,12 @@ interface Step {
 }
 
 /**
- * The notarial-paper band. The plot→document→owner→PoA chain assembles
- * itself as it scrolls in: the spine grows downward and each link snaps
- * on with its station badge.
+ * The plot→document→owner→PoA chain assembles itself as it scrolls in:
+ * the spine grows downward and each link snaps on with its station badge.
+ *
+ * The deed card is the one genuinely PAPER object on the site — an
+ * actual document lying on the dark table. It carries `.register-paper`
+ * itself; the section around it stays in the night register.
  */
 export function TitleChain() {
   const t = useT();
@@ -70,19 +73,8 @@ export function TitleChain() {
     <Section
       id="title-chain"
       hud={t("titleChain.eyebrow")}
-      className="register-paper relative overflow-hidden"
-      // the deed zone of the sheet: the paper deepens toward paper-200
+      className="relative overflow-hidden"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 paper-grain"
-        style={{
-          // The deed zone is a bounded band: it fades back out before
-          // the section ends so the sheet never shows a hard seam.
-          background:
-            "linear-gradient(180deg, transparent 0%, var(--color-paper-200) 38%, var(--color-paper-200) 68%, transparent 100%)",
-        }}
-      />
       <Container className="relative">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <div>
@@ -93,14 +85,14 @@ export function TitleChain() {
               as="h2"
               mode="scroll"
               className="text-balance font-display"
-              style={{ fontSize: "var(--fs-h2)", color: "var(--color-ink-900)" }}
+              style={{ fontSize: "var(--fs-h2)", color: "var(--color-paper-50)" }}
             >
               {t("titleChain.title")}
             </SplitHeading>
             <Reveal delay={0.1}>
               <p
                 className="mt-5 max-w-xl text-pretty leading-relaxed"
-                style={{ color: "color-mix(in srgb, var(--color-ink-700) 85%, transparent)" }}
+                style={{ color: "color-mix(in srgb, var(--color-paper-100) 82%, transparent)" }}
               >
                 {t("titleChain.body")}
               </p>
@@ -109,7 +101,7 @@ export function TitleChain() {
 
           {/* Animated ownership chain — the deed card */}
           <div className="relative" ref={chainRef}>
-            <div className="relative border bg-paper-50 p-6 shadow-sheet sm:p-8">
+            <div className="register-paper relative border bg-paper-50 p-6 shadow-sheet sm:p-8">
               <CornerMarks className="text-ink-700/50" />
               <div className="mb-6 flex items-center justify-between">
                 <span className="font-mono text-xs uppercase tracking-[0.18em] text-ink-500">

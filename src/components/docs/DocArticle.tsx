@@ -19,7 +19,7 @@ export function DocArticle({ slug }: { slug: string }) {
   }, [slug]);
 
   if (!page) {
-    return <p className="text-ink-800">Not found.</p>;
+    return <p className="text-ink-300">Not found.</p>;
   }
 
   const blocks = page.blocks[locale];
@@ -42,7 +42,7 @@ export function DocArticle({ slug }: { slug: string }) {
           <p
             className="mt-4 text-pretty leading-relaxed"
             style={{
-              color: "color-mix(in srgb, var(--color-ink-800) 84%, transparent)",
+              color: "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
             }}
           >
             {page.intro[locale]}
@@ -61,10 +61,7 @@ export function DocArticle({ slug }: { slug: string }) {
         <div className="mt-8 border-t pt-6">
           <Link
             href="/"
-            className="font-mono text-xs tracking-wide transition-colors hover:text-ink-950"
-            style={{
-              color: "color-mix(in srgb, var(--color-ink-800) 72%, transparent)",
-            }}
+            className="font-mono text-xs tracking-wide text-ink-300 transition-colors hover:text-paper-50"
           >
             ← {t("docs.backToSite")}
           </Link>
@@ -75,12 +72,7 @@ export function DocArticle({ slug }: { slug: string }) {
       {toc.length > 0 && (
         <aside className="hidden xl:block">
           <div className="sticky top-24">
-            <p
-              className="font-mono text-xs uppercase tracking-[0.16em]"
-              style={{
-                color: "color-mix(in srgb, var(--color-ink-700) 70%, transparent)",
-              }}
-            >
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-ink-300">
               {t("docs.onThisPage")}
             </p>
             <ul className="mt-3 space-y-2 border-l">
@@ -88,11 +80,7 @@ export function DocArticle({ slug }: { slug: string }) {
                 <li key={h.id}>
                   <a
                     href={`#${h.id}`}
-                    className="-ml-px block border-l-2 border-transparent pl-3 text-sm transition-colors hover:border-ember-700 hover:text-ink-950"
-                    style={{
-                      color:
-                        "color-mix(in srgb, var(--color-ink-800) 76%, transparent)",
-                    }}
+                    className="-ml-px block border-l-2 border-transparent pl-3 text-sm text-ink-300 transition-colors hover:border-ember-500 hover:text-paper-50"
                   >
                     {h.text}
                   </a>
@@ -121,22 +109,19 @@ function ContinueReading() {
   return (
     <Link
       href={`/docs/${page.slug}`}
-      className="group mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 border border-ember-700/40 bg-ember-500/10 px-4 py-3 transition-colors hover:bg-ember-500/15"
+      className="group mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 border border-ember-500/40 bg-ember-500/10 px-4 py-3 transition-colors hover:bg-ember-500/15"
     >
-      <span className="flex-none font-mono text-[11px] uppercase tracking-[0.16em] text-ember-800">
+      <span className="flex-none font-mono text-[11px] uppercase tracking-[0.16em] text-ember-400">
         {t("docs.continueReading")}
       </span>
       {/* On narrow screens the destination gets its own full row so the
           long Bulgarian titles stay readable instead of truncating. */}
-      <span className="order-last basis-full font-display text-sm text-ink-900 sm:order-none sm:min-w-0 sm:basis-auto sm:truncate">
+      <span className="order-last basis-full font-display text-sm text-paper-50 sm:order-none sm:min-w-0 sm:basis-auto sm:truncate">
         {page.title[locale]}
       </span>
       <span
         aria-hidden
-        className="ml-auto flex-none font-mono text-[11px]"
-        style={{
-          color: "color-mix(in srgb, var(--color-ink-700) 70%, transparent)",
-        }}
+        className="ml-auto flex-none font-mono text-[11px] text-ink-300"
       >
         {String(idx + 1).padStart(2, "0")} / {String(DOC_PAGES.length).padStart(2, "0")}
       </span>
@@ -171,30 +156,18 @@ function Pager({ slug }: { slug: string }) {
         <Link
           href={href(prev)}
           rel="prev"
-          className="group relative flex flex-col gap-2.5 overflow-hidden border bg-paper-50/60 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-paper-50"
+          className="group relative flex flex-col gap-2.5 overflow-hidden border bg-ink-800/50 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink-800"
         >
           <span
             aria-hidden
-            className="absolute inset-y-0 left-0 w-0.5 origin-top scale-y-0 bg-ember-700 transition-transform duration-500 ease-out group-hover:scale-y-100"
+            className="absolute inset-y-0 left-0 w-0.5 origin-top scale-y-0 bg-ember-500 transition-transform duration-500 ease-out group-hover:scale-y-100"
           />
-          <span
-            className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors group-hover:text-ember-800"
-            style={{
-              color: "color-mix(in srgb, var(--color-ink-700) 72%, transparent)",
-            }}
-          >
+          <span className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-300 transition-colors group-hover:text-ember-400">
             <PagerArrow dir="prev" />
             {t("docs.prev")}
-            <span
-              className="ml-auto"
-              style={{
-                color: "color-mix(in srgb, var(--color-ink-700) 70%, transparent)",
-              }}
-            >
-              {station(prev)}
-            </span>
+            <span className="ml-auto text-ink-300">{station(prev)}</span>
           </span>
-          <span className="font-display text-lg leading-snug text-ink-900">
+          <span className="font-display text-lg leading-snug text-paper-50">
             {prev.title[locale]}
           </span>
         </Link>
@@ -206,25 +179,18 @@ function Pager({ slug }: { slug: string }) {
         <Link
           href={href(next)}
           rel="next"
-          className="group relative flex flex-col gap-2.5 overflow-hidden border border-ember-700/40 bg-ember-500/10 p-5 text-right transition-all duration-300 hover:-translate-y-0.5 hover:bg-ember-500/15"
+          className="group relative flex flex-col gap-2.5 overflow-hidden border border-ember-500/40 bg-ember-500/10 p-5 text-right transition-all duration-300 hover:-translate-y-0.5 hover:bg-ember-500/15"
         >
           <span
             aria-hidden
-            className="absolute inset-y-0 right-0 w-0.5 origin-bottom scale-y-0 bg-ember-700 transition-transform duration-500 ease-out group-hover:scale-y-100"
+            className="absolute inset-y-0 right-0 w-0.5 origin-bottom scale-y-0 bg-ember-500 transition-transform duration-500 ease-out group-hover:scale-y-100"
           />
-          <span className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ember-800">
-            <span
-              className="mr-auto"
-              style={{
-                color: "color-mix(in srgb, var(--color-ink-700) 70%, transparent)",
-              }}
-            >
-              {station(next)}
-            </span>
+          <span className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ember-400">
+            <span className="mr-auto text-ink-300">{station(next)}</span>
             {t("docs.next")}
             <PagerArrow dir="next" />
           </span>
-          <span className="font-display text-lg leading-snug text-ink-900">
+          <span className="font-display text-lg leading-snug text-paper-50">
             {next.title[locale]}
           </span>
         </Link>
@@ -271,7 +237,7 @@ function Block({ block }: { block: DocBlock }) {
         <p
           className="leading-relaxed"
           style={{
-            color: "color-mix(in srgb, var(--color-ink-800) 86%, transparent)",
+            color: "color-mix(in srgb, var(--color-paper-100) 86%, transparent)",
           }}
         >
           {block.text}
@@ -286,10 +252,10 @@ function Block({ block }: { block: DocBlock }) {
               className="flex items-start gap-3"
               style={{
                 color:
-                  "color-mix(in srgb, var(--color-ink-800) 86%, transparent)",
+                  "color-mix(in srgb, var(--color-paper-100) 86%, transparent)",
               }}
             >
-              <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-ember-700" />
+              <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-ember-500" />
               <span>{it}</span>
             </li>
           ))}
@@ -299,9 +265,11 @@ function Block({ block }: { block: DocBlock }) {
       return (
         <ol className="space-y-3">
           {block.items.map((s, i) => (
-            <li key={s.t} className="flex gap-4 border bg-paper-50 px-4 py-3.5">
+            <li key={s.t} className="flex gap-4 border bg-ink-800/50 px-4 py-3.5">
               <span
                 className="flex h-7 w-7 flex-none items-center justify-center rounded-full font-mono text-xs font-semibold"
+                // ember-700 behind white, not ember-600: the lighter fill
+                // drops the numeral to 4.1:1 and fails AA.
                 style={{
                   background: "var(--color-ember-700)",
                   color: "var(--color-paper-50)",
@@ -310,14 +278,14 @@ function Block({ block }: { block: DocBlock }) {
                 {i + 1}
               </span>
               <span>
-                <span className="block text-sm font-semibold text-ink-900">
+                <span className="block text-sm font-semibold text-paper-50">
                   {s.t}
                 </span>
                 <span
                   className="mt-0.5 block text-sm"
                   style={{
                     color:
-                      "color-mix(in srgb, var(--color-ink-800) 80%, transparent)",
+                      "color-mix(in srgb, var(--color-paper-100) 80%, transparent)",
                   }}
                 >
                   {s.d}
@@ -332,18 +300,16 @@ function Block({ block }: { block: DocBlock }) {
         <div
           className="border-l-2 px-4 py-3 text-sm leading-relaxed"
           style={{
-            borderColor: "var(--color-ember-700)",
+            borderColor: "var(--color-ember-500)",
             background:
-              "color-mix(in srgb, var(--color-ember-500) 9%, transparent)",
-            color: "color-mix(in srgb, var(--color-ink-800) 90%, transparent)",
+              "color-mix(in srgb, var(--color-ember-500) 10%, transparent)",
+            color: "color-mix(in srgb, var(--color-paper-100) 90%, transparent)",
           }}
         >
           {block.text}
         </div>
       );
     case "code":
-      // Dark plate on the sheet — instrument output stays in the night
-      // register, like the app screenshots.
       return (
         <pre className="overflow-x-auto rounded-xl border border-ink-700 bg-ink-950 p-4 font-mono text-sm leading-relaxed text-ember-200">
           {block.text}

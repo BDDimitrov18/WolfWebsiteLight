@@ -8,21 +8,16 @@ interface PrivacySection {
   ps: string[];
 }
 
-/** The privacy policy — a plain document, set in ink on the sheet. */
+/** The privacy policy — a plain document. */
 export function PrivacyArticle() {
   const t = useT();
   const sections = t<PrivacySection[]>("privacyPage.sections");
 
   return (
-    <Section hud={t("privacyPage.title")} className="register-paper">
+    <Section hud={t("privacyPage.title")}>
       <Container>
         <article className="mx-auto max-w-3xl">
-          <p
-            className="font-mono text-xs tracking-[0.18em]"
-            style={{
-              color: "color-mix(in srgb, var(--color-ink-700) 72%, transparent)",
-            }}
-          >
+          <p className="font-mono text-xs tracking-[0.18em] text-ink-300">
             {t("privacyPage.updated")}
           </p>
           <h1 className="mt-3 font-display" style={{ fontSize: "var(--fs-h2)" }}>
@@ -31,7 +26,7 @@ export function PrivacyArticle() {
           <p
             className="mt-6 text-pretty leading-relaxed"
             style={{
-              color: "color-mix(in srgb, var(--color-ink-800) 90%, transparent)",
+              color: "color-mix(in srgb, var(--color-paper-100) 90%, transparent)",
             }}
           >
             {t("privacyPage.intro")}
@@ -46,7 +41,7 @@ export function PrivacyArticle() {
                   className="mt-4 text-pretty leading-relaxed"
                   style={{
                     color:
-                      "color-mix(in srgb, var(--color-ink-800) 86%, transparent)",
+                      "color-mix(in srgb, var(--color-paper-100) 86%, transparent)",
                   }}
                 >
                   {p}

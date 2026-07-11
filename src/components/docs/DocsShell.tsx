@@ -12,7 +12,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="register-paper min-h-screen">
+    <div className="min-h-screen bg-ink-900">
       {/* Docs header */}
       <header className="sticky top-0 z-40 border-b border-ink-700 bg-ink-950/85 backdrop-blur-md">
         <Container>
@@ -30,7 +30,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
                 </svg>
               </button>
               <Logo />
-              <span className="hidden font-mono text-xs uppercase tracking-[0.2em] text-ink-400 sm:inline">
+              <span className="hidden font-mono text-xs uppercase tracking-[0.2em] text-ink-300 sm:inline">
                 / {t("docs.title")}
               </span>
             </div>
@@ -48,22 +48,22 @@ export function DocsShell({ children }: { children: ReactNode }) {
             </div>
           </aside>
 
-          {/* Sidebar — mobile drawer (a sheet sliding over the sheet) */}
+          {/* Sidebar — mobile drawer */}
           {open && (
             <div className="fixed inset-0 z-50 lg:hidden">
               <div
-                className="absolute inset-0 bg-ink-950/50"
+                className="absolute inset-0 bg-ink-950/70"
                 onClick={() => setOpen(false)}
                 aria-hidden
               />
-              <div className="register-paper absolute left-0 top-0 h-full w-72 overflow-y-auto border-r bg-paper-50 p-6 shadow-sheet">
+              <div className="absolute left-0 top-0 h-full w-72 overflow-y-auto border-r border-ink-700 bg-ink-900 p-6 shadow-ambient">
                 <div className="mb-6 flex items-center justify-between">
-                  <Logo tone="dark" />
+                  <Logo />
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
                     aria-label={t("nav.close")}
-                    className="text-ink-800 transition-colors hover:text-ink-950"
+                    className="text-ink-300 transition-colors hover:text-paper-50"
                   >
                     ✕
                   </button>

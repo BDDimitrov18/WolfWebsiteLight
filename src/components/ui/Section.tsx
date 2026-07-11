@@ -46,9 +46,9 @@ export function Section({
 }
 
 /**
- * Paper-register section header: mono label + a dimension rule
- * measured across the full container width — the header row of a
- * drafted sheet — then the display heading and lead below.
+ * Section header in the drafting grammar: mono label + a dimension
+ * rule measured across the full container width — the header row of
+ * a survey sheet — then the display heading and lead below.
  */
 export function SheetHeader({
   label,
@@ -70,13 +70,13 @@ export function SheetHeader({
             className="h-3 min-w-0 flex-1"
             style={{
               color:
-                "color-mix(in srgb, var(--color-ink-700) 38%, transparent)",
+                "color-mix(in srgb, var(--color-ink-500) 75%, transparent)",
             }}
           />
         </div>
       </Reveal>
       <div className="mt-9">
-        <SectionHeading title={title} subtitle={subtitle} tone="dark" align={align} />
+        <SectionHeading title={title} subtitle={subtitle} align={align} />
       </div>
     </div>
   );
@@ -88,21 +88,15 @@ export function SectionHeading({
   title,
   subtitle,
   align = "left",
-  tone = "light",
 }: {
   eyebrow?: string;
   title: ReactNode;
   subtitle?: ReactNode;
   align?: "left" | "center";
-  tone?: "light" | "dark";
 }) {
   const { locale } = useLocale();
-  const headColor =
-    tone === "light" ? "var(--color-paper-50)" : "var(--color-ink-900)";
-  const subColor =
-    tone === "light"
-      ? "color-mix(in srgb, var(--color-paper-100) 70%, transparent)"
-      : "color-mix(in srgb, var(--color-ink-700) 78%, transparent)";
+  const headColor = "var(--color-paper-50)";
+  const subColor = "color-mix(in srgb, var(--color-paper-100) 70%, transparent)";
   return (
     <div
       className={`max-w-2xl ${align === "center" ? "mx-auto text-center" : ""}`}

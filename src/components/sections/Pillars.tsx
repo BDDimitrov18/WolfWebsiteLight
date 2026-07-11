@@ -17,10 +17,9 @@ interface Featured extends Item {
 const ICONS = ["sync", "stopwatch", "selfcare", "sheet"] as const;
 
 /**
- * Paper register. The featured pillar is the sheet's primary cell —
- * a drafted frame with corner registration marks; the four supporting
- * pillars form one hairline-divided ledger strip rather than four
- * floating cards.
+ * The featured pillar is the sheet's primary cell — a drafted frame
+ * with corner registration marks; the four supporting pillars form one
+ * hairline-divided ledger strip rather than four floating cards.
  */
 export function Pillars() {
   const t = useT();
@@ -28,7 +27,7 @@ export function Pillars() {
   const featured = t<Featured>("pillars.featured");
 
   return (
-    <Section id="why" hud={t("pillars.eyebrow")} className="register-paper relative overflow-hidden">
+    <Section id="why" hud={t("pillars.eyebrow")} className="relative overflow-hidden">
       {/* Millimeter grid along the sheet's left margin, fading out well
           before the section seams */}
       <div
@@ -51,11 +50,11 @@ export function Pillars() {
         {/* The headline differentiator: individual work accounting */}
         <RevealGroup className="mt-16">
           <RevealItem>
-            <article className="group relative border bg-paper-50 p-6 shadow-sheet sm:p-9">
-              <CornerMarks className="text-ember-700" />
+            <article className="group relative border bg-ink-850 p-6 shadow-ambient sm:p-9">
+              <CornerMarks className="text-ember-500" />
               <div className="grid gap-6 lg:grid-cols-[3fr_2fr] lg:gap-12">
                 <div>
-                  <span className="flex h-11 w-11 items-center justify-center border border-ember-700/30 bg-ember-500/10 text-ember-700 transition-transform duration-500 group-hover:scale-110">
+                  <span className="flex h-11 w-11 items-center justify-center border border-ember-500/30 bg-ember-500/10 text-ember-400 transition-transform duration-500 group-hover:scale-110">
                     <PersonCheckIcon />
                   </span>
                   <h3 className="mt-5 text-xl">{featured.title}</h3>
@@ -63,7 +62,7 @@ export function Pillars() {
                     className="mt-3 leading-relaxed"
                     style={{
                       color:
-                        "color-mix(in srgb, var(--color-ink-800) 84%, transparent)",
+                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
                     }}
                   >
                     {featured.body}
@@ -78,10 +77,10 @@ export function Pillars() {
                       }`}
                       style={{
                         color:
-                          "color-mix(in srgb, var(--color-ink-800) 88%, transparent)",
+                          "color-mix(in srgb, var(--color-paper-100) 88%, transparent)",
                       }}
                     >
-                      <span className="flex-none font-mono text-[0.7rem] text-ember-800">
+                      <span className="flex-none font-mono text-[0.7rem] text-ember-400">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       {point}
@@ -94,17 +93,17 @@ export function Pillars() {
         </RevealGroup>
 
         {/* Supporting pillars: one ledger strip, hairline-divided */}
-        <RevealGroup className="mt-6 grid border-y sm:grid-cols-2 lg:grid-cols-4 lg:border lg:bg-paper-50/40">
+        <RevealGroup className="mt-6 grid border-y sm:grid-cols-2 lg:grid-cols-4 lg:border lg:bg-ink-850/50">
           {items.map((item, i) => (
             <RevealItem key={item.title} className="h-full">
               <article
-                className={`group h-full p-6 transition-colors duration-300 hover:bg-paper-50 ${
+                className={`group h-full p-6 transition-colors duration-300 hover:bg-ink-850 ${
                   i === 1 ? "border-t sm:border-t-0" : ""
                 } ${i >= 2 ? "border-t lg:border-t-0" : ""} ${
                   i % 2 === 1 ? "sm:border-l" : ""
                 } ${i === 2 ? "lg:border-l" : ""}`}
               >
-                <span className="flex h-10 w-10 items-center justify-center text-ember-700 transition-colors duration-300 group-hover:text-ember-600">
+                <span className="flex h-10 w-10 items-center justify-center text-ember-400 transition-colors duration-300 group-hover:text-ember-300">
                   <PillarIcon name={ICONS[i % ICONS.length]} />
                 </span>
                 <h3 className="mt-5 text-lg">{item.title}</h3>
@@ -112,7 +111,7 @@ export function Pillars() {
                   className="mt-2 text-sm leading-relaxed"
                   style={{
                     color:
-                      "color-mix(in srgb, var(--color-ink-800) 80%, transparent)",
+                      "color-mix(in srgb, var(--color-paper-100) 80%, transparent)",
                   }}
                 >
                   {item.body}

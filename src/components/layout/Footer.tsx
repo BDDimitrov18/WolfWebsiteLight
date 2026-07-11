@@ -50,16 +50,6 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden border-t border-ink-700 bg-ink-950">
-      {/* Closing neatline: the sheet's bottom edge, mirroring the one
-          that opened it under the hero */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-px"
-        style={{
-          background:
-            "color-mix(in srgb, var(--color-ember-700) 55%, transparent)",
-        }}
-      />
       <CompassRose className="pointer-events-none absolute -right-20 -top-24 h-80 w-80 text-ink-500 opacity-30" />
       <Container className="relative">
         <div className="grid grid-cols-2 gap-10 py-16 sm:grid-cols-3 lg:grid-cols-5">
@@ -104,13 +94,13 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-3 border-t border-ink-700 py-6 sm:flex-row sm:items-center">
-          <p className="text-xs text-ink-400">
+          <p className="text-xs text-ink-300">
             © {year} Wolf · {t("footer.author")}. {t("footer.rights")}
           </p>
           <div className="flex items-center gap-6">
             <Link
               href="/privacy"
-              className="text-xs text-ink-400 underline-offset-4 transition-colors hover:text-paper-50 hover:underline"
+              className="text-xs text-ink-300 underline-offset-4 transition-colors hover:text-paper-50 hover:underline"
             >
               {t("footer.links.privacy")}
             </Link>

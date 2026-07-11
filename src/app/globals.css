@@ -4,16 +4,19 @@
    WOLF — Design Tokens
    Brand: land-surveying / cadastral / geodesy.
 
-   Two registers, like the profession itself:
-   — the FIELD (night): deep navy ink, wireframe terrain, the
-     burnt-ember accent of the instrument. Hero, architecture,
-     closing CTA.
-   — the SHEET (paper): warm drafting paper, ink hairlines,
-     millimeter grids, oxide-red annotations — the survey plan
-     the field work becomes. The body of the page.
-   Sections opt into the paper register with `.register-paper`,
-   which re-points the scoped vars (eyebrow, focus ring, lead,
-   borders) so shared primitives adapt without forking.
+   The site is drafted in ONE register — the FIELD (night): deep
+   navy ink stepping through ink-950/900/850, wireframe terrain,
+   the burnt-ember accent of the instrument. The drafting grammar
+   (hairline ledgers, millimeter grids, corner marks, dimension
+   rules, survey markers) is drawn in light on that ground rather
+   than in ink on paper.
+
+   The PAPER register survives as `.register-paper`, but only for
+   things that genuinely ARE paper inside the night — the deed card
+   in the title chain. It re-points the scoped vars (eyebrow, focus
+   ring, lead, borders, grid) so shared primitives adapt without
+   forking. Do not put it back on whole sections: the black-to-paper
+   jump between bands was rejected in review.
    ============================================================ */
 
 @theme {
@@ -170,8 +173,9 @@
   }
 
   /* ---- The SHEET register ---------------------------------
-     A section drafted on paper: warm surface, ink text, and
-     every scoped primitive re-pointed for light ground. */
+     Scoped to an actual document sitting in the night — the deed
+     card. Warm surface, ink text, every scoped primitive
+     re-pointed for light ground. Not for whole sections. */
   .register-paper {
     background-color: var(--color-paper-100);
     color: var(--color-ink-800);
@@ -186,22 +190,26 @@
     color: var(--color-ink-900);
   }
 
-  /* Millimeter drafting grid — the paper register's signature
-     texture: fine 9px pitch with a heavier line every 5th. The two
-     pitches sit close in alpha so a mask fades them out together
-     instead of leaving a stepped edge. */
+  /* Millimeter drafting grid: fine 9px pitch with a heavier line
+     every 5th. The two pitches sit close in alpha so a mask fades
+     them out together instead of leaving a stepped edge.
+
+     The line color is a variable, not a literal: on night the grid
+     is scribed in light, on paper in ink. Same texture, both grounds. */
   .mm-grid {
+    --grid-major: color-mix(in srgb, var(--color-ink-300) 11%, transparent);
+    --grid-minor: color-mix(in srgb, var(--color-ink-300) 7%, transparent);
     background-image:
-      linear-gradient(to right, color-mix(in srgb, var(--color-ink-700) 9%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-700) 9%, transparent) 1px, transparent 1px),
-      linear-gradient(to right, color-mix(in srgb, var(--color-ink-700) 6%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-700) 6%, transparent) 1px, transparent 1px);
+      linear-gradient(to right, var(--grid-major) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px),
+      linear-gradient(to right, var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-minor) 1px, transparent 1px);
     background-size: 45px 45px, 45px 45px, 9px 9px, 9px 9px;
   }
-
-  /* Adjacent sheets read as one continuous sheet: collapse the seam. */
-  .register-paper + .register-paper {
-    padding-top: 3rem;
+  .register-paper .mm-grid,
+  .register-paper.mm-grid {
+    --grid-major: color-mix(in srgb, var(--color-ink-700) 9%, transparent);
+    --grid-minor: color-mix(in srgb, var(--color-ink-700) 6%, transparent);
   }
 
   /* Grain + topographic paper texture used on light panels */

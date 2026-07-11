@@ -28,12 +28,11 @@ const TOUR: { key: string; slot: string }[] = [
 ];
 
 /**
- * The survey walk, drafted on the sheet. On desktop the app's dark
- * screens sit like plates pinned to the drafting table inside a sticky
- * frame with corner registration marks; the stations on the left hang
- * off a vertical traverse line, and scrolling crossfades the matching
- * screen and advances the "02 / 08" counter. On touch/small screens it
- * falls back to a clean stacked tour.
+ * The survey walk. On desktop the app's screens sit like plates pinned
+ * inside a sticky frame with corner registration marks; the stations on
+ * the left hang off a vertical traverse line, and scrolling crossfades
+ * the matching screen and advances the "02 / 08" counter. On touch/small
+ * screens it falls back to a clean stacked tour.
  */
 export function FeatureTour() {
   const t = useT();
@@ -72,7 +71,8 @@ export function FeatureTour() {
         );
         blocks.forEach((b, j) =>
           gsap.to(b, {
-            // 0.73 keeps passive stations readable at WCAG AA over paper
+            // 0.73 keeps passive stations readable at WCAG AA on this
+            // ground — checked in review, do not lower it
             opacity: j === i ? 1 : 0.73,
             duration: dur,
             ease: "power2.out",
@@ -115,7 +115,7 @@ export function FeatureTour() {
   }, [locale]);
 
   return (
-    <Section id="features" hud={t("features.eyebrow")} className="register-paper relative">
+    <Section id="features" hud={t("features.eyebrow")} className="relative">
       <Container>
         <SheetHeader
           label={t("features.eyebrow")}
@@ -140,7 +140,7 @@ export function FeatureTour() {
               className="absolute bottom-0 left-[3px] top-0 w-px"
               style={{
                 background:
-                  "color-mix(in srgb, var(--color-ink-700) 25%, transparent)",
+                  "color-mix(in srgb, var(--color-ink-500) 70%, transparent)",
               }}
             />
             {TOUR.map((row, i) => {
@@ -158,9 +158,9 @@ export function FeatureTour() {
                     {/* survey point marker on the traverse */}
                     <span
                       aria-hidden
-                      className="absolute -left-8 top-1/2 h-[7px] w-[7px] -translate-y-1/2 rotate-45 border border-ember-700 bg-paper-100"
+                      className="absolute -left-8 top-1/2 h-[7px] w-[7px] -translate-y-1/2 rotate-45 border border-ember-500 bg-ink-900"
                     />
-                    <span className="font-mono text-xs tracking-wider text-ember-800">
+                    <span className="font-mono text-xs tracking-wider text-ember-400">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="eyebrow">{f.tag}</span>
@@ -175,7 +175,7 @@ export function FeatureTour() {
                     className="mt-4 text-pretty leading-relaxed"
                     style={{
                       color:
-                        "color-mix(in srgb, var(--color-ink-800) 84%, transparent)",
+                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
                     }}
                   >
                     {f.body}
@@ -188,7 +188,7 @@ export function FeatureTour() {
                           className="text-sm"
                           style={{
                             color:
-                              "color-mix(in srgb, var(--color-ink-800) 90%, transparent)",
+                              "color-mix(in srgb, var(--color-paper-100) 90%, transparent)",
                           }}
                         >
                           {b}
@@ -208,16 +208,16 @@ export function FeatureTour() {
           <div>
             <div className="sticky top-0 flex h-screen flex-col justify-center">
               <div className="mb-3 flex items-center justify-between font-mono text-xs tracking-[0.18em]">
-                <span ref={tagRef} className="uppercase text-ember-800" />
-                <span style={{ color: "color-mix(in srgb, var(--color-ink-700) 75%, transparent)" }}>
-                  <span ref={counterRef} className="text-ink-900">01</span>
+                <span ref={tagRef} className="uppercase text-ember-400" />
+                <span className="text-ink-300">
+                  <span ref={counterRef} className="text-paper-50">01</span>
                   {" / "}
                   {String(TOUR.length).padStart(2, "0")}
                 </span>
               </div>
               <div className="relative">
                 <CornerMarks
-                  className="text-ink-700/50"
+                  className="text-ink-400"
                   inset={-11}
                 />
                 {TOUR.map((row, i) => {
@@ -250,10 +250,10 @@ export function FeatureTour() {
               <div key={row.key} className="flex flex-col gap-8">
                 <Reveal>
                   <div className="flex items-baseline gap-3">
-                    <span className="font-mono text-xs tracking-wider text-ember-800">
+                    <span className="font-mono text-xs tracking-wider text-ember-400">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="h-px w-8 self-center bg-ember-700/50" />
+                    <span className="h-px w-8 self-center bg-ember-500/50" />
                     <span className="eyebrow">{f.tag}</span>
                   </div>
                   <h3
@@ -266,7 +266,7 @@ export function FeatureTour() {
                     className="mt-4 text-pretty leading-relaxed"
                     style={{
                       color:
-                        "color-mix(in srgb, var(--color-ink-800) 84%, transparent)",
+                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
                     }}
                   >
                     {f.body}
@@ -279,7 +279,7 @@ export function FeatureTour() {
                           className="text-sm"
                           style={{
                             color:
-                              "color-mix(in srgb, var(--color-ink-800) 90%, transparent)",
+                              "color-mix(in srgb, var(--color-paper-100) 90%, transparent)",
                           }}
                         >
                           {b}
@@ -308,12 +308,12 @@ function Check() {
   return (
     <span
       className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full"
-      style={{ background: "color-mix(in srgb, var(--color-ember-600) 14%, transparent)" }}
+      style={{ background: "color-mix(in srgb, var(--color-ember-500) 16%, transparent)" }}
     >
       <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
         <path
           d="M2.5 6.5 5 9l4.5-5.5"
-          stroke="var(--color-ember-700)"
+          stroke="var(--color-ember-400)"
           strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"

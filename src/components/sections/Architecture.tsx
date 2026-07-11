@@ -14,10 +14,10 @@ interface Layer {
 }
 
 /**
- * The blueprint. System tiers drawn as one hairline-divided strip on
- * the sheet — workstation → server → database — joined by survey
- * markers on the shared dividers; the background triangulation net
- * draws itself stroke-by-stroke in ink, scrubbed to the scroll.
+ * The blueprint, drawn on the deepest ink of the page. System tiers
+ * form one hairline-divided strip — workstation → server → database —
+ * joined by survey markers on the shared dividers; the background
+ * triangulation net draws itself stroke-by-stroke, scrubbed to scroll.
  */
 export function Architecture() {
   const t = useT();
@@ -64,12 +64,12 @@ export function Architecture() {
     <Section
       id="architecture"
       hud={t("architecture.eyebrow")}
-      className="register-paper relative overflow-hidden"
+      className="relative overflow-hidden bg-ink-950"
     >
       <div ref={rootRef} className="contents">
         {/* xl only: at lg the net would run under the subtitle text */}
         <div data-draw aria-hidden className="pointer-events-none absolute right-0 top-10 hidden xl:block">
-          <TriangulationField className="h-96 w-96 text-ink-700/45" />
+          <TriangulationField className="h-96 w-96 text-ember-500/30" />
         </div>
 
         <Container className="relative">
@@ -80,21 +80,21 @@ export function Architecture() {
           />
 
           <RevealGroup
-            className="mt-16 grid border bg-paper-50/40 lg:grid-cols-3"
+            className="mt-16 grid border bg-ink-900/60 lg:grid-cols-3"
             stagger={0.1}
           >
             {layers.map((layer, i) => (
               <RevealItem key={layer.name} className="h-full">
                 <article
-                  className={`relative h-full p-6 transition-colors duration-300 hover:bg-paper-50 sm:p-7 ${
+                  className={`relative h-full p-6 transition-colors duration-300 hover:bg-ink-900 sm:p-7 ${
                     i > 0 ? "border-t lg:border-l lg:border-t-0" : ""
                   }`}
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <span className="font-mono text-xs tracking-wider text-ember-800">
+                    <span className="font-mono text-xs tracking-wider text-ember-400">
                       0{i + 1}
                     </span>
-                    <span className="border border-ember-700/30 bg-ember-500/10 px-2.5 py-1 font-mono text-[11px] tracking-wide text-ember-800">
+                    <span className="border border-ember-500/30 bg-ember-500/10 px-2.5 py-1 font-mono text-[11px] tracking-wide text-ember-300">
                       {layer.tech}
                     </span>
                   </div>
@@ -103,15 +103,16 @@ export function Architecture() {
                     className="mt-3 text-sm leading-relaxed"
                     style={{
                       color:
-                        "color-mix(in srgb, var(--color-ink-800) 82%, transparent)",
+                        "color-mix(in srgb, var(--color-paper-100) 82%, transparent)",
                     }}
                   >
                     {layer.body}
                   </p>
                   {i < layers.length - 1 && (
+                    // sits ON the divider, so its fill must match the section ground
                     <span
                       aria-hidden
-                      className="absolute -right-[4.5px] top-1/2 z-10 hidden h-2 w-2 -translate-y-1/2 rotate-45 border border-ember-700 bg-paper-100 lg:block"
+                      className="absolute -right-[4.5px] top-1/2 z-10 hidden h-2 w-2 -translate-y-1/2 rotate-45 border border-ember-500 bg-ink-950 lg:block"
                     />
                   )}
                 </article>
@@ -129,10 +130,10 @@ export function Architecture() {
                   }`}
                   style={{
                     color:
-                      "color-mix(in srgb, var(--color-ink-800) 86%, transparent)",
+                      "color-mix(in srgb, var(--color-paper-100) 86%, transparent)",
                   }}
                 >
-                  <span className="h-1.5 w-1.5 flex-none rounded-full bg-ember-700" />
+                  <span className="h-1.5 w-1.5 flex-none rounded-full bg-ember-500" />
                   {b}
                 </li>
               ))}

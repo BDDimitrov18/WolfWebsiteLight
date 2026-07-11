@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
@@ -15,7 +16,12 @@ import { LanguageToggle } from "./LanguageToggle";
  */
 export function Navbar() {
   const t = useT();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  // Only the home page opens on the night hero; every other route under
+  // this navbar starts on paper, where the transparent light-on-dark
+  // idle state would be illegible — go solid from scroll 0 there.
+  const solid = scrolled || pathname !== "/";
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
@@ -94,10 +100,10 @@ export function Navbar() {
         className="relative border-b backdrop-blur-md transition-colors duration-400"
         style={{
           borderBottomWidth: 1,
-          background: scrolled
+          background: solid
             ? "color-mix(in srgb, var(--color-ink-950) 82%, transparent)"
             : "transparent",
-          borderColor: scrolled
+          borderColor: solid
             ? "color-mix(in srgb, var(--color-paper-100) 9%, transparent)"
             : "transparent",
         }}
@@ -106,12 +112,14 @@ export function Navbar() {
           <nav className="flex h-16 items-center justify-between gap-4">
             <Logo />
 
-            <div className="hidden items-center gap-8 md:flex">
+            {/* Inline links from lg: at md the Bulgarian labels + CTA
+                overflow the 64px bar and wrap — tablets get the burger. */}
+            <div className="hidden items-center gap-8 lg:flex">
               {links.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="nav-link text-sm text-ink-300 transition-colors hover:text-paper-50"
+                  className="nav-link whitespace-nowrap text-sm text-ink-300 transition-colors hover:text-paper-50"
                 >
                   {l.label}
                 </Link>
@@ -122,7 +130,7 @@ export function Navbar() {
               <LanguageToggle />
               <Link
                 href="/#contact"
-                className="btn btn-primary hidden h-9 px-4 py-0 text-sm sm:inline-flex"
+                className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
               >
                 {t("nav.cta")}
               </Link>
@@ -131,7 +139,7 @@ export function Navbar() {
                 onClick={() => setOpen((v) => !v)}
                 aria-label={t("nav.menu")}
                 aria-expanded={open}
-                className="flex h-10 w-10 items-center justify-center rounded-md border border-ink-600 text-paper-100 md:hidden"
+                className="flex h-10 w-10 items-center justify-center rounded-md border border-ink-600 text-paper-100 lg:hidden"
               >
                 <Burger open={open} />
               </button>
@@ -146,7 +154,7 @@ export function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div
-          className="md:hidden"
+          className="lg:hidden"
           style={{
             background: "var(--color-ink-950)",
             borderBottom:

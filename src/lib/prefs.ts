@@ -15,6 +15,12 @@ import { useCallback, useSyncExternalStore } from "react";
 
 const listeners = new Set<() => void>();
 
+// Session-scoped fallback for environments where reads work but writes
+// throw (Safari private mode, exhausted quota): a set value must still
+// take effect for the session, or the control that wrote it would look
+// broken. Persistence is simply lost — the correct degradation.
+const memory = new Map<string, string | null>();
+
 function emit() {
   listeners.forEach((l) => l());
 }
@@ -35,9 +41,9 @@ export function usePref(
     subscribe,
     () => {
       try {
-        return localStorage.getItem(key);
+        return localStorage.getItem(key) ?? memory.get(key) ?? null;
       } catch {
-        return null;
+        return memory.get(key) ?? null;
       }
     },
     () => null,
@@ -45,6 +51,7 @@ export function usePref(
 
   const set = useCallback(
     (v: string | null) => {
+      memory.set(key, v);
       try {
         if (v === null) {
           localStorage.removeItem(key);
@@ -52,7 +59,7 @@ export function usePref(
           localStorage.setItem(key, v);
         }
       } catch {
-        /* storage unavailable — the UI simply stays un-personalized */
+        /* write blocked — the in-memory value carries the session */
       }
       emit();
     },
@@ -64,10 +71,11 @@ export function usePref(
 
 /** Write a preference outside React (e.g. from an effect). */
 export function setPref(key: string, value: string) {
+  memory.set(key, value);
   try {
     localStorage.setItem(key, value);
   } catch {
-    /* best effort */
+    /* write blocked — the in-memory value carries the session */
   }
   emit();
 }

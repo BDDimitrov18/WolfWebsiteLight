@@ -67,7 +67,8 @@ export function Architecture() {
       className="register-paper relative overflow-hidden"
     >
       <div ref={rootRef} className="contents">
-        <div data-draw aria-hidden className="pointer-events-none absolute right-0 top-10 hidden lg:block">
+        {/* xl only: at lg the net would run under the subtitle text */}
+        <div data-draw aria-hidden className="pointer-events-none absolute right-0 top-10 hidden xl:block">
           <TriangulationField className="h-96 w-96 text-ink-700/45" />
         </div>
 

@@ -76,7 +76,8 @@ export function CTA() {
 
       <Container className="relative">
         <div className="relative mx-auto max-w-4xl border bg-paper-50 px-7 py-14 text-center shadow-sheet sm:px-14">
-          <CornerMarks className="text-ember-700" />
+          {/* top-right cross omitted — the stamp lands there */}
+          <CornerMarks className="text-ember-700" corners={["tl", "bl", "br"]} />
           {/* The stamp: red ink, slightly off-square, over the plate's edge */}
           <SheetStamp
             ring={t("cta.stampRing")}
@@ -114,10 +115,10 @@ export function CTA() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t("cta.emailPlaceholder")}
-              className="w-full flex-1 border bg-white px-4 py-3 text-sm text-ink-900 transition-colors focus:border-ember-700"
+              className="w-full flex-1 border bg-white px-4 py-3 text-sm text-ink-900 transition-colors placeholder:text-ink-500 focus:border-ember-700"
               style={{
                 borderColor:
-                  "color-mix(in srgb, var(--color-ink-700) 35%, transparent)",
+                  "color-mix(in srgb, var(--color-ink-700) 55%, transparent)",
               }}
             />
             <Magnetic>

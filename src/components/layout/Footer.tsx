@@ -50,6 +50,16 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden border-t border-ink-700 bg-ink-950">
+      {/* Closing neatline: the sheet's bottom edge, mirroring the one
+          that opened it under the hero */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "color-mix(in srgb, var(--color-ember-700) 55%, transparent)",
+        }}
+      />
       <CompassRose className="pointer-events-none absolute -right-20 -top-24 h-80 w-80 text-ink-500 opacity-30" />
       <Container className="relative">
         <div className="grid grid-cols-2 gap-10 py-16 sm:grid-cols-3 lg:grid-cols-5">

@@ -121,18 +121,21 @@ function ContinueReading() {
   return (
     <Link
       href={`/docs/${page.slug}`}
-      className="group mb-8 flex items-center gap-3 border border-ember-700/40 bg-ember-500/10 px-4 py-3 transition-colors hover:bg-ember-500/15"
+      className="group mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 border border-ember-700/40 bg-ember-500/10 px-4 py-3 transition-colors hover:bg-ember-500/15"
     >
-      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ember-800">
+      <span className="flex-none font-mono text-[11px] uppercase tracking-[0.16em] text-ember-800">
         {t("docs.continueReading")}
       </span>
-      <span className="min-w-0 truncate font-display text-sm text-ink-900">
+      {/* On narrow screens the destination gets its own full row so the
+          long Bulgarian titles stay readable instead of truncating. */}
+      <span className="order-last basis-full font-display text-sm text-ink-900 sm:order-none sm:min-w-0 sm:basis-auto sm:truncate">
         {page.title[locale]}
       </span>
       <span
+        aria-hidden
         className="ml-auto flex-none font-mono text-[11px]"
         style={{
-          color: "color-mix(in srgb, var(--color-ink-700) 60%, transparent)",
+          color: "color-mix(in srgb, var(--color-ink-700) 70%, transparent)",
         }}
       >
         {String(idx + 1).padStart(2, "0")} / {String(DOC_PAGES.length).padStart(2, "0")}
@@ -185,7 +188,7 @@ function Pager({ slug }: { slug: string }) {
             <span
               className="ml-auto"
               style={{
-                color: "color-mix(in srgb, var(--color-ink-700) 60%, transparent)",
+                color: "color-mix(in srgb, var(--color-ink-700) 70%, transparent)",
               }}
             >
               {station(prev)}
@@ -213,7 +216,7 @@ function Pager({ slug }: { slug: string }) {
             <span
               className="mr-auto"
               style={{
-                color: "color-mix(in srgb, var(--color-ink-700) 60%, transparent)",
+                color: "color-mix(in srgb, var(--color-ink-700) 70%, transparent)",
               }}
             >
               {station(next)}

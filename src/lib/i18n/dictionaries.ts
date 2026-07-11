@@ -33,6 +33,7 @@ const bg = {
     docs: "Документация",
     cta: "Заявете демо",
     menu: "Меню",
+    close: "Затвори",
   },
   hero: {
     eyebrow: "Система за управление на проектантска практика",
@@ -343,6 +344,7 @@ const bg = {
         ps: [
           "Сайтът е статичен и няма собствен сървър за данни. Формата „Заявете демо“ не изпраща нищо към нас автоматично — тя отваря вашата пощенска програма с предварително попълнено писмо, което вие решавате дали да изпратите.",
           "Имейл, който ни изпратите, се използва единствено за да ви отговорим и да уговорим демонстрация. Не го споделяме с трети страни и не изпращаме маркетингови съобщения.",
+          "Сайтът запомня няколко предпочитания в хранилището на вашия браузър: езика на интерфейса, че въвеждащата анимация е показана, последната прочетена глава от документацията и избран размер на екипа в страницата с цените. Те никога не напускат устройството ви, ние нямаме достъп до тях, а изчистването на данните за сайта в браузъра ги премахва.",
         ],
       },
       {
@@ -402,6 +404,7 @@ const en: typeof bg = {
     docs: "Docs",
     cta: "Book a demo",
     menu: "Menu",
+    close: "Close",
   },
   hero: {
     eyebrow: "Design practice management system",
@@ -712,6 +715,7 @@ const en: typeof bg = {
         ps: [
           "The site is static and has no data server of its own. The “Book a demo” form sends nothing to us automatically — it opens your mail client with a pre-filled message that you decide whether to send.",
           "An email you send us is used solely to reply and arrange a demonstration. We do not share it with third parties and we do not send marketing messages.",
+          "The site remembers a few preferences in your browser's own storage: the interface language, that the intro animation has been shown, the last documentation chapter you read, and a team size you pick on the pricing page. They never leave your device, we cannot read them, and clearing your browser's site data removes them.",
         ],
       },
       {

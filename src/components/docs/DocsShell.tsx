@@ -62,7 +62,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
-                    aria-label="Close"
+                    aria-label={t("nav.close")}
                     className="text-ink-800 transition-colors hover:text-ink-950"
                   >
                     ✕

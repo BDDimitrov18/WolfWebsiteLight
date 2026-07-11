@@ -160,14 +160,20 @@ tested claim.
 
 Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
 
-7. **Pricing „Препоръчан план“ / "Recommended plan"** (screen-reader label on
+9. **Pricing „Препоръчан план“ / "Recommended plan"** (screen-reader label on
    the featured tier's ★ badge, added with the 2026-07-11 redesign) — a vendor
    recommendation, not a popularity statistic; the Standard tier was already
    visually marked as featured (★) before the redesign. No sales-volume claim
-   is made or implied.
+   is made or implied. The team-size selector added alongside it („Колко души
+   е практиката?“) lets the visitor highlight a tier matching their own
+   choice; that state shows „за вашия екип“ / "for your team" — the visitor's
+   stored selection, not a vendor claim — and without a selection the sheet
+   shows exactly the vendor default.
 
-8. **CTA stamp „ДЕМО · 30 МИН“ / "DEMO · 30 MIN"** (decorative ink-stamp motif
-   on the demo request form, 2026-07-11) — restates the existing verified CTA
-   claim „Половин час е достатъчен…“ ("Half an hour is enough…"), which is the
-   owner's demo-length commitment. The ring text is the product descriptor
-   („за проектантски практики“), no certification or approval implied.
+10. **CTA stamp** (decorative ink-stamp motif on the demo request form,
+    2026-07-11) — center text „ДЕМО\n30 МИН“ / "DEMO\n30 MIN"
+    (`cta.stampCenter`), ring text „WOLF · ЗА ПРОЕКТАНТСКИ ПРАКТИКИ · “ /
+    "WOLF · FOR DESIGN PRACTICES · " (`cta.stampRing`). The 30-minute figure
+    restates the owner-attested CTA claim „Половин час е достатъчен…“
+    (`cta.body`, unchanged); the ring is the established product descriptor.
+    No certification or approval implied; the SVG is aria-hidden.

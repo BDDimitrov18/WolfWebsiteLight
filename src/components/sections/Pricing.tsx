@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { dictionaries } from "@/lib/i18n/dictionaries";
 import { usePref } from "@/lib/prefs";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
@@ -33,13 +34,22 @@ export function Pricing() {
   const notes = t<string[]>("pricing.notes");
   const [team, setTeam] = usePref("wolf.team");
 
-  const parsed = team === null ? NaN : Number.parseInt(team, 10);
-  const selected =
-    Number.isInteger(parsed) && parsed >= 0 && parsed < cards.length
-      ? parsed
-      : null;
-  const highlight =
-    selected ?? cards.findIndex((c) => c.featured);
+  // The preference stores the tier NAME, not an array index — a future
+  // reorder or insert in the price list must never silently point a
+  // returning visitor's badge at the wrong tier. Names are looked up
+  // across both locales (the top tier is „Предприятие“/"Enterprise").
+  const tierIndex = (name: string | null): number | null => {
+    if (!name) return null;
+    for (const loc of ["bg", "en"] as const) {
+      const i = dictionaries[loc].pricing.cards.findIndex(
+        (c) => c.name === name,
+      );
+      if (i !== -1 && i < cards.length) return i;
+    }
+    return null;
+  };
+  const selected = tierIndex(team);
+  const highlight = selected ?? cards.findIndex((c) => c.featured);
 
   return (
     <Section id="pricing" hud={t("pricing.eyebrow")} className="register-paper relative overflow-hidden">
@@ -65,9 +75,12 @@ export function Pricing() {
           <div
             className="mt-10 flex flex-wrap items-baseline gap-x-5 gap-y-3"
             role="group"
-            aria-label={t("pricing.teamPrompt")}
+            aria-labelledby="pricing-team-prompt"
           >
-            <p className="font-mono text-xs uppercase tracking-[0.16em] text-ember-800">
+            <p
+              id="pricing-team-prompt"
+              className="font-mono text-xs uppercase tracking-[0.16em] text-ember-800"
+            >
               {t("pricing.teamPrompt")}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -78,7 +91,7 @@ export function Pricing() {
                     key={card.name}
                     type="button"
                     aria-pressed={active}
-                    onClick={() => setTeam(active ? null : String(i))}
+                    onClick={() => setTeam(active ? null : card.name)}
                     className={`border px-3 py-1.5 font-mono text-xs transition-colors ${
                       active
                         ? "border-ember-700 bg-ember-500/10 text-ink-950"
@@ -90,6 +103,8 @@ export function Pricing() {
                         : {
                             color:
                               "color-mix(in srgb, var(--color-ink-800) 78%, transparent)",
+                            borderColor:
+                              "color-mix(in srgb, var(--color-ink-700) 50%, transparent)",
                           }
                     }
                   >

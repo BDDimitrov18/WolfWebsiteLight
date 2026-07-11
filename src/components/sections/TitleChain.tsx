@@ -77,8 +77,10 @@ export function TitleChain() {
         aria-hidden
         className="pointer-events-none absolute inset-0 paper-grain"
         style={{
+          // The deed zone is a bounded band: it fades back out before
+          // the section ends so the sheet never shows a hard seam.
           background:
-            "linear-gradient(180deg, transparent, var(--color-paper-200))",
+            "linear-gradient(180deg, transparent 0%, var(--color-paper-200) 38%, var(--color-paper-200) 68%, transparent 100%)",
         }}
       />
       <Container className="relative">

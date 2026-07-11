@@ -54,10 +54,15 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   // first client render agree on the default ("bg") — reading localStorage /
   // navigator during render would cause a hydration mismatch.
   useEffect(() => {
-    const stored =
-      typeof window !== "undefined"
-        ? (window.localStorage.getItem(STORAGE_KEY) as Locale | null)
-        : null;
+    // Guarded: merely touching localStorage throws under "block all
+    // cookies" / some webviews, and an uncaught throw here would tear
+    // down the entire hydrated tree.
+    let stored: Locale | null = null;
+    try {
+      stored = window.localStorage.getItem(STORAGE_KEY) as Locale | null;
+    } catch {
+      /* storage blocked — fall through to browser language */
+    }
     const next: Locale =
       stored === "bg" || stored === "en"
         ? stored

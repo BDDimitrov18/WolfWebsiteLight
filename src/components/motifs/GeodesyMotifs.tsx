@@ -239,14 +239,19 @@ export function CompassRose({ className, ...props }: SVGProps<SVGSVGElement>) {
    survey plan sheet. Wrap any relatively-positioned box to make it
    read as a drafted cell rather than a generic card.
    ---------------------------------------------------------------- */
+type Corner = "tl" | "tr" | "bl" | "br";
+
 export function CornerMarks({
   className = "",
   size = 14,
   inset = -7,
+  corners = ["tl", "tr", "bl", "br"],
 }: {
   className?: string;
   size?: number;
   inset?: number;
+  /** Which corners to mark — omit one when another motif occupies it. */
+  corners?: Corner[];
 }) {
   const arm = size / 2;
   const cross = (
@@ -265,12 +270,19 @@ export function CornerMarks({
     </svg>
   );
   const pos = `${inset}px`;
+  const at: Record<Corner, React.CSSProperties> = {
+    tl: { top: pos, left: pos },
+    tr: { top: pos, right: pos },
+    bl: { bottom: pos, left: pos },
+    br: { bottom: pos, right: pos },
+  };
   return (
     <span aria-hidden className={`pointer-events-none ${className}`}>
-      <span className="absolute" style={{ top: pos, left: pos }}>{cross}</span>
-      <span className="absolute" style={{ top: pos, right: pos }}>{cross}</span>
-      <span className="absolute" style={{ bottom: pos, left: pos }}>{cross}</span>
-      <span className="absolute" style={{ bottom: pos, right: pos }}>{cross}</span>
+      {corners.map((c) => (
+        <span key={c} className="absolute" style={at[c]}>
+          {cross}
+        </span>
+      ))}
     </span>
   );
 }

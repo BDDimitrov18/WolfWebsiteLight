@@ -11,12 +11,12 @@
    rules, survey markers) is drawn in light on that ground rather
    than in ink on paper.
 
-   The PAPER register survives as `.register-paper`, but only for
-   things that genuinely ARE paper inside the night — the deed card
-   in the title chain. It re-points the scoped vars (eyebrow, focus
-   ring, lead, borders, grid) so shared primitives adapt without
-   forking. Do not put it back on whole sections: the black-to-paper
-   jump between bands was rejected in review.
+   There is no paper register. An earlier build put whole sections
+   on a warm drafting sheet; the black-to-paper jump was rejected
+   twice by the owner. The `paper-*` tokens survive only as the
+   light end of the type/accent scale — do not reintroduce a light
+   ground. The only light plates on the site are the app's own
+   screenshots.
    ============================================================ */
 
 @theme {
@@ -74,9 +74,6 @@
   --shadow-frame: 0 30px 60px -30px rgba(9, 13, 21, 0.7),
     0 8px 24px -12px rgba(9, 13, 21, 0.45);
   --shadow-ember: 0 10px 30px -8px rgba(194, 94, 42, 0.45);
-  /* Elevation on paper: soft warm ink, like a sheet lifted off the table */
-  --shadow-sheet: 0 1px 2px rgba(42, 32, 18, 0.07),
-    0 18px 44px -24px rgba(42, 32, 18, 0.28);
 
   /* ---- Easing -------------------------------------------- */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -172,55 +169,16 @@
     color: var(--lead-color, color-mix(in srgb, var(--color-paper-100) 78%, transparent));
   }
 
-  /* ---- The SHEET register ---------------------------------
-     Scoped to an actual document sitting in the night — the deed
-     card. Warm surface, ink text, every scoped primitive
-     re-pointed for light ground. Not for whole sections. */
-  .register-paper {
-    background-color: var(--color-paper-100);
-    color: var(--color-ink-800);
-    --eyebrow-color: var(--color-ember-800);
-    --lead-color: color-mix(in srgb, var(--color-ink-800) 88%, transparent);
-    --focus-ring: var(--color-ember-700);
-  }
-  .register-paper :where(*) {
-    border-color: color-mix(in srgb, var(--color-ink-700) 22%, transparent);
-  }
-  .register-paper :where(h1, h2, h3, h4) {
-    color: var(--color-ink-900);
-  }
-
   /* Millimeter drafting grid: fine 9px pitch with a heavier line
      every 5th. The two pitches sit close in alpha so a mask fades
-     them out together instead of leaving a stepped edge.
-
-     The line color is a variable, not a literal: on night the grid
-     is scribed in light, on paper in ink. Same texture, both grounds. */
+     them out together instead of leaving a stepped edge. */
   .mm-grid {
-    --grid-major: color-mix(in srgb, var(--color-ink-300) 11%, transparent);
-    --grid-minor: color-mix(in srgb, var(--color-ink-300) 7%, transparent);
     background-image:
-      linear-gradient(to right, var(--grid-major) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px),
-      linear-gradient(to right, var(--grid-minor) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-minor) 1px, transparent 1px);
+      linear-gradient(to right, color-mix(in srgb, var(--color-ink-300) 11%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-300) 11%, transparent) 1px, transparent 1px),
+      linear-gradient(to right, color-mix(in srgb, var(--color-ink-300) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-ink-300) 7%, transparent) 1px, transparent 1px);
     background-size: 45px 45px, 45px 45px, 9px 9px, 9px 9px;
-  }
-  .register-paper .mm-grid,
-  .register-paper.mm-grid {
-    --grid-major: color-mix(in srgb, var(--color-ink-700) 9%, transparent);
-    --grid-minor: color-mix(in srgb, var(--color-ink-700) 6%, transparent);
-  }
-
-  /* Grain + topographic paper texture used on light panels */
-  .paper-grain {
-    background-image:
-      radial-gradient(
-        circle at 1px 1px,
-        color-mix(in srgb, var(--color-ink-700) 9%, transparent) 1px,
-        transparent 0
-      );
-    background-size: 22px 22px;
   }
 
   /* Hairline coordinate grid (dark sections) */
@@ -296,14 +254,6 @@
   }
   .btn-ghost:hover {
     background-color: color-mix(in srgb, var(--color-paper-100) 12%, transparent);
-  }
-  .register-paper .btn-ghost {
-    background-color: transparent;
-    color: var(--color-ink-800);
-    border-color: color-mix(in srgb, var(--color-ink-700) 35%, transparent);
-  }
-  .register-paper .btn-ghost:hover {
-    background-color: color-mix(in srgb, var(--color-ink-700) 7%, transparent);
   }
 }
 

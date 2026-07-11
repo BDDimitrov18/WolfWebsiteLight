@@ -380,29 +380,3 @@ export function SheetStamp({
   );
 }
 
-/* ----------------------------------------------------------------
-   Ideal-parts glyph — fractional ownership (e.g. 1/3), the heart of
-   the cadastral title-chain model.
-   ---------------------------------------------------------------- */
-export function IdealPartsGlyph({
-  className,
-  ...props
-}: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      viewBox="0 0 80 80"
-      fill="none"
-      aria-hidden="true"
-      className={className}
-      {...props}
-    >
-      <rect x="6" y="6" width="68" height="68" rx="6" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M6 40 H74 M40 6 V74" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-      <path
-        d="M6 6 L40 40 L6 40 Z"
-        fill="var(--color-ember-500)"
-        opacity="0.85"
-      />
-    </svg>
-  );
-}

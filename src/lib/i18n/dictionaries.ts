@@ -214,15 +214,23 @@ const bg = {
   },
   titleChain: {
     eyebrow: "Специализираният модул",
-    chainLabel: "имот ↔ документ ↔ собственик ↔ пълномощно",
-    title: "Веригата на собствеността, моделирана коректно",
-    body: "Един имот има множество документи. Един документ свързва множество собственици. Всеки собственик държи идеална част и може да бъде представляван чрез пълномощно. Wolf записва точно тази тройна връзка.",
-    steps: [
-      { label: "Имот", value: "КИ · УПИ · местност" },
-      { label: "Документ", value: "акт · номер · издател" },
-      { label: "Собственик", value: "идеална част 1/3" },
-      { label: "Пълномощно", value: "номер · дата" },
-    ],
+    title: "Имоти, документи, собственици",
+    body: "Wolf пази имотите, документите за собственост, собствениците и пълномощните — заедно с връзките помежду им. Един имот има няколко документа, а един документ — няколко собственика, всеки с идеалната си част.",
+    graph: {
+      caption: "Примерни данни",
+      flow: "имот → документ → собственик → пълномощно",
+      plot: { label: "Имот", id: "68134.905.211", sub: "УПИ IV-211 · 1 240 м²" },
+      docs: [
+        { label: "Нотариален акт", ref: "№ 143, том II" },
+        { label: "Договор за делба", ref: "№ 27 · 2019 г." },
+      ],
+      owners: [
+        { name: "И. Петров", part: "1/2" },
+        { name: "М. Петрова", part: "1/4" },
+        { name: "Г. Илиев", part: "1/4" },
+      ],
+      poa: { label: "Пълномощно", ref: "№ 88 · 2024 г." },
+    },
   },
   architecture: {
     eyebrow: "Как работи",
@@ -595,15 +603,23 @@ const en: typeof bg = {
   },
   titleChain: {
     eyebrow: "The specialized module",
-    chainLabel: "plot ↔ document ↔ owner ↔ PoA",
-    title: "The chain of ownership, modeled correctly",
-    body: "A plot has many documents. A document links many owners. Each owner holds an ideal part and may be represented by a power of attorney. Wolf records exactly this three-way relationship.",
-    steps: [
-      { label: "Plot", value: "cad. no. · UPI · locality" },
-      { label: "Document", value: "deed · number · issuer" },
-      { label: "Owner", value: "ideal part 1/3" },
-      { label: "Power of attorney", value: "number · date" },
-    ],
+    title: "Plots, documents, owners",
+    body: "Wolf keeps the plots, the ownership documents, the owners and the powers of attorney — together with the links between them. One plot has several documents, and one document several owners, each with an ideal part.",
+    graph: {
+      caption: "Sample data",
+      flow: "plot → document → owner → power of attorney",
+      plot: { label: "Plot", id: "68134.905.211", sub: "UPI IV-211 · 1,240 m²" },
+      docs: [
+        { label: "Notarial deed", ref: "No. 143, vol. II" },
+        { label: "Split agreement", ref: "No. 27 · 2019" },
+      ],
+      owners: [
+        { name: "I. Petrov", part: "1/2" },
+        { name: "M. Petrova", part: "1/4" },
+        { name: "G. Iliev", part: "1/4" },
+      ],
+      poa: { label: "Power of attorney", ref: "No. 88 · 2024" },
+    },
   },
   architecture: {
     eyebrow: "How it works",

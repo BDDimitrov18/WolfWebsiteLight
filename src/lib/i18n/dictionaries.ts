@@ -133,11 +133,11 @@ const bg = {
       templates: {
         tag: "Шаблони",
         title: "Бланките на практиката — сглобени в конструктор",
-        body: "Шаблонът се сглобява от блокове — заглавие, текст, таблица със списък, повтарящ се раздел, подписи — а данните се поставят като полета с едно кликване: „Номер на поръчката“, „Три имена“, „ЕГН“. Повтарящите се раздели изреждат имотите на поръчката, а за всеки имот — неговите собственици.",
+        body: "Два начина, един резултат. В конструктора шаблонът се сглобява от блокове, а данните се поставят като полета с едно кликване: „Номер на поръчката“, „Три имена“, „ЕГН“. Или пишете бланката в Word с плейсхолдъри и я качвате готова. Двата вида шаблони стоят в един списък и се генерират по един и същи начин.",
         bullets: [
-          "Без плейсхолдъри на ръка — полетата се избират от списък",
+          "Конструктор: блокове и полета от списък — без писане на код",
+          "Или Word файл с {{плейсхолдъри}} и {{#each}} списъци — както досега",
           "Жив преглед: примерни данни или реална поръчка, преди да публикувате",
-          "Внасяне на съществуващ .docx — текстът и форматирането стават блокове",
         ],
       },
       calendar: {
@@ -514,11 +514,11 @@ const en: typeof bg = {
       templates: {
         tag: "Templates",
         title: "Your practice's forms, assembled in a builder",
-        body: "A template is assembled from blocks — heading, text, list table, repeating section, signatures — and the data goes in as fields you insert with a click: “Order number”, “Full name”, “ЕГН”. Repeating sections walk the order's plots, and for each plot, its owners.",
+        body: "Two roads, one result. In the builder a template is assembled from blocks, and the data goes in as fields you insert with a click: “Order number”, “Full name”, “ЕГН”. Or you write the form in Word with placeholders and upload it finished. Both kinds sit in one list and generate identically.",
         bullets: [
-          "No placeholders typed by hand — fields are picked from a list",
+          "Builder: blocks and fields picked from a list — no code to write",
+          "Or a Word file with {{placeholders}} and {{#each}} lists — as before",
           "Live preview: sample data or a real order, before you publish",
-          "Import an existing .docx — its text and formatting become blocks",
         ],
       },
       calendar: {

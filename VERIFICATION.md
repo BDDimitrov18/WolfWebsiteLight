@@ -211,11 +211,24 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
     of rendering as an unresolved literal, and `{{#each plots}}` nested inside
     `{{#each owners}}` now enumerates each owner's own plots.
 
-12. **Removed claims** (2026-07-11), no longer true of the app and deleted from
-    the site: the downloadable starter template („Изтегли начален шаблон
-    (.docx)“ — the button was removed in the builder work), and authoring
-    templates by typing `{{placeholders}}` into Word as the *primary* flow
-    (still supported for existing Word templates, and raw upload is now
-    admin-only; the site says exactly that). The token-syntax code block in
-    `/docs/templates` was replaced with the builder's Bulgarian field catalogue,
-    quoted from `OrderMergeContextBuilder.cs`.
+12. **Both authoring paths are documented as equals** (owner directive,
+    2026-07-11: *"both options should be available… make sure it is visible"*).
+    `/docs/templates` opens on „Два начина към една бланка“ and then documents
+    each in full: the Конструктор (blocks, field picker, live preview, draft →
+    publish, .docx import) and Word templates with `{{placeholders}}`
+    (`{{#each}}` lists, „Провери шаблона“ linter, preview, „Замени файла“). The
+    homepage tour stop names both. Both code blocks are quoted from the app —
+    the Bulgarian field catalogue and the token syntax from
+    `OrderMergeContextBuilder.cs`.
+    - Rights wording: the site says who may upload Word files and edit others'
+      templates is **set in „Роли и права“**, rather than asserting "admin
+      only". This is the accurate statement: the gate is the
+      `templates.manageAll` permission (`TemplatesController.cs:199`), and the
+      default `RoleStandard` bundle **seeds `TemplatesManageAll`**
+      (`Permissions.cs:218`) — so on a default install the whole team can
+      upload, and it only becomes admin-only if the owner strips the right.
+    - **One claim was REMOVED and not restored:** the downloadable starter
+      template („Изтегли начален шаблон (.docx)“). That button was deleted from
+      the app in the builder work (M2); `StarterTemplateBuilder.cs` survives
+      only as seed/test code. If the owner wants it back, that is an app change,
+      not a site one.

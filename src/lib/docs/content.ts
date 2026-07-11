@@ -92,7 +92,7 @@ export const DOC_PAGES: DocPage[] = [
             "Календар — задачите по крайни срокове",
             "Служители — екипът и личните справки (за администратори)",
             "Фактури — регистърът на фактурите и PDF генераторът",
-            "Шаблони — бланките на практиката, сглобени в конструктора",
+            "Шаблони — бланките на практиката: в конструктора или като Word файл",
             "Справки — отчетите в Excel",
             "Администрация — потребители, роли и права (за администратори)",
             "Помощ — вграденото ръководство на системата (отваря се и с F1)",
@@ -179,7 +179,7 @@ export const DOC_PAGES: DocPage[] = [
             "Calendar — tasks by due date",
             "Employees — the team and per-person reports (administrators)",
             "Invoices — the invoice register and the PDF generator",
-            "Templates — the practice's forms, assembled in the builder",
+            "Templates — the practice's forms: in the builder, or as a Word file",
             "Reports — the Excel exports",
             "Administration — users, roles and rights (administrators)",
             "Help — the system's built-in manual (also opens with F1)",
@@ -1008,11 +1008,29 @@ export const DOC_PAGES: DocPage[] = [
     navKey: "templates",
     title: { bg: "Шаблони за документи", en: "Document templates" },
     intro: {
-      bg: "Бланките на практиката се сглобяват в конструктор — от блокове и полета, без писане на код — и Wolf ги попълва с данните на всяка поръчка, записвайки готовия документ направо в нейната папка.",
-      en: "Your practice's forms are assembled in a builder — from blocks and fields, with no code to write — and Wolf fills them with any order's data, saving the finished document straight into that order's folder.",
+      bg: "Бланките на практиката стават шаблони, които Wolf попълва с данните на всяка поръчка и записва направо в нейната папка. Шаблонът се прави по два начина — визуално в конструктора или като Word файл с плейсхолдъри. Двата вида работят рамо до рамо.",
+      en: "Your practice's forms become templates that Wolf fills with any order's data and saves straight into that order's folder. A template is made in one of two ways — visually in the builder, or as a Word file with placeholders. Both kinds work side by side.",
     },
     blocks: {
       bg: [
+        { type: "h2", id: "ways", text: "Два начина към една бланка" },
+        {
+          type: "p",
+          text: "Няма правилен и грешен път — изберете този, който ви е удобен. Готовите шаблони от двата вида стоят в един списък, генерират се по един и същи начин и се различават само по етикета си.",
+        },
+        {
+          type: "steps",
+          items: [
+            {
+              t: "Конструкторът",
+              d: "Сглобявате документа от блокове и слагате полетата с кликване. Не се пише код, не се помнят имена на плейсхолдъри, а живият преглед показва резултата още докато работите. Това е по-краткият път за повечето хора.",
+            },
+            {
+              t: "Word файл с плейсхолдъри",
+              d: "Пишете бланката в Word, както сте свикнали, и оставяте плейсхолдъри като {{order.name}} на местата за данни. Качвате готовия .docx и Wolf го попълва. Удобно, ако бланката вече съществува или ѝ трябва оформление, което Word прави най-добре.",
+            },
+          ],
+        },
         { type: "img", slot: "TemplateBuilder", alt: "Конструкторът на шаблони", title: "Wolf — Конструктор на шаблони" },
         { type: "h2", id: "builder", text: "Конструкторът" },
         {
@@ -1077,6 +1095,28 @@ export const DOC_PAGES: DocPage[] = [
           type: "callout",
           text: "Внасянето е механично: таблици, изображения, текстови полета, колонтитули и номерирани списъци не се пренасят. На мястото на всяка таблица остава бележка, за да я сглобите наново с „Таблица със списък“.",
         },
+        { type: "h2", id: "word", text: "Word шаблони с плейсхолдъри" },
+        {
+          type: "p",
+          text: "Вторият начин: шаблонът е обикновен Word документ (.docx), в който на мястото на променливите данни стоят плейсхолдъри. „Качи Word файл (.docx)“ го добавя с име, описание и тип данни, а панелът „Налични плейсхолдъри“ показва всички полета, групирани по тема, с копиране с един клик.",
+        },
+        {
+          type: "code",
+          text: "{{order.id}}  {{order.name}}  {{order.price}}  {{order.unpaid}}\n{{client.fullname}}  {{client.address}}  {{client.phone}}\n{{today}}  {{today.long}}   →  11.07.2026 · 11 юли 2026 г.\n{{#each plots}} {{plot.number}} {{plot.address}} {{/each}}\n{{#each owners}} {{owner.fullname}} {{owner.egn}} {{/each}}",
+        },
+        {
+          type: "ul",
+          items: [
+            "Списъците — имоти, собственици, възложители, дейности, задачи, фактури — се разгръщат с {{#each …}} … {{/each}}: като поредица от абзаци или като повтарящ се ред в таблица",
+            "„Провери шаблона“ хваща печатни грешки в плейсхолдърите и проблеми в {{#each}} блоковете, преди да са стигнали до реален документ",
+            "„Преглед“ върху избрана поръчка отваря попълнен пробен документ — и казва колко плейсхолдъра са останали празни за нея",
+            "„Замени файла“ качва нова версия на бланката, без да губите шаблона и настройките му",
+          ],
+        },
+        {
+          type: "p",
+          text: "Шаблонът, качен като Word файл, се вижда в списъка с етикет „Word файл“ — за да е ясно, че се редактира в Word, а не в конструктора. Ако решите, „Превърни в Word шаблон“ изнася и конструкторски шаблон като обикновен .docx.",
+        },
         { type: "h2", id: "generate", text: "Генериране за поръчка" },
         { type: "img", slot: "GenerateDocument", alt: "Генериране на документ от шаблон", title: "Wolf — Генериране на документ" },
         {
@@ -1104,7 +1144,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "p",
-          text: "Старите Word шаблони с плейсхолдъри продължават да работят и се разпознават с етикет „Word файл“ — за тях остава и „Провери шаблона“. Качването на готов Word файл е запазено за администратори; всички останали създават шаблони в конструктора.",
+          text: "Кой може да качва Word файлове и кой да променя чужди шаблони се задава в „Роли и права“ — вижте раздел „Администрация“.",
         },
         {
           type: "callout",
@@ -1112,6 +1152,24 @@ export const DOC_PAGES: DocPage[] = [
         },
       ],
       en: [
+        { type: "h2", id: "ways", text: "Two roads to one form" },
+        {
+          type: "p",
+          text: "There is no right and wrong way here — take whichever suits you. Templates of both kinds sit in one list, generate identically, and differ only by their badge.",
+        },
+        {
+          type: "steps",
+          items: [
+            {
+              t: "The builder",
+              d: "You assemble the document from blocks and place the fields with a click. No code to write, no placeholder names to remember, and a live preview shows the result as you work. For most people this is the shorter road.",
+            },
+            {
+              t: "A Word file with placeholders",
+              d: "You write the form in Word, the way you always have, leaving placeholders like {{order.name}} where the data belongs. Upload the finished .docx and Wolf fills it in. Handy when the form already exists, or needs layout that Word does best.",
+            },
+          ],
+        },
         { type: "img", slot: "TemplateBuilder", alt: "The template builder", title: "Wolf — Template builder" },
         { type: "h2", id: "builder", text: "The builder" },
         {
@@ -1176,6 +1234,28 @@ export const DOC_PAGES: DocPage[] = [
           type: "callout",
           text: "The import is mechanical: tables, images, text boxes, headers/footers and numbered lists do not come across. A note is left where each table was, so you can rebuild it with a list table.",
         },
+        { type: "h2", id: "word", text: "Word templates with placeholders" },
+        {
+          type: "p",
+          text: "The second road: the template is a plain Word document (.docx) with placeholders standing where the variable data goes. \"Upload Word file (.docx)\" adds it with a name, a description and a data type, and the \"Available placeholders\" panel lists every field, grouped by topic, with one-click copy.",
+        },
+        {
+          type: "code",
+          text: "{{order.id}}  {{order.name}}  {{order.price}}  {{order.unpaid}}\n{{client.fullname}}  {{client.address}}  {{client.phone}}\n{{today}}  {{today.long}}   →  11.07.2026 · 11 July 2026\n{{#each plots}} {{plot.number}} {{plot.address}} {{/each}}\n{{#each owners}} {{owner.fullname}} {{owner.egn}} {{/each}}",
+        },
+        {
+          type: "ul",
+          items: [
+            "Lists — plots, owners, commissioners, activities, tasks, invoices — unfold with {{#each …}} … {{/each}}: as a run of paragraphs or as a repeating table row",
+            "\"Check template\" catches typos in placeholders and problems in {{#each}} blocks before they reach a real document",
+            "\"Preview\" against a chosen order opens a filled-in trial document — and reports how many placeholders came out empty for it",
+            "\"Replace file\" uploads a new version of the form without losing the template or its settings",
+          ],
+        },
+        {
+          type: "p",
+          text: "A template uploaded as a Word file carries a \"Word file\" badge in the list — so it is clear that it is edited in Word, not in the builder. And if you change your mind, \"Convert to a Word template\" exports a builder template as a plain .docx.",
+        },
         { type: "h2", id: "generate", text: "Generating for an order" },
         { type: "img", slot: "GenerateDocument", alt: "Generating a document from a template", title: "Wolf — Generate document" },
         {
@@ -1203,7 +1283,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "p",
-          text: "Older Word templates with placeholders keep working and are badged as such — \"Check template\" remains available for them. Uploading a ready-made Word file is reserved for administrators; everyone else builds templates in the builder.",
+          text: "Who may upload Word files, and who may change someone else's template, is set in Roles & rights — see the Administration section.",
         },
         {
           type: "callout",

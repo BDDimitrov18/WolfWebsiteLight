@@ -165,3 +165,9 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
    recommendation, not a popularity statistic; the Standard tier was already
    visually marked as featured (★) before the redesign. No sales-volume claim
    is made or implied.
+
+8. **CTA stamp „ДЕМО · 30 МИН“ / "DEMO · 30 MIN"** (decorative ink-stamp motif
+   on the demo request form, 2026-07-11) — restates the existing verified CTA
+   claim „Половин час е достатъчен…“ ("Half an hour is enough…"), which is the
+   owner's demo-length commitment. The ring text is the product descriptor
+   („за проектантски практики“), no certification or approval implied.

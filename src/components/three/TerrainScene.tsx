@@ -66,6 +66,37 @@ const STATION_COL = 0xc9d2e4; // cool paper
 const EMBER = 0xed9a57; // --color-ember-400
 const PARCEL_COL = 0xd8c9b4; // warm survey-paper — parcels read as drawn on the map
 
+/**
+ * The field at the visitor's hour. Surveying starts at first light —
+ * the terrain's accent hues shift with local time of day: rose-warm at
+ * dawn, clearer and cooler through working hours, deep ember at dusk,
+ * and the familiar night palette otherwise. Purely a tint on the
+ * existing materials: computed client-side at mount (no SSR value, no
+ * hydration surface), and the night palette is byte-identical to the
+ * original design, so nothing depends on the clock being right.
+ */
+interface DayTint {
+  line: number;
+  station: number;
+  ember: number;
+  fog: number;
+  wire: number;
+}
+
+function timeTint(hour: number): DayTint {
+  if (hour >= 5 && hour < 9)
+    // dawn — first light, warm rose over the ridges
+    return { line: 0x41485f, station: 0xd9cfc4, ember: 0xf0a06a, fog: 0x121523, wire: 0.3 };
+  if (hour >= 9 && hour < 17)
+    // working hours — clearer air, brighter stations
+    return { line: 0x46536e, station: 0xdde4f0, ember: 0xedaa6d, fog: 0x0e1422, wire: 0.34 };
+  if (hour >= 17 && hour < 21)
+    // dusk — the ember deepens
+    return { line: 0x443f58, station: 0xd3c8bb, ember: 0xe8874a, fog: 0x110f1e, wire: 0.3 };
+  // night — the original palette
+  return { line: LINE_COL, station: STATION_COL, ember: EMBER, fog: INK_FOG, wire: 0.3 };
+}
+
 /** Soft round sprite so points render as glows, not squares. */
 function makePointTexture(): THREE.Texture {
   const c = document.createElement("canvas");
@@ -229,6 +260,7 @@ export default function TerrainScene({
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mobile = window.innerWidth < 768;
+    const tint = timeTint(new Date().getHours());
 
     let renderer: THREE.WebGLRenderer;
     try {
@@ -247,7 +279,7 @@ export default function TerrainScene({
     host.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(INK_FOG, 18, 62);
+    scene.fog = new THREE.Fog(tint.fog, 18, 62);
 
     const camera = new THREE.PerspectiveCamera(
       55,
@@ -278,9 +310,9 @@ export default function TerrainScene({
     const wire = new THREE.LineSegments(
       new THREE.WireframeGeometry(plane),
       new THREE.LineBasicMaterial({
-        color: LINE_COL,
+        color: tint.line,
         transparent: true,
-        opacity: 0.30,
+        opacity: tint.wire,
       }),
     );
     scene.add(wire);
@@ -307,7 +339,7 @@ export default function TerrainScene({
     const stations = new THREE.Points(
       stationGeo,
       new THREE.PointsMaterial({
-        color: STATION_COL,
+        color: tint.station,
         size: 0.28,
         map: pointTex,
         transparent: true,
@@ -324,7 +356,7 @@ export default function TerrainScene({
       new THREE.Float32BufferAttribute(emberPositions, 3),
     );
     const emberMat = new THREE.PointsMaterial({
-      color: EMBER,
+      color: tint.ember,
       size: 0.85,
       map: pointTex,
       transparent: true,
@@ -343,7 +375,7 @@ export default function TerrainScene({
       new THREE.Float32BufferAttribute(new Float32Array(SCAN_N * 3), 3),
     );
     const scanMat = new THREE.LineBasicMaterial({
-      color: EMBER,
+      color: tint.ember,
       transparent: true,
       opacity: 0.0,
       blending: THREE.AdditiveBlending,
@@ -425,7 +457,7 @@ export default function TerrainScene({
         new THREE.Float32BufferAttribute(parcelOutline(p, 0.09), 3),
       );
       const lineMat = new THREE.LineBasicMaterial({
-        color: EMBER,
+        color: tint.ember,
         transparent: true,
         opacity: 0.5,
         blending: THREE.AdditiveBlending,
@@ -458,7 +490,7 @@ export default function TerrainScene({
       fillGeo.setAttribute("position", new THREE.Float32BufferAttribute(fillPos, 3));
       fillGeo.setIndex(fillIdx);
       const fillMat = new THREE.MeshBasicMaterial({
-        color: EMBER,
+        color: tint.ember,
         transparent: true,
         opacity: 0.05,
         blending: THREE.AdditiveBlending,
@@ -499,7 +531,7 @@ export default function TerrainScene({
           ),
         );
         leaderMat = new THREE.LineBasicMaterial({
-          color: EMBER,
+          color: tint.ember,
           transparent: true,
           opacity: 0.32,
           blending: THREE.AdditiveBlending,

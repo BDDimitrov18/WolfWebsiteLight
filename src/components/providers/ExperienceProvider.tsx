@@ -64,16 +64,32 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // ---- Preloader decision (once per tab session) ------------------------
+  // ---- Preloader decision (first visit only) -----------------------------
+  // The calibration intro is a first-impression device: returning
+  // visitors (localStorage) skip straight to the hero. The old
+  // per-tab-session key is honoured so mid-session upgrades don't
+  // replay it either.
   useEffect(() => {
-    const seen = sessionStorage.getItem("wolf-intro") === "1";
+    let seen = false;
+    try {
+      seen =
+        localStorage.getItem("wolf.introSeen") === "1" ||
+        sessionStorage.getItem("wolf-intro") === "1";
+    } catch {
+      /* storage unavailable → treat as first visit */
+    }
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (seen || reduce) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot post-mount environment read (sessionStorage/media query), intentional
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot post-mount environment read (storage/media query), intentional
       setShowPreloader(false);
       setReady(true);
     } else {
-      sessionStorage.setItem("wolf-intro", "1");
+      try {
+        localStorage.setItem("wolf.introSeen", "1");
+        sessionStorage.setItem("wolf-intro", "1");
+      } catch {
+        /* best effort */
+      }
       setShowPreloader(true);
     }
   }, []);

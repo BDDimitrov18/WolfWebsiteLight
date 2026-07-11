@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { Container, Section, SectionHeading } from "@/components/ui/Section";
+import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { TriangulationField } from "@/components/motifs/GeodesyMotifs";
 
@@ -14,8 +14,10 @@ interface Layer {
 }
 
 /**
- * System tiers over a coordinate grid; the background triangulation
- * net draws itself stroke-by-stroke, scrubbed to the scroll.
+ * The blueprint. System tiers drawn as one hairline-divided strip on
+ * the sheet — workstation → server → database — joined by survey
+ * markers on the shared dividers; the background triangulation net
+ * draws itself stroke-by-stroke in ink, scrubbed to the scroll.
  */
 export function Architecture() {
   const t = useT();
@@ -62,56 +64,53 @@ export function Architecture() {
     <Section
       id="architecture"
       hud={t("architecture.eyebrow")}
-      className="relative overflow-hidden bg-ink-950"
+      className="register-paper relative overflow-hidden"
     >
       <div ref={rootRef} className="contents">
-        <div aria-hidden className="pointer-events-none absolute inset-0 coord-grid opacity-[0.5]" />
         <div data-draw aria-hidden className="pointer-events-none absolute right-0 top-10 hidden lg:block">
-          <TriangulationField className="h-96 w-96 text-ember-500/30" />
+          <TriangulationField className="h-96 w-96 text-ink-700/45" />
         </div>
 
         <Container className="relative">
-          <SectionHeading
-            eyebrow={t("architecture.eyebrow")}
+          <SheetHeader
+            label={t("architecture.eyebrow")}
             title={t("architecture.title")}
             subtitle={t("architecture.subtitle")}
           />
 
-          <RevealGroup className="mt-14 grid gap-4 lg:grid-cols-3" stagger={0.1}>
+          <RevealGroup
+            className="mt-16 grid border bg-paper-50/40 lg:grid-cols-3"
+            stagger={0.1}
+          >
             {layers.map((layer, i) => (
-              <RevealItem key={layer.name}>
+              <RevealItem key={layer.name} className="h-full">
                 <article
-                  className="relative h-full rounded-xl border p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-ember-500/40"
-                  style={{
-                    borderColor: "color-mix(in srgb, var(--color-paper-100) 12%, transparent)",
-                    background: "color-mix(in srgb, var(--color-ink-800) 75%, transparent)",
-                  }}
+                  className={`relative h-full p-6 transition-colors duration-300 hover:bg-paper-50 sm:p-7 ${
+                    i > 0 ? "border-t lg:border-l lg:border-t-0" : ""
+                  }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs tracking-wider text-ink-400">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="font-mono text-xs tracking-wider text-ember-800">
                       0{i + 1}
                     </span>
-                    <span
-                      className="rounded-full px-2.5 py-1 font-mono text-[11px] tracking-wide text-ember-300"
-                      style={{ background: "color-mix(in srgb, var(--color-ember-500) 14%, transparent)" }}
-                    >
+                    <span className="border border-ember-700/30 bg-ember-500/10 px-2.5 py-1 font-mono text-[11px] tracking-wide text-ember-800">
                       {layer.tech}
                     </span>
                   </div>
-                  <h3 className="mt-4 text-xl" style={{ color: "var(--color-paper-50)" }}>
-                    {layer.name}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-300">
+                  <h3 className="mt-4 text-xl">{layer.name}</h3>
+                  <p
+                    className="mt-3 text-sm leading-relaxed"
+                    style={{
+                      color:
+                        "color-mix(in srgb, var(--color-ink-800) 82%, transparent)",
+                    }}
+                  >
                     {layer.body}
                   </p>
                   {i < layers.length - 1 && (
                     <span
                       aria-hidden
-                      className="absolute -right-2 top-1/2 z-10 hidden h-4 w-4 -translate-y-1/2 rotate-45 border-r border-t lg:block"
-                      style={{
-                        borderColor: "color-mix(in srgb, var(--color-ember-400) 60%, transparent)",
-                        background: "var(--color-ink-950)",
-                      }}
+                      className="absolute -right-[4.5px] top-1/2 z-10 hidden h-2 w-2 -translate-y-1/2 rotate-45 border border-ember-700 bg-paper-100 lg:block"
                     />
                   )}
                 </article>
@@ -120,13 +119,19 @@ export function Architecture() {
           </RevealGroup>
 
           <Reveal className="mt-10" delay={0.1}>
-            <ul className="grid gap-3 sm:grid-cols-3">
-              {bullets.map((b) => (
+            <ul className="grid border-t sm:grid-cols-3">
+              {bullets.map((b, i) => (
                 <li
                   key={b}
-                  className="flex items-center gap-2.5 rounded-lg border border-ink-700 px-4 py-3 text-sm text-ink-300 transition-colors duration-300 hover:border-ember-500/40 hover:text-paper-100"
+                  className={`flex items-center gap-3 py-3.5 text-sm sm:pr-6 ${
+                    i > 0 ? "border-t sm:border-t-0 sm:border-l sm:pl-6" : ""
+                  }`}
+                  style={{
+                    color:
+                      "color-mix(in srgb, var(--color-ink-800) 86%, transparent)",
+                  }}
                 >
-                  <span className="h-1.5 w-1.5 flex-none rounded-full bg-ember-500" />
+                  <span className="h-1.5 w-1.5 flex-none rounded-full bg-ember-700" />
                   {b}
                 </li>
               ))}

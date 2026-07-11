@@ -19,13 +19,13 @@ export function ScreenshotFrame({
   alt,
   slot,
   title = "Wolf",
-  priority = false,
+  preload = false,
 }: {
   src?: string;
   alt: string;
   slot: string;
   title?: string;
-  priority?: boolean;
+  preload?: boolean;
 }) {
   const t = useT();
   const [open, setOpen] = useState(false);
@@ -72,7 +72,7 @@ export function ScreenshotFrame({
             alt={alt}
             fill
             sizes="(max-width: 1024px) 100vw, 60vw"
-            priority={priority}
+            preload={preload}
             className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
           />
           {/* Zoom affordance: always visible on touch (no hover to reveal

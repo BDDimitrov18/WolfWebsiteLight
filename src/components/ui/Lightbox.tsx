@@ -25,6 +25,14 @@ export function Lightbox({
 }) {
   const panelRef = useRef<HTMLElement>(null);
 
+  // The dialog effect must run exactly once per open — a parent
+  // re-render passing a fresh onClose closure must not re-run it
+  // (that would replay the intro tween and re-steal focus).
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
   useEffect(() => {
     const opener =
       document.activeElement instanceof HTMLElement
@@ -39,7 +47,7 @@ export function Lightbox({
     focusables()[0]?.focus();
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") onCloseRef.current();
       if (e.key === "Tab") {
         const els = focusables();
         if (!els.length) return;
@@ -83,7 +91,7 @@ export function Lightbox({
       document.body.style.overflow = "";
       opener?.focus();
     };
-  }, [onClose]);
+  }, []);
 
   return createPortal(
     <div
@@ -142,7 +150,7 @@ export function Lightbox({
             height={1032}
             sizes="95vw"
             className="h-auto w-full"
-            priority
+            loading="eager"
           />
         </div>
       </figure>

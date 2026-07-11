@@ -246,6 +246,8 @@ const bg = {
     subtitle:
       "Абонамент или еднократен лиценз — изберете модела, който пасва на практиката. Всеки план включва пълната функционалност, реалното време и автоматичните обновления.",
     recommended: "Препоръчан план",
+    teamPrompt: "Колко души е практиката?",
+    matchBadge: "за вашия екип",
     cards: [
       {
         name: "Solo",
@@ -298,6 +300,8 @@ const bg = {
     eyebrow: "Готови ли сте?",
     title: "Вижте Wolf върху вашите поръчки",
     body: "Половин час е достатъчен, за да преминем от възлагане до фактура и отчет с вашите реални работни потоци.",
+    stampRing: "WOLF · ЗА ПРОЕКТАНТСКИ ПРАКТИКИ · ",
+    stampCenter: "ДЕМО\n30 МИН",
     primary: "Заявете демо",
     secondary: "Прочетете документацията",
     emailLabel: "Служебен имейл",
@@ -369,6 +373,7 @@ const bg = {
     searchPlaceholder: "Търсене в документацията…",
     onThisPage: "На тази страница",
     backToSite: "Към сайта",
+    continueReading: "Продължете откъдето спряхте",
     prev: "Предишен раздел",
     next: "Следващ раздел",
     nav: {
@@ -610,6 +615,8 @@ const en: typeof bg = {
     subtitle:
       "A subscription or a one-time license — pick the model that fits your practice. Every plan includes the full feature set, real-time sync and automatic updates.",
     recommended: "Recommended plan",
+    teamPrompt: "How big is your practice?",
+    matchBadge: "for your team",
     cards: [
       {
         name: "Solo",
@@ -662,6 +669,8 @@ const en: typeof bg = {
     eyebrow: "Ready?",
     title: "See Wolf on your own orders",
     body: "Half an hour is enough to go from a commission to an invoice and a report using your real workflows.",
+    stampRing: "WOLF · FOR DESIGN PRACTICES · ",
+    stampCenter: "DEMO\n30 MIN",
     primary: "Book a demo",
     secondary: "Read the docs",
     emailLabel: "Work email",
@@ -733,6 +742,7 @@ const en: typeof bg = {
     searchPlaceholder: "Search the docs…",
     onThisPage: "On this page",
     backToSite: "Back to site",
+    continueReading: "Continue where you left off",
     prev: "Previous section",
     next: "Next section",
     nav: {

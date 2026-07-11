@@ -11,7 +11,7 @@ export function DocsSidebar({ onNavigate }: { onNavigate?: () => void }) {
 
   return (
     <nav aria-label={t("docs.title")} className="flex flex-col gap-1">
-      <p className="mb-2 px-3 font-mono text-xs uppercase tracking-[0.18em] text-ember-400">
+      <p className="mb-2 px-3 font-mono text-xs uppercase tracking-[0.18em] text-ember-800">
         {t("docs.title")}
       </p>
       {DOC_PAGES.map((page) => {
@@ -23,15 +23,17 @@ export function DocsSidebar({ onNavigate }: { onNavigate?: () => void }) {
             href={href}
             onClick={onNavigate}
             aria-current={active ? "page" : undefined}
-            className="rounded-md px-3 py-2 text-sm transition-colors"
+            className="px-3 py-2 text-sm transition-colors"
             style={{
-              color: active ? "var(--color-paper-50)" : "var(--color-ink-300)",
+              color: active
+                ? "var(--color-ink-950)"
+                : "color-mix(in srgb, var(--color-ink-800) 76%, transparent)",
               background: active
-                ? "color-mix(in srgb, var(--color-ember-500) 16%, transparent)"
+                ? "color-mix(in srgb, var(--color-ember-500) 12%, transparent)"
                 : "transparent",
               borderLeft: active
-                ? "2px solid var(--color-ember-500)"
-                : "2px solid transparent",
+                ? "2px solid var(--color-ember-700)"
+                : "2px solid color-mix(in srgb, var(--color-ink-700) 18%, transparent)",
             }}
           >
             {page.title[locale]}

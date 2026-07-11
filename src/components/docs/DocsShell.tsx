@@ -12,7 +12,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-ink-900">
+    <div className="register-paper min-h-screen">
       {/* Docs header */}
       <header className="sticky top-0 z-40 border-b border-ink-700 bg-ink-950/85 backdrop-blur-md">
         <Container>
@@ -48,22 +48,22 @@ export function DocsShell({ children }: { children: ReactNode }) {
             </div>
           </aside>
 
-          {/* Sidebar — mobile drawer */}
+          {/* Sidebar — mobile drawer (a sheet sliding over the sheet) */}
           {open && (
             <div className="fixed inset-0 z-50 lg:hidden">
               <div
-                className="absolute inset-0 bg-ink-950/70"
+                className="absolute inset-0 bg-ink-950/50"
                 onClick={() => setOpen(false)}
                 aria-hidden
               />
-              <div className="absolute left-0 top-0 h-full w-72 border-r border-ink-700 bg-ink-900 p-6">
+              <div className="register-paper absolute left-0 top-0 h-full w-72 overflow-y-auto border-r bg-paper-50 p-6 shadow-sheet">
                 <div className="mb-6 flex items-center justify-between">
-                  <Logo />
+                  <Logo tone="dark" />
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
                     aria-label="Close"
-                    className="text-ink-300 hover:text-paper-50"
+                    className="text-ink-800 transition-colors hover:text-ink-950"
                   >
                     ✕
                   </button>

@@ -28,7 +28,7 @@ export function Logo({
         alt="Wolf"
         width={40}
         height={40}
-        priority
+        preload
         className="h-9 w-9 object-contain"
       />
       {withWordmark && (

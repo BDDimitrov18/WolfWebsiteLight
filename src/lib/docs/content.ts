@@ -69,7 +69,7 @@ export const DOC_PAGES: DocPage[] = [
             },
             {
               t: "Вход",
-              d: "Въведете потребителското име и паролата, дадени от вашия администратор. Профилът определя какво виждате — служител или администратор.",
+              d: "Въведете потребителското име и паролата, дадени от вашия администратор. Ролята на профила определя какво виждате и какво можете да променяте. „Запомни ме на този компютър“ ви спестява входа следващия път — и връща прозорците и разделите, с които сте работили.",
             },
             {
               t: "Готово",
@@ -92,8 +92,9 @@ export const DOC_PAGES: DocPage[] = [
             "Календар — задачите по крайни срокове",
             "Служители — екипът и личните справки (за администратори)",
             "Фактури — регистърът на фактурите и PDF генераторът",
-            "Шаблони — бланките на практиката, попълвани автоматично",
+            "Шаблони — бланките на практиката, сглобени в конструктора",
             "Справки — отчетите в Excel",
+            "Администрация — потребители, роли и права (за администратори)",
             "Помощ — вграденото ръководство на системата (отваря се и с F1)",
           ],
         },
@@ -155,7 +156,7 @@ export const DOC_PAGES: DocPage[] = [
             },
             {
               t: "Sign in",
-              d: "Enter the username and password provided by your administrator. Your account determines what you see — employee or administrator.",
+              d: "Enter the username and password provided by your administrator. Your account's role determines what you see and what you may change. \"Remember me on this computer\" saves you the sign-in next time — and restores the windows and tabs you were working in.",
             },
             {
               t: "Ready",
@@ -178,8 +179,9 @@ export const DOC_PAGES: DocPage[] = [
             "Calendar — tasks by due date",
             "Employees — the team and per-person reports (administrators)",
             "Invoices — the invoice register and the PDF generator",
-            "Templates — the practice's letterheads, filled in automatically",
+            "Templates — the practice's forms, assembled in the builder",
             "Reports — the Excel exports",
+            "Administration — users, roles and rights (administrators)",
             "Help — the system's built-in manual (also opens with F1)",
           ],
         },
@@ -618,7 +620,16 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "owners", text: "Собственици" },
         {
           type: "p",
-          text: "Отделен екран „Собственици“ пази регистъра на всички собственици — имена, ЕГН и адрес — с търсене и редакция. При въвеждане на собственик по документ системата предлага съществуващите записи, за да не се дублират хора. Глобалното търсене (Ctrl+K) намира собственик и по ЕГН.",
+          text: "Отделен екран „Собственици“ пази регистъра на всички собственици — имена, ЕГН и адрес — с търсене по име, ЕГН или адрес. За всеки се вижда с колко документа, имота и поръчки е свързан, а от записа се минава към всеки от тях.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Червеният етикет „Дублирано ЕГН“ показва веднага, ако един и същ човек е въведен два пъти",
+            "При въвеждане на собственик по документ системата предлага съществуващите записи, за да не се дублират хора",
+            "„Покажи поръчките“ отваря филтрирания списък с поръчките на този собственик",
+            "Глобалното търсене (Ctrl+K) намира собственик и по ЕГН",
+          ],
         },
         { type: "h2", id: "docs", text: "Документи за собственост" },
         { type: "img", slot: "DocumentsTab", alt: "Екранът Документи", title: "Wolf — Документи" },
@@ -679,7 +690,16 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "owners", text: "Owners" },
         {
           type: "p",
-          text: "A dedicated Owners screen keeps the register of all owners — names, ID number (ЕГН) and address — with search and editing. When entering an owner on a document, the system suggests existing records so people are never duplicated. Global search (Ctrl+K) also finds an owner by ЕГН.",
+          text: "A dedicated Owners screen keeps the register of all owners — names, ID number (ЕГН) and address — searchable by name, ЕГН or address. For each you see how many documents, plots and orders they are tied to, and you can jump to any of them from the record.",
+        },
+        {
+          type: "ul",
+          items: [
+            "A red \"Duplicate ЕГН\" badge shows at once if the same person was entered twice",
+            "When entering an owner on a document, the system suggests existing records so people are never duplicated",
+            "\"Show orders\" opens the filtered list of that owner's orders",
+            "Global search (Ctrl+K) also finds an owner by ЕГН",
+          ],
         },
         { type: "h2", id: "docs", text: "Ownership documents" },
         { type: "img", slot: "DocumentsTab", alt: "The Documents screen", title: "Wolf — Documents" },
@@ -988,73 +1008,103 @@ export const DOC_PAGES: DocPage[] = [
     navKey: "templates",
     title: { bg: "Шаблони за документи", en: "Document templates" },
     intro: {
-      bg: "Качете бланките на практиката като .docx шаблони с плейсхолдъри — Wolf ги попълва с данните на всяка поръчка и записва готовия документ направо в нейната папка.",
-      en: "Upload your practice's forms as .docx templates with placeholders — Wolf fills them with any order's data and saves the finished document straight into that order's folder.",
+      bg: "Бланките на практиката се сглобяват в конструктор — от блокове и полета, без писане на код — и Wolf ги попълва с данните на всяка поръчка, записвайки готовия документ направо в нейната папка.",
+      en: "Your practice's forms are assembled in a builder — from blocks and fields, with no code to write — and Wolf fills them with any order's data, saving the finished document straight into that order's folder.",
     },
     blocks: {
       bg: [
-        { type: "img", slot: "TemplatesScreen", alt: "Екранът Шаблони", title: "Wolf — Шаблони" },
-        { type: "h2", id: "idea", text: "Как работи" },
+        { type: "img", slot: "TemplateBuilder", alt: "Конструкторът на шаблони", title: "Wolf — Конструктор на шаблони" },
+        { type: "h2", id: "builder", text: "Конструкторът" },
         {
           type: "p",
-          text: "Шаблонът е обикновен Word документ (.docx), в който на мястото на променливите данни стоят плейсхолдъри като {{order.name}} или {{client.fullname}}. Качвате го веднъж в раздел „Шаблони“ — и всеки от екипа генерира попълнен документ за всяка поръчка: договори, протоколи, писма, декларации.",
+          text: "„+ Нов шаблон“ отваря празен лист в „Конструктор на шаблони“: вляво е палитрата с блокове, в средата е самият документ, а вдясно — живият преглед. Договори, протоколи, писма, декларации — всяка бланка на практиката се сглобява тук.",
         },
         {
           type: "steps",
           items: [
             {
-              t: "Създайте бланката",
-              d: "Тръгнете от „Изтегли начален шаблон (.docx)“ — готово скеле с най-често използваните плейсхолдъри — или добавете плейсхолдъри в свой съществуващ документ.",
+              t: "Сглобете листа",
+              d: "От „Добави блок“ слагате заглавие, текст, ред с данни, таблица със списък, повтарящ се раздел, подписи или празен ред. Блоковете се подреждат и разместват свободно.",
             },
             {
-              t: "Качете я",
-              d: "„+ Качи шаблон (.docx)“ с име, описание и тип данни. Шаблонът се появява при целия екип в реално време.",
+              t: "Поставете полетата",
+              d: "„+ Постави поле“ отваря списъка с полета с търсене — „Номер на поръчката“, „Три имена“, „ЕГН“. Полето влиза в текста като чип. За паричните полета има и вариант с „лв.“",
             },
             {
-              t: "Проверете я",
-              d: "„Провери шаблона“ хваща печатни грешки в плейсхолдърите и проблеми в {{#each}} блоковете, преди да са стигнали до реален документ.",
+              t: "Вижте резултата",
+              d: "Панелът „Преглед на живо“ показва документа с примерни данни или върху избрана реална поръчка — и брои колко полета остават празни за нея. „Отвори в Word“ дава попълнен пробен документ.",
             },
             {
-              t: "Преглед с реални данни",
-              d: "Изберете произволна поръчка и „Преглед“ отваря попълнен пробен документ — включително колко плейсхолдъра са останали празни за нея.",
+              t: "Публикувайте",
+              d: "Докато е „Чернова“, шаблонът е само ваш и не може да се използва за генериране. „Публикувай“ го прави достъпен за целия екип.",
             },
           ],
         },
-        { type: "h2", id: "tokens", text: "Плейсхолдърите" },
+        { type: "h2", id: "fields", text: "Полетата" },
         {
           type: "p",
-          text: "Панелът „Налични плейсхолдъри“ показва всички полета, групирани по тема, с копиране в клипборда с един клик. Извадка от най-използваните:",
+          text: "Полетата се избират от списък на български — не се пишат на ръка. Групирани са по тема; извадка от най-използваните:",
         },
         {
           type: "code",
-          text: "{{order.id}}  {{order.name}}  {{order.price}}  {{order.unpaid}}\n{{client.fullname}}  {{client.address}}  {{client.phone}}\n{{today}}  {{today.long}}   →  07.07.2026 · 7 юли 2026 г.\n{{#each plots}} {{plot.number}} {{plot.address}} {{/each}}\n{{#each owners}} {{owner.fullname}} {{owner.egn}} {{/each}}",
+          text: "Поръчка        Номер · Име · Цена · Аванс · Неразплатено\nВъзложител     Три имена · Адрес · Телефон · ЕГН / ЕИК\nИмоти          КИ · УПИ · Местност · Площ · Община\nСобственици    Три имена · ЕГН · Адрес · Идеална част\nДокументи      Акт · Номер · Издател · Дата\nДата           Днес  →  11.07.2026 · 11 юли 2026 г.",
         },
+        { type: "h2", id: "format", text: "Форматиране" },
         {
           type: "p",
-          text: "Списъците — имоти, собственици, възложители, дейности, задачи, фактури — се разгръщат с {{#each …}} … {{/each}}: като поредица от абзаци или като повтарящ се ред в таблица.",
+          text: "Удебелен, курсив и подчертан текст се прилагат върху избраното — включително в средата на изречение. Избирате шрифт (Times New Roman, Arial, Calibri), размер и подравняване, а „Настройки на документа“ задава основния шрифт и размер за целия лист.",
+        },
+        { type: "h2", id: "lists", text: "Списъци и повтарящи се раздели" },
+        {
+          type: "p",
+          text: "„Таблица със списък“ изрежда имотите, собствениците, дейностите или задачите на поръчката като редове на таблица. „Повтарящ се раздел“ повтаря цял набор от блокове — заглавие, абзаци, подписи — веднъж за всеки елемент.",
+        },
+        {
+          type: "ul",
+          items: [
+            "„№ по ред“ номерира елементите в списъка автоматично",
+            "Вложени раздели: за всеки имот — неговите собственици; за всеки собственик — неговите имоти",
+            "„Имот (основен)“ и „Собственик (основен)“ вземат първия от поръчката — за документ с един имот не е нужен списък",
+            "Ако шаблонът работи само с първия имот, а поръчката има няколко, системата предупреждава при генериране",
+          ],
+        },
+        { type: "h2", id: "import", text: "Внасяне на съществуващ .docx" },
+        {
+          type: "p",
+          text: "„Нов шаблон от документ (.docx)“ взема готова бланка и превръща текста и форматирането ѝ в блокове — не започвате от празен лист. Полетата поставяте след това сами.",
+        },
+        {
+          type: "callout",
+          text: "Внасянето е механично: таблици, изображения, текстови полета, колонтитули и номерирани списъци не се пренасят. На мястото на всяка таблица остава бележка, за да я сглобите наново с „Таблица със списък“.",
         },
         { type: "h2", id: "generate", text: "Генериране за поръчка" },
         { type: "img", slot: "GenerateDocument", alt: "Генериране на документ от шаблон", title: "Wolf — Генериране на документ" },
         {
           type: "p",
-          text: "От екрана на поръчката бутонът „Генерирай документ“ показва наличните шаблони като карти. Избирате шаблон, натискате „Генерирай“ — документът се попълва с актуалните данни на поръчката, записва се в нейната папка и се отваря автоматично.",
+          text: "От екрана на поръчката бутонът „Генерирай документ“ показва публикуваните шаблони като карти. Избирате шаблон, натискате „Генерирай“ — документът се попълва с актуалните данни на поръчката, записва се в нейната папка и се отваря автоматично.",
         },
         {
           type: "ul",
           items: [
             "Файлът се именува шаблон_поръчка_дата — подрежда се сам в папката на поръчката",
-            "Ако плейсхолдър остане без стойност, системата предупреждава кой точно — обикновено печатна грешка",
+            "Ако поле остане без стойност, системата предупреждава кое точно",
             "„Отвори папката“ показва готовия файл в Explorer",
           ],
         },
         { type: "h2", id: "rights", text: "Права и екипна работа" },
+        { type: "img", slot: "TemplatesScreen", alt: "Списъкът с шаблони", title: "Wolf — Шаблони" },
         {
           type: "ul",
           items: [
-            "Всеки в екипа вижда и използва всички шаблони",
-            "Променя или изтрива шаблон само създателят му или администратор",
-            "Промяна по шаблон се появява при целия екип в реално време",
+            "Три отделни права: използване на шаблони, управление на собствените, управление на всички",
+            "Черновите са лични; публикуваният шаблон се появява при целия екип в реално време",
+            "Публикуването е еднопосочно — публикуван шаблон не се връща в чернова",
+            "Шаблон на колега променя или изтрива само администратор",
           ],
+        },
+        {
+          type: "p",
+          text: "Старите Word шаблони с плейсхолдъри продължават да работят и се разпознават с етикет „Word файл“ — за тях остава и „Провери шаблона“. Качването на готов Word файл е запазено за администратори; всички останали създават шаблони в конструктора.",
         },
         {
           type: "callout",
@@ -1062,68 +1112,98 @@ export const DOC_PAGES: DocPage[] = [
         },
       ],
       en: [
-        { type: "img", slot: "TemplatesScreen", alt: "The Templates screen", title: "Wolf — Templates" },
-        { type: "h2", id: "idea", text: "How it works" },
+        { type: "img", slot: "TemplateBuilder", alt: "The template builder", title: "Wolf — Template builder" },
+        { type: "h2", id: "builder", text: "The builder" },
         {
           type: "p",
-          text: "A template is a plain Word document (.docx) where the variable data is replaced by placeholders like {{order.name}} or {{client.fullname}}. Upload it once in the Templates section — and anyone on the team generates a filled-in document for any order: contracts, protocols, letters, declarations.",
+          text: "\"+ New template\" opens a blank sheet in the template builder: the block palette on the left, the document itself in the middle, the live preview on the right. Contracts, protocols, letters, declarations — every form your practice uses is assembled here.",
         },
         {
           type: "steps",
           items: [
             {
-              t: "Create the form",
-              d: "Start from \"Download starter template (.docx)\" — a ready scaffold with the most-used placeholders — or add placeholders to an existing document of yours.",
+              t: "Assemble the sheet",
+              d: "From \"Add block\" you drop in a heading, text, a data row, a list table, a repeating section, signatures or a blank line. Blocks reorder freely.",
             },
             {
-              t: "Upload it",
-              d: "\"+ Upload template (.docx)\" with a name, description and data type. The template appears for the whole team in real time.",
+              t: "Insert the fields",
+              d: "\"+ Insert field\" opens a searchable list of fields — \"Order number\", \"Full name\", \"ЕГН\". The field lands in the text as a chip. Money fields also come in a variant carrying „лв.“",
             },
             {
-              t: "Validate it",
-              d: "\"Check template\" catches typos in placeholders and problems in {{#each}} blocks before they reach a real document.",
+              t: "See the result",
+              d: "The live preview shows the document against sample data or a chosen real order — and counts how many fields come out empty for it. \"Open in Word\" produces a filled-in trial document.",
             },
             {
-              t: "Preview with real data",
-              d: "Pick any order and \"Preview\" opens a filled-in trial document — including how many placeholders came out empty for it.",
+              t: "Publish",
+              d: "While it is a draft, the template is yours alone and cannot be used to generate anything. \"Publish\" makes it available to the whole team.",
             },
           ],
         },
-        { type: "h2", id: "tokens", text: "The placeholders" },
+        { type: "h2", id: "fields", text: "The fields" },
         {
           type: "p",
-          text: "The \"Available placeholders\" panel lists every field, grouped by topic, with one-click copy to clipboard. A sample of the most used:",
+          text: "Fields are picked from a list, not typed by hand. They are grouped by topic; a sample of the most used:",
         },
         {
           type: "code",
-          text: "{{order.id}}  {{order.name}}  {{order.price}}  {{order.unpaid}}\n{{client.fullname}}  {{client.address}}  {{client.phone}}\n{{today}}  {{today.long}}   →  07.07.2026 · 7 July 2026\n{{#each plots}} {{plot.number}} {{plot.address}} {{/each}}\n{{#each owners}} {{owner.fullname}} {{owner.egn}} {{/each}}",
+          text: "Order        Number · Name · Price · Advance · Outstanding\nClient       Full name · Address · Phone · ЕГН / ЕИК\nPlots        Cadastral no. · UPI · Locality · Area · Municipality\nOwners       Full name · ЕГН · Address · Ideal part\nDocuments    Deed · Number · Issuer · Date\nDate         Today  →  11.07.2026 · 11 July 2026",
         },
+        { type: "h2", id: "format", text: "Formatting" },
         {
           type: "p",
-          text: "Lists — plots, owners, commissioners, activities, tasks, invoices — unfold with {{#each …}} … {{/each}}: as a run of paragraphs or as a repeating table row.",
+          text: "Bold, italic and underline apply to the selection — mid-sentence included. You pick the font (Times New Roman, Arial, Calibri), the size and the alignment, while \"Document settings\" sets the base font and size for the whole sheet.",
+        },
+        { type: "h2", id: "lists", text: "Lists & repeating sections" },
+        {
+          type: "p",
+          text: "A \"list table\" lays out the order's plots, owners, activities or tasks as table rows. A \"repeating section\" repeats a whole set of blocks — heading, paragraphs, signatures — once per item.",
+        },
+        {
+          type: "ul",
+          items: [
+            "A row-number field numbers the items in a list automatically",
+            "Nested sections: for each plot, its owners; for each owner, their plots",
+            "\"Primary plot\" and \"primary owner\" take the first one on the order — a single-plot document needs no list at all",
+            "If the template only fills in the first plot but the order has several, the system warns you at generation time",
+          ],
+        },
+        { type: "h2", id: "import", text: "Importing an existing .docx" },
+        {
+          type: "p",
+          text: "\"New template from a document (.docx)\" takes a form you already have and turns its text and formatting into blocks — you do not start from a blank sheet. You then place the fields yourself.",
+        },
+        {
+          type: "callout",
+          text: "The import is mechanical: tables, images, text boxes, headers/footers and numbered lists do not come across. A note is left where each table was, so you can rebuild it with a list table.",
         },
         { type: "h2", id: "generate", text: "Generating for an order" },
         { type: "img", slot: "GenerateDocument", alt: "Generating a document from a template", title: "Wolf — Generate document" },
         {
           type: "p",
-          text: "On the order's screen, \"Generate document\" shows the available templates as cards. Pick one, press Generate — the document fills with the order's live data, saves into the order's own folder and opens automatically.",
+          text: "On the order's screen, \"Generate document\" shows the published templates as cards. Pick one, press Generate — the document fills with the order's live data, saves into the order's own folder and opens automatically.",
         },
         {
           type: "ul",
           items: [
             "The file is named template_order_date — it files itself in the order's folder",
-            "If a placeholder ends up without a value, the system warns you exactly which one — usually a typo",
+            "If a field ends up without a value, the system warns you exactly which one",
             "\"Open folder\" reveals the finished file in Explorer",
           ],
         },
         { type: "h2", id: "rights", text: "Permissions & teamwork" },
+        { type: "img", slot: "TemplatesScreen", alt: "The template list", title: "Wolf — Templates" },
         {
           type: "ul",
           items: [
-            "Everyone on the team sees and uses all templates",
-            "Only its creator or an administrator can modify or delete a template",
-            "A change to a template reaches the whole team in real time",
+            "Three separate rights: using templates, managing your own, managing everyone's",
+            "Drafts are private; a published template reaches the whole team in real time",
+            "Publishing is one-way — a published template cannot be returned to draft",
+            "Only an administrator may change or delete a colleague's template",
           ],
+        },
+        {
+          type: "p",
+          text: "Older Word templates with placeholders keep working and are badged as such — \"Check template\" remains available for them. Uploading a ready-made Word file is reserved for administrators; everyone else builds templates in the builder.",
         },
         {
           type: "callout",
@@ -1220,7 +1300,11 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dropdowns", text: "Падащи менюта и текст" },
         {
           type: "p",
-          text: "Падащи менюта по статус на архив, статус на задача и статус на плащане — включително обобщеното „Неразплатени“ (неплатени и с аванс заедно). Текстови търсения по номер на поръчка, име, коментар, населено място, номер на имот, УПИ, квартал и номер на фактура.",
+          text: "Падащи менюта по статус на архив, статус на задача и статус на плащане — включително обобщеното „Неразплатени“ (неплатени и с аванс заедно). Текстови търсения по номер на поръчка, име, коментар, населено място, номер на имот, УПИ, квартал, номер и тип на документ за собственост и номер на фактура.",
+        },
+        {
+          type: "p",
+          text: "Лентата „Приложени филтри“ изброява всичко включено в момента — с брояч върху бутона за филтри и „Изчисти всички“ до нея, за да не остане скрит филтър, който тихо крие поръчки.",
         },
         { type: "h2", id: "invoicing", text: "Филтър по фактуриране" },
         {
@@ -1256,7 +1340,11 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dropdowns", text: "Dropdowns & text" },
         {
           type: "p",
-          text: "Dropdowns for archive status, task status and payment status — including the combined \"Unsettled\" (unpaid and advance together). Text searches by order number, name, comment, settlement, plot number, UPI, neighbourhood and invoice number.",
+          text: "Dropdowns for archive status, task status and payment status — including the combined \"Unsettled\" (unpaid and advance together). Text searches by order number, name, comment, settlement, plot number, UPI, neighbourhood, ownership-document number and type, and invoice number.",
+        },
+        {
+          type: "p",
+          text: "An \"Applied filters\" bar lists everything currently switched on — with a count badge on the filter button and \"Clear all\" beside it, so no forgotten filter quietly hides orders from you.",
         },
         { type: "h2", id: "invoicing", text: "Invoicing filter" },
         {
@@ -1410,13 +1498,35 @@ export const DOC_PAGES: DocPage[] = [
           text: "Списък на екипа с търсене — включително външни изпълнители. За всеки служител: общо дейности и задачи, плащания, завършени и чакащи задачи, брой уникални поръчки, плюс разбивки по дейност и задача с преход към поръчката.",
         },
         { type: "img", slot: "EmployeesStatistics", alt: "Статистика на служител", title: "Wolf — Статистика на служител" },
-        { type: "h2", id: "roles", text: "Роли и достъп" },
+        { type: "h2", id: "roles", text: "Роли и права" },
+        { type: "img", slot: "Administration", alt: "Роли и права", title: "Wolf — Администрация" },
+        {
+          type: "p",
+          text: "Разделът „Администрация“ държи достъпа до системата и има два таба: „Потребители“ и „Роли и права“. Виждат го само хората с администраторски права.",
+        },
         {
           type: "ul",
           items: [
-            "Администратор — вижда таблото, статистиката на служителите, календара на всеки и създава потребителски профили",
-            "Служител — работи с поръчки, имоти, клиенти и календара си, без администраторските екрани",
+            "Потребители: създаване на профил с потребителско име, имейл и парола",
+            "Всеки профил се свързва със служител — така човекът вижда своите задачи и своите поръчки",
+            "Смяна на паролата и изключване на профил, без да се губи историята му",
           ],
+        },
+        {
+          type: "p",
+          text: "„Роли и права“ е матрица с отметки: за всяка роля се вижда и задава какво може да прави — модул по модул. Правата са отделни за поръчки, имоти, клиенти, фактури, шаблони, справки и администрация.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Готови роли: Админ, Деловодител, Изпълнител, Счетоводител, Потребител",
+            "„Създай роля“ — собствена роля с точно тези права, които решите",
+            "Ролята „Админ“ е системна и заключена — не може да остане практиката без администратор",
+          ],
+        },
+        {
+          type: "callout",
+          text: "Финансовият поглед е отделен от работния: редовете „Неразплатено“ и „Нефактурирано“, маржът по поръчка и цялото Табло се виждат само от администратори.",
         },
         { type: "h2", id: "profile", text: "Личен профил" },
         { type: "img", slot: "PersonalTab", alt: "Личният профил", title: "Wolf — Профил" },
@@ -1449,13 +1559,35 @@ export const DOC_PAGES: DocPage[] = [
           text: "A searchable list of the team — external contractors included. For every employee: total activities and tasks, payments, completed and pending tasks, count of unique orders, plus activity and task breakdowns with a jump to the order.",
         },
         { type: "img", slot: "EmployeesStatistics", alt: "Employee statistics", title: "Wolf — Employee statistics" },
-        { type: "h2", id: "roles", text: "Roles & access" },
+        { type: "h2", id: "roles", text: "Roles & rights" },
+        { type: "img", slot: "Administration", alt: "Roles & rights", title: "Wolf — Administration" },
+        {
+          type: "p",
+          text: "The Administration section owns access to the system and has two tabs: Users, and Roles & rights. Only people with administrator rights can see it.",
+        },
         {
           type: "ul",
           items: [
-            "Administrator — sees the dashboard, employee statistics, everyone's calendar and creates user accounts",
-            "Employee — works with orders, plots, clients and their own calendar, without the admin screens",
+            "Users: create an account with a username, an e-mail and a password",
+            "Each account is linked to an employee — so that person sees their own tasks and their own orders",
+            "Reset a password or disable an account without losing its history",
           ],
+        },
+        {
+          type: "p",
+          text: "Roles & rights is a checkbox matrix: for each role you see and set exactly what it may do — module by module. Rights are separate for orders, plots, clients, invoices, templates, reports and administration.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Ready-made roles: Admin, Office, Surveyor, Accountant, User",
+            "\"Create role\" — your own role with precisely the rights you decide",
+            "The Admin role is a system role and is locked — a practice can never be left without an administrator",
+          ],
+        },
+        {
+          type: "callout",
+          text: "The financial view is separate from the working one: the \"Outstanding\" and \"Uninvoiced\" totals, the per-order margin and the whole dashboard are visible to administrators only.",
         },
         { type: "h2", id: "profile", text: "Personal profile" },
         { type: "img", slot: "PersonalTab", alt: "The personal profile", title: "Wolf — Profile" },

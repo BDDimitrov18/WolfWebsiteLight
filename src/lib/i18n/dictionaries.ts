@@ -17,6 +17,7 @@ export const FEATURE_KEYS = [
   "realtime",
   "clients",
   "dashboard",
+  "permissions",
 ] as const;
 
 const bg = {
@@ -131,12 +132,12 @@ const bg = {
       },
       templates: {
         tag: "Шаблони",
-        title: "Вашите бланки, попълнени от системата",
-        body: "Качете свой .docx файл с плейсхолдъри като {{order.name}} и {{client.fullname}} — Wolf го попълва с актуалните данни на всяка поръчка и записва готовия документ направо в нейната папка. С вградена проверка на шаблона и преглед върху реална поръчка.",
+        title: "Бланките на практиката — сглобени в конструктор",
+        body: "Шаблонът се сглобява от блокове — заглавие, текст, таблица със списък, повтарящ се раздел, подписи — а данните се поставят като полета с едно кликване: „Номер на поръчката“, „Три имена“, „ЕГН“. Повтарящите се раздели изреждат имотите на поръчката, а за всеки имот — неговите собственици.",
         bullets: [
-          "Договори, протоколи, писма — всяка бланка на практиката",
-          "Списъци с {{#each}} — имоти, собственици и дейности в таблици",
-          "Шаблоните се споделят в екипа в реално време",
+          "Без плейсхолдъри на ръка — полетата се избират от списък",
+          "Жив преглед: примерни данни или реална поръчка, преди да публикувате",
+          "Внасяне на съществуващ .docx — текстът и форматирането стават блокове",
         ],
       },
       calendar: {
@@ -194,9 +195,19 @@ const bg = {
         title: "Табло за управление",
         body: "Неразплатено, фактурирано, активни поръчки и просрочени задачи — на един поглед. Отдолу: дейностите по месеци, задачите по статус, вземанията с преход към всяка поръчка и натовареността на екипа. Обновява се в реално време.",
         bullets: [
-          "Вземания — кой дължи, колко и от преди колко дни",
+          "Вземания по давност: до 30, 30–60, 60–90 и над 90 дни",
           "Натовареност на екипа: активни и завършени задачи по служител",
           "Достъп само за администратори",
+        ],
+      },
+      permissions: {
+        tag: "Достъп",
+        title: "Роли и права за всеки в екипа",
+        body: "Разделът „Администрация“ държи потребителите и ролите: Админ, Деловодител, Изпълнител, Счетоводител, Потребител. Матрица с отметки казва какво може всяка роля — модул по модул: поръчки, фактури, шаблони, справки, администрация.",
+        bullets: [
+          "Собствени роли — създавате ги и им давате точните права",
+          "Потребител ↔ служител: всеки вижда своите задачи и своите поръчки",
+          "Финансовите суми, маржът и таблото остават само за администратори",
         ],
       },
     },
@@ -331,7 +342,7 @@ const bg = {
       privacy: "Поверителност",
     },
     rights: "Всички права запазени.",
-    version: "Описана версия 1.0.24",
+    version: "Описана версия 1.0.25",
   },
   privacyPage: {
     title: "Политика за поверителност",
@@ -502,12 +513,12 @@ const en: typeof bg = {
       },
       templates: {
         tag: "Templates",
-        title: "Your own letterheads, filled in by the system",
-        body: "Upload your own .docx file with placeholders like {{order.name}} and {{client.fullname}} — Wolf fills it with the live data of any order and saves the finished document straight into that order's folder. With built-in template validation and a preview against a real order.",
+        title: "Your practice's forms, assembled in a builder",
+        body: "A template is assembled from blocks — heading, text, list table, repeating section, signatures — and the data goes in as fields you insert with a click: “Order number”, “Full name”, “ЕГН”. Repeating sections walk the order's plots, and for each plot, its owners.",
         bullets: [
-          "Contracts, protocols, letters — every form your practice uses",
-          "Lists via {{#each}} — plots, owners and activities in tables",
-          "Templates are shared with the team in real time",
+          "No placeholders typed by hand — fields are picked from a list",
+          "Live preview: sample data or a real order, before you publish",
+          "Import an existing .docx — its text and formatting become blocks",
         ],
       },
       calendar: {
@@ -565,9 +576,19 @@ const en: typeof bg = {
         title: "Management dashboard",
         body: "Outstanding, invoiced, active orders and overdue tasks — at a glance. Below: monthly activity, tasks by status, receivables with a jump to any order, and the team's workload. Updates in real time.",
         bullets: [
-          "Receivables — who owes, how much and since when",
+          "Receivables by age: under 30, 30–60, 60–90 and over 90 days",
           "Team workload: active and completed tasks per person",
           "Admin-only access",
+        ],
+      },
+      permissions: {
+        tag: "Access",
+        title: "Roles and rights for everyone on the team",
+        body: "The “Administration” section holds the users and the roles: Admin, Office, Surveyor, Accountant, User. A checkbox matrix says what each role may do — module by module: orders, invoices, templates, reports, administration.",
+        bullets: [
+          "Your own roles — create them and grant the exact rights",
+          "User ↔ employee: everyone sees their own tasks and their own orders",
+          "Financial totals, margin and the dashboard stay admin-only",
         ],
       },
     },
@@ -702,7 +723,7 @@ const en: typeof bg = {
       privacy: "Privacy",
     },
     rights: "All rights reserved.",
-    version: "Documented version 1.0.24",
+    version: "Documented version 1.0.25",
   },
   privacyPage: {
     title: "Privacy policy",

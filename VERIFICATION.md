@@ -44,7 +44,8 @@ outcomes) and the docs completion.*
 | Filters: quick toggles, status dropdowns, text searches, multi-selects, active-filters indicator | §8.3 | ✅ |
 | Reports: All Tasks, Obligations, Task-Type Payment, monthly per-employee; .xlsx | §8.11 | ✅ |
 | Invoicing: PDF invoice from order data — auto-suggested sequential number (max+1, 10 digits), VAT (default 20%), dual currency EUR/BGN, amount in words (Bulgarian, auto + editable), line items suggested from activities, live preview = same renderer as the file | Verified in code, 2026-07-07: `Wolf.Invoicing/` (InvoiceComposer, InvoicePdfDocument, CurrencyConverter, BulgarianNumberToWords), `Views/InvoiceDraftView.axaml`, `ViewModels/InvoiceDraftViewModel.cs`. NOTE: uncommitted working-tree feature (post-1.0.24, in-flight release). Supplier details are currently set in code per deployment (`InvoiceComposer.cs`) — the site phrases this as "configured at rollout", which matches practice; do not claim an in-app settings screen. | ✅ |
-| Templates: upload .docx with {{placeholders}} and {{#each}} loops (paragraphs + table rows), linter validation, preview against a real order, starter template download, output into the order's folder (Desktop fallback), unresolved-placeholder warning, creator/admin-only modify, real-time sync | Verified in code, 2026-07-07: `Views/DocumentTemplatesView.axaml`, `Views/GenerateDocumentView.axaml`, `Documents/{DocxMergeEngine,DocxTemplateLinter,StarterTemplateBuilder,OrderMergeContextBuilder,DocumentOutput}.cs`; committed (commits `6e05270`, `fe55fa2`) | ✅ |
+| Templates: assembled in the „Конструктор“ builder — 7 block types (Заглавие/Текст/Ред с данни/Таблица със списък/Повтарящ се раздел/Подписи/Празен ред), fields inserted from a searchable Bulgarian picker (never typed), live preview against sample data or a real order with an empty-field count, „Отвори в Word“, draft → publish (one-way), mechanical .docx import, „№ по ред“, nested repeating sections (plot→its owners, owner→their plots), first-item („основен“) fields with a multi-item warning at generation, three separate rights (use / manage own / manage all), admin-only raw Word upload, legacy Word templates keep working + „Провери шаблона“ | Verified in code, 2026-07-11: `Views/TemplateBuilderView.axaml`, `Views/DocumentTemplatesView.axaml`, `Controls/FieldPickerFlyout.axaml`, `Documents/{TemplateDesign,DocxBlockImporter,TemplateImportFlow,OrderMergeContextBuilder,FirstItemBindingLint}.cs`, `Api/Controllers/TemplatesController.cs`, `Wolf.Dtos/Permissions.cs`; commits `e4e7eaf`→`0fc26f4` (M1–M5 + UI audit). **BUILT BUT NOT YET RELEASED — see flagged item 11.** | ⚠️ |
+| Roles & rights: „Администрация“ with Потребители + Роли и права tabs, per-module permission matrix, seeded roles (Админ / Деловодител / Изпълнител / Счетоводител / Потребител), custom roles, locked Admin role, user↔employee link, password reset, disable account | Verified in code, 2026-07-11: `Views/AdministrationView.axaml`, `Wolf.Api/Authorization/*`, `Wolf.Dtos/Permissions.cs`; commit `e4e7eaf`. **BUILT BUT NOT YET RELEASED, and server-side enforcement currently ships OFF — see flagged item 11.** | ⚠️ |
 | Teamwork: simultaneous work, instant propagation, conflict warning instead of data loss | §4.3 (optimistic concurrency, "friendly 409"), §7.4, §6.4 (audit log) | ✅ |
 | Dashboard: KPI cards (outstanding, invoiced, active orders, overdue tasks), monthly activity, tasks by status, receivables with jump-to-order, team workload, admin-only, real-time | Dashboard rebuilt 2026-07-06 (supersedes §8.7's top-5/recent-orders description); verified against the supplied `AdminBoard.png` screenshot of the new build | ✅ |
 | Clients: searchable list, all-time financials, per-order breakdown, Excel export, legal type | §8.4 | ✅ |
@@ -111,15 +112,18 @@ tested claim.
    owner (subscription prices 2026-07-06; one-time ladder restructured to the
    3× multiple on the owner's approval, same date; the earlier per-seat model
    was dropped). Commercial terms, not derivable from PROJECT_OVERVIEW.
-5. **Version "1.0.24"** (footer, updated 2026-07-07) matches the latest app
-   release commit (`c9d1670` Release 1.0.24). The invoice PDF generator, global
-   search and Owners screen described in the docs are in the working tree for
-   the *next* release — bump the footer again when it ships if desired. The
-   bundled `LoginScreen.png` still shows `v1.0.15`.
-7. **Placeholder screenshots** (2026-07-07): `InvoiceDraft.png`,
-   `TemplatesScreen.png`, `GenerateDocument.png` in `public/screenshots/` are
-   branded "снимка очаква се" placeholders, NOT real app screenshots — replace
-   with real captures under the same filenames.
+5. **Version "1.0.25"** (footer, updated 2026-07-11) matches the app's current
+   `<Version>` in `Wolf.Desktop.csproj` and release commit `d5a7d6a`
+   (Release 1.0.25). NOTE: the site documents *ahead* of this version — the
+   Конструктор template builder and the Администрация roles screen are built
+   but unreleased (flagged item 11). Bump the footer to the next release number
+   when that ships. The bundled `LoginScreen.png` still shows `v1.0.15`.
+7. **Placeholder screenshots** (2026-07-07, extended 2026-07-11): `InvoiceDraft.png`,
+   `TemplatesScreen.png`, `GenerateDocument.png`, `TemplateBuilder.png` and
+   `Administration.png` in `public/screenshots/` are branded "снимка очаква се"
+   placeholders, NOT real app screenshots — replace with real captures under the
+   same filenames (1919×1032 to match the frame's aspect ratio). The owner has
+   said the captures will follow.
 8. **Invoicing round 2 + help/colors/filters** (2026-07-07, second sweep) — all
    verified in the app's UNCOMMITTED working tree (HEAD still `c9d1670`
    Release 1.0.24; +4,244 lines staged for the next release):
@@ -177,3 +181,41 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
     restates the owner-attested CTA claim „Половин час е достатъчен…“
     (`cta.body`, unchanged); the ring is the established product descriptor.
     No certification or approval implied; the SVG is aria-hidden.
+
+11. ⚠️ **The site documents two features AHEAD of their release** (2026-07-11,
+    on the owner's explicit instruction: *"make the website as it's already
+    come out — I will ship it soon"*). Both are fully built on the app's
+    `feature/document-templates` branch (commits `e4e7eaf`→`0fc26f4`) but are
+    NOT in any release:
+    - **Конструктор (template builder)** — `/docs/templates` was rewritten
+      around it, and the homepage tour stop „Шаблони“ now describes it.
+      `DEPLOY.md:188` marks the required migration
+      `2026-07-09_template_designjson_isdraft.sql` as **"(not yet applied)"**;
+      builder + API + desktop go out as one combined deploy.
+    - **Роли и права / Администрация** — `/docs/admin` §Роли и права and the
+      new tour stop „Достъп“ describe it as working access control. The owner
+      confirmed (2026-07-11) that server-side enforcement will be switched on:
+      it currently ships `"Authorization": { "Mode": "Off" }`
+      (`Wolf.Api/appsettings.json`), where the permission system governs what
+      each role SEES in the app but does not yet block the API. **The site does
+      not claim encryption, audit-grade access control, or a security
+      guarantee** — it describes roles, rights and admin-only visibility, which
+      is what the UI does today and what the API will enforce once the mode is
+      flipped. Re-check this item when `Mode` is set to `Enforce`.
+
+    Until that deploy, these two pages describe a build customers on 1.0.25 do
+    not yet have. Everything else on the site matches the released app.
+    Two consequences worth noting for the release notes (not marketing claims):
+    existing Word templates change behaviour under the new engine — `{{plot.*}}`
+    used outside an `{{#each}}` now resolves to the order's first plot instead
+    of rendering as an unresolved literal, and `{{#each plots}}` nested inside
+    `{{#each owners}}` now enumerates each owner's own plots.
+
+12. **Removed claims** (2026-07-11), no longer true of the app and deleted from
+    the site: the downloadable starter template („Изтегли начален шаблон
+    (.docx)“ — the button was removed in the builder work), and authoring
+    templates by typing `{{placeholders}}` into Word as the *primary* flow
+    (still supported for existing Word templates, and raw upload is now
+    admin-only; the site says exactly that). The token-syntax code block in
+    `/docs/templates` was replaced with the builder's Bulgarian field catalogue,
+    quoted from `OrderMergeContextBuilder.cs`.

@@ -123,7 +123,7 @@ const bg = {
       invoicing: {
         tag: "Фактуриране",
         title: "Фактура в PDF — направо от поръчката",
-        body: "Wolf съставя фактурата от данните на поръчката: редовете се предлагат от дейностите, а ДДС, втората валута и сумата словом се изчисляват сами. Живият преглед показва точния документ — каквото виждате, това се генерира.",
+        body: "Wolf съставя фактурата от данните на поръчката: редовете се предлагат от дейностите, а ДДС, втората валута и сумата словом се изчисляват сами. Реквизитите на доставчика идват от „Фирмени данни“ и се замразяват върху всяка издадена фактура. Живият преглед показва точния документ — каквото виждате, това се генерира.",
         bullets: [
           "Номерът идва от сървъра — двама души никога не получават един и същ",
           "Обща фактура: една фактура, разпределена на дялове по няколко поръчки",
@@ -193,21 +193,21 @@ const bg = {
       dashboard: {
         tag: "Табло",
         title: "Табло за управление",
-        body: "Неразплатено, фактурирано, активни поръчки и просрочени задачи — на един поглед. Отдолу: дейностите по месеци, задачите по статус, вземанията с преход към всяка поръчка и натовареността на екипа. Обновява се в реално време.",
+        body: "Просрочени и предстоящи задачи, натовареност на екипа, издадени фактури, най-големи платци и поръчки с нефактуриран остатък — на един поглед, с избираем аналитичен период. Всеки панел показва само данните, до които имате права. Обновява се в реално време.",
         bullets: [
-          "Вземания по давност: до 30, 30–60, 60–90 и над 90 дни",
-          "Натовареност на екипа: активни и завършени задачи по служител",
-          "Достъп само за администратори",
+          "Най-големи текущи остатъци по поръчки — с преход към всяка",
+          "Натовареност на екипа: поръчки, контрол и просрочени по служител",
+          "Финансовите панели изискват отделно право „Виждане на вземания“",
         ],
       },
       permissions: {
         tag: "Достъп",
         title: "Роли и права за всеки в екипа",
-        body: "Разделът „Администрация“ държи потребителите и ролите: Админ, Деловодител, Изпълнител, Счетоводител, Потребител. Матрица с отметки казва какво може всяка роля — модул по модул: поръчки, фактури, шаблони, справки, администрация.",
+        body: "Разделът „Администрация“ държи потребителите, ролите, одитния журнал и фирмените данни. Матрица с отметки казва какво може всяка роля — модул по модул, включително обхват на данните: всички записи или само поръчките, в които служителят участва.",
         bullets: [
           "Собствени роли — създавате ги и им давате точните права",
-          "Потребител ↔ служител: всеки вижда своите задачи и своите поръчки",
-          "Финансовите суми, маржът и таблото остават само за администратори",
+          "Финансите са отделен модул права: вземания, маржове, плащания",
+          "Одитен журнал: кой какво е променил, с преход към записа",
         ],
       },
     },
@@ -350,7 +350,7 @@ const bg = {
       privacy: "Поверителност",
     },
     rights: "Всички права запазени.",
-    version: "Описана версия 1.0.25",
+    version: "Описана версия 1.0.26",
   },
   privacyPage: {
     title: "Политика за поверителност",
@@ -512,7 +512,7 @@ const en: typeof bg = {
       invoicing: {
         tag: "Invoicing",
         title: "A PDF invoice — straight from the order",
-        body: "Wolf assembles the invoice from the order's data: line items are suggested from the activities, and VAT, the second currency and the amount in words are computed for you. A live preview shows the exact document — what you see is what gets generated.",
+        body: "Wolf assembles the invoice from the order's data: line items are suggested from the activities, and VAT, the second currency and the amount in words are computed for you. The supplier's details come from “Company data” and are frozen onto every issued invoice. A live preview shows the exact document — what you see is what gets generated.",
         bullets: [
           "The number comes from the server — two people can never get the same one",
           "Shared invoices: one invoice split into shares across several orders",
@@ -582,21 +582,21 @@ const en: typeof bg = {
       dashboard: {
         tag: "Dashboard",
         title: "Management dashboard",
-        body: "Outstanding, invoiced, active orders and overdue tasks — at a glance. Below: monthly activity, tasks by status, receivables with a jump to any order, and the team's workload. Updates in real time.",
+        body: "Overdue and upcoming tasks, team workload, issued invoices, top payers and orders with an unbilled remainder — at a glance, over a selectable analytics period. Every panel shows only the data you have rights to. Updates in real time.",
         bullets: [
-          "Receivables by age: under 30, 30–60, 60–90 and over 90 days",
-          "Team workload: active and completed tasks per person",
-          "Admin-only access",
+          "Largest current balances by order — with a jump to each",
+          "Team workload: orders, control duty and overdue per person",
+          "The financial panels require the separate “View receivables” right",
         ],
       },
       permissions: {
         tag: "Access",
         title: "Roles and rights for everyone on the team",
-        body: "The “Administration” section holds the users and the roles: Admin, Office, Surveyor, Accountant, User. A checkbox matrix says what each role may do — module by module: orders, invoices, templates, reports, administration.",
+        body: "The “Administration” section holds the users, the roles, the audit log and the company data. A checkbox matrix says what each role may do — module by module, including data scope: all records, or only the orders the employee takes part in.",
         bullets: [
           "Your own roles — create them and grant the exact rights",
-          "User ↔ employee: everyone sees their own tasks and their own orders",
-          "Financial totals, margin and the dashboard stay admin-only",
+          "Finance is its own rights module: receivables, margins, payments",
+          "Audit log: who changed what, with a jump to the record",
         ],
       },
     },
@@ -739,7 +739,7 @@ const en: typeof bg = {
       privacy: "Privacy",
     },
     rights: "All rights reserved.",
-    version: "Documented version 1.0.25",
+    version: "Documented version 1.0.26",
   },
   privacyPage: {
     title: "Privacy policy",

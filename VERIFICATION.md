@@ -43,11 +43,11 @@ outcomes) and the docs completion.*
 | Calendar: monthly grid, overdue indicators, today's-tasks bell, employee switcher | §8.6 | ✅ |
 | Filters: quick toggles, status dropdowns, text searches, multi-selects, active-filters indicator | §8.3 | ✅ |
 | Reports: All Tasks, Obligations, Task-Type Payment, monthly per-employee; .xlsx | §8.11 | ✅ |
-| Invoicing: PDF invoice from order data — auto-suggested sequential number (max+1, 10 digits), VAT (default 20%), dual currency EUR/BGN, amount in words (Bulgarian, auto + editable), line items suggested from activities, live preview = same renderer as the file | Verified in code, 2026-07-07: `Wolf.Invoicing/` (InvoiceComposer, InvoicePdfDocument, CurrencyConverter, BulgarianNumberToWords), `Views/InvoiceDraftView.axaml`, `ViewModels/InvoiceDraftViewModel.cs`. NOTE: uncommitted working-tree feature (post-1.0.24, in-flight release). Supplier details are currently set in code per deployment (`InvoiceComposer.cs`) — the site phrases this as "configured at rollout", which matches practice; do not claim an in-app settings screen. | ✅ |
-| Templates: assembled in the „Конструктор“ builder — 7 block types (Заглавие/Текст/Ред с данни/Таблица със списък/Повтарящ се раздел/Подписи/Празен ред), fields inserted from a searchable Bulgarian picker (never typed), live preview against sample data or a real order with an empty-field count, „Отвори в Word“, draft → publish (one-way), mechanical .docx import, „№ по ред“, nested repeating sections (plot→its owners, owner→their plots), first-item („основен“) fields with a multi-item warning at generation, three separate rights (use / manage own / manage all), admin-only raw Word upload, legacy Word templates keep working + „Провери шаблона“ | Verified in code, 2026-07-11: `Views/TemplateBuilderView.axaml`, `Views/DocumentTemplatesView.axaml`, `Controls/FieldPickerFlyout.axaml`, `Documents/{TemplateDesign,DocxBlockImporter,TemplateImportFlow,OrderMergeContextBuilder,FirstItemBindingLint}.cs`, `Api/Controllers/TemplatesController.cs`, `Wolf.Dtos/Permissions.cs`; commits `e4e7eaf`→`0fc26f4` (M1–M5 + UI audit). **BUILT BUT NOT YET RELEASED — see flagged item 11.** | ⚠️ |
-| Roles & rights: „Администрация“ with Потребители + Роли и права tabs, per-module permission matrix, seeded roles (Админ / Деловодител / Изпълнител / Счетоводител / Потребител), custom roles, locked Admin role, user↔employee link, password reset, disable account | Verified in code, 2026-07-11: `Views/AdministrationView.axaml`, `Wolf.Api/Authorization/*`, `Wolf.Dtos/Permissions.cs`; commit `e4e7eaf`. **BUILT BUT NOT YET RELEASED, and server-side enforcement currently ships OFF — see flagged item 11.** | ⚠️ |
+| Invoicing: PDF invoice from order data — auto-suggested sequential number (max+1, 10 digits), VAT (default 20%), dual currency EUR/BGN, amount in words (Bulgarian, auto + editable), line items suggested from activities, live preview = same renderer as the file | Verified in code, 2026-07-07: `Wolf.Invoicing/` (InvoiceComposer, InvoicePdfDocument, CurrencyConverter, BulgarianNumberToWords), `Views/InvoiceDraftView.axaml`, `ViewModels/InvoiceDraftViewModel.cs`. Shipped in 1.0.26. **Supplier details are no longer hardcoded** — since `6ee1cdc` they come from Администрация → „Фирмени данни“ and are frozen as a snapshot on each issued invoice (item 13). | ✅ |
+| Templates: assembled in the „Конструктор“ builder — 7 block types (Заглавие/Текст/Ред с данни/Таблица със списък/Повтарящ се раздел/Подписи/Празен ред), fields inserted from a searchable Bulgarian picker (never typed), live preview against sample data or a real order with an empty-field count, „Отвори в Word“, draft → publish (one-way), mechanical .docx import, „№ по ред“, nested repeating sections (plot→its owners, owner→their plots), first-item („основен“) fields with a multi-item warning at generation, three separate rights (use / manage own / manage all), admin-only raw Word upload, legacy Word templates keep working + „Провери шаблона“ | Verified in code, 2026-07-11: `Views/TemplateBuilderView.axaml`, `Views/DocumentTemplatesView.axaml`, `Controls/FieldPickerFlyout.axaml`, `Documents/{TemplateDesign,DocxBlockImporter,TemplateImportFlow,OrderMergeContextBuilder,FirstItemBindingLint}.cs`, `Api/Controllers/TemplatesController.cs`, `Wolf.Dtos/Permissions.cs`; commits `e4e7eaf`→`0fc26f4` (M1–M5 + UI audit). **Shipped in 1.0.26 (2026-07-13) — item 11 resolved.** Since `1c2ba10` also: per-column „Заглавие“/„Суфикс“, deeper nesting, revision-guarded saves. | ✅ |
+| Roles & rights: „Администрация“ with Потребители / Роли и права / Одитен журнал / Фирмени данни tabs, per-module permission matrix incl. data scope (viewAll vs viewParticipating), seeded roles (Админ / Деловодител / Изпълнител / Счетоводител / Потребител), custom roles, locked Admin role, user↔employee link, password reset, disable account | Verified in code, 2026-07-11 and re-verified 2026-07-13: `Views/AdministrationView.axaml`, `Wolf.Api/Authorization/*`, `Wolf.Dtos/Permissions.cs`, `Services/{DesktopPermissionPolicy,DownstreamDataScope}.cs`; commits `e4e7eaf`, `6ee1cdc`. **Shipped in 1.0.26; server-side enforcement is now ON (`"Authorization": {"Mode": "Enforce"}`) — item 11 resolved.** | ✅ |
 | Teamwork: simultaneous work, instant propagation, conflict warning instead of data loss | §4.3 (optimistic concurrency, "friendly 409"), §7.4, §6.4 (audit log) | ✅ |
-| Dashboard: KPI cards (outstanding, invoiced, active orders, overdue tasks), monthly activity, tasks by status, receivables with jump-to-order, team workload, admin-only, real-time | Dashboard rebuilt 2026-07-06 (supersedes §8.7's top-5/recent-orders description); verified against the supplied `AdminBoard.png` screenshot of the new build | ✅ |
+| Dashboard: attention cards (overdue / due in 7 days / open), tasks by status, team workload, issued invoices, payers by invoiced value, orders with an unbilled remainder, largest current balances, selectable analytics period, rights-scoped panels, real-time | Dashboard rebuilt AGAIN in `6ee1cdc` (`DashboardView.axaml`, ~986 lines) — verified in code 2026-07-13. **The receivables aging buckets (до 30 / 30–60 / 60–90 / над 90 дни) no longer exist in the app** and were removed from the site's tour + `/docs/admin` the same day. `AdminBoard.png` now predates this rebuild — recapture. | ✅ |
 | Clients: searchable list, all-time financials, per-order breakdown, Excel export, legal type | §8.4 | ✅ |
 
 ## How it works (formerly Architecture)
@@ -73,7 +73,7 @@ outcomes) and the docs completion.*
 | Calendar & scheduling | §8.6, §8.2 (bell) |
 | Filters & search | §8.3 (advanced order filters, Ctrl+F §8.2) |
 | Reports & exports | §8.11 (base reports; renamed to current UI labels 2026-07-07: „Оборот на задачи“, „Задължения“, „Плащания по вид задача“, „Месечна справка“) + new „Справка такси (държавни такси)“ and the two no-filter business reports („Поръчки и приходи по общини“, „Клиенти: класация и реактивиране“) verified in `Views/InqueriesView.axaml` 2026-07-07 (working tree) |
-| Administration | §8.5, §8.12, §6.1 (roles); dashboard detail (clickable KPI cards, 12-month charts, receivables aging buckets, team workload) verified against `DashboardView.axaml`/`DashboardViewModel.cs` 2026-07-07 |
+| Administration | §8.5, §8.12, §6.1 (roles); rewritten 2026-07-13 against `6ee1cdc` — four Администрация tabs (Потребители / Роли и права / Одитен журнал / Фирмени данни), the rebuilt Табло, the employee create/edit form, and „Моят профил“ as a work centre. See item 13. |
 
 Additions verified in code on 2026-07-07 (source: `../Wolf.Desktop` working tree
 + recent commits, which are ahead of PROJECT_OVERVIEW.md v1.0.16):
@@ -112,15 +112,17 @@ tested claim.
    owner (subscription prices 2026-07-06; one-time ladder restructured to the
    3× multiple on the owner's approval, same date; the earlier per-seat model
    was dropped). Commercial terms, not derivable from PROJECT_OVERVIEW.
-5. **Version "1.0.25"** (footer, updated 2026-07-11) matches the app's current
-   `<Version>` in `Wolf.Desktop.csproj` and release commit `d5a7d6a`
-   (Release 1.0.25). NOTE: the site documents *ahead* of this version — the
-   Конструктор template builder and the Администрация roles screen are built
-   but unreleased (flagged item 11). Bump the footer to the next release number
-   when that ships. The bundled `LoginScreen.png` still shows `v1.0.15`.
-7. **Placeholder screenshots** (2026-07-07, extended 2026-07-11): `InvoiceDraft.png`,
-   `TemplatesScreen.png`, `GenerateDocument.png`, `TemplateBuilder.png` and
-   `Administration.png` in `public/screenshots/` are branded "снимка очаква се"
+5. **Version "1.0.26"** (footer, updated 2026-07-13) matches the app's current
+   `<Version>` in `Wolf.Desktop.csproj`. The app's own `DEPLOY.md` records
+   1.0.26 as **shipped on 2026-07-13**, together with the template builder,
+   server authorization + data scopes, the audit journal and the company-data
+   migrations. There is no `Release 1.0.26` commit (the release ladder stops at
+   `d5a7d6a` = 1.0.25); the version lives in the csproj and the deploy record.
+   The bundled `LoginScreen.png` still shows `v1.0.15`.
+7. **Placeholder screenshots** (2026-07-07, extended 2026-07-13): `InvoiceDraft.png`,
+   `TemplatesScreen.png`, `GenerateDocument.png`, `TemplateBuilder.png`,
+   `Administration.png` and the two new slots `AuditLog.png` +
+   `CompanyProfile.png` in `public/screenshots/` are branded "снимка очаква се"
    placeholders, NOT real app screenshots — replace with real captures under the
    same filenames (1919×1032 to match the frame's aspect ratio). The owner has
    said the captures will follow.
@@ -147,14 +149,17 @@ tested claim.
    - Ctrl+K scope now incl. invoices, employees, tasks, app sections; Ctrl+Enter
      opens in Orders; Shift+double-click sidebar item → floating window —
      `HelpContent.cs`, `MainWindowViewModel.cs`.
-   - Supplier requisites REMAIN hardcoded per deployment (`InvoiceComposer.cs`,
-     "to be moved to config later") — the site still says "configured at
-     rollout"; do not claim a settings screen.
-   - Money footer totals „Неразплатено“/„Нефактурирано“ are ADMIN-ONLY
-     (`OrdersView.axaml` IsVisible=IsAdmin; owner-reported 2026-07-07, verified
-     in code); the filtered order count stays visible to all roles. The
-     admin-only МАРЖ field (price minus task payments and fees) in the order
-     detail is documented on /docs/orders.
+   - ~~Supplier requisites REMAIN hardcoded per deployment~~ — **SUPERSEDED
+     2026-07-13 by item 13: there is now a „Фирмени данни“ screen.** The old
+     guardrail ("do not claim a settings screen") no longer applies; the site
+     now says the requisites come from Администрация → Фирмени данни.
+   - Money footer totals „Неразплатено“/„Нефактурирано“ were ADMIN-ONLY
+     (`OrdersView.axaml` IsVisible=IsAdmin; owner-reported 2026-07-07).
+     **Superseded 2026-07-13:** the gate is now the granular permission
+     `finance.viewOrderTotals` („Виждане на вземания“), and МАРЖ is
+     `finance.viewMargins` („Виждане на маржове“) — both seeded to the Админ
+     role only, so the customer-visible behaviour is unchanged by default. The
+     site now describes them as rights, not as an admin hardcode.
 6. **Contact details** (CTA, footer, privacy page) — phone +359 877 139 712,
    email bddimitrov18@gmail.com, name Bozhidar Damyanov Dimitrov (no company
    entity) — supplied by the owner 2026-07-06. The demo form's mailto now
@@ -182,7 +187,19 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
     (`cta.body`, unchanged); the ring is the established product descriptor.
     No certification or approval implied; the SVG is aria-hidden.
 
-11. ⚠️ **The site documents two features AHEAD of their release** (2026-07-11,
+11. ✅ **RESOLVED 2026-07-13 — no longer ahead of the release.** Both features
+    below shipped in **1.0.26** (the app's `DEPLOY.md`: *"Last shipped: 1.0.26
+    (2026-07-13, together with the template-builder, server authorization/data
+    scopes, audit journal, company-data migrations)"*), and server-side
+    enforcement is now ON — `Wolf.Api/appsettings.json` reads
+    `"Authorization": { "Mode": "Enforce" }` (was `"Off"`). The permission
+    system now blocks the API, not just the UI. The two ⚠️ rows in the
+    feature-tour table (Templates, Roles & rights) are cleared. The original
+    flag is kept below for history.
+
+    <details><summary>Original flag (2026-07-11)</summary>
+
+    ⚠️ **The site documents two features AHEAD of their release** (2026-07-11,
     on the owner's explicit instruction: *"make the website as it's already
     come out — I will ship it soon"*). Both are fully built on the app's
     `feature/document-templates` branch (commits `e4e7eaf`→`0fc26f4`) but are
@@ -211,6 +228,8 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
     of rendering as an unresolved literal, and `{{#each plots}}` nested inside
     `{{#each owners}}` now enumerates each owner's own plots.
 
+    </details>
+
 12. **Both authoring paths are documented as equals** (owner directive,
     2026-07-11: *"both options should be available… make sure it is visible"*).
     `/docs/templates` opens on „Два начина към една бланка“ and then documents
@@ -232,3 +251,71 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
       the app in the builder work (M2); `StarterTemplateBuilder.cs` survives
       only as seed/test code. If the owner wants it back, that is an app change,
       not a site one.
+
+13. **Round 3 — firm administration, audit journal, work centre** (2026-07-13,
+    third full app↔site sweep). All of the below is verified in the app's
+    **committed** `main` (commits `1c2ba10` "Harden document builder and enable
+    advanced nesting", `6ee1cdc` "ship secure workflows and firm
+    administration"), shipped as **1.0.26**. Nothing here is uncommitted —
+    unlike rounds 1–2, the app's working tree holds only build artefacts.
+
+    - **„Фирмени данни“ — the supplier is no longer hardcoded.** New 4th tab in
+      Администрация (`Views/AdministrationView.axaml`), backed by
+      `deploy/sql/2026-07-13_company_profiles.sql`. Holds one or more дружества
+      with legal identity (Код, Кратко/Юридическо/Търговско име, ЕИК, „Регистрация
+      по ДДС“ + ДДС №, адрес, МОЛ, контакти), invoicing defaults (Място на
+      издаване, Съставител, ДДС %, Валута) and bank accounts (add / edit /
+      **„Деактивирай“ — never delete**), plus a live „ПРЕГЛЕД НА ДОСТАВЧИКА“ card.
+      `InvoiceComposer.Compose` now **requires** an `InvoiceSupplierSnapshot`
+      argument and has **no hardcoded fallback**; the old
+      `// Hardcoded supplier … To be moved to config later` block is gone.
+      → The site's long-standing "настройват се при внедряването" wording is
+      **retired** on `/docs/invoicing` and in the homepage tour.
+    - **Snapshot immutability.** `Invoice` gained `Companyid`,
+      `Supplierprofileversionid`, `Suppliersnapshotjson` — every issued invoice
+      freezes the requisites, so editing the company profile cannot rewrite
+      invoice history. The desktop sends `ExpectedSupplierProfileVersionId`; a
+      stale preview is rejected (`company_profile_changed`) and the draft offers
+      **„Обнови фирмените данни“**. Documented as a step on `/docs/invoicing`.
+    - **„Одитен журнал“** — new 3rd Администрация tab (`AuditController`,
+      `DatabaseAuditService`, `2026-07-13_audit_events.sql`): filters (търсене /
+      потребител / вид запис / действие / период), an event stream with jump-to-record
+      and „В Поръчки“ buttons, and a detail pane showing the **записани данни**.
+      Gated by the separate `admin.audit` right (Админ only by default). New
+      `/docs/admin` §Одитен журнал + slot `AuditLog.png`.
+    - **Finance is now its own rights module** (`Wolf.Dtos/Permissions.cs`):
+      `finance.viewOrderTotals` („Виждане на вземания“) gates the
+      Неразплатено/Нефактурирано footer and the dashboard's money panels;
+      `finance.viewMargins` („Виждане на маржове“) gates МАРЖ. Seeded to Админ
+      only — default behaviour matches what the site said before, but the site
+      now describes the *right*, not an `IsAdmin` hardcode (see item 8).
+    - **Data scope per list** (`DownstreamDataScope.cs`,
+      `2026-07-13_downstream_scope_createdby.sql`): every dataset has
+      `*.viewAll` vs `*.viewParticipating`; with neither, the list is empty.
+      Documented in `/docs/admin` §Роли и права.
+    - **Табло rebuilt** (`DashboardView.axaml`, ~986 lines): „Задачи, изискващи
+      внимание“ (ПРОСРОЧЕНИ / ДО 7 ДНИ / ОТВОРЕНИ), „Натовареност на екипа“,
+      „Издадени фактури“, „Платци по фактурирана стойност“, „Поръчки с
+      нефактуриран остатък“, „Най-големи текущи остатъци“, all over a selectable
+      analytics period and scoped to the viewer's rights. **The old aging buckets
+      (до 30 / 30–60 / 60–90 / над 90 дни) are GONE from the app** — that claim
+      was removed from the homepage tour and `/docs/admin`, where it would
+      otherwise have become false.
+    - **„Моят профил“ = a work centre** (`UserProfileView.axaml`): four attention
+      cards (ПРОСРОЧЕНИ / ДНЕС / СЛЕДВАЩИ 7 ДНИ / ВСИЧКИ ОТВОРЕНИ), „Моята
+      работна опашка“ ranked by urgency with colour bars, „Натовареност · 7 дни“,
+      „Активни поръчки“, „За мой контрол“. Replaces the old PersonalTab
+      description (period stats + completion %) on `/docs/admin` §Личен профил.
+    - **Конструктор** (`1c2ba10`): table columns get per-column „Заглавие“ and
+      „Суфикс след стойността“; repeating sections nest deeper; template writes
+      are guarded by a revision token (`2026-07-12_template_revision.sql`) with an
+      „Незапазени промени“ marker and a rejected-stale-write path instead of
+      last-write-wins.
+    - **Employees**: new create/edit form with „Външен служител“, and an
+      `employees.createExternal` right that locks the type to „Външен“.
+    - **Not user-visible, deliberately not on the site:** `d6c41f8` (test
+      determinism) and `28cda26` (production backup hardening — `deploy/backup.sh`,
+      a server-ops concern; the site makes no backup claim, and none was added).
+    - **In-app Help was NOT updated** for these features (`HelpContent.cs`
+      untouched in all four commits) — for now the website is the only place the
+      company-data / audit / work-centre features are documented.

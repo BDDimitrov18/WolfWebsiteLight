@@ -85,18 +85,22 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "ul",
           items: [
-            "Табло — финансовият пулс на практиката (за администратори)",
+            "Табло — пулсът на практиката: внимание, натовареност, финанси",
             "Поръчки — работният екран, център на ежедневието",
             "Имоти, Документи и Собственици — кадастралният регистър и веригата на собствеността",
             "Клиенти — възложителите, с финансова статистика за всеки",
             "Календар — задачите по крайни срокове",
-            "Служители — екипът и личните справки (за администратори)",
+            "Служители — екипът и личните справки",
             "Фактури — регистърът на фактурите и PDF генераторът",
             "Шаблони — бланките на практиката: в конструктора или като Word файл",
             "Справки — отчетите в Excel",
-            "Администрация — потребители, роли и права (за администратори)",
+            "Администрация — потребители, роли и права, одитен журнал и фирмени данни",
             "Помощ — вграденото ръководство на системата (отваря се и с F1)",
           ],
+        },
+        {
+          type: "p",
+          text: "Виждате само разделите, за които имате права: списъкът по-горе е пълният. Клик върху собственото ви име отваря „Моят профил“ — личен работен център с просрочените ви задачи, опашката по спешност и поръчките, в които участвате.",
         },
         {
           type: "p",
@@ -172,18 +176,22 @@ export const DOC_PAGES: DocPage[] = [
         {
           type: "ul",
           items: [
-            "Dashboard — the practice's financial pulse (administrators)",
+            "Dashboard — the practice's pulse: attention, workload, finances",
             "Orders — the working screen, the centre of the day",
             "Plots, Documents and Owners — the cadastral register and the chain of ownership",
             "Clients — the commissioners, with financial statistics for each",
             "Calendar — tasks by due date",
-            "Employees — the team and per-person reports (administrators)",
+            "Employees — the team and per-person reports",
             "Invoices — the invoice register and the PDF generator",
             "Templates — the practice's forms: in the builder, or as a Word file",
             "Reports — the Excel exports",
-            "Administration — users, roles and rights (administrators)",
+            "Administration — users, roles and rights, the audit log and the company data",
             "Help — the system's built-in manual (also opens with F1)",
           ],
+        },
+        {
+          type: "p",
+          text: "You only see the sections your rights cover: the list above is the full one. Clicking your own name opens \"My profile\" — a personal work centre with your overdue tasks, your queue by urgency and the orders you take part in.",
         },
         {
           type: "p",
@@ -247,7 +255,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "p",
-          text: "Под списъка лентата със суми показва „Неразплатено“ и „Нефактурирано“ за текущия изглед — само за администратори. Двете са и бързи филтри — клик върху „Неразплатено“ оставя само неразплатените поръчки, клик върху „Нефактурирано“ — тези под цената. Броят на филтрираните поръчки се вижда от всички.",
+          text: "Под списъка лентата със суми показва „Неразплатено“ и „Нефактурирано“ за текущия изглед — само за хората с правото „Виждане на вземания“ (по подразбиране: администраторите). Двете са и бързи филтри — клик върху „Неразплатено“ оставя само неразплатените поръчки, клик върху „Нефактурирано“ — тези под цената. Броят на филтрираните поръчки се вижда от всички.",
         },
         { type: "h2", id: "create", text: "Създаване и редакция" },
         {
@@ -283,7 +291,7 @@ export const DOC_PAGES: DocPage[] = [
             "Клиенти — кой е възложил поръчката, с роля и бърза връзка към статистиката му",
             "Имоти и документи — имотите по поръчката и документите за собственост",
             "Фактури — нова PDF фактура, въвеждане на съществуваща или свързване на обща фактура от базата; плюс „Генерирай документ“ (от шаблон на практиката)",
-            "МАРЖ — цената минус заплащанията и таксите по задачите (само за администратори)",
+            "МАРЖ — цената минус заплащанията и таксите по задачите (изисква правото „Виждане на маржове“)",
           ],
         },
         { type: "h2", id: "colors", text: "Цветове на задачите" },
@@ -310,7 +318,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "p",
-          text: "Under the list, the totals bar shows \"Outstanding\" and \"Uninvoiced\" for the current view — administrators only. Both double as quick filters — clicking \"Outstanding\" keeps only unpaid orders, clicking \"Uninvoiced\" those billed under their price. The filtered order count is visible to everyone.",
+          text: "Under the list, the totals bar shows \"Outstanding\" and \"Uninvoiced\" for the current view — only to people holding the \"View receivables\" right (administrators by default). Both double as quick filters — clicking \"Outstanding\" keeps only unpaid orders, clicking \"Uninvoiced\" those billed under their price. The filtered order count is visible to everyone.",
         },
         { type: "h2", id: "create", text: "Creating & editing" },
         {
@@ -346,7 +354,7 @@ export const DOC_PAGES: DocPage[] = [
             "Clients — who commissioned the order, with their role and a quick link to their statistics",
             "Plots & documents — the order's parcels and their ownership documents",
             "Invoices — a new PDF invoice, entering an existing one, or linking a shared invoice from the database; plus \"Generate document\" (from a practice template)",
-            "MARGIN — the price minus the tasks' payments and fees (administrators only)",
+            "MARGIN — the price minus the tasks' payments and fees (requires the \"View margins\" right)",
           ],
         },
         { type: "h2", id: "colors", text: "Task colours" },
@@ -877,8 +885,12 @@ export const DOC_PAGES: DocPage[] = [
               d: "Редовете се предлагат от дейностите на поръчката — описание от типа на дейността (с номерата на имотите) и единична цена от възнаграждението. Добавяте и махате редове свободно.",
             },
             {
+              t: "Доставчик",
+              d: "Реквизитите на доставчика и банковата сметка идват от активното основно дружество във „Фирмени данни“ и се показват в прегледа. Ако междувременно колега ги е променил, бутонът „Обнови фирмените данни“ ги дърпа наново — фактура не се издава със стари реквизити.",
+            },
+            {
               t: "Генериране",
-              d: "„Генерирай и отвори PDF“ създава файла и го отваря веднага — готов за печат или изпращане.",
+              d: "„Генерирай и отвори PDF“ създава файла и го отваря веднага — готов за печат или изпращане. Валутата и банковата сметка се замразяват при издаването.",
             },
           ],
         },
@@ -908,7 +920,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "callout",
-          text: "Реквизитите на практиката — наименование, ЕИК/ДДС №, IBAN, МОЛ — се настройват при внедряването и се попълват автоматично във всяка фактура.",
+          text: "Реквизитите на доставчика — наименование, ЕИК/ДДС №, IBAN, МОЛ — идват от „Фирмени данни“ в раздел „Администрация“ и се попълват автоматично във всяка фактура. Издадената фактура пази снимка на реквизитите такива, каквито са били в момента на издаване: по-късна промяна на фирмените данни не пренаписва старите фактури.",
         },
       ],
       en: [
@@ -963,8 +975,12 @@ export const DOC_PAGES: DocPage[] = [
               d: "Lines are suggested from the order's activities — the description from the activity type (with the plot numbers) and the unit price from the payment. Add and remove lines freely.",
             },
             {
+              t: "Supplier",
+              d: "The supplier's requisites and bank account come from the active default company under \"Company data\" and show up in the preview. If a colleague changed them meanwhile, the \"Refresh company data\" button pulls them again — an invoice is never issued on stale requisites.",
+            },
+            {
               t: "Generate",
-              d: "\"Generate and open PDF\" creates the file and opens it immediately — ready to print or send.",
+              d: "\"Generate and open PDF\" creates the file and opens it immediately — ready to print or send. The currency and the bank account are frozen at issue.",
             },
           ],
         },
@@ -994,7 +1010,7 @@ export const DOC_PAGES: DocPage[] = [
         },
         {
           type: "callout",
-          text: "The practice's own details — name, company/VAT number, IBAN, accountable person — are configured at rollout and fill in automatically on every invoice.",
+          text: "The supplier's details — name, company/VAT number, IBAN, accountable person — come from \"Company data\" in the Administration section and fill in automatically on every invoice. An issued invoice keeps a snapshot of those details exactly as they were at the moment of issue: a later change to the company data does not rewrite older invoices.",
         },
       ],
     },
@@ -1081,10 +1097,15 @@ export const DOC_PAGES: DocPage[] = [
           type: "ul",
           items: [
             "„№ по ред“ номерира елементите в списъка автоматично",
-            "Вложени раздели: за всеки имот — неговите собственици; за всеки собственик — неговите имоти",
+            "Вложени раздели: за всеки имот — неговите собственици; за всеки собственик — неговите имоти. Вложените раздели могат да се вложат и по-надълбоко",
+            "Колоните на таблицата се подреждат и настройват поотделно: собствено „Заглавие“ (празното взема името на полето) и „Суфикс след стойността“ — например „лв.“",
             "„Имот (основен)“ и „Собственик (основен)“ вземат първия от поръчката — за документ с един имот не е нужен списък",
             "Ако шаблонът работи само с първия имот, а поръчката има няколко, системата предупреждава при генериране",
           ],
+        },
+        {
+          type: "callout",
+          text: "Докато редактирате, „Незапазени промени“ стои над листа. Ако колега е записал същия шаблон преди вас, Wolf отказва записа вместо да презапише неговата версия — презареждате и нанасяте промяната наново.",
         },
         { type: "h2", id: "import", text: "Внасяне на съществуващ .docx" },
         {
@@ -1220,10 +1241,15 @@ export const DOC_PAGES: DocPage[] = [
           type: "ul",
           items: [
             "A row-number field numbers the items in a list automatically",
-            "Nested sections: for each plot, its owners; for each owner, their plots",
+            "Nested sections: for each plot, its owners; for each owner, their plots. Nested sections can now nest deeper still",
+            "Table columns are reordered and configured one by one: their own \"Heading\" (an empty one falls back to the field's name) and a \"Suffix after the value\" — \"лв.\", for instance",
             "\"Primary plot\" and \"primary owner\" take the first one on the order — a single-plot document needs no list at all",
             "If the template only fills in the first plot but the order has several, the system warns you at generation time",
           ],
+        },
+        {
+          type: "callout",
+          text: "While you edit, an \"Unsaved changes\" marker sits above the sheet. If a colleague saved the same template before you, Wolf refuses the write instead of overwriting their version — you reload and re-apply your change.",
         },
         { type: "h2", id: "import", text: "Importing an existing .docx" },
         {
@@ -1394,7 +1420,7 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "money", text: "Лентата със суми" },
         {
           type: "p",
-          text: "Под списъка с поръчки „Неразплатено“ и „Нефактурирано“ показват сумите за текущия изглед и са кликаеми: клик включва съответния бърз филтър („Неразплатени“ / „Под цената“) с отметка, докато е активен. Сумите се виждат само от администратори; броят на филтрираните поръчки — от всички.",
+          text: "Под списъка с поръчки „Неразплатено“ и „Нефактурирано“ показват сумите за текущия изглед и са кликаеми: клик включва съответния бърз филтър („Неразплатени“ / „Под цената“) с отметка, докато е активен. Сумите изискват правото „Виждане на вземания“; броят на филтрираните поръчки се вижда от всички.",
         },
         { type: "h2", id: "multi", text: "Множествен избор" },
         {
@@ -1434,7 +1460,7 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "money", text: "The totals bar" },
         {
           type: "p",
-          text: "Under the order list, \"Outstanding\" and \"Uninvoiced\" show the sums for the current view and are clickable: a click applies the matching quick filter (\"Unsettled\" / \"Under the price\") with a check mark while active. The sums are visible to administrators only; the filtered order count to everyone.",
+          text: "Under the order list, \"Outstanding\" and \"Uninvoiced\" show the sums for the current view and are clickable: a click applies the matching quick filter (\"Unsettled\" / \"Under the price\") with a check mark while active. The sums need the \"View receivables\" right; the filtered order count is visible to everyone.",
         },
         { type: "h2", id: "multi", text: "Multi-select" },
         {
@@ -1550,8 +1576,8 @@ export const DOC_PAGES: DocPage[] = [
     navKey: "admin",
     title: { bg: "Администрация", en: "Administration" },
     intro: {
-      bg: "Прегледът на управителя: табло с финансите на практиката, статистика по служители и контрол на достъпа.",
-      en: "The manager's view: a dashboard with the firm's finances, per-employee statistics and access control.",
+      bg: "Прегледът на управителя: аналитично табло, статистика по служители, потребители и роли, одитен журнал и фирмените данни, от които се издават фактурите.",
+      en: "The manager's view: an analytics dashboard, per-employee statistics, users and roles, the audit log, and the company data invoices are issued from.",
     },
     blocks: {
       bg: [
@@ -1559,15 +1585,14 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dashboard", text: "Табло за управление" },
         {
           type: "p",
-          text: "Ключовите числа на практиката на един екран: неразплатени суми, общо фактурирано, активни поръчки и просрочени задачи. Отдолу — дейностите по месеци, задачите по статус, вземанията и натовареността на екипа.",
+          text: "Аналитичен изглед на практиката с избираем период. Горе — „Задачи, изискващи внимание“: просрочените, тези със срок до 7 дни и всички отворени. Отдолу — задачите по статус, натовареността на екипа и финансовите панели: издадени фактури, платци по фактурирана стойност, поръчки с нефактуриран остатък и най-големите текущи остатъци.",
         },
         {
           type: "ul",
           items: [
-            "Картите „Неразплатено“ и „Просрочени задачи“ са кликаеми — отварят списъка на съответните поръчки",
-            "Графики: дейностите по месеци срещу завършените задачи и задачите по статус за последните 12 месеца",
-            "Вземания — кой дължи, колко и от преди колко дни, групирани по давност; всяко вземане води към поръчката си",
-            "Натовареност на екипа — активните и завършените този месец задачи на всеки, с преход към справката му",
+            "„Натовареност на екипа“ — за всеки служител: поръчки, задачи за контрол, натоварване и просрочени; външните изпълнители са отбелязани",
+            "„Най-големи текущи остатъци“ и „Поръчки с нефактуриран остатък“ — с бутон „Към поръчката“ за всяко перо",
+            "Всеки панел показва само данните в обхвата на вашите права — таблото се отваря с правото „Табло“, а финансовите панели искат и „Виждане на вземания“",
             "Числата се обновяват в реално време, докато екипът работи, и следват режима активни/архив",
           ],
         },
@@ -1577,24 +1602,28 @@ export const DOC_PAGES: DocPage[] = [
           type: "p",
           text: "Списък на екипа с търсене — включително външни изпълнители. За всеки служител: общо дейности и задачи, плащания, завършени и чакащи задачи, брой уникални поръчки, плюс разбивки по дейност и задача с преход към поръчката.",
         },
+        {
+          type: "p",
+          text: "Служителите се създават и редактират във формуляр с лични данни (име, презиме, фамилия), контакти (телефон, имейл) и отметка „Външен служител“. Правата за служители са отделни — има дори право, което позволява създаване само на външни изпълнители: тогава типът е заключен като „Външен“.",
+        },
         { type: "img", slot: "EmployeesStatistics", alt: "Статистика на служител", title: "Wolf — Статистика на служител" },
         { type: "h2", id: "roles", text: "Роли и права" },
         { type: "img", slot: "Administration", alt: "Роли и права", title: "Wolf — Администрация" },
         {
           type: "p",
-          text: "Разделът „Администрация“ държи достъпа до системата и има два таба: „Потребители“ и „Роли и права“. Виждат го само хората с администраторски права.",
+          text: "Разделът „Администрация“ държи достъпа и данните на практиката в четири таба: „Потребители“, „Роли и права“, „Одитен журнал“ и „Фирмени данни“. Всеки таб се вижда само с прилежащото му право — човек със „Счетоводител“ например може да отваря „Фирмени данни“, без да вижда потребителите.",
         },
         {
           type: "ul",
           items: [
-            "Потребители: създаване на профил с потребителско име, имейл и парола",
+            "Потребители: създаване на профил с потребителско име, имейл, парола, служител и роли",
             "Всеки профил се свързва със служител — така човекът вижда своите задачи и своите поръчки",
             "Смяна на паролата и изключване на профил, без да се губи историята му",
           ],
         },
         {
           type: "p",
-          text: "„Роли и права“ е матрица с отметки: за всяка роля се вижда и задава какво може да прави — модул по модул. Правата са отделни за поръчки, имоти, клиенти, фактури, шаблони, справки и администрация.",
+          text: "„Роли и права“ е матрица с отметки: за всяка роля се вижда и задава какво може да прави — модул по модул. Правата са групирани по: поръчки, дейности и задачи, клиенти, имоти и собственост, фактури, финанси, справки, шаблони, служители, номенклатури и администрация.",
         },
         {
           type: "ul",
@@ -1602,17 +1631,61 @@ export const DOC_PAGES: DocPage[] = [
             "Готови роли: Админ, Деловодител, Изпълнител, Счетоводител, Потребител",
             "„Създай роля“ — собствена роля с точно тези права, които решите",
             "Ролята „Админ“ е системна и заключена — не може да остане практиката без администратор",
+            "Обхват на данните за всеки списък: „всички“ или „само по поръчки, в които участва“ — без нито едно от двете списъкът е празен",
           ],
         },
         {
           type: "callout",
-          text: "Финансовият поглед е отделен от работния: редовете „Неразплатено“ и „Нефактурирано“, маржът по поръчка и цялото Табло се виждат само от администратори.",
+          text: "Финансите са отделен модул права: „Виждане на вземания“ (редовете „Неразплатено“ и „Нефактурирано“ и финансовите панели на таблото) и „Виждане на маржове“ (МАРЖ по поръчка). По подразбиране ги има само ролята „Админ“.",
         },
-        { type: "h2", id: "profile", text: "Личен профил" },
-        { type: "img", slot: "PersonalTab", alt: "Личният профил", title: "Wolf — Профил" },
+        { type: "h2", id: "audit", text: "Одитен журнал" },
+        { type: "img", slot: "AuditLog", alt: "Одитният журнал", title: "Wolf — Одитен журнал" },
         {
           type: "p",
-          text: "Всеки служител има собствен изглед: статистика за периода (този месец, миналия, последните 3, всичко), процент завършени задачи, дневни, седмични и месечни графики на обема работа и списък на последно завършените задачи.",
+          text: "Всяка промяна по данните оставя следа: кой, кога, какво и върху кой запис. Журналът се филтрира по текст, потребител, вид запис, действие и период, а всяко събитие показва и записаните данни — точните стойности в момента на промяната.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Бутон към самия запис и „В Поръчки“ — показва поръчките, свързани със събитието",
+            "Панел с подробности: действие, потребител, обект, идентификатор и записаните данни",
+            "Отваря се с отделното право „Одитен журнал“ — по подразбиране само за администратори",
+          ],
+        },
+        { type: "h2", id: "company", text: "Фирмени данни" },
+        { type: "img", slot: "CompanyProfile", alt: "Фирмените данни", title: "Wolf — Фирмени данни" },
+        {
+          type: "p",
+          text: "Тук живеят дружествата, от които практиката издава документи — с всичко, което излиза върху фактурата: юридическо име, ЕИК/Булстат, регистрация по ДДС и ДДС №, адрес, МОЛ, контакти, банкови сметки и стойности по подразбиране за фактуриране (място на издаване, съставител, ДДС %, валута). Карта „Преглед на доставчика“ показва на живо как ще изглежда доставчикът върху фактурата.",
+        },
+        {
+          type: "ul",
+          items: [
+            "Дружествата могат да са няколко — активното основно дружество е това, от което се издават новите фактури",
+            "Банковите сметки се добавят и деактивират, но никога не се изтриват — деактивирането не променя историческите фактури",
+            "Всяка издадена фактура замразява снимка на реквизитите — промяна на фирмените данни не пренаписва издадени фактури",
+            "Правата са раздробени: преглед, правни данни, банкови сметки и фактуриране са отделни отметки — правото за редакция не дава автоматично право за преглед",
+            "„История“ пази правните, банковите и фактурните промени — с бутон „Отвори одитния журнал“",
+          ],
+        },
+        {
+          type: "callout",
+          text: "Ако колега запише промяна, докато редактирате, Wolf показва „Има по-нова версия на фирмените данни“ и предлага „Презареди“ — вместо мълчаливо да презапише неговата версия.",
+        },
+        { type: "h2", id: "profile", text: "Моят профил — работен център" },
+        { type: "img", slot: "PersonalTab", alt: "Работният център в личния профил", title: "Wolf — Моят профил" },
+        {
+          type: "p",
+          text: "Клик върху собственото име в главния прозорец отваря „Моят профил“ — личен работен център. Четири карти за внимание сортират опашката: „Просрочени“, „Днес“, „Следващи 7 дни“ и „Всички отворени“, а под тях „Моята работна опашка“ реди незавършените задачи по спешност, с цветна лента (синьо — наближава, жълто — днес, червено — просрочено) и бутон към точната задача в поръчката.",
+        },
+        {
+          type: "ul",
+          items: [
+            "„Натовареност · 7 дни“ — колко задачи падат на всеки от следващите дни",
+            "„Активни поръчки“ — поръчките, в които участвате, с брой отворени задачи и следващ срок",
+            "„За мой контрол“ — задачите, на които сте контрольор, отделно от собствените",
+            "Бутони „Календар“ и „Моите поръчки“ — календарът ви и списъкът на поръчките ви на едно кликване",
+          ],
         },
       ],
       en: [
@@ -1620,15 +1693,14 @@ export const DOC_PAGES: DocPage[] = [
         { type: "h2", id: "dashboard", text: "Management dashboard" },
         {
           type: "p",
-          text: "The practice's key numbers on one screen: outstanding sums, total invoiced, active orders and overdue tasks. Below — monthly activity, tasks by status, receivables and the team's workload.",
+          text: "An analytics view of the practice over a period you choose. At the top — \"Tasks needing attention\": overdue, due within 7 days, and all open. Below — tasks by status, the team's workload, and the financial panels: issued invoices, payers by invoiced value, orders with an unbilled remainder, and the largest current balances.",
         },
         {
           type: "ul",
           items: [
-            "The \"Outstanding\" and \"Overdue tasks\" cards are clickable — they open the matching order lists",
-            "Charts: monthly activity against completed tasks, and tasks by status over the last 12 months",
-            "Receivables — who owes, how much and since when, grouped by age; each jumps straight to its order",
-            "Team workload — each person's active and this-month-completed tasks, with a jump to their report",
+            "\"Team workload\" — per employee: orders, tasks to control, load and overdue; external contractors are badged",
+            "\"Largest current balances\" and \"Orders with an unbilled remainder\" — each line has a \"To the order\" button",
+            "Every panel shows only the data your rights cover — the dashboard itself needs the \"Dashboard\" right, and the financial panels also need \"View receivables\"",
             "The numbers update in real time while the team works, and follow the active/archive mode",
           ],
         },
@@ -1638,24 +1710,28 @@ export const DOC_PAGES: DocPage[] = [
           type: "p",
           text: "A searchable list of the team — external contractors included. For every employee: total activities and tasks, payments, completed and pending tasks, count of unique orders, plus activity and task breakdowns with a jump to the order.",
         },
+        {
+          type: "p",
+          text: "Employees are created and edited in a form with personal data (first, middle, last name), contacts (phone, e-mail) and an \"External employee\" checkbox. Employee rights are separate — there is even a right that only allows creating external contractors: the type is then locked to \"External\".",
+        },
         { type: "img", slot: "EmployeesStatistics", alt: "Employee statistics", title: "Wolf — Employee statistics" },
         { type: "h2", id: "roles", text: "Roles & rights" },
         { type: "img", slot: "Administration", alt: "Roles & rights", title: "Wolf — Administration" },
         {
           type: "p",
-          text: "The Administration section owns access to the system and has two tabs: Users, and Roles & rights. Only people with administrator rights can see it.",
+          text: "The Administration section owns the practice's access and data across four tabs: Users, Roles & rights, Audit log, and Company data. Each tab appears only with its own right — an Accountant, for instance, can open Company data without seeing the users.",
         },
         {
           type: "ul",
           items: [
-            "Users: create an account with a username, an e-mail and a password",
+            "Users: create an account with a username, an e-mail, a password, an employee and roles",
             "Each account is linked to an employee — so that person sees their own tasks and their own orders",
             "Reset a password or disable an account without losing its history",
           ],
         },
         {
           type: "p",
-          text: "Roles & rights is a checkbox matrix: for each role you see and set exactly what it may do — module by module. Rights are separate for orders, plots, clients, invoices, templates, reports and administration.",
+          text: "Roles & rights is a checkbox matrix: for each role you see and set exactly what it may do — module by module. The rights are grouped into: orders, activities and tasks, clients, plots and ownership, invoices, finance, reports, templates, employees, nomenclatures and administration.",
         },
         {
           type: "ul",
@@ -1663,17 +1739,61 @@ export const DOC_PAGES: DocPage[] = [
             "Ready-made roles: Admin, Office, Surveyor, Accountant, User",
             "\"Create role\" — your own role with precisely the rights you decide",
             "The Admin role is a system role and is locked — a practice can never be left without an administrator",
+            "Data scope per list: \"all\" or \"only the orders they take part in\" — with neither ticked, the list is empty",
           ],
         },
         {
           type: "callout",
-          text: "The financial view is separate from the working one: the \"Outstanding\" and \"Uninvoiced\" totals, the per-order margin and the whole dashboard are visible to administrators only.",
+          text: "Finance is its own rights module: \"View receivables\" (the \"Outstanding\" and \"Uninvoiced\" totals and the dashboard's financial panels) and \"View margins\" (the per-order margin). By default only the Admin role holds them.",
         },
-        { type: "h2", id: "profile", text: "Personal profile" },
-        { type: "img", slot: "PersonalTab", alt: "The personal profile", title: "Wolf — Profile" },
+        { type: "h2", id: "audit", text: "Audit log" },
+        { type: "img", slot: "AuditLog", alt: "The audit log", title: "Wolf — Audit log" },
         {
           type: "p",
-          text: "Every employee gets their own view: statistics per period (this month, last month, last 3, all time), task completion percentage, daily, weekly and monthly workload charts and a list of recently completed tasks.",
+          text: "Every change to the data leaves a trace: who, when, what and on which record. The log filters by text, user, record type, action and period, and each event also shows the recorded data — the exact values at the moment of the change.",
+        },
+        {
+          type: "ul",
+          items: [
+            "A button through to the record itself, and \"In Orders\" — showing the orders tied to the event",
+            "A detail panel: action, user, object, identifier and the recorded data",
+            "Opens with the separate \"Audit log\" right — administrators only by default",
+          ],
+        },
+        { type: "h2", id: "company", text: "Company data" },
+        { type: "img", slot: "CompanyProfile", alt: "Company data", title: "Wolf — Company data" },
+        {
+          type: "p",
+          text: "This is where the legal entities the practice issues documents from live — with everything that prints on an invoice: legal name, company number, VAT registration and VAT number, address, responsible person, contacts, bank accounts and invoicing defaults (place of issue, drawer, VAT %, currency). A \"Supplier preview\" card shows live how the supplier will look on the invoice.",
+        },
+        {
+          type: "ul",
+          items: [
+            "There can be several companies — the active default one is what new invoices are issued from",
+            "Bank accounts are added and deactivated, never deleted — deactivating does not change historical invoices",
+            "Every issued invoice freezes a snapshot of the requisites — changing the company data does not rewrite invoices already issued",
+            "The rights are granular: view, legal data, bank accounts and invoicing are separate checkboxes — an edit right does not grant a view right",
+            "\"History\" keeps the legal, banking and invoicing changes — with an \"Open the audit log\" button",
+          ],
+        },
+        {
+          type: "callout",
+          text: "If a colleague saves a change while you are editing, Wolf shows \"There is a newer version of the company data\" and offers \"Reload\" — instead of silently overwriting their version.",
+        },
+        { type: "h2", id: "profile", text: "My profile — the work centre" },
+        { type: "img", slot: "PersonalTab", alt: "The work centre in the personal profile", title: "Wolf — My profile" },
+        {
+          type: "p",
+          text: "Clicking your own name in the main window opens \"My profile\" — a personal work centre. Four attention cards sort the queue: \"Overdue\", \"Today\", \"Next 7 days\" and \"All open\", and below them \"My work queue\" ranks unfinished tasks by urgency, with a colour bar (blue — due soon, yellow — today, red — overdue) and a button through to the exact task inside its order.",
+        },
+        {
+          type: "ul",
+          items: [
+            "\"Load · 7 days\" — how many tasks fall on each of the coming days",
+            "\"Active orders\" — the orders you take part in, with open-task counts and the next deadline",
+            "\"To control\" — the tasks you are the controller on, kept apart from your own",
+            "\"Calendar\" and \"My orders\" buttons — your calendar and your order list, one click away",
+          ],
         },
       ],
     },

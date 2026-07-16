@@ -99,7 +99,7 @@ const bg = {
     subtitle:
       "Кратка демонстрация на възможностите на системата. Филмът е анимиран, а интерфейсът в него е опростен за прегледност. По-надолу в страницата са показани снимки на реалния интерфейс.",
     play: "Пусни филма",
-    caption: "Демонстрация на възможностите · анимирана · 2:53",
+    caption: "Демонстрация на възможностите · анимирана · 3:26",
   },
   features: {
     eyebrow: "Обиколка на продукта",
@@ -500,7 +500,7 @@ const en: typeof bg = {
     subtitle:
       "A short showcase of what the system can do. The film is motion-designed, with an interface simplified for watchability; on-screen text is in Bulgarian. Screenshots of the real interface are shown further down the page.",
     play: "Play the film",
-    caption: "A functionality showcase · motion-designed · 2:53",
+    caption: "A functionality showcase · motion-designed · 3:26",
   },
   features: {
     eyebrow: "Product tour",

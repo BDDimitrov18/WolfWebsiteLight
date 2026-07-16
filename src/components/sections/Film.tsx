@@ -47,8 +47,10 @@ export function Film() {
           <div className="relative aspect-video w-full">
             <video
               ref={videoRef}
-              src={asset("/video/wolf-launch.mp4")}
-              poster={asset("/video/wolf-launch-poster.jpg")}
+              // v2: the 3:26 cut + the 1:06 orders-scene poster. Bump on
+              // re-render — same filenames, browsers cache the old bytes.
+              src={asset("/video/wolf-launch.mp4?v=2")}
+              poster={asset("/video/wolf-launch-poster.jpg?v=2")}
               preload="none"
               playsInline
               controls={playing}
@@ -88,7 +90,7 @@ export function Film() {
                 </span>
                 <span className="relative mt-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-paper-50">
                   {t("film.play")}
-                  <span className="text-ink-300">· 2:53</span>
+                  <span className="text-ink-300">· 3:26</span>
                 </span>
               </button>
             )}

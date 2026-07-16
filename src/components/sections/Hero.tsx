@@ -172,7 +172,6 @@ export function Hero() {
         <div ref={shotRef} data-hero-intro className="intro-hide relative mx-auto max-w-5xl">
           <ScreenshotFrame
             slot="OrdersScreen"
-            src="/screenshots/OrdersScreen.png"
             alt={t("features.items.orders.title")}
             title="Wolf — Поръчки"
             preload

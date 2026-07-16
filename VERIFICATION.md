@@ -445,3 +445,16 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
       is gone; the image sizes to calc(100vh − 7.5rem) with width following
       the aspect ratio, so on 1920×1080 it renders ~1824×960 with the
       container padding as margin (verified in Chrome).
+18. **Round 8 — screenshot cache-busting** (2026-07-16): the owner reported
+    still seeing placeholder plates for Одитен журнал / Фирмени данни on the
+    homepage. Diagnosis: the LIVE files were verified byte-identical (sha1)
+    to the new real captures — the server was correct; the browser had
+    cached the old plates under the same URLs (Pages serves max-age=600).
+    Fix: `screenshot(slot)` helper in `src/lib/asset.ts` appends
+    `?v=<SCREENSHOT_VERSION>` (now 2) to every /screenshots URL
+    (ScreenshotFrame, ScreenshotCarousel incl. its Lightbox, Hero now uses
+    the slot instead of a raw src). Bump the constant on each future
+    screenshot batch. Verified in the export: 28 versioned URLs on /,
+    9 on /docs/admin, zero unversioned. Also audited every slot file:
+    all 27 are real captures except the unreferenced AdminPanel.png /
+    LoginScreen.png and the older-but-real Employees.png.

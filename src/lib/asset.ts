@@ -11,3 +11,15 @@ export function asset(path: string): string {
   if (!path.startsWith("/")) return path;
   return `${BASE_PATH}${path}`;
 }
+
+/**
+ * Screenshot files are replaced in place under stable names, so browsers
+ * that cached an old capture (or a placeholder plate) keep showing it.
+ * Bump this once per screenshot batch — the query string changes every
+ * /screenshots URL and forces a fresh fetch.
+ */
+const SCREENSHOT_VERSION = 2;
+
+export function screenshot(slot: string): string {
+  return asset(`/screenshots/${slot}.png?v=${SCREENSHOT_VERSION}`);
+}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { asset } from "@/lib/asset";
+import { asset, screenshot } from "@/lib/asset";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Lightbox } from "@/components/ui/Lightbox";
 
@@ -29,7 +29,7 @@ export function ScreenshotFrame({
 }) {
   const t = useT();
   const [open, setOpen] = useState(false);
-  const resolved = asset(src ?? `/screenshots/${slot}.png`);
+  const resolved = src ? asset(src) : screenshot(slot);
 
   return (
     <>

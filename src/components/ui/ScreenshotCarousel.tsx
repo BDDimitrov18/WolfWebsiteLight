@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { asset } from "@/lib/asset";
+import { screenshot } from "@/lib/asset";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Lightbox } from "@/components/ui/Lightbox";
 
@@ -111,7 +111,7 @@ export function ScreenshotCarousel({
                 }`}
               >
                 <Image
-                  src={asset(`/screenshots/${s.slot}.png`)}
+                  src={screenshot(s.slot)}
                   alt={slideAlt(s)}
                   fill
                   sizes="(max-width: 1024px) 100vw, 60vw"
@@ -163,7 +163,7 @@ export function ScreenshotCarousel({
 
       {open && (
         <Lightbox
-          src={asset(`/screenshots/${current.slot}.png`)}
+          src={screenshot(current.slot)}
           alt={slideAlt(current)}
           title={`${title} · ${current.label}`}
           onClose={() => setOpen(false)}

@@ -84,7 +84,7 @@ const bg = {
         body: "Търсене, филтри и списъци реагират мигновено — дори с хиляди поръчки, имоти и задачи.",
       },
       {
-        title: "Грижи се само за себе си",
+        title: "Грижи се сам за себе си",
         body: "Обикновено Windows приложение: инсталира се за минути и се обновява автоматично при нова версия.",
       },
       {
@@ -286,7 +286,7 @@ const bg = {
         users: "1–3 потребители",
         price: "€10",
         period: "/мес.",
-        year: "€120/год. при годишно фактуриране",
+        year: "€120/год. — цена за цялата практика, не на потребител",
         perpetual: "или еднократен лиценз €360 (+€65/год. поддръжка по избор)",
         cta: "Заявете демо",
         featured: false,
@@ -296,7 +296,7 @@ const bg = {
         users: "4–10 потребители",
         price: "€25",
         period: "/мес.",
-        year: "€300/год. при годишно фактуриране",
+        year: "€300/год. — цена за цялата практика, не на потребител",
         perpetual: "или еднократен лиценз €900 (+€160/год. поддръжка по избор)",
         cta: "Заявете демо",
         featured: true,
@@ -306,7 +306,7 @@ const bg = {
         users: "11–25 потребители",
         price: "€50",
         period: "/мес.",
-        year: "€600/год. при годишно фактуриране",
+        year: "€600/год. — цена за цялата практика, не на потребител",
         perpetual: "или еднократен лиценз €1 800 (+€325/год. поддръжка по избор)",
         cta: "Заявете демо",
         featured: false,
@@ -324,8 +324,46 @@ const bg = {
     ],
     notes: [
       "Цените са в евро, без ДДС (20%).",
-      "Абонаментът е на практика и се фактурира годишно; при месечно фактуриране цената е с около 20% по-висока.",
+      "Месечната цена е крайна и важи за цялата практика — не се плаща на потребител.",
       "Еднократният лиценз е за цялата практика. Годишната поддръжка (по избор, ~18% от лиценза) включва обновленията и съпорта.",
+    ],
+  },
+  faq: {
+    eyebrow: "Въпроси и отговори",
+    title: "Каквото бихте попитали на демонстрацията",
+    items: [
+      {
+        q: "Как да видя системата, преди да реша?",
+        a: "Заявете демонстрация — показваме Wolf на живо, с примерни данни, и минаваме през вашите работни процеси. Условията за пробно ползване се уговарят на самата демонстрация.",
+      },
+      {
+        q: "Как се пренасят съществуващите ни данни?",
+        a: "При внедряването екипът на разработчика съдейства за пренасянето на съществуващите ви записи — клиенти, поръчки, номенклатури. Работните ви файлове остават в познатите папки: Wolf пази пътя към папката на всяка поръчка и я отваря с един клик.",
+      },
+      {
+        q: "Къде стоят данните и чии са?",
+        a: "На сървър, който вие контролирате — машина в офиса или в облака, по ваш избор. Базата данни е ваша от първия ден. Достъпът е с потребител и парола, правата се прилагат на сървърно ниво, а одитният журнал пази следа кой какво е променил.",
+      },
+      {
+        q: "Прави ли системата резервни копия?",
+        a: "Да — при внедряването се конфигурират автоматични резервни копия на базата данни на вашия сървър, така че информацията на практиката да е защитена и от техническа повреда.",
+      },
+      {
+        q: "Какво става, ако спра абонамента?",
+        a: "Базата данни е при вас и остава ваша — не губите информацията си. При спрян абонамент спират обновленията и поддръжката. Ако предпочитате безсрочно ползване, има и еднократен лиценз.",
+      },
+      {
+        q: "Какви са техническите изисквания?",
+        a: "Обикновени офис компютри със съвременен Windows (Windows 10 или по-нов). Приложението е самостоятелно — не изисква инсталиран Office или друг софтуер, инсталира се за минути и се обновява само.",
+      },
+      {
+        q: "Как стои въпросът с ЕГН и GDPR?",
+        a: "Личните данни — включително ЕГН на собствениците — стоят във вашата база, на вашия сървър, и не се споделят с никого. Полета като ЕГН и адрес са по избор: запис се създава и само с име. Ролите ограничават кой какво вижда, а одитният журнал записва всяка промяна — практиката остава администратор на данните си.",
+      },
+      {
+        q: "На потребител ли се плаща?",
+        a: "Не. Цената е за цялата практика — плановете се различават само по размера на екипа. Колегите ви не струват допълнително.",
+      },
     ],
   },
   cta: {
@@ -362,7 +400,7 @@ const bg = {
       privacy: "Поверителност",
     },
     rights: "Всички права запазени.",
-    version: "Описана версия 1.0.26",
+    version: "Документацията описва версия 1.0.26",
   },
   privacyPage: {
     title: "Политика за поверителност",
@@ -635,7 +673,7 @@ const en: typeof bg = {
       plot: { label: "Plot", id: "68134.905.211", sub: "UPI IV-211 · 1,240 m²" },
       docs: [
         { label: "Notarial deed", ref: "No. 143, vol. II" },
-        { label: "Split agreement", ref: "No. 27 · 2019" },
+        { label: "Partition agreement", ref: "No. 27 · 2019" },
       ],
       owners: [
         { name: "I. Petrov", part: "1/2" },
@@ -687,7 +725,7 @@ const en: typeof bg = {
         users: "1–3 users",
         price: "€10",
         period: "/mo",
-        year: "€120/year, billed annually",
+        year: "€120/year — one price for the whole practice, not per user",
         perpetual: "or a one-time license €360 (+€65/yr optional maintenance)",
         cta: "Book a demo",
         featured: false,
@@ -697,7 +735,7 @@ const en: typeof bg = {
         users: "4–10 users",
         price: "€25",
         period: "/mo",
-        year: "€300/year, billed annually",
+        year: "€300/year — one price for the whole practice, not per user",
         perpetual: "or a one-time license €900 (+€160/yr optional maintenance)",
         cta: "Book a demo",
         featured: true,
@@ -707,7 +745,7 @@ const en: typeof bg = {
         users: "11–25 users",
         price: "€50",
         period: "/mo",
-        year: "€600/year, billed annually",
+        year: "€600/year — one price for the whole practice, not per user",
         perpetual: "or a one-time license €1,800 (+€325/yr optional maintenance)",
         cta: "Book a demo",
         featured: false,
@@ -725,8 +763,46 @@ const en: typeof bg = {
     ],
     notes: [
       "Prices are in EUR, excluding VAT (20%).",
-      "Subscriptions are per firm, billed annually; monthly billing is about 20% higher.",
+      "The monthly price is final and covers the whole practice — you never pay per user.",
       "The one-time license covers the whole firm. Optional annual maintenance (~18% of the license) includes updates and support.",
+    ],
+  },
+  faq: {
+    eyebrow: "Questions & answers",
+    title: "What you would ask at the demo",
+    items: [
+      {
+        q: "How do I see the system before deciding?",
+        a: "Book a demo — we show Wolf live, with sample data, and walk through your own workflows. Trial arrangements are agreed at the demo itself.",
+      },
+      {
+        q: "How does our existing data come across?",
+        a: "During rollout the developer's team helps migrate your existing records — clients, orders, nomenclatures. Your working files stay in the folders you know: Wolf keeps each order's folder path and opens it in one click.",
+      },
+      {
+        q: "Where does the data live, and whose is it?",
+        a: "On a server you control — a machine in your office or in the cloud, your choice. The database is yours from day one. Access is by username and password, rights are enforced at the server layer, and the audit log keeps a trail of who changed what.",
+      },
+      {
+        q: "Are there backups?",
+        a: "Yes — automatic database backups are configured on your server during rollout, so the practice's information is protected against technical failure too.",
+      },
+      {
+        q: "What happens if I stop the subscription?",
+        a: "The database is on your server and stays yours — you don't lose your information. A lapsed subscription stops updates and support. If you prefer indefinite use, there is also a one-time license.",
+      },
+      {
+        q: "What are the technical requirements?",
+        a: "Ordinary office computers running a modern Windows (Windows 10 or newer). The application is self-contained — no Office or other software required, installs in minutes and updates itself.",
+      },
+      {
+        q: "What about ЕГН and GDPR?",
+        a: "Personal data — including owners' ЕГН — lives in your database, on your server, and is shared with no one. Fields like ЕГН and address are optional: a record can be created with just a name. Roles limit who sees what, and the audit log records every change — the practice remains the controller of its data.",
+      },
+      {
+        q: "Is it priced per user?",
+        a: "No. The price covers the whole practice — the plans differ only by team size. Your colleagues don't cost extra.",
+      },
     ],
   },
   cta: {
@@ -763,7 +839,7 @@ const en: typeof bg = {
       privacy: "Privacy",
     },
     rights: "All rights reserved.",
-    version: "Documented version 1.0.26",
+    version: "The documentation describes version 1.0.26",
   },
   privacyPage: {
     title: "Privacy policy",

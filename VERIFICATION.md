@@ -487,3 +487,35 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
       permission checks + data scopes (item 13).
     - Verified in the built HTML: 11 new strings ×2 (desktop+mobile tour),
       6 stale strings ×0.
+20. **Round 10 — external review batch (items 2–6)** (2026-07-16):
+    - **Lenis REMOVED** (`ExperienceProvider`, CSS base styles,
+      `data-lenis-prevent`, npm dep): its rAF loop taxed office PCs, it
+      swallowed End/Home (verified fixed: End reaches page bottom exactly,
+      Home returns to 0), and its `anchors: {offset: -72}` was the root
+      cause of the earlier 72px anchor shortfall. Scrolling is native; CSS
+      `scroll-behavior: smooth` covers anchors; ScrollTrigger unaffected.
+    - **Black-screen-on-anchor claim re-verified dead**: direct loads of
+      /#contact and /#architecture show 6/6 and 9/9 text nodes visible
+      (the reveal removal in item 15 was the fix; reviewer saw the older build).
+    - **OG tags now Bulgarian** (og:title/og:description in layout.tsx) and
+      **og.png re-rendered on the night register** using the real brand mark
+      from public/brand/wolf_logo_white_tight.png (first attempt hand-drew
+      the logo — discarded; second cropped a film frame — replaced on owner
+      feedback with the actual PNG asset).
+    - **Copy:** footer → „Документацията описва версия 1.0.26“ (EN mirror);
+      pillar → „Грижи се сам за себе си“ (ambiguity fix); EN "split
+      agreement" → "partition agreement" (dictionaries + docs/model);
+      Callendar.png renamed to Calendar.png (slot refs updated).
+    - **Pricing:** cards now say „€N/год. — цена за цялата практика, не на
+      потребител“; the „при месечно фактуриране ~20% по-висока“ note was
+      REMOVED — the owner confirmed (2026-07-16) that €10/25/50 ARE the
+      exact monthly per-practice prices; note replaced with „Месечната цена
+      е крайна и важи за цялата практика“.
+    - **NEW FAQ section** (id="faq", between Pricing and CTA): 8 Q&As
+      (BG+EN), native <details> accordion. Answers grounded in: the
+      architecture section (your server/your DB), the app (file path per
+      order, optional ЕГН/address, audit log, server-enforced roles),
+      deploy/backup.sh (backup claim), one-time license (lapse answer).
+      ⚠️ OWNER TO CONFIRM: trial wording, migration-help promise, backup
+      promise, lapse behaviour ("app keeps working without updates" is
+      implied), Windows 10+ requirement.

@@ -8,6 +8,7 @@ import { FeatureTour } from "@/components/sections/FeatureTour";
 import { TitleChain } from "@/components/sections/TitleChain";
 import { Architecture } from "@/components/sections/Architecture";
 import { Pricing } from "@/components/sections/Pricing";
+import { Faq } from "@/components/sections/Faq";
 import { CTA } from "@/components/sections/CTA";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
         <TitleChain />
         <Architecture />
         <Pricing />
+        <Faq />
         <CTA />
       </main>
       <Footer />

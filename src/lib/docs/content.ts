@@ -722,7 +722,7 @@ export const DOC_PAGES: DocPage[] = [
         { type: "img", slot: "DocumentsTab", alt: "The Documents screen", title: "Wolf — Documents" },
         {
           type: "p",
-          text: "A document records the full legal side: type (notarial deed, split agreement, purchase contract, testament, municipal or state ownership act…), number, issuer, tome, register, case, date of issue, date of registration and type of ownership.",
+          text: "A document records the full legal side: type (notarial deed, partition agreement, purchase contract, testament, municipal or state ownership act…), number, issuer, tome, register, case, date of issue, date of registration and type of ownership.",
         },
         { type: "h2", id: "editor", text: "The ownership editor" },
         {
@@ -1341,7 +1341,7 @@ export const DOC_PAGES: DocPage[] = [
     },
     blocks: {
       bg: [
-        { type: "img", slot: "Callendar", alt: "Календарът", title: "Wolf — Календар" },
+        { type: "img", slot: "Calendar", alt: "Календарът", title: "Wolf — Календар" },
         { type: "h2", id: "grid", text: "Месечната решетка" },
         {
           type: "p",
@@ -1363,7 +1363,7 @@ export const DOC_PAGES: DocPage[] = [
         },
       ],
       en: [
-        { type: "img", slot: "Callendar", alt: "The calendar", title: "Wolf — Calendar" },
+        { type: "img", slot: "Calendar", alt: "The calendar", title: "Wolf — Calendar" },
         { type: "h2", id: "grid", text: "The monthly grid" },
         {
           type: "p",

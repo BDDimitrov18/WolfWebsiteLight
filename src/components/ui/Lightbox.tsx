@@ -99,7 +99,6 @@ export function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={alt}
-      data-lenis-prevent
     >
       <div
         data-lightbox-backdrop

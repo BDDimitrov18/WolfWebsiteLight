@@ -41,9 +41,11 @@ export const metadata: Metadata = {
     "Wolf — многопотребителска система за управление на проектантска практика. Поръчки, дейности, имоти, документи за собственост, фактури и отчети в реално време.",
   metadataBase: new URL("https://bddimitrov18.github.io"),
   openGraph: {
-    title: "Wolf — Design practice management software",
+    // Bulgarian: the audience shares links on Facebook/Viber in BG —
+    // an English preview card reads as a foreign product.
+    title: "Wolf — система за управление на проектантска практика",
     description:
-      "One native Windows system for orders, plots, ownership documents, invoicing and real-time reporting.",
+      "Поръчки, имоти, документи за собственост, фактури и справки — в една система, в реално време, за целия екип.",
     type: "website",
     images: [{ url: asset("/og.png"), width: 1200, height: 630, alt: "Wolf" }],
   },

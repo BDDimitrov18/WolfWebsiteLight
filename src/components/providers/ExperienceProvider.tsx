@@ -8,14 +8,16 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import Lenis from "lenis";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { ScrollTrigger } from "@/lib/gsap";
 import { Preloader } from "@/components/ui/Preloader";
 
 /**
- * Experience layer: Lenis smooth scrolling driven by the GSAP ticker
- * (so ScrollTrigger and the scroll position never disagree), plus the
- * global capability flags every animated component needs.
+ * Experience layer: the global capability flags every animated
+ * component needs. Scrolling is NATIVE — Lenis was removed on review
+ * (2026-07-16): its per-frame loop taxed office PCs, it swallowed
+ * Home/End/PageDown keys, and its `anchors` offset fought the
+ * sections' scroll-mt. CSS `scroll-behavior: smooth` covers anchor
+ * scrolling; ScrollTrigger listens to native scroll by itself.
  *
  * `ready` flips true once the preloader finishes (or is skipped) —
  * above-the-fold intro timelines wait for it; scroll-triggered work
@@ -94,28 +96,10 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // ---- Lenis <-> ScrollTrigger ------------------------------------------
+  // Re-measure triggers once web fonts settle (metrics shift line breaks).
   useEffect(() => {
-    if (reducedMotion) return;
-
-    const lenis = new Lenis({
-      lerp: 0.115,
-      anchors: { offset: -72 }, // clear the fixed navbar on #hash scrolls
-    });
-    lenis.on("scroll", ScrollTrigger.update);
-
-    const raf = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
-
-    // Re-measure triggers once web fonts settle (metrics shift line breaks).
     document.fonts?.ready.then(() => ScrollTrigger.refresh());
-
-    return () => {
-      gsap.ticker.remove(raf);
-      lenis.destroy();
-    };
-  }, [reducedMotion]);
+  }, []);
 
   const value = useMemo(
     () => ({ reducedMotion, finePointer, ready }),

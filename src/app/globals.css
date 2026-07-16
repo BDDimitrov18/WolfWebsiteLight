@@ -287,23 +287,8 @@
 }
 
 /* ============================================================
-   Experience layer (GSAP + Lenis + cursor + HUD)
+   Experience layer (GSAP + HUD) — scrolling is native
    ============================================================ */
-
-/* ---- Lenis smooth scroll (recommended base styles) -------- */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
 
 /* ---- JS-gated intro states --------------------------------
    Elements that the hero intro choreographs carry `.intro-hide`.

@@ -23,7 +23,7 @@ const TOUR: { key: string; slot: string; pages?: string[]; pagesKey?: string }[]
   { key: "titleChain", slot: "PlotsAndDocsInOrderTab" },
   { key: "invoicing", slot: "InvoiceDraft" },
   { key: "templates", slot: "TemplateBuilder" },
-  { key: "calendar", slot: "Callendar" },
+  { key: "calendar", slot: "Calendar" },
   { key: "filters", slot: "FiltersOrders" },
   { key: "reports", slot: "InqueriesTab" },
   {

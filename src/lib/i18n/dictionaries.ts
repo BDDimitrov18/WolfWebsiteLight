@@ -177,7 +177,7 @@ const bg = {
         title: "Аналитични отчети в Excel",
         body: "Готови справки с богато филтриране, експортирани като форматирани .xlsx файлове: всички задачи, задължения, плащания по тип задача и месечни справки по служител.",
         bullets: [
-          "Справките се персонализират и допълват от екипа на разработчика — по заявка на практиката",
+          "Справките се персонализират и допълват от екипа на разработчика — по ваша заявка",
           "Възможност за многолистови справки, по един лист на служител",
           "Множество филтри по информацията, която справката обработва",
         ],
@@ -578,7 +578,7 @@ const en: typeof bg = {
         title: "Analytical reports in Excel",
         body: "Built-in reports with rich filtering, exported as styled .xlsx files: all tasks, obligations, payments by task type and monthly per-employee breakdowns.",
         bullets: [
-          "Reports can be customized and extended by the developer's team — on the practice's request",
+          "Reports can be customized and extended by the developer's team — on your request",
           "Multi-sheet reports available, one sheet per employee",
           "Multiple filters over the data the report processes",
         ],

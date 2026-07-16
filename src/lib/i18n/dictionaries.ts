@@ -135,7 +135,7 @@ const bg = {
       invoicing: {
         tag: "Фактуриране",
         title: "Фактура в PDF — направо от поръчката",
-        body: "Wolf съставя фактурата от данните на поръчката: редовете се предлагат от дейностите, а ДДС, втората валута и сумата словом се изчисляват сами. Реквизитите на доставчика идват от „Фирмени данни“ и се замразяват върху всяка издадена фактура. Живият преглед показва точния документ — каквото виждате, това се генерира.",
+        body: "Wolf съставя фактурата от данните на поръчката: редовете се предлагат от дейностите, а ДДС, втората валута и сумата словом се изчисляват сами. Въпреки автоматичното попълване потребителите имат свободата да редактират всяко едно поле от фактурата. Реквизитите на доставчика на услугата идват от „Фирмени данни“ и се замразяват върху всяка издадена фактура. Живият преглед показва точния документ — каквото виждате, това се генерира.",
         bullets: [
           "Номерът идва от сървъра — двама души никога не получават един и същ",
           "Обща фактура: една фактура, разпределена на дялове по няколко поръчки",
@@ -144,22 +144,22 @@ const bg = {
       },
       templates: {
         tag: "Шаблони",
-        title: "Бланките на практиката — сглобени в конструктор",
-        body: "Два начина, един резултат. В конструктора шаблонът се сглобява от блокове, а данните се поставят като полета с едно кликване: „Номер на поръчката“, „Три имена“, „ЕГН“. Или пишете бланката в Word с плейсхолдъри и я качвате готова. Двата вида шаблони стоят в един списък и се генерират по един и същи начин.",
+        title: "Автоматично попълване на Word документи",
+        body: "Wolf попълва документите на практиката автоматично с данните от системата. Шаблон се създава по два начина: като изпишете плейсхолдъри директно в Word файл — или по по-удобния път: визуален конструктор с интерактивно сглобяване от блокове, в който полетата се поставят през потребителския интерфейс. Конструкторът е тестван и одобрен от експерти в бранша като лесен за работа.",
         bullets: [
-          "Конструктор: блокове и полета от списък — без писане на код",
-          "Или Word файл с {{плейсхолдъри}} и {{#each}} списъци — както досега",
+          "Всички типове данни и полета от базата се поставят в шаблона — и по двата начина",
           "Жив преглед: примерни данни или реална поръчка, преди да публикувате",
+          "При внедряване екипът на разработчика може да подготви шаблоните ви предварително — готови от първия ден",
         ],
       },
       calendar: {
         tag: "Календар",
         title: "Календар и планиране",
-        body: "Месечна решетка с групиране на задачите по краен срок, маркиране на просрочените и бърз преход към поръчката. Администраторите превключват между служители.",
+        body: "Месечна решетка с групиране на задачите по краен срок, маркиране на просрочените и бърз преход към поръчката. Потребители с определени роли виждат и календарите на другите служители — за ръководителя това е бърз поглед върху натовареността на всеки от екипа за конкретния ден.",
         bullets: [
           "Подчертаване на днес и просрочени задачи",
           "Камбана „задачи за днес“ с брояч",
-          "Превключвател на служители за администратори",
+          "Преглед на календара на колега — според ролята и правата",
         ],
       },
       filters: {
@@ -177,9 +177,9 @@ const bg = {
         title: "Аналитични отчети в Excel",
         body: "Готови справки с богато филтриране, експортирани като форматирани .xlsx файлове: всички задачи, задължения, плащания по тип задача и месечни справки по служител.",
         bullets: [
-          "Йерархия служител → поръчка → дейност → задача",
-          "Многолистови справки, по един лист на служител",
-          "Експорт на статистика на клиента",
+          "Справките се персонализират и допълват от екипа на разработчика — по заявка на практиката",
+          "Възможност за многолистови справки, по един лист на служител",
+          "Множество филтри по информацията, която справката обработва",
         ],
       },
       realtime: {
@@ -215,7 +215,7 @@ const bg = {
       permissions: {
         tag: "Достъп",
         title: "Роли и права за всеки в екипа",
-        body: "Разделът „Администрация“ държи потребителите, ролите, одитния журнал и фирмените данни. Матрица с отметки казва какво може всяка роля — модул по модул, включително обхват на данните: всички записи или само поръчките, в които служителят участва.",
+        body: "Разделът „Администрация“ държи потребителите, ролите, одитния журнал и фирмените данни. Матрица с отметки казва какво може всяка роля — модул по модул, включително обхват на данните: всички записи или само поръчките, в които служителят участва. Правата се прилагат на сървърно ниво: данни, за които потребителят няма право, изобщо не тръгват по мрежата — и не могат да бъдат прихванати от него.",
         bullets: [
           "Собствени роли — създавате ги и им давате точните права",
           "Финансите са отделен модул права: вземания, маржове, плащания",
@@ -536,7 +536,7 @@ const en: typeof bg = {
       invoicing: {
         tag: "Invoicing",
         title: "A PDF invoice — straight from the order",
-        body: "Wolf assembles the invoice from the order's data: line items are suggested from the activities, and VAT, the second currency and the amount in words are computed for you. The supplier's details come from “Company data” and are frozen onto every issued invoice. A live preview shows the exact document — what you see is what gets generated.",
+        body: "Wolf assembles the invoice from the order's data: line items are suggested from the activities, and VAT, the second currency and the amount in words are computed for you. Despite the automatic filling, users are free to edit every single field of the invoice. The service supplier's details come from “Company data” and are frozen onto every issued invoice. A live preview shows the exact document — what you see is what gets generated.",
         bullets: [
           "The number comes from the server — two people can never get the same one",
           "Shared invoices: one invoice split into shares across several orders",
@@ -545,22 +545,22 @@ const en: typeof bg = {
       },
       templates: {
         tag: "Templates",
-        title: "Your practice's forms, assembled in a builder",
-        body: "Two roads, one result. In the builder a template is assembled from blocks, and the data goes in as fields you insert with a click: “Order number”, “Full name”, “ЕГН”. Or you write the form in Word with placeholders and upload it finished. Both kinds sit in one list and generate identically.",
+        title: "Automatic filling of Word documents",
+        body: "Wolf fills your practice's documents automatically with the data in the system. A template is made in two ways: by typing placeholders straight into a Word file — or the friendlier way: a visual builder with interactive block assembly, where the fields are placed through the user interface. The builder has been tested and verified by experts in the field to be easy to work with.",
         bullets: [
-          "Builder: blocks and fields picked from a list — no code to write",
-          "Or a Word file with {{placeholders}} and {{#each}} lists — as before",
+          "Every data type and field in the database can go into a template — with either method",
           "Live preview: sample data or a real order, before you publish",
+          "At deployment, the developer's team can prepare your templates in advance — ready from day one",
         ],
       },
       calendar: {
         tag: "Calendar",
         title: "Calendar & scheduling",
-        body: "A monthly grid grouping tasks by due date, flagging overdue work and jumping straight to the order. Admins switch between employees.",
+        body: "A monthly grid grouping tasks by due date, flagging overdue work and jumping straight to the order. Users with the right roles can also view other employees' calendars — a manager's quick read on each person's workload for a given day.",
         bullets: [
           "Today highlight and overdue indicators",
           "“Today's tasks” bell with a count badge",
-          "Employee switcher for administrators",
+          "A colleague's calendar at a glance — governed by roles and rights",
         ],
       },
       filters: {
@@ -578,9 +578,9 @@ const en: typeof bg = {
         title: "Analytical reports in Excel",
         body: "Built-in reports with rich filtering, exported as styled .xlsx files: all tasks, obligations, payments by task type and monthly per-employee breakdowns.",
         bullets: [
-          "Hierarchy employee → order → activity → task",
-          "Multi-sheet reports, one sheet per employee",
-          "Client statistics export",
+          "Reports can be customized and extended by the developer's team — on the practice's request",
+          "Multi-sheet reports available, one sheet per employee",
+          "Multiple filters over the data the report processes",
         ],
       },
       realtime: {
@@ -616,7 +616,7 @@ const en: typeof bg = {
       permissions: {
         tag: "Access",
         title: "Roles and rights for everyone on the team",
-        body: "The “Administration” section holds the users, the roles, the audit log and the company data. A checkbox matrix says what each role may do — module by module, including data scope: all records, or only the orders the employee takes part in.",
+        body: "The “Administration” section holds the users, the roles, the audit log and the company data. A checkbox matrix says what each role may do — module by module, including data scope: all records, or only the orders the employee takes part in. Rights are enforced at the server layer: data a user isn't permitted to see never leaves the server — so it can't be intercepted on the network either.",
         bullets: [
           "Your own roles — create them and grant the exact rights",
           "Finance is its own rights module: receivables, margins, payments",

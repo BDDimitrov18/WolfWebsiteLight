@@ -458,3 +458,32 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
     9 on /docs/admin, zero unversioned. Also audited every slot file:
     all 27 are real captures except the unreferenced AdminPanel.png /
     LoginScreen.png and the older-but-real Employees.png.
+19. **Round 9 — owner copy edits on five tour stops** (2026-07-16, all BG+EN):
+    - **03 Фактуриране:** added „Въпреки автоматичното попълване потребителите
+      имат свободата да редактират всяко едно поле от фактурата.“ (true:
+      composer fields incl. the server-suggested number stay editable) and
+      „Реквизитите на доставчика“ → „…на доставчика **на услугата**“.
+    - **04 Шаблони:** rewritten for readers who don't know templates. Title →
+      „Автоматично попълване на Word документи“. Two authoring paths framed
+      simply (typed placeholders vs the friendlier visual builder with
+      interactive blocks); **no specific placeholder names** (the „Три
+      имена“/„{{#each}}“ examples removed on instruction); claim that ALL
+      database data types/fields can go into templates via both methods;
+      builder „тестван и одобрен от експерти в бранша“ (owner-attested —
+      domain experts, i.e. the practice's users, verified it as easy);
+      new bullet: the developer's team can prepare templates at deployment.
+    - **05 Календар:** „Администраторите превключват между служители“ →
+      role-based viewing of colleagues' calendars, framed as the manager's
+      read on per-day workload (accurate: gated by roles/rights, not an
+      admin hardcode).
+    - **07 Справки:** bullet „Йерархия служител → поръчка → дейност → задача“
+      REMOVED (owner: unclear) and replaced with dev-customizable reports on
+      request; „Многолистови справки“ → „Възможност за многолистови…“;
+      „Експорт на статистика на клиента“ → „Множество филтри по
+      информацията, която справката обработва“.
+    - **09 Достъп:** added server-layer enforcement claim — unpermitted data
+      never leaves the server, so it can't be intercepted on the network.
+      TRUE since 1.0.26: `"Authorization": {"Mode": "Enforce"}`, server-side
+      permission checks + data scopes (item 13).
+    - Verified in the built HTML: 11 new strings ×2 (desktop+mobile tour),
+      6 stale strings ×0.

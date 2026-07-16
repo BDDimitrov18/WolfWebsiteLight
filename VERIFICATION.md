@@ -404,3 +404,14 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
     Bulgarian). Dict block `film.*` (BG+EN). Verified on the built export:
     poster renders, click starts playback (currentTime advances), overlay
     drops, controls appear.
+    - **CORRECTION (2026-07-16, owner):** the film's screens are NOT app
+      screenshots and not the normal usage flow — it is a motion-designed
+      showcase with an interface deliberately simplified for the viewer.
+      The original claims („Всеки екран във филма е реална функционалност…,
+      а не монтаж“ / „всички екрани са реални“) were FALSE and were replaced
+      the same day with „анимирана демонстрация: показва истинските
+      възможности на Wolf, с интерфейс, опростен за прегледност“ /
+      "a motion-designed demo … interface simplified for watchability"
+      (caption „анимирана демонстрация“ / "a motion-designed demo").
+      Guardrail: never describe the film as screenshots, screen recordings,
+      or the real interface.

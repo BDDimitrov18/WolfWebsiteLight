@@ -88,9 +88,19 @@ export function Film() {
                     <path d="M8 5.5v13l11-6.5-11-6.5Z" fill="var(--color-paper-50)" />
                   </svg>
                 </span>
-                <span className="relative mt-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-paper-50">
+                {/* Stacked lines so the label centers exactly on the
+                    button's axis — a trailing duration in the same row
+                    would push it sideways. Dark pill behind them: the
+                    poster is a light app screen, bare text drowns on it. */}
+                <span
+                  className="relative mt-5 flex flex-col items-center gap-1 rounded-lg px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-paper-50"
+                  style={{
+                    background:
+                      "color-mix(in srgb, var(--color-ink-950) 78%, transparent)",
+                  }}
+                >
                   {t("film.play")}
-                  <span className="text-ink-300">· 3:26</span>
+                  <span className="text-ink-300">3:26</span>
                 </span>
               </button>
             )}

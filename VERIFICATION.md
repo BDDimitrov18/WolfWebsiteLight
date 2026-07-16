@@ -354,3 +354,38 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
       Chrome + Edge, pager/sidebar/hash/back-and-forth) all land at scrollY=0.
       The only mid-page landing found is the browser's own back/forward
       restoration, which is standard behaviour and was left alone.
+15. **Round 5 — reveals removed, unified nav, admin carousel** (2026-07-16,
+    owner requests):
+    - **Scroll-triggered text entrances removed site-wide** ("a website pro
+      told me it's not good"): `Reveal`/`RevealGroup`/`RevealItem` now render
+      static (components kept for their grouping semantics), and
+      `SplitHeading mode="scroll"` renders a plain visible heading. The ONLY
+      surviving text animation is the hero's one-time load choreography
+      (`mode="load"` + `.intro-hide`, preloader hand-off). Decorative
+      scroll-scrubbed motifs (Architecture stroke drawing, CTA contour
+      drift, tour crossfade/station dim) were kept — they are not text
+      entrances. Verified: no text node on / or /docs/* is hidden or at
+      opacity<0.05 without scrolling.
+    - **Navbar unified**: the docs header (`DocsShell`) now carries the same
+      tabs as the site navbar (Възможности / Как работи / Цени /
+      Документация + Заявете демо CTA), desktop inline + mobile drawer (site
+      tabs above the chapter list). Verified: from /docs, Цени lands on
+      /#pricing with sectionTop=96.
+    - **Same-page section landing fixed**: router-path hash clicks landed
+      72–200px short because the hero's load choreography still shifts
+      layout while the smooth scroll is in flight. New
+      `src/lib/sectionScroll.ts` intercepts same-page section clicks
+      (navbar, hero CTAs, pricing CTAs), uses native `scrollIntoView` and
+      re-settles once on `scrollend` (skipped if the reader scrolled away;
+      setTimeout fallback for Safari <26). Verified: home→#features/
+      #architecture/#pricing all land at exactly sectionTop=96.
+    - **„Достъп“ tour stop is now a carousel** mirroring the app's
+      Администрация tabs: Роли и права (`Administration`) / Одитен журнал
+      (`AuditLog`) / Фирмени данни (`CompanyProfile`), labels via dict key
+      `features.adminPages` (BG+EN). NOTE: the latter two slots are still
+      branded placeholders until the owner's captures land (item 7).
+    - Where the six pending captures appear: `InvoicesTab` → /docs/invoicing
+      (top); `Employees`+`EmployeesStatistics` → /docs/admin §Служители;
+      `AuditLog` → /docs/admin §Одитен журнал + homepage Достъп carousel;
+      `CompanyProfile` → /docs/admin §Фирмени данни + homepage Достъп
+      carousel; `PersonalTab` → /docs/admin §Моят профил.

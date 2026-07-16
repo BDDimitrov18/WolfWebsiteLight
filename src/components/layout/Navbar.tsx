@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { scrollToSection } from "@/lib/sectionScroll";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
@@ -94,6 +95,14 @@ export function Navbar() {
     { href: "/docs", label: t("nav.docs") },
   ];
 
+  // Already on the homepage → scroll to the section ourselves (see
+  // scrollToSection for why); on any other route the Link navigates.
+  const onNavClick = (e: React.MouseEvent, href: string) => {
+    if (pathname !== "/" || !href.startsWith("/#")) return;
+    setOpen(false);
+    scrollToSection(e, href);
+  };
+
   return (
     <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 will-change-transform">
       <div
@@ -119,6 +128,7 @@ export function Navbar() {
                 <Link
                   key={l.href}
                   href={l.href}
+                  onClick={(e) => onNavClick(e, l.href)}
                   className="nav-link whitespace-nowrap text-sm text-ink-300 transition-colors hover:text-paper-50"
                 >
                   {l.label}
@@ -130,6 +140,7 @@ export function Navbar() {
               <LanguageToggle />
               <Link
                 href="/#contact"
+                onClick={(e) => onNavClick(e, "/#contact")}
                 className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
               >
                 {t("nav.cta")}
@@ -168,7 +179,10 @@ export function Navbar() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    setOpen(false);
+                    onNavClick(e, l.href);
+                  }}
                   className="rounded-md px-3 py-3 text-base text-paper-100 transition-colors hover:bg-ink-800"
                 >
                   {l.label}
@@ -178,7 +192,10 @@ export function Navbar() {
                 <LanguageToggle />
                 <Link
                   href="/#contact"
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    setOpen(false);
+                    onNavClick(e, "/#contact");
+                  }}
                   className="btn btn-primary h-9 px-4 py-0 text-sm"
                 >
                   {t("nav.cta")}

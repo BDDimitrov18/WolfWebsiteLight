@@ -9,12 +9,15 @@ import { useExperience } from "@/components/providers/ExperienceProvider";
  * points being recorded.
  *
  * - `mode="load"`  → plays once the preloader hands off (hero).
- * - `mode="scroll"`→ plays when the heading scrolls into view.
+ * - `mode="scroll"`→ RETIRED (owner request, 2026-07-16): scroll-triggered
+ *   text entrances are gone site-wide; this mode now renders a plain,
+ *   immediately-visible heading. Only the hero's one-time load
+ *   choreography survives.
  *
- * Resilience: the element ships visible in HTML. It carries `.intro-hide`
- * (hidden only under `html.js`, with a CSS failsafe), and we only remove
- * that class at the exact moment GSAP takes over. Reduced motion → no
- * split, no hide, content simply shows.
+ * Resilience (load mode): the element ships visible in HTML. It carries
+ * `.intro-hide` (hidden only under `html.js`, with a CSS failsafe), and
+ * we only remove that class at the exact moment GSAP takes over.
+ * Reduced motion → no split, no hide, content simply shows.
  *
  * Re-mount on locale change (pass `key={locale}`) so lines re-split.
  */
@@ -38,7 +41,7 @@ export function SplitHeading({
   const ref = useRef<HTMLElement>(null);
   const { ready } = useExperience();
   // In load-mode we wait for the preloader hand-off.
-  const armed = mode === "scroll" || ready;
+  const armed = mode === "load" && ready;
 
   useEffect(() => {
     const el = ref.current;
@@ -70,15 +73,6 @@ export function SplitHeading({
             // Un-split once done: the overflow-clip line masks otherwise
             // shave serif descenders forever at our tight line-height.
             onComplete: () => self.revert(),
-            ...(mode === "scroll"
-              ? {
-                  scrollTrigger: {
-                    trigger: el,
-                    start: "top 88%",
-                    once: true,
-                  },
-                }
-              : {}),
           });
         },
       });
@@ -94,7 +88,9 @@ export function SplitHeading({
     <Tag
       // @ts-expect-error — ref is valid for every allowed tag
       ref={ref}
-      className={`intro-hide split-mask ${className}`}
+      // intro-hide only when an animation will actually lift it (hero
+      // load mode); static headings must never carry a hiding class.
+      className={`${mode === "load" ? "intro-hide split-mask" : ""} ${className}`}
       style={style}
     >
       {children}

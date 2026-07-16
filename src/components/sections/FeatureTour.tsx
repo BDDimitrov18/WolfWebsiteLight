@@ -17,8 +17,8 @@ interface FeatureItem {
 }
 
 // Each feature → its screenshot slot. Drop <slot>.png into /public/screenshots.
-// `pages` turns the stop into a carousel — labels come from features.boardPages.
-const TOUR: { key: string; slot: string; pages?: string[] }[] = [
+// `pages` turns the stop into a carousel — labels come from features.<pagesKey>.
+const TOUR: { key: string; slot: string; pages?: string[]; pagesKey?: string }[] = [
   { key: "orders", slot: "OrdersScreen" },
   { key: "titleChain", slot: "PlotsAndDocsInOrderTab" },
   { key: "invoicing", slot: "InvoiceDraft" },
@@ -30,8 +30,15 @@ const TOUR: { key: string; slot: string; pages?: string[] }[] = [
     key: "dashboard",
     slot: "AdminBoard",
     pages: ["AdminBoard", "AdminBoardFinance", "AdminBoardTeam"],
+    pagesKey: "boardPages",
   },
-  { key: "permissions", slot: "Administration" },
+  {
+    // mirrors the app's Администрация tabs, like the Табло carousel
+    key: "permissions",
+    slot: "Administration",
+    pages: ["Administration", "AuditLog", "CompanyProfile"],
+    pagesKey: "adminPages",
+  },
 ];
 
 /**
@@ -312,8 +319,8 @@ function TourShot({
   f: FeatureItem;
 }) {
   const t = useT();
-  if (row.pages) {
-    const labels = t<string[]>("features.boardPages");
+  if (row.pages && row.pagesKey) {
+    const labels = t<string[]>(`features.${row.pagesKey}`);
     return (
       <ScreenshotCarousel
         slides={row.pages.map((slot, i) => ({ slot, label: labels[i] ?? slot }))}

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "@/lib/gsap";
 import { useLocale, useT } from "@/lib/i18n/LocaleProvider";
+import { scrollToSection } from "@/lib/sectionScroll";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { Container } from "@/components/ui/Section";
 import { ScreenshotFrame } from "@/components/ui/ScreenshotFrame";
@@ -140,13 +141,21 @@ export function Hero() {
             className="intro-hide mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
             <Magnetic className="w-full sm:w-auto">
-              <Link href="/#contact" className="btn btn-primary w-full sm:w-auto">
+              <Link
+                href="/#contact"
+                onClick={(e) => scrollToSection(e, "/#contact")}
+                className="btn btn-primary w-full sm:w-auto"
+              >
                 {t("hero.ctaPrimary")}
                 <Arrow />
               </Link>
             </Magnetic>
             <Magnetic className="w-full sm:w-auto">
-              <Link href="/#features" className="btn btn-ghost w-full sm:w-auto">
+              <Link
+                href="/#features"
+                onClick={(e) => scrollToSection(e, "/#features")}
+                className="btn btn-ghost w-full sm:w-auto"
+              >
                 {t("hero.ctaSecondary")}
               </Link>
             </Magnetic>

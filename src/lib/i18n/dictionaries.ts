@@ -102,6 +102,7 @@ const bg = {
     shotPrev: "Предишен изглед",
     shotNext: "Следващ изглед",
     boardPages: ["Обобщение", "Финанси", "Екип"],
+    adminPages: ["Роли и права", "Одитен журнал", "Фирмени данни"],
     items: {
       orders: {
         tag: "Поръчки",
@@ -494,6 +495,7 @@ const en: typeof bg = {
     shotPrev: "Previous view",
     shotNext: "Next view",
     boardPages: ["Summary", "Finance", "Team"],
+    adminPages: ["Roles & rights", "Audit log", "Company data"],
     items: {
       orders: {
         tag: "Orders",

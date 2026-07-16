@@ -14,7 +14,14 @@ export type DocBlock =
   | { type: "steps"; items: { t: string; d: string }[] }
   | { type: "callout"; text: string }
   | { type: "code"; text: string }
-  | { type: "img"; slot: string; alt: string; title?: string };
+  | { type: "img"; slot: string; alt: string; title?: string }
+  | {
+      // several screenshots rotating in one frame, with arrows
+      type: "imgs";
+      slides: { slot: string; label: string }[];
+      alt: string;
+      title?: string;
+    };
 
 export interface DocPage {
   slug: string; // "" = index
@@ -1581,7 +1588,16 @@ export const DOC_PAGES: DocPage[] = [
     },
     blocks: {
       bg: [
-        { type: "img", slot: "AdminBoard", alt: "Таблото за управление", title: "Wolf — Табло" },
+        {
+          type: "imgs",
+          slides: [
+            { slot: "AdminBoard", label: "Обобщение" },
+            { slot: "AdminBoardFinance", label: "Финанси" },
+            { slot: "AdminBoardTeam", label: "Екип" },
+          ],
+          alt: "Таблото за управление",
+          title: "Wolf — Табло",
+        },
         { type: "h2", id: "dashboard", text: "Табло за управление" },
         {
           type: "p",
@@ -1689,7 +1705,16 @@ export const DOC_PAGES: DocPage[] = [
         },
       ],
       en: [
-        { type: "img", slot: "AdminBoard", alt: "The management dashboard", title: "Wolf — Dashboard" },
+        {
+          type: "imgs",
+          slides: [
+            { slot: "AdminBoard", label: "Summary" },
+            { slot: "AdminBoardFinance", label: "Finance" },
+            { slot: "AdminBoardTeam", label: "Team" },
+          ],
+          alt: "The management dashboard",
+          title: "Wolf — Dashboard",
+        },
         { type: "h2", id: "dashboard", text: "Management dashboard" },
         {
           type: "p",

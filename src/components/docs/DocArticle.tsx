@@ -7,6 +7,7 @@ import { DOC_PAGES, getDocPage, type DocBlock, type DocPage } from "@/lib/docs/c
 import { usePref, setPref } from "@/lib/prefs";
 import { Reveal } from "@/components/ui/Reveal";
 import { ScreenshotFrame } from "@/components/ui/ScreenshotFrame";
+import { ScreenshotCarousel } from "@/components/ui/ScreenshotCarousel";
 
 export function DocArticle({ slug }: { slug: string }) {
   const { locale, t } = useLocale();
@@ -320,6 +321,16 @@ function Block({ block }: { block: DocBlock }) {
         <div className="my-2">
           <ScreenshotFrame
             slot={block.slot}
+            alt={block.alt}
+            title={block.title ?? block.alt}
+          />
+        </div>
+      );
+    case "imgs":
+      return (
+        <div className="my-2">
+          <ScreenshotCarousel
+            slides={block.slides}
             alt={block.alt}
             title={block.title ?? block.alt}
           />

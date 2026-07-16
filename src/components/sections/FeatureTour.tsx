@@ -5,6 +5,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useLocale, useT } from "@/lib/i18n/LocaleProvider";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { ScreenshotFrame } from "@/components/ui/ScreenshotFrame";
+import { ScreenshotCarousel } from "@/components/ui/ScreenshotCarousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
@@ -16,7 +17,8 @@ interface FeatureItem {
 }
 
 // Each feature → its screenshot slot. Drop <slot>.png into /public/screenshots.
-const TOUR: { key: string; slot: string }[] = [
+// `pages` turns the stop into a carousel — labels come from features.boardPages.
+const TOUR: { key: string; slot: string; pages?: string[] }[] = [
   { key: "orders", slot: "OrdersScreen" },
   { key: "titleChain", slot: "PlotsAndDocsInOrderTab" },
   { key: "invoicing", slot: "InvoiceDraft" },
@@ -24,7 +26,11 @@ const TOUR: { key: string; slot: string }[] = [
   { key: "calendar", slot: "Callendar" },
   { key: "filters", slot: "FiltersOrders" },
   { key: "reports", slot: "InqueriesTab" },
-  { key: "dashboard", slot: "AdminBoard" },
+  {
+    key: "dashboard",
+    slot: "AdminBoard",
+    pages: ["AdminBoard", "AdminBoardFinance", "AdminBoardTeam"],
+  },
   { key: "permissions", slot: "Administration" },
 ];
 
@@ -230,11 +236,7 @@ export function FeatureTour() {
                       className={i === 0 ? "relative" : "absolute inset-0"}
                       style={i === 0 ? undefined : { opacity: 0 }}
                     >
-                      <ScreenshotFrame
-                        slot={row.slot}
-                        alt={f.title}
-                        title={`Wolf — ${f.tag}`}
-                      />
+                      <TourShot row={row} f={f} />
                     </div>
                   );
                 })}
@@ -290,11 +292,7 @@ export function FeatureTour() {
                   </ul>
                 </Reveal>
                 <Reveal delay={0.08}>
-                  <ScreenshotFrame
-                    slot={row.slot}
-                    alt={f.title}
-                    title={`Wolf — ${f.tag}`}
-                  />
+                  <TourShot row={row} f={f} />
                 </Reveal>
               </div>
             );
@@ -302,6 +300,30 @@ export function FeatureTour() {
         </div>
       </div>
     </Section>
+  );
+}
+
+/** One tour stop's visual: a single frame, or a paged carousel (Табло). */
+function TourShot({
+  row,
+  f,
+}: {
+  row: (typeof TOUR)[number];
+  f: FeatureItem;
+}) {
+  const t = useT();
+  if (row.pages) {
+    const labels = t<string[]>("features.boardPages");
+    return (
+      <ScreenshotCarousel
+        slides={row.pages.map((slot, i) => ({ slot, label: labels[i] ?? slot }))}
+        alt={f.title}
+        title={`Wolf — ${f.tag}`}
+      />
+    );
+  }
+  return (
+    <ScreenshotFrame slot={row.slot} alt={f.title} title={`Wolf — ${f.tag}`} />
   );
 }
 

@@ -99,6 +99,9 @@ const bg = {
     subtitle:
       "Каквато и да е услугата — заснемане, трасиране, делба, кадастрален проект или нещо съвсем друго — работният ѝ поток минава през едни и същи ясни екрани.",
     zoomHint: "Увеличи",
+    shotPrev: "Предишен изглед",
+    shotNext: "Следващ изглед",
+    boardPages: ["Обобщение", "Финанси", "Екип"],
     items: {
       orders: {
         tag: "Поръчки",
@@ -488,6 +491,9 @@ const en: typeof bg = {
     subtitle:
       "Whatever the service — a survey, staking-out, partition, cadastral project or something else entirely — its workflow runs through the same clear screens.",
     zoomHint: "Enlarge",
+    shotPrev: "Previous view",
+    shotNext: "Next view",
+    boardPages: ["Summary", "Finance", "Team"],
     items: {
       orders: {
         tag: "Orders",

@@ -47,7 +47,7 @@ outcomes) and the docs completion.*
 | Templates: assembled in the „Конструктор“ builder — 7 block types (Заглавие/Текст/Ред с данни/Таблица със списък/Повтарящ се раздел/Подписи/Празен ред), fields inserted from a searchable Bulgarian picker (never typed), live preview against sample data or a real order with an empty-field count, „Отвори в Word“, draft → publish (one-way), mechanical .docx import, „№ по ред“, nested repeating sections (plot→its owners, owner→their plots), first-item („основен“) fields with a multi-item warning at generation, three separate rights (use / manage own / manage all), admin-only raw Word upload, legacy Word templates keep working + „Провери шаблона“ | Verified in code, 2026-07-11: `Views/TemplateBuilderView.axaml`, `Views/DocumentTemplatesView.axaml`, `Controls/FieldPickerFlyout.axaml`, `Documents/{TemplateDesign,DocxBlockImporter,TemplateImportFlow,OrderMergeContextBuilder,FirstItemBindingLint}.cs`, `Api/Controllers/TemplatesController.cs`, `Wolf.Dtos/Permissions.cs`; commits `e4e7eaf`→`0fc26f4` (M1–M5 + UI audit). **Shipped in 1.0.26 (2026-07-13) — item 11 resolved.** Since `1c2ba10` also: per-column „Заглавие“/„Суфикс“, deeper nesting, revision-guarded saves. | ✅ |
 | Roles & rights: „Администрация“ with Потребители / Роли и права / Одитен журнал / Фирмени данни tabs, per-module permission matrix incl. data scope (viewAll vs viewParticipating), seeded roles (Админ / Деловодител / Изпълнител / Счетоводител / Потребител), custom roles, locked Admin role, user↔employee link, password reset, disable account | Verified in code, 2026-07-11 and re-verified 2026-07-13: `Views/AdministrationView.axaml`, `Wolf.Api/Authorization/*`, `Wolf.Dtos/Permissions.cs`, `Services/{DesktopPermissionPolicy,DownstreamDataScope}.cs`; commits `e4e7eaf`, `6ee1cdc`. **Shipped in 1.0.26; server-side enforcement is now ON (`"Authorization": {"Mode": "Enforce"}`) — item 11 resolved.** | ✅ |
 | Teamwork: simultaneous work, instant propagation, conflict warning instead of data loss | §4.3 (optimistic concurrency, "friendly 409"), §7.4, §6.4 (audit log) | ✅ |
-| Dashboard: attention cards (overdue / due in 7 days / open), tasks by status, team workload, issued invoices, payers by invoiced value, orders with an unbilled remainder, largest current balances, selectable analytics period, rights-scoped panels, real-time | Dashboard rebuilt AGAIN in `6ee1cdc` (`DashboardView.axaml`, ~986 lines) — verified in code 2026-07-13. **The receivables aging buckets (до 30 / 30–60 / 60–90 / над 90 дни) no longer exist in the app** and were removed from the site's tour + `/docs/admin` the same day. `AdminBoard.png` now predates this rebuild — recapture. | ✅ |
+| Dashboard: attention cards (overdue / due in 7 days / open), tasks by status, team workload, issued invoices, payers by invoiced value, orders with an unbilled remainder, largest current balances, selectable analytics period, rights-scoped panels, real-time | Dashboard rebuilt AGAIN in `6ee1cdc` (`DashboardView.axaml`, ~986 lines) — verified in code 2026-07-13. **The receivables aging buckets (до 30 / 30–60 / 60–90 / над 90 дни) no longer exist in the app** and were removed from the site's tour + `/docs/admin` the same day. 2026-07-16: real captures of all three dashboard tabs landed (`AdminBoard` / `AdminBoardFinance` / `AdminBoardTeam`) and the Табло stop is now a 3-page carousel with arrows (item 14). | ✅ |
 | Clients: searchable list, all-time financials, per-order breakdown, Excel export, legal type | §8.4 | ✅ |
 
 ## How it works (formerly Architecture)
@@ -119,13 +119,14 @@ tested claim.
    migrations. There is no `Release 1.0.26` commit (the release ladder stops at
    `d5a7d6a` = 1.0.25); the version lives in the csproj and the deploy record.
    The bundled `LoginScreen.png` still shows `v1.0.15`.
-7. **Placeholder screenshots** (2026-07-07, extended 2026-07-13): `InvoiceDraft.png`,
-   `TemplatesScreen.png`, `GenerateDocument.png`, `TemplateBuilder.png`,
-   `Administration.png` and the two new slots `AuditLog.png` +
-   `CompanyProfile.png` in `public/screenshots/` are branded "снимка очаква се"
-   placeholders, NOT real app screenshots — replace with real captures under the
-   same filenames (1919×1032 to match the frame's aspect ratio). The owner has
-   said the captures will follow.
+7. **Placeholder screenshots** (2026-07-07, extended 2026-07-13; largely
+   RESOLVED 2026-07-16): the owner delivered real captures
+   (`WolfScreenshots/newScreenshots`, ~1918×1008) and 18 slot files were
+   replaced/added — see item 14. Still NOT real app screenshots:
+   `AuditLog.png` and `CompanyProfile.png` (branded "снимка очаква се"
+   placeholders). Still real-but-outdated: `PersonalTab.png` (predates the
+   work-centre rebuild), `InvoicesTab.png`, `Employees.png`,
+   `EmployeesStatistics.png` (older app version).
 8. **Invoicing round 2 + help/colors/filters** (2026-07-07, second sweep) — all
    verified in the app's UNCOMMITTED working tree (HEAD still `c9d1670`
    Release 1.0.24; +4,244 lines staged for the next release):
@@ -319,3 +320,37 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
     - **In-app Help was NOT updated** for these features (`HelpContent.cs`
       untouched in all four commits) — for now the website is the only place the
       company-data / audit / work-centre features are documented.
+14. **Round 4 — real screenshots + Табло carousel** (2026-07-16, owner-delivered
+    captures from `Wolf.Desktop/WolfScreenshots/newScreenshots`, ~1918×1008):
+    - **18 slot files replaced/added** in `public/screenshots/` (mapping:
+      ArchiveOrdersView→ArchiveModeOrders, Board p1/p2/p3→AdminBoard/
+      AdminBoardFinance/AdminBoardTeam, CallendarShowCase→Callendar,
+      ClientsTab→ClientsTab, ClientStatistics→ClientStatisticsTab,
+      DocumentGenerationWindow→GenerateDocument, DocumentsOfOwnership→
+      DocumentsTab, Filters→FiltersOrders, Inqueries→InqueriesTab,
+      OrdersScreen→OrdersScreen, PDFInvoiceCreation→InvoiceDraft,
+      PlotsSubtabInOrders→PlotsAndDocsInOrderTab, PlotsTab→PlotsTab,
+      Roles→Administration, TemplateBuilder→TemplateBuilder,
+      TemplatesTab→TemplatesScreen). Mappings verified by eyeballing the
+      captures (Board p1/p2/p3 = the dashboard's Обобщение/Финанси/Екип tabs;
+      Roles = Роли и права with the data-scope explainer; PlotsSubtabInOrders =
+      the order's Имоти и документи tab).
+    - **New `ScreenshotCarousel` component** (`src/components/ui/
+      ScreenshotCarousel.tsx`): one window chrome, several pages crossfading
+      inside; auto-advances every 5s, pauses on hover/lightbox, stops for good
+      once the reader uses the arrows or dots; reduced motion disables
+      autoplay; title bar shows the current page name + `n / 3` counter; dots
+      sit on a dark pill (the app's screenshots are white — bare dots drown).
+    - **Used for Табло in both places**: the homepage tour stop `dashboard`
+      (`FeatureTour.tsx` `pages:` + `TourShot`; labels from new dict key
+      `features.boardPages`, BG Обобщение/Финанси/Екип, EN Summary/Finance/
+      Team) and `/docs/admin` §Табло (new `imgs` DocBlock type in
+      `content.ts` + `DocArticle.tsx` case).
+    - Behaviour verified against the built static export with Chrome
+      (arrows switch label+image, dots jump, auto-rotate advances after 5s,
+      homepage instance renders).
+    - Same session: the docs pager complaint («next» from Фактуриране)
+      could NOT be reproduced — 12+ scenarios (live site + dev + local build,
+      Chrome + Edge, pager/sidebar/hash/back-and-forth) all land at scrollY=0.
+      The only mid-page landing found is the browser's own back/forward
+      restoration, which is standard behaviour and was left alone.

@@ -95,11 +95,11 @@ const bg = {
   },
   film: {
     eyebrow: "Филмът",
-    title: "Една поръчка. Цялата система.",
+    title: "Възможностите на Wolf — за три минути",
     subtitle:
-      "Проследете Поръчка № 2417 — трасиране на ул. „Орлова“ 12 — от приемането до плащането за по-малко от три минути. Филмът е анимирана демонстрация: показва истинските възможности на Wolf, с интерфейс, опростен за прегледност.",
+      "Кратка демонстрация на възможностите на системата. Филмът е анимиран, а интерфейсът в него е опростен за прегледност. По-надолу в страницата са показани снимки на реалния интерфейс.",
     play: "Пусни филма",
-    caption: "Поръчка № 2417 · от приемане до плащане · анимирана демонстрация",
+    caption: "Демонстрация на възможностите · анимирана · 2:53",
   },
   features: {
     eyebrow: "Обиколка на продукта",
@@ -496,11 +496,11 @@ const en: typeof bg = {
   },
   film: {
     eyebrow: "The film",
-    title: "One order. The whole system.",
+    title: "Wolf's capabilities — in three minutes",
     subtitle:
-      "Follow order № 2417 — setting out at 12 Orlova St. — from intake to payment in under three minutes. The film is a motion-designed demo: it shows Wolf's real capabilities with an interface simplified for watchability. On-screen text is in Bulgarian.",
+      "A short showcase of what the system can do. The film is motion-designed, with an interface simplified for watchability; on-screen text is in Bulgarian. Screenshots of the real interface are shown further down the page.",
     play: "Play the film",
-    caption: "Order № 2417 · from intake to payment · a motion-designed demo",
+    caption: "A functionality showcase · motion-designed · 2:53",
   },
   features: {
     eyebrow: "Product tour",

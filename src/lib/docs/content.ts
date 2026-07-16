@@ -633,6 +633,7 @@ export const DOC_PAGES: DocPage[] = [
           text: "С един клик Wolf изтегля реалните координати на имота от кадастъра и отваря контура му в Google Earth. Виждате точното местоположение и границите на имота, без да напускате системата и без да пренабирате номера в друг сайт.",
         },
         { type: "h2", id: "owners", text: "Собственици" },
+        { type: "img", slot: "Owners", alt: "Екранът Собственици", title: "Wolf — Собственици" },
         {
           type: "p",
           text: "Отделен екран „Собственици“ пази регистъра на всички собственици — имена, ЕГН и адрес — с търсене по име, ЕГН или адрес. За всеки се вижда с колко документа, имота и поръчки е свързан, а от записа се минава към всеки от тях.",
@@ -703,6 +704,7 @@ export const DOC_PAGES: DocPage[] = [
           text: "In one click Wolf pulls the plot's real coordinates from the cadastre and opens its outline in Google Earth. You see the exact location and boundaries without leaving the system or retyping the number into another site.",
         },
         { type: "h2", id: "owners", text: "Owners" },
+        { type: "img", slot: "Owners", alt: "The Owners screen", title: "Wolf — Owners" },
         {
           type: "p",
           text: "A dedicated Owners screen keeps the register of all owners — names, ID number (ЕГН) and address — searchable by name, ЕГН or address. For each you see how many documents, plots and orders they are tied to, and you can jump to any of them from the record.",

@@ -424,3 +424,24 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
       with a → marker. Verified on the built export: home tabs stay on "/"
       and land at sectionTop=96; the docs button navigates to /docs; the
       docs header carries the same structure.
+17. **Round 7 — final captures, honest film copy, full-screen lightbox**
+    (2026-07-16):
+    - **Item 7 is now fully RESOLVED for the placeholder plates**: the owner
+      delivered AuditLog, CompanyProfiles→CompanyProfile, PersonalTab,
+      InvoicesTab, EmployeeStatisctis→EmployeesStatistics (all ~1918×1008,
+      verified visually: audit log with filters + „Записани данни“ JSON;
+      Фирмени данни with дружества, bank accounts, history; the work-centre
+      profile; the invoice register; the statistics screen). Plus a bonus
+      **Owners.png** (the Собственици register) — added as a NEW img slot on
+      /docs/plots §Собственици (BG+EN). Remaining known-stale: Employees.png
+      (older app version), LoginScreen.png (unused slot, v1.0.15).
+    - **Film copy re-tightened (owner):** no „проследете… от приемането до
+      плащането“ narrative — the film is presented purely as a functionality
+      showcase. New title „Възможностите на Wolf — за три минути“, subtitle
+      says animated + simplified interface AND points down the page:
+      „По-надолу в страницата са показани снимки на реалния интерфейс.“
+      Caption „Демонстрация на възможностите · анимирана · 2:53“. EN mirror.
+    - **Lightbox now fills the screen** (owner request): the max-w-6xl cap
+      is gone; the image sizes to calc(100vh − 7.5rem) with width following
+      the aspect ratio, so on 1920×1080 it renders ~1824×960 with the
+      container padding as margin (verified in Chrome).

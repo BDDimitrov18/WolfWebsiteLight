@@ -111,10 +111,12 @@ export function Lightbox({
         onClick={onClose}
         aria-hidden
       />
+      {/* Sized by the image itself: as large as the viewport allows —
+          the container's padding is the breathing margin, no width cap. */}
       <figure
         ref={panelRef}
         data-lightbox-panel
-        className="relative flex max-h-full w-full max-w-6xl flex-col overflow-hidden rounded-xl border"
+        className="relative flex max-h-full max-w-full flex-col overflow-hidden rounded-xl border"
         style={{
           borderColor: "color-mix(in srgb, var(--color-paper-100) 14%, transparent)",
           background: "var(--color-ink-900)",
@@ -143,13 +145,17 @@ export function Lightbox({
           </button>
         </div>
         <div className="relative min-h-0 flex-1 overflow-auto">
+          {/* Fill the screen: viewport height minus the container's
+              margin and the title bar. Width follows via aspect ratio,
+              capped by max-w-full on narrow screens. */}
           <Image
             src={src}
             alt={alt}
             width={1919}
             height={1032}
             sizes="95vw"
-            className="h-auto w-full"
+            className="block h-auto w-auto max-w-full"
+            style={{ maxHeight: "calc(100vh - 7.5rem)" }}
             loading="eager"
           />
         </div>

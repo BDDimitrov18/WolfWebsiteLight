@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Story } from "@/components/sections/Story";
+import { Film } from "@/components/sections/Film";
 import { Pillars } from "@/components/sections/Pillars";
 import { FeatureTour } from "@/components/sections/FeatureTour";
 import { TitleChain } from "@/components/sections/TitleChain";
@@ -16,6 +17,7 @@ export default function Home() {
       <main>
         <Hero />
         <Story />
+        <Film />
         <Pillars />
         <FeatureTour />
         <TitleChain />

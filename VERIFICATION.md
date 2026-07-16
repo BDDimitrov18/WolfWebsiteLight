@@ -389,3 +389,18 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
       `AuditLog` → /docs/admin §Одитен журнал + homepage Достъп carousel;
       `CompanyProfile` → /docs/admin §Фирмени данни + homepage Достъп
       carousel; `PersonalTab` → /docs/admin §Моят профил.
+16. **Round 6 — the launch film** (2026-07-16): `public/video/wolf-launch.mp4`
+    (24.5 MB, 1920×1080, 173 s, H.264, Remotion-rendered — the owner's launch
+    film; all on-screen text Bulgarian, no VO/music yet) + a poster frame
+    extracted at 0:08 (`wolf-launch-poster.jpg`, the logo over night parcels).
+    New homepage section `Film` (id="film") between Story and Pillars:
+    SheetHeader + CornerMarks-framed player, **self-hosted and click-to-play**
+    (`preload="none"` + poster → verified ZERO video requests until the play
+    button is pressed; no third-party embed, consistent with the privacy
+    story). Button „Пусни филма · 2:53“; native controls after start; caption
+    „Поръчка № 2417 · от приемане до плащане · всички екрани са реални“.
+    Copy claims match the film's own description (order № 2417, intake→
+    payment, every screen real; EN subtitle notes on-screen text is
+    Bulgarian). Dict block `film.*` (BG+EN). Verified on the built export:
+    poster renders, click starts playback (currentTime advances), overlay
+    drops, controls appear.

@@ -93,6 +93,14 @@ const bg = {
       },
     ],
   },
+  film: {
+    eyebrow: "Филмът",
+    title: "Една поръчка. Цялата система.",
+    subtitle:
+      "Проследете Поръчка № 2417 — трасиране на ул. „Орлова“ 12 — от приемането до плащането за по-малко от три минути. Всеки екран във филма е реална функционалност на Wolf, а не монтаж.",
+    play: "Пусни филма",
+    caption: "Поръчка № 2417 · от приемане до плащане · всички екрани са реални",
+  },
   features: {
     eyebrow: "Обиколка на продукта",
     title: "Всеки екран, изграден за реалната работа",
@@ -485,6 +493,14 @@ const en: typeof bg = {
         body: "Financial and operational reports come out as ready .xlsx files — they open anywhere, no Office install needed. Invoices come out as a finished PDF.",
       },
     ],
+  },
+  film: {
+    eyebrow: "The film",
+    title: "One order. The whole system.",
+    subtitle:
+      "Follow order № 2417 — setting out at 12 Orlova St. — from intake to payment in under three minutes. Every screen in the film is real Wolf functionality, not a mock-up. On-screen text is in Bulgarian.",
+    play: "Play the film",
+    caption: "Order № 2417 · from intake to payment · every screen is real",
   },
   features: {
     eyebrow: "Product tour",

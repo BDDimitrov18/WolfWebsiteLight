@@ -88,11 +88,13 @@ export function Navbar() {
     };
   }, [open]);
 
+  // The tab row is uniform: every tab scrolls to a homepage section.
+  // Документация is a different kind of destination (a separate page),
+  // so it lives with the actions on the right, styled as a button.
   const links = [
     { href: "/#features", label: t("nav.features") },
     { href: "/#architecture", label: t("nav.architecture") },
     { href: "/#pricing", label: t("nav.pricing") },
-    { href: "/docs", label: t("nav.docs") },
   ];
 
   // Already on the homepage → scroll to the section ourselves (see
@@ -138,6 +140,12 @@ export function Navbar() {
 
             <div className="flex items-center gap-3">
               <LanguageToggle />
+              <Link
+                href="/docs"
+                className="btn btn-ghost hidden h-9 whitespace-nowrap px-4 py-0 text-sm lg:inline-flex"
+              >
+                {t("nav.docs")}
+              </Link>
               <Link
                 href="/#contact"
                 onClick={(e) => onNavClick(e, "/#contact")}
@@ -188,6 +196,15 @@ export function Navbar() {
                   {l.label}
                 </Link>
               ))}
+              {/* Separate destination, separated visually */}
+              <Link
+                href="/docs"
+                onClick={() => setOpen(false)}
+                className="mt-1 flex items-center justify-between rounded-md border border-ink-600 px-3 py-3 text-base text-paper-100 transition-colors hover:bg-ink-800"
+              >
+                {t("nav.docs")}
+                <span aria-hidden className="font-mono text-xs text-ink-300">→</span>
+              </Link>
               <div className="mt-3 flex items-center justify-between px-3">
                 <LanguageToggle />
                 <Link

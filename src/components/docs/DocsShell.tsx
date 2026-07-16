@@ -12,14 +12,13 @@ export function DocsShell({ children }: { children: ReactNode }) {
   const t = useT();
   const [open, setOpen] = useState(false);
 
-  // Same tabs as the site navbar, so navigation is uniform everywhere:
-  // section tabs carry you to the homepage sections, Документация is
-  // the page you're on.
+  // Same tab row as the site navbar — from here every tab does the same
+  // thing: carries you to its homepage section. Документация is not a
+  // tab but the page you're on (the button next to the CTA).
   const links = [
-    { href: "/#features", label: t("nav.features"), current: false },
-    { href: "/#architecture", label: t("nav.architecture"), current: false },
-    { href: "/#pricing", label: t("nav.pricing"), current: false },
-    { href: "/docs", label: t("nav.docs"), current: true },
+    { href: "/#features", label: t("nav.features") },
+    { href: "/#architecture", label: t("nav.architecture") },
+    { href: "/#pricing", label: t("nav.pricing") },
   ];
 
   return (
@@ -50,10 +49,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
                 <Link
                   key={l.href}
                   href={l.href}
-                  aria-current={l.current ? "page" : undefined}
-                  className={`nav-link whitespace-nowrap text-sm transition-colors hover:text-paper-50 ${
-                    l.current ? "text-paper-50" : "text-ink-300"
-                  }`}
+                  className="nav-link whitespace-nowrap text-sm text-ink-300 transition-colors hover:text-paper-50"
                 >
                   {l.label}
                 </Link>
@@ -61,6 +57,13 @@ export function DocsShell({ children }: { children: ReactNode }) {
             </div>
             <div className="flex items-center gap-3">
               <LanguageToggle />
+              <Link
+                href="/docs"
+                aria-current="page"
+                className="btn btn-ghost hidden h-9 whitespace-nowrap px-4 py-0 text-sm lg:inline-flex"
+              >
+                {t("nav.docs")}
+              </Link>
               <Link
                 href="/#contact"
                 className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
@@ -103,18 +106,16 @@ export function DocsShell({ children }: { children: ReactNode }) {
                 </div>
                 {/* Site tabs first — same set as the homepage navbar */}
                 <div className="mb-6 flex flex-col gap-1 border-b pb-6">
-                  {links
-                    .filter((l) => !l.current)
-                    .map((l) => (
-                      <Link
-                        key={l.href}
-                        href={l.href}
-                        onClick={() => setOpen(false)}
-                        className="rounded-md px-3 py-2 text-sm text-ink-300 transition-colors hover:bg-ink-800 hover:text-paper-50"
-                      >
-                        {l.label}
-                      </Link>
-                    ))}
+                  {links.map((l) => (
+                    <Link
+                      key={l.href}
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className="rounded-md px-3 py-2 text-sm text-ink-300 transition-colors hover:bg-ink-800 hover:text-paper-50"
+                    >
+                      {l.label}
+                    </Link>
+                  ))}
                 </div>
                 <DocsSidebar onNavigate={() => setOpen(false)} />
               </div>

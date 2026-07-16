@@ -415,3 +415,12 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
       (caption „анимирана демонстрация“ / "a motion-designed demo").
       Guardrail: never describe the film as screenshots, screen recordings,
       or the real interface.
+    - **Follow-up (same day, owner):** „Документация“ as a *tab* still broke
+      the uniformity rule (tabs scrolled, it redirected). The tab row is now
+      sections only (Възможности / Как работи / Цени — every tab scrolls);
+      Документация moved to the right-hand action cluster as a ghost button
+      (next to „Заявете демо“) in BOTH headers, marked aria-current on docs
+      pages; in the mobile menu it is a visually separated, bordered row
+      with a → marker. Verified on the built export: home tabs stay on "/"
+      and land at sectionTop=96; the docs button navigates to /docs; the
+      docs header carries the same structure.

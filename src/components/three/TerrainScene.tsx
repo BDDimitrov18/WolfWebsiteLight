@@ -399,14 +399,18 @@ export default function TerrainScene({
           [13, -22],
           [2, -15],
         ];
-    // Chip world positions solved against the camera so they float low in
-    // the frame's far corners, well clear of the hero copy (the canvas is
-    // taller than the viewport — the whole hero section — so "low on
-    // screen" means high in world y).
+    // Chip world positions solved against the camera so they land in the
+    // frame's bottom corners (~78% down, ~22%/78% across), clear of the
+    // headline, lead and CTA column. The hero canvas is exactly the
+    // viewport now — low on screen means near-field ground, so the chips
+    // hover just above it, close to the camera, scaled down to keep the
+    // same apparent size they had at depth.
     const chipAnchors: [number, number, number][] = [
-      [-6.59, 3.6, -6],
-      [6.59, 3.6, -6],
+      [-4.9, 0.7, 3],
+      [4.9, 0.7, 3],
     ];
+    const CHIP_W = 1.24;
+    const CHIP_H = 0.93;
     const featured = featuredAt
       .map((q) => {
         let best: Parcel | null = null;
@@ -520,7 +524,7 @@ export default function TerrainScene({
           fog: false, // keep the ember/ink colors true at depth
         });
         sprite = new THREE.Sprite(spriteMat);
-        sprite.scale.set(2.1, 1.58, 1);
+        sprite.scale.set(CHIP_W, CHIP_H, 1);
         sprite.position.set(chipX, baseY, chipZ);
         scene.add(sprite);
         chipMatsRef.current.push(spriteMat);
@@ -529,7 +533,7 @@ export default function TerrainScene({
         leaderGeo.setAttribute(
           "position",
           new THREE.Float32BufferAttribute(
-            [p.cx, groundY + 0.1, p.cz, chipX, baseY - 0.9, chipZ],
+            [p.cx, groundY + 0.1, p.cz, chipX, baseY - CHIP_H * 0.65, chipZ],
             3,
           ),
         );
@@ -615,13 +619,13 @@ export default function TerrainScene({
       // their leader lines stay pinned to the card edge
       for (const m of markers) {
         if (!m.sprite) continue;
-        m.sprite.position.y = m.baseY + Math.sin(t * 0.8 + m.phase) * 0.12;
+        m.sprite.position.y = m.baseY + Math.sin(t * 0.8 + m.phase) * 0.08;
         const s = 1 + m.pulse * 0.08;
-        m.sprite.scale.set(2.1 * s, 1.58 * s, 1);
+        m.sprite.scale.set(CHIP_W * s, CHIP_H * s, 1);
         (m.sprite.material as THREE.SpriteMaterial).opacity = 0.62 + m.pulse * 0.28;
         if (m.leaderGeo) {
           const lp = m.leaderGeo.attributes.position as THREE.BufferAttribute;
-          lp.setY(1, m.sprite.position.y - 0.9 * s);
+          lp.setY(1, m.sprite.position.y - CHIP_H * 0.65 * s);
           lp.needsUpdate = true;
         }
       }

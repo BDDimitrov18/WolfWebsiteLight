@@ -61,6 +61,10 @@ const bg = {
     problemsTitle: "Какви проблеми имаше",
     solutionsTitlePre: "Как ",
     solutionsTitleMark: "Wolf ги разрешава",
+    photoAlt:
+      "Работно бюро преди Wolf — купчини документи, разпечатки и ръчни бележки около монитора",
+    photoNote:
+      "Текстът на документите и снимките са замъглени от съображения за поверителност",
     problems: [
       {
         qLead: "Кой по какво работи",
@@ -499,6 +503,10 @@ const en: typeof bg = {
     problemsTitle: "The problems you had",
     solutionsTitlePre: "How ",
     solutionsTitleMark: "Wolf solves them",
+    photoAlt:
+      "A working desk before Wolf — piles of documents, printouts and handwritten notes around the monitor",
+    photoNote:
+      "Document text and photos are blurred for privacy",
     problems: [
       {
         qLead: "Who is working on what",

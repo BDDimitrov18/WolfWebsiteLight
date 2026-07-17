@@ -1,6 +1,7 @@
 "use client";
 
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { asset } from "@/lib/asset";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
@@ -42,7 +43,26 @@ export function Pillars() {
 
         {/* ---- Part 1: the problems — image left, list right ---- */}
         <div className="mt-14 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <ImageSlot />
+          {/* The owner's real desk, pre-Wolf. Faces, screen content and
+              document text are pixelated in the source file itself. */}
+          <figure className="relative overflow-hidden rounded-xl border">
+            <img
+              src={asset("/photos/desk-before.jpg")}
+              alt={t("pillars.photoAlt")}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover"
+              style={{ objectPosition: "50% 42%" }}
+            />
+            <figcaption
+              className="absolute bottom-2.5 left-2.5 rounded-full px-3 py-1.5 font-mono text-[10px] tracking-wide text-ink-300"
+              style={{
+                background:
+                  "color-mix(in srgb, var(--color-ink-950) 78%, transparent)",
+              }}
+            >
+              {t("pillars.photoNote")}
+            </figcaption>
+          </figure>
           <div>
             <h3 className="text-xl text-paper-50 sm:text-2xl">
               {t("pillars.problemsTitle")}

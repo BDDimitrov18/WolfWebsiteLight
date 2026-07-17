@@ -48,6 +48,9 @@ const bg = {
     leadMark: "целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
     ctaSecondary: "Към видеото",
+    hookA:
+      "Всеки може да използва Ексел, хвърчащи листи за организация и аларми за напомняне.",
+    hookB: "Организационната система Wolf е следващото ниво.",
   },
   story: {
     eyebrow: "Историята",
@@ -469,6 +472,9 @@ const en: typeof bg = {
     leadMark: "the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
     ctaSecondary: "Watch the video",
+    hookA:
+      "Anyone can get by with Excel, loose paper sheets and reminder alarms.",
+    hookB: "The Wolf organizational system is the next level.",
   },
   story: {
     eyebrow: "The story",

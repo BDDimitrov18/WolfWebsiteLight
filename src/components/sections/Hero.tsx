@@ -71,7 +71,7 @@ export function Hero() {
       </div>
 
       {/* ---- Viewport plate ---- */}
-      <Container className="relative flex min-h-[100svh] flex-col justify-center pb-24 pt-28">
+      <Container className="relative flex min-h-[86svh] flex-col justify-center pb-14 pt-28">
         <div className="mx-auto max-w-5xl text-center">
           <SplitHeading
             key={`title-${locale}`}
@@ -130,6 +130,15 @@ export function Hero() {
               </Link>
             </Magnetic>
           </div>
+
+          {/* The hook — why "another tool" isn't the same thing. */}
+          <p
+            data-hero-intro
+            className="intro-hide mx-auto mt-12 max-w-2xl text-pretty leading-relaxed text-ink-300"
+          >
+            {t("hero.hookA")}{" "}
+            <span className="text-paper-50">{t("hero.hookB")}</span>
+          </p>
         </div>
       </Container>
     </section>

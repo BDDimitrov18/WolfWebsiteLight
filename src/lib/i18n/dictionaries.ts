@@ -58,6 +58,9 @@ const bg = {
   pillars: {
     eyebrow: "Защо Wolf",
     title: "Какви проблеми решава",
+    problemsTitle: "Какви проблеми имаше",
+    solutionsTitlePre: "Как ",
+    solutionsTitleMark: "Wolf ги разрешава",
     problems: [
       {
         q: "Кой по какво работи и колко е свършил",
@@ -470,6 +473,9 @@ const en: typeof bg = {
   pillars: {
     eyebrow: "Why Wolf",
     title: "The problems Wolf solves",
+    problemsTitle: "The problems you had",
+    solutionsTitlePre: "How ",
+    solutionsTitleMark: "Wolf solves them",
     problems: [
       {
         q: "Who is working on what, and how much they have done",

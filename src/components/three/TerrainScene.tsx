@@ -399,18 +399,40 @@ export default function TerrainScene({
           [13, -22],
           [2, -15],
         ];
-    // Chip world positions solved against the camera so they land in the
-    // frame's bottom corners (~78% down, ~22%/78% across), clear of the
-    // headline, lead and CTA column. The hero canvas is exactly the
-    // viewport now — low on screen means near-field ground, so the chips
-    // hover just above it, close to the camera, scaled down to keep the
-    // same apparent size they had at depth.
-    const chipAnchors: [number, number, number][] = [
-      [-4.9, 0.7, 3],
-      [4.9, 0.7, 3],
-    ];
-    const CHIP_W = 1.24;
-    const CHIP_H = 0.93;
+    // The chips flank the copy at the far left and right screen edges,
+    // mid-height. Screen placement is what matters, so their world
+    // anchors are solved against the actual camera and viewport aspect
+    // rather than hardcoded: unproject the target NDC point and walk the
+    // ray to the mid-field plane (same depth as the original design,
+    // which keeps their apparent size).
+    const CHIP_W = 2.1;
+    const CHIP_H = 1.58;
+    const CHIP_PLANE_Z = -6;
+    const CHIP_NDC_Y = -0.08; // just below vertical center
+    camera.lookAt(0, 1.2, -14);
+    camera.updateMatrixWorld();
+    camera.matrixWorldInverse.copy(camera.matrixWorld).invert();
+    const anchorAt = (ndcX: number): [number, number, number] => {
+      const dir = new THREE.Vector3(ndcX, CHIP_NDC_Y, 0.5)
+        .unproject(camera)
+        .sub(camera.position)
+        .normalize();
+      const k = (CHIP_PLANE_Z - camera.position.z) / dir.z;
+      return [
+        camera.position.x + dir.x * k,
+        camera.position.y + dir.y * k,
+        CHIP_PLANE_Z,
+      ];
+    };
+    // Edge inset that keeps the whole card on-screen with a margin —
+    // narrower viewports pull it in automatically.
+    const probeDepth = -new THREE.Vector3(...anchorAt(0)).applyMatrix4(
+      camera.matrixWorldInverse,
+    ).z;
+    const halfWidthNdc =
+      CHIP_W / 2 / (probeDepth * Math.tan(THREE.MathUtils.degToRad(55 / 2)) * camera.aspect);
+    const edgeX = Math.min(0.84, 1 - halfWidthNdc - 0.06);
+    const chipAnchors: [number, number, number][] = [anchorAt(-edgeX), anchorAt(edgeX)];
     const featured = featuredAt
       .map((q) => {
         let best: Parcel | null = null;
@@ -619,7 +641,7 @@ export default function TerrainScene({
       // their leader lines stay pinned to the card edge
       for (const m of markers) {
         if (!m.sprite) continue;
-        m.sprite.position.y = m.baseY + Math.sin(t * 0.8 + m.phase) * 0.08;
+        m.sprite.position.y = m.baseY + Math.sin(t * 0.8 + m.phase) * 0.12;
         const s = 1 + m.pulse * 0.08;
         m.sprite.scale.set(CHIP_W * s, CHIP_H * s, 1);
         (m.sprite.material as THREE.SpriteMaterial).opacity = 0.62 + m.pulse * 0.28;

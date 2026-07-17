@@ -88,21 +88,24 @@ export function Navbar() {
     };
   }, [open]);
 
-  // The tab row is uniform: every tab scrolls to a homepage section.
-  // Документация is a different kind of destination (a separate page),
-  // so it lives with the actions on the right, styled as a button.
+  // The tab row is uniform: every tab navigates to its own page.
+  // Документация lives with the actions on the right, styled as a
+  // button.
   const links = [
-    { href: "/#features", label: t("nav.features") },
-    { href: "/#architecture", label: t("nav.architecture") },
-    { href: "/#pricing", label: t("nav.pricing") },
+    { href: "/features", label: t("nav.features") },
+    { href: "/architecture", label: t("nav.architecture") },
+    { href: "/pricing", label: t("nav.pricing") },
   ];
 
-  // Already on the homepage → scroll to the section ourselves (see
-  // scrollToSection for why); on any other route the Link navigates.
-  const onNavClick = (e: React.MouseEvent, href: string) => {
-    if (pathname !== "/" || !href.startsWith("/#")) return;
+  // The static export serves trailing-slash URLs (/features/).
+  const isActive = (href: string) => pathname === href || pathname === `${href}/`;
+
+  // The demo form (#contact) sits at the bottom of every marketing
+  // page — scroll to it in place. On a route without it the call
+  // no-ops and the Link navigates to the homepage form instead.
+  const onCtaClick = (e: React.MouseEvent) => {
     setOpen(false);
-    scrollToSection(e, href);
+    scrollToSection(e, "/#contact");
   };
 
   return (
@@ -130,8 +133,10 @@ export function Navbar() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  onClick={(e) => onNavClick(e, l.href)}
-                  className="nav-link whitespace-nowrap text-sm text-ink-300 transition-colors hover:text-paper-50"
+                  aria-current={isActive(l.href) ? "page" : undefined}
+                  className={`nav-link whitespace-nowrap text-sm transition-colors hover:text-paper-50 ${
+                    isActive(l.href) ? "text-paper-50" : "text-ink-300"
+                  }`}
                 >
                   {l.label}
                 </Link>
@@ -148,7 +153,7 @@ export function Navbar() {
               </Link>
               <Link
                 href="/#contact"
-                onClick={(e) => onNavClick(e, "/#contact")}
+                onClick={onCtaClick}
                 className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
               >
                 {t("nav.cta")}
@@ -187,10 +192,7 @@ export function Navbar() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  onClick={(e) => {
-                    setOpen(false);
-                    onNavClick(e, l.href);
-                  }}
+                  onClick={() => setOpen(false)}
                   className="rounded-md px-3 py-3 text-base text-paper-100 transition-colors hover:bg-ink-800"
                 >
                   {l.label}
@@ -209,10 +211,7 @@ export function Navbar() {
                 <LanguageToggle />
                 <Link
                   href="/#contact"
-                  onClick={(e) => {
-                    setOpen(false);
-                    onNavClick(e, "/#contact");
-                  }}
+                  onClick={onCtaClick}
                   className="btn btn-primary h-9 px-4 py-0 text-sm"
                 >
                   {t("nav.cta")}

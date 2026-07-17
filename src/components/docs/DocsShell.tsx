@@ -12,13 +12,13 @@ export function DocsShell({ children }: { children: ReactNode }) {
   const t = useT();
   const [open, setOpen] = useState(false);
 
-  // Same tab row as the site navbar — from here every tab does the same
-  // thing: carries you to its homepage section. Документация is not a
-  // tab but the page you're on (the button next to the CTA).
+  // Same tab row as the site navbar — every tab navigates to its own
+  // page. Документация is not a tab but the page you're on (the button
+  // next to the CTA).
   const links = [
-    { href: "/#features", label: t("nav.features") },
-    { href: "/#architecture", label: t("nav.architecture") },
-    { href: "/#pricing", label: t("nav.pricing") },
+    { href: "/features", label: t("nav.features") },
+    { href: "/architecture", label: t("nav.architecture") },
+    { href: "/pricing", label: t("nav.pricing") },
   ];
 
   return (

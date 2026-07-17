@@ -28,7 +28,7 @@ const bg = {
   },
   nav: {
     product: "Продукт",
-    features: "Възможности",
+    features: "Функционалности",
     architecture: "Как работи",
     pricing: "Цени",
     docs: "Документация",
@@ -92,7 +92,7 @@ const bg = {
     eyebrow: "Филмът",
     title: "Възможностите на Wolf — за три минути",
     subtitle:
-      "Кратка демонстрация на възможностите на системата. Филмът е анимиран, а интерфейсът в него е опростен за прегледност. По-надолу в страницата са показани снимки на реалния интерфейс.",
+      "Кратка демонстрация на възможностите на системата. Филмът е анимиран, а интерфейсът в него е опростен за прегледност. Снимки на реалния интерфейс са показани на страница „Функционалности“.",
     play: "Пусни филма",
     caption: "Демонстрация на възможностите · анимирана · 3:26",
   },
@@ -383,9 +383,10 @@ const bg = {
     resources: "Ресурси",
     company: "Контакти",
     links: {
-      features: "Възможности",
+      features: "Функционалности",
       architecture: "Как работи",
       pricing: "Цени",
+      faq: "Често задавани въпроси",
       docs: "Документация",
       gettingStarted: "Първи стъпки",
       model: "Модел на данните",
@@ -526,7 +527,7 @@ const en: typeof bg = {
     eyebrow: "The film",
     title: "Wolf's capabilities — in three minutes",
     subtitle:
-      "A short showcase of what the system can do. The film is motion-designed, with an interface simplified for watchability; on-screen text is in Bulgarian. Screenshots of the real interface are shown further down the page.",
+      "A short showcase of what the system can do. The film is motion-designed, with an interface simplified for watchability; on-screen text is in Bulgarian. Screenshots of the real interface are on the Features page.",
     play: "Play the film",
     caption: "A functionality showcase · motion-designed · 3:26",
   },
@@ -820,6 +821,7 @@ const en: typeof bg = {
       features: "Features",
       architecture: "How it works",
       pricing: "Pricing",
+      faq: "FAQ",
       docs: "Documentation",
       gettingStarted: "Getting started",
       model: "Data model",

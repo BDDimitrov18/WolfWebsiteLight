@@ -24,9 +24,10 @@ export function Footer() {
     {
       title: t("footer.product"),
       links: [
-        { href: "/#features", label: t("footer.links.features") },
-        { href: "/#architecture", label: t("footer.links.architecture") },
-        { href: "/#pricing", label: t("footer.links.pricing") },
+        { href: "/features", label: t("footer.links.features") },
+        { href: "/architecture", label: t("footer.links.architecture") },
+        { href: "/pricing", label: t("footer.links.pricing") },
+        { href: "/#faq", label: t("footer.links.faq") },
       ],
     },
     {

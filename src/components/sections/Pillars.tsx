@@ -46,7 +46,7 @@ export function Pillars() {
               document text are blurred in the source file itself. */}
           <figure className="relative overflow-hidden rounded-xl border">
             <img
-              src={asset("/photos/desk-before.jpg")}
+              src={asset("/photos/desk-before.jpg?v=2")}
               alt={t("pillars.photoAlt")}
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"

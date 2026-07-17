@@ -73,23 +73,20 @@ export function Hero() {
       {/* ---- Viewport plate ---- */}
       <Container className="relative flex min-h-[100svh] flex-col justify-center pb-24 pt-28">
         <div className="mx-auto max-w-5xl text-center">
-          <p
-            data-hero-intro
-            className="intro-hide eyebrow mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-2 text-[0.6rem] sm:text-[0.78rem]"
-          >
-            {t("hero.eyebrow")}
-          </p>
-
           <SplitHeading
             key={`title-${locale}`}
             as="h1"
             mode="load"
             delay={0.12}
-            className="text-balance font-display"
-            // A step below --fs-display: the two-line headline is long
-            // enough that the full display size would wrap each line.
+            // The old eyebrow's grammar promoted to the headline: mono,
+            // uppercase, tracked. Mono glyphs are a fixed 0.6em advance,
+            // so the size cap is solved from the longer line's character
+            // count against the max-w-5xl column.
+            className="text-balance font-mono uppercase"
             style={{
-              fontSize: "clamp(2rem, 0.9rem + 3.1vw, 3.7rem)",
+              fontSize: "clamp(1.6rem, 0.7rem + 2.7vw, 3.1rem)",
+              letterSpacing: "0.04em",
+              lineHeight: 1.25,
               color: "var(--color-paper-50)",
             }}
           >

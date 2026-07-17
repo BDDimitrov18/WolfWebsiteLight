@@ -108,7 +108,7 @@ export function Hero() {
             className="intro-hide mx-auto mt-7 max-w-2xl text-pretty lead"
           >
             {t("hero.leadPre")}
-            <U thick="0.12em">{t("hero.leadMark")}</U>
+            <U>{t("hero.leadMark")}</U>
           </p>
 
           <div
@@ -137,10 +137,10 @@ export function Hero() {
   );
 }
 
-/** Fat ember underline for the hero's marked phrases. */
+/** Ember underline for the hero's marked phrases. */
 function U({
   children,
-  thick = "0.14em",
+  thick = "0.06em",
 }: {
   children: React.ReactNode;
   thick?: string;

@@ -5,7 +5,8 @@ import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
 interface Problem {
-  q: string;
+  qLead: string;
+  qRest: string;
   aLead: string;
   aRest: string;
 }
@@ -48,12 +49,22 @@ export function Pillars() {
             </h3>
             <ul className="mt-7 space-y-5">
               {problems.map((p, i) => (
-                <li key={p.q} className="flex items-baseline gap-4">
+                <li key={p.qLead} className="flex items-baseline gap-4">
                   <span className="flex-none font-mono text-xs text-ember-400">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="font-semibold leading-relaxed text-paper-50">
-                    {p.q}
+                  <p
+                    className="leading-relaxed"
+                    style={{
+                      color:
+                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
+                    }}
+                  >
+                    <strong className="font-semibold text-paper-50">
+                      {p.qLead}
+                    </strong>
+                    {" — "}
+                    {p.qRest}
                   </p>
                 </li>
               ))}
@@ -79,7 +90,7 @@ export function Pillars() {
             </h3>
             <ul className="mt-7 space-y-5">
               {problems.map((p, i) => (
-                <li key={p.q} className="flex items-baseline gap-4">
+                <li key={p.aLead} className="flex items-baseline gap-4">
                   <span className="flex-none font-mono text-xs text-ember-400">
                     {String(i + 1).padStart(2, "0")}
                   </span>

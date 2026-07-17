@@ -63,37 +63,44 @@ const bg = {
     solutionsTitleMark: "Wolf ги разрешава",
     problems: [
       {
-        q: "Кой по какво работи и колко е свършил",
+        qLead: "Кой по какво работи",
+        qRest: "до къде е стигнал и колко е свършил",
         aLead: "Всяка задача има изпълнител",
         aRest:
-          "работата е обща, задачите — лични, а месечната справка показва приноса на всеки служител.",
+          "работата е обща, задачите — лични, а справките по период по избор показват изработеното от служителите.",
       },
       {
-        q: "Неразплатени суми се губят с месеци",
+        qLead: "Неразплатени суми",
+        qRest: "се губят",
         aLead: "Статус на плащане на всяка поръчка",
         aRest:
-          "платено, аванс или неплатено — неплатеното излиза с един филтър, преди да се е изгубило.",
+          "следи се колко е платено и колко е фактурирано, а всяка отделна фактура се пази в базата — като данни или като прикачен файл, така че да се вижда пълната история.",
       },
       {
-        q: "Информацията е пръсната по папки, файлове и глави",
-        aLead: "Всичко на едно място",
+        qLead: "Информацията е пръсната",
+        qRest: "по папки, файлове и глави",
+        aLead: "Всичко в една система",
         aRest:
           "поръчки, клиенти, фактури и задачи, свързани помежду си — както са свързани и в действителност.",
       },
       {
-        q: "Двама души по една поръчка си пречат",
+        qLead: "Трудност при комуникацията",
+        qRest:
+          "за състоянието на работата при по-големи проекти между служителите",
         aLead: "Целият екип работи едновременно",
         aRest:
           "промяната на колегата се появява на екрана ви в мига, в който е направена, без взаимно презаписване.",
       },
       {
-        q: "Справките за счетоводителя отнемат часове",
+        qLead: "Справките за счетоводителя",
+        qRest: "отнемат часове",
         aLead: "Справки с един клик",
         aRest:
           "финансовите и оперативните излизат директно като .xlsx файлове, а фактурите — като готов PDF.",
       },
       {
-        q: "Липса на специализирани модули за проектантски данни",
+        qLead: "Липса на специализирани модули",
+        qRest: "за проектантски данни",
         aLead: "Създадена за проектантската практика",
         aRest:
           "имоти, документи за собственост и вериги на собственост, свързани с поръчките така, както са свързани в действителност.",
@@ -494,37 +501,44 @@ const en: typeof bg = {
     solutionsTitleMark: "Wolf solves them",
     problems: [
       {
-        q: "Who is working on what, and how much they have done",
+        qLead: "Who is working on what",
+        qRest: "how far along they are and how much they have done",
         aLead: "Every task has an assignee",
         aRest:
-          "the work is shared, the tasks are personal, and the monthly report shows each person's contribution.",
+          "the work is shared, the tasks are personal, and reports over any period you choose show what each person produced.",
       },
       {
-        q: "Unpaid amounts slip away for months",
+        qLead: "Unpaid amounts",
+        qRest: "slip away",
         aLead: "A payment status on every order",
         aRest:
-          "paid, advance or unpaid — the unpaid ones surface with a single filter, before they get lost.",
+          "how much is paid and how much is invoiced is tracked, and every single invoice is kept in the database — as data or as an attached file — so the full history stays visible.",
       },
       {
-        q: "Information is scattered across folders, files and heads",
-        aLead: "Everything in one place",
+        qLead: "Information is scattered",
+        qRest: "across folders, files and heads",
+        aLead: "Everything in one system",
         aRest:
           "orders, clients, invoices and tasks, linked to each other the way they are linked in reality.",
       },
       {
-        q: "Two people on one order get in each other's way",
+        qLead: "Communication is hard",
+        qRest:
+          "about where the work stands on larger projects, across the team",
         aLead: "The whole team works at once",
         aRest:
           "a colleague's change appears on your screen the moment it is made, with no overwriting.",
       },
       {
-        q: "Reports for the accountant take hours",
+        qLead: "Reports for the accountant",
+        qRest: "take hours",
         aLead: "Reports in one click",
         aRest:
           "financial and operational ones come out directly as .xlsx files, and invoices as a finished PDF.",
       },
       {
-        q: "No specialized modules for design-practice data",
+        qLead: "No specialized modules",
+        qRest: "for design-practice data",
         aLead: "Built for the design practice",
         aRest:
           "plots, ownership documents and title chains, linked to the orders the way they are linked in reality.",

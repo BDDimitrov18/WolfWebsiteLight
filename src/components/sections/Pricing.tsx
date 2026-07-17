@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { scrollToSection } from "@/lib/sectionScroll";
+import { CONTACT } from "@/lib/contact";
 import { dictionaries } from "@/lib/i18n/dictionaries";
 import { usePref } from "@/lib/prefs";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
@@ -172,13 +171,12 @@ export function Pricing() {
                   >
                     {card.perpetual}
                   </p>
-                  <Link
-                    href="/#contact"
-                    onClick={(e) => scrollToSection(e, "/#contact")}
+                  <a
+                    href={CONTACT.demoHref}
                     className={`btn mt-6 w-full ${isHighlight ? "btn-primary" : "btn-ghost"}`}
                   >
                     {card.cta}
-                  </Link>
+                  </a>
                 </article>
               </RevealItem>
             );

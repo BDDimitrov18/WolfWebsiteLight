@@ -37,9 +37,15 @@ const bg = {
     close: "Затвори",
   },
   hero: {
-    titleA: "Цялата ви проектантска практика",
-    titleB: "— в единна софтуерна система",
-    lead: "Wolf събира поръчките, имотите, документите за собственост, фактурите и задачите на практиката на едно място — и целият екип вижда всяка промяна в мига, в който се случи.",
+    titleAPre: "",
+    titleAMark: "Цялата",
+    titleAPost: " ви проектантска практика",
+    titleBPre: "— в ",
+    titleBMark: "единна софтуерна система",
+    titleBPost: "",
+    leadPre:
+      "Wolf събира поръчките, имотите, документите за собственост, фактурите и задачите на практиката на едно място — и ",
+    leadMark: "целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
     ctaSecondary: "Към видеото",
     docChips: [
@@ -359,20 +365,6 @@ const bg = {
       },
     ],
   },
-  cta: {
-    eyebrow: "Готови ли сте?",
-    title: "Вижте Wolf върху вашите поръчки",
-    body: "Половин час е достатъчен, за да преминем от възлагане до фактура и отчет с вашите реални работни потоци.",
-    stampRing: "WOLF · ЗА ПРОЕКТАНТСКИ ПРАКТИКИ · ",
-    stampCenter: "ДЕМО\n30 МИН",
-    primary: "Заявете демо",
-    secondary: "Прочетете документацията",
-    emailLabel: "Служебен имейл",
-    emailPlaceholder: "вие@praktika.bg",
-    send: "Изпрати",
-    privacy: "Никога няма да споделим вашите данни.",
-    talk: "Предпочитате да поговорим?",
-  },
   footer: {
     tagline: "Система за управление на проектантска практика.",
     madeIn: "Проектирано и разработено в България.",
@@ -405,7 +397,7 @@ const bg = {
       {
         h: "Какво събира този сайт",
         ps: [
-          "Сайтът е статичен и няма собствен сървър за данни. Формата „Заявете демо“ не изпраща нищо към нас автоматично — тя отваря вашата пощенска програма с предварително попълнено писмо, което вие решавате дали да изпратите.",
+          "Сайтът е статичен и няма собствен сървър за данни. Бутонът „Заявете демо“ не изпраща нищо към нас автоматично — той отваря вашата пощенска програма с предварително попълнено писмо, което вие решавате дали да изпратите.",
           "Имейл, който ни изпратите, се използва единствено за да ви отговорим и да уговорим демонстрация. Не го споделяме с трети страни и не изпращаме маркетингови съобщения.",
           "Сайтът запомня няколко предпочитания в хранилището на вашия браузър: езика на интерфейса, че въвеждащата анимация е показана, последната прочетена глава от документацията и избран размер на екипа в страницата с цените. Те никога не напускат устройството ви, ние нямаме достъп до тях, а изчистването на данните за сайта в браузъра ги премахва.",
         ],
@@ -470,9 +462,15 @@ const en: typeof bg = {
     close: "Close",
   },
   hero: {
-    titleA: "Your whole design practice",
-    titleB: "— in one unified software system",
-    lead: "Wolf brings your orders, properties, ownership documents, invoices and tasks into one place — and the whole team sees every change the moment it happens.",
+    titleAPre: "Your ",
+    titleAMark: "whole",
+    titleAPost: " design practice",
+    titleBPre: "— in one ",
+    titleBMark: "unified software system",
+    titleBPost: "",
+    leadPre:
+      "Wolf brings your orders, properties, ownership documents, invoices and tasks into one place — and ",
+    leadMark: "the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
     ctaSecondary: "Watch the video",
     docChips: [
@@ -792,20 +790,6 @@ const en: typeof bg = {
       },
     ],
   },
-  cta: {
-    eyebrow: "Ready?",
-    title: "See Wolf on your own orders",
-    body: "Half an hour is enough to go from a commission to an invoice and a report using your real workflows.",
-    stampRing: "WOLF · FOR DESIGN PRACTICES · ",
-    stampCenter: "DEMO\n30 MIN",
-    primary: "Book a demo",
-    secondary: "Read the docs",
-    emailLabel: "Work email",
-    emailPlaceholder: "you@firm.bg",
-    send: "Send",
-    privacy: "We'll never share your details.",
-    talk: "Prefer to talk?",
-  },
   footer: {
     tagline: "Management system for design practices.",
     madeIn: "Designed and built in Bulgaria.",
@@ -838,7 +822,7 @@ const en: typeof bg = {
       {
         h: "What this site collects",
         ps: [
-          "The site is static and has no data server of its own. The “Book a demo” form sends nothing to us automatically — it opens your mail client with a pre-filled message that you decide whether to send.",
+          "The site is static and has no data server of its own. The “Book a demo” button sends nothing to us automatically — it opens your mail client with a pre-filled message that you decide whether to send.",
           "An email you send us is used solely to reply and arrange a demonstration. We do not share it with third parties and we do not send marketing messages.",
           "The site remembers a few preferences in your browser's own storage: the interface language, that the intro animation has been shown, the last documentation chapter you read, and a team size you pick on the pricing page. They never leave your device, we cannot read them, and clearing your browser's site data removes them.",
         ],

@@ -3,7 +3,6 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FeatureTour } from "@/components/sections/FeatureTour";
 import { TitleChain } from "@/components/sections/TitleChain";
-import { CTA } from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "Функционалности",
@@ -18,7 +17,6 @@ export default function FeaturesPage() {
       <main>
         <FeatureTour />
         <TitleChain />
-        <CTA />
       </main>
       <Footer />
     </>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { gsap } from "@/lib/gsap";
 import { useLocale, useT } from "@/lib/i18n/LocaleProvider";
 import { scrollToSection } from "@/lib/sectionScroll";
+import { CONTACT } from "@/lib/contact";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { Container } from "@/components/ui/Section";
 import { SplitHeading } from "@/components/ui/SplitHeading";
@@ -90,15 +91,24 @@ export function Hero() {
               color: "var(--color-paper-50)",
             }}
           >
-            <span className="block">{t("hero.titleA")}</span>
-            <span className="block text-ink-300">{t("hero.titleB")}</span>
+            <span className="block">
+              {t("hero.titleAPre")}
+              <U>{t("hero.titleAMark")}</U>
+              {t("hero.titleAPost")}
+            </span>
+            <span className="block text-ink-300">
+              {t("hero.titleBPre")}
+              <U>{t("hero.titleBMark")}</U>
+              {t("hero.titleBPost")}
+            </span>
           </SplitHeading>
 
           <p
             data-hero-intro
             className="intro-hide mx-auto mt-7 max-w-2xl text-pretty lead"
           >
-            {t("hero.lead")}
+            {t("hero.leadPre")}
+            <U thick="0.12em">{t("hero.leadMark")}</U>
           </p>
 
           <div
@@ -106,14 +116,10 @@ export function Hero() {
             className="intro-hide mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
             <Magnetic className="w-full sm:w-auto">
-              <Link
-                href="/#contact"
-                onClick={(e) => scrollToSection(e, "/#contact")}
-                className="btn btn-primary w-full sm:w-auto"
-              >
+              <a href={CONTACT.demoHref} className="btn btn-primary w-full sm:w-auto">
                 {t("hero.ctaPrimary")}
                 <Arrow />
-              </Link>
+              </a>
             </Magnetic>
             <Magnetic className="w-full sm:w-auto">
               <Link
@@ -128,6 +134,28 @@ export function Hero() {
         </div>
       </Container>
     </section>
+  );
+}
+
+/** Fat ember underline for the hero's marked phrases. */
+function U({
+  children,
+  thick = "0.14em",
+}: {
+  children: React.ReactNode;
+  thick?: string;
+}) {
+  return (
+    <span
+      style={{
+        textDecorationLine: "underline",
+        textDecorationColor: "var(--color-ember-500)",
+        textDecorationThickness: thick,
+        textUnderlineOffset: "0.16em",
+      }}
+    >
+      {children}
+    </span>
   );
 }
 

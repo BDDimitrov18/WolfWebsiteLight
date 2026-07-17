@@ -6,4 +6,9 @@ export const CONTACT = {
   phoneDisplay: "+359 877 139 712",
   phoneHref: "tel:+359877139712",
   email: "bddimitrov18@gmail.com",
+  /** Every „Заявете демо" button opens a pre-filled email — the site has
+   *  no data server, matching the privacy policy's description. */
+  demoHref: `mailto:bddimitrov18@gmail.com?subject=${encodeURIComponent(
+    "Заявка за демо — Wolf",
+  )}`,
 } as const;

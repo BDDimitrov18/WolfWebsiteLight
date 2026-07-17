@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Architecture } from "@/components/sections/Architecture";
-import { CTA } from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "Как работи",
@@ -16,7 +15,6 @@ export default function ArchitecturePage() {
       <Navbar />
       <main>
         <Architecture />
-        <CTA />
       </main>
       <Footer />
     </>

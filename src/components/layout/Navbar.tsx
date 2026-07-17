@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { scrollToSection } from "@/lib/sectionScroll";
+import { CONTACT } from "@/lib/contact";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
@@ -100,14 +100,6 @@ export function Navbar() {
   // The static export serves trailing-slash URLs (/features/).
   const isActive = (href: string) => pathname === href || pathname === `${href}/`;
 
-  // The demo form (#contact) sits at the bottom of every marketing
-  // page — scroll to it in place. On a route without it the call
-  // no-ops and the Link navigates to the homepage form instead.
-  const onCtaClick = (e: React.MouseEvent) => {
-    setOpen(false);
-    scrollToSection(e, "/#contact");
-  };
-
   return (
     <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 will-change-transform">
       <div
@@ -151,13 +143,12 @@ export function Navbar() {
               >
                 {t("nav.docs")}
               </Link>
-              <Link
-                href="/#contact"
-                onClick={onCtaClick}
+              <a
+                href={CONTACT.demoHref}
                 className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
               >
                 {t("nav.cta")}
-              </Link>
+              </a>
               <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
@@ -209,13 +200,13 @@ export function Navbar() {
               </Link>
               <div className="mt-3 flex items-center justify-between px-3">
                 <LanguageToggle />
-                <Link
-                  href="/#contact"
-                  onClick={onCtaClick}
+                <a
+                  href={CONTACT.demoHref}
+                  onClick={() => setOpen(false)}
                   className="btn btn-primary h-9 px-4 py-0 text-sm"
                 >
                   {t("nav.cta")}
-                </Link>
+                </a>
               </div>
             </div>
           </Container>

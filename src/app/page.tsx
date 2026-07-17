@@ -5,7 +5,6 @@ import { Story } from "@/components/sections/Story";
 import { Film } from "@/components/sections/Film";
 import { Pillars } from "@/components/sections/Pillars";
 import { Faq } from "@/components/sections/Faq";
-import { CTA } from "@/components/sections/CTA";
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
         <Film />
         <Pillars />
         <Faq />
-        <CTA />
       </main>
       <Footer />
     </>

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Pricing } from "@/components/sections/Pricing";
-import { CTA } from "@/components/sections/CTA";
 
 export const metadata: Metadata = {
   title: "Цени",
@@ -16,7 +15,6 @@ export default function PricingPage() {
       <Navbar />
       <main>
         <Pricing />
-        <CTA />
       </main>
       <Footer />
     </>

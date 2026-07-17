@@ -3,7 +3,7 @@
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { asset } from "@/lib/asset";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
-import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
+import { ScreenshotFrame } from "@/components/ui/ScreenshotFrame";
 
 interface Problem {
   qLead: string;
@@ -14,10 +14,9 @@ interface Problem {
 
 /**
  * "Какви проблеми решава" in two mirrored halves (layout after the
- * owner's reference, 2026-07-17): the problems list with an image slot
- * on the left, then the solutions list with an image slot on the
- * right. The slots are drafted empty frames awaiting the owner's
- * images — swap the <ImageSlot /> for an <Image /> when they arrive.
+ * owner's reference, 2026-07-17): the problems list beside the owner's
+ * real pre-Wolf desk photo, then the solutions list beside the Wolf
+ * Orders screen — the same practice's work, now in the software.
  */
 export function Pillars() {
   const t = useT();
@@ -44,14 +43,14 @@ export function Pillars() {
         {/* ---- Part 1: the problems — image left, list right ---- */}
         <div className="mt-14 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* The owner's real desk, pre-Wolf. Faces, screen content and
-              document text are pixelated in the source file itself. */}
+              document text are blurred in the source file itself. */}
           <figure className="relative overflow-hidden rounded-xl border">
             <img
               src={asset("/photos/desk-before.jpg")}
               alt={t("pillars.photoAlt")}
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"
-              style={{ objectPosition: "50% 42%" }}
+              style={{ objectPosition: "50% 40%" }}
             />
             <figcaption
               className="absolute bottom-2.5 left-2.5 rounded-full px-3 py-1.5 font-mono text-[10px] tracking-wide text-ink-300"
@@ -131,36 +130,14 @@ export function Pillars() {
               ))}
             </ul>
           </div>
-          <ImageSlot />
+          {/* The same practice's work, now inside Wolf. */}
+          <ScreenshotFrame
+            slot="OrdersScreen"
+            title="Wolf — Поръчки"
+            alt={t("pillars.shotAlt")}
+          />
         </div>
       </Container>
     </Section>
-  );
-}
-
-/**
- * Reserved space for the owner's images: a drafted empty frame in the
- * site's survey grammar. Desktop-only until real images land, so
- * mobile doesn't scroll past two empty boxes.
- */
-function ImageSlot() {
-  return (
-    <div
-      aria-hidden
-      className="relative hidden aspect-[4/3] overflow-hidden rounded-xl border lg:block"
-      style={{
-        background: "color-mix(in srgb, var(--color-ink-850) 65%, transparent)",
-      }}
-    >
-      <CornerMarks className="text-ink-500" />
-      <div
-        className="absolute inset-0 mm-grid opacity-40"
-        style={{
-          maskImage: "radial-gradient(80% 80% at 50% 50%, black 0%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(80% 80% at 50% 50%, black 0%, transparent 75%)",
-        }}
-      />
-    </div>
   );
 }

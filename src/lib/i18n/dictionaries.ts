@@ -65,6 +65,7 @@ const bg = {
       "Работно бюро преди Wolf — купчини документи, разпечатки и ръчни бележки около монитора",
     photoNote:
       "Текстът на документите и снимките са замъглени от съображения за поверителност",
+    shotAlt: "Екранът „Поръчки“ в Wolf — всяка поръчка със статус, плащане и изпълнител",
     problems: [
       {
         qLead: "Кой по какво работи",
@@ -507,6 +508,7 @@ const en: typeof bg = {
       "A working desk before Wolf — piles of documents, printouts and handwritten notes around the monitor",
     photoNote:
       "Document text and photos are blurred for privacy",
+    shotAlt: "The Orders screen in Wolf — every order with its status, payment and assignee",
     problems: [
       {
         qLead: "Who is working on what",

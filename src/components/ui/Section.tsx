@@ -38,7 +38,7 @@ export function Section({
     <section
       id={id}
       data-hud={hud}
-      className={`relative scroll-mt-24 py-24 sm:py-28 lg:py-36 ${className}`}
+      className={`relative scroll-mt-24 py-12 sm:py-14 lg:py-20 ${className}`}
     >
       {children}
     </section>

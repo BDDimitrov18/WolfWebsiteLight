@@ -42,7 +42,6 @@ const bg = {
     lead: "Wolf събира поръчките, имотите, документите за собственост, фактурите и задачите на практиката на едно място — и целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
     ctaSecondary: "Към видеото",
-    note: "Изградено за проектантски практики в България.",
     docChips: [
       { title: "Проект № 2418", meta: "Имот 68134.905.211" },
       { title: "Проект № 2431", meta: "Имот 68134.902.77" },
@@ -476,7 +475,6 @@ const en: typeof bg = {
     lead: "Wolf brings your orders, properties, ownership documents, invoices and tasks into one place — and the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
     ctaSecondary: "Watch the video",
-    note: "Built for design practices in Bulgaria.",
     docChips: [
       { title: "Project No. 2418", meta: "Plot 68134.905.211" },
       { title: "Project No. 2431", meta: "Plot 68134.902.77" },

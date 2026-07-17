@@ -125,10 +125,6 @@ export function Hero() {
               </Link>
             </Magnetic>
           </div>
-
-          <p data-hero-intro className="intro-hide mt-6 text-sm text-ink-300">
-            {t("hero.note")}
-          </p>
         </div>
       </Container>
     </section>

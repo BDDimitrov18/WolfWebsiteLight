@@ -57,26 +57,26 @@ const bg = {
   },
   pillars: {
     eyebrow: "Защо Wolf",
-    title: "Какви проблеми решаваме",
+    title: "Какви проблеми решава",
     problems: [
       {
-        q: "Кой по какво работи — и кой колко е свършил?",
+        q: "Кой по какво работи и колко е свършил",
         a: "Всяка задача има изпълнител. Работата е обща, задачите — лични, а месечната справка показва приноса на всеки служител.",
       },
       {
-        q: "Неразплатени суми се губят с месеци.",
+        q: "Неразплатени суми се губят с месеци",
         a: "Всяка поръчка носи статус на плащане — платено, аванс или неплатено — и неплатеното излиза с един филтър, преди да се е изгубило.",
       },
       {
-        q: "Информацията е пръсната по папки, файлове и глави.",
+        q: "Информацията е пръсната по папки, файлове и глави",
         a: "Поръчки, имоти, документи за собственост, клиенти и фактури живеят на едно място и са свързани помежду си — както са свързани и в действителност.",
       },
       {
-        q: "Двама души по една поръчка си пречат.",
+        q: "Двама души по една поръчка си пречат",
         a: "Целият екип работи едновременно: промяната на колегата се появява на екрана ви в мига, в който е направена, без взаимно презаписване.",
       },
       {
-        q: "Справките за счетоводителя отнемат часове.",
+        q: "Справките за счетоводителя отнемат часове",
         a: "Финансовите и оперативните справки излизат директно като .xlsx файлове, а фактурите — като готов PDF.",
       },
     ],
@@ -469,26 +469,26 @@ const en: typeof bg = {
   },
   pillars: {
     eyebrow: "Why Wolf",
-    title: "The problems we solve",
+    title: "The problems Wolf solves",
     problems: [
       {
-        q: "Who is working on what — and who has done how much?",
+        q: "Who is working on what, and how much they have done",
         a: "Every task has an assignee. The work is shared, the tasks are personal, and the monthly report shows each person's contribution.",
       },
       {
-        q: "Unpaid amounts slip away for months.",
+        q: "Unpaid amounts slip away for months",
         a: "Every order carries a payment status — paid, advance or unpaid — and the unpaid ones surface with a single filter, before they get lost.",
       },
       {
-        q: "Information is scattered across folders, files and heads.",
+        q: "Information is scattered across folders, files and heads",
         a: "Orders, plots, ownership documents, clients and invoices live in one place, linked to each other the way they are linked in reality.",
       },
       {
-        q: "Two people on one order get in each other's way.",
+        q: "Two people on one order get in each other's way",
         a: "The whole team works at once: a colleague's change appears on your screen the moment it is made, with no overwriting.",
       },
       {
-        q: "Reports for the accountant take hours.",
+        q: "Reports for the accountant take hours",
         a: "Financial and operational reports come out directly as .xlsx files, and invoices as a finished PDF.",
       },
     ],

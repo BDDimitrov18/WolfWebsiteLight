@@ -35,30 +35,28 @@ export function Pillars() {
       <Container className="relative">
         <SheetHeader label={t("pillars.eyebrow")} title={t("pillars.title")} />
 
-        <div className="mt-12 max-w-5xl border-t">
+        {/* Bold lead + dash + explanation, flowing as one line — the
+            benefit-list grammar, without cards or icons. */}
+        <ul className="mt-12 max-w-3xl space-y-7">
           {problems.map((p, i) => (
-            <div
-              key={p.q}
-              className="grid gap-3 border-b py-7 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14"
-            >
-              <div className="flex items-baseline gap-4">
-                <span className="flex-none font-mono text-xs text-ember-400">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-lg leading-snug text-paper-50">{p.q}</h3>
-              </div>
+            <li key={p.q} className="flex items-baseline gap-4">
+              <span className="flex-none font-mono text-xs text-ember-400">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <p
-                className="pl-8 leading-relaxed lg:pl-0"
+                className="leading-relaxed"
                 style={{
                   color:
                     "color-mix(in srgb, var(--color-paper-100) 82%, transparent)",
                 }}
               >
+                <strong className="font-semibold text-paper-50">{p.q}</strong>
+                {" — "}
                 {p.a}
               </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </Container>
     </Section>
   );

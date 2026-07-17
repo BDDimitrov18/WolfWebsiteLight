@@ -48,10 +48,6 @@ const bg = {
     leadMark: "целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
     ctaSecondary: "Към видеото",
-    docChips: [
-      { title: "Проект № 2418", meta: "Имот 68134.905.211" },
-      { title: "Проект № 2431", meta: "Имот 68134.902.77" },
-    ],
   },
   story: {
     eyebrow: "Историята",
@@ -473,10 +469,6 @@ const en: typeof bg = {
     leadMark: "the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
     ctaSecondary: "Watch the video",
-    docChips: [
-      { title: "Project No. 2418", meta: "Plot 68134.905.211" },
-      { title: "Project No. 2431", meta: "Plot 68134.902.77" },
-    ],
   },
   story: {
     eyebrow: "The story",

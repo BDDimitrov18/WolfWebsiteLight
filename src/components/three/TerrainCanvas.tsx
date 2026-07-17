@@ -1,7 +1,6 @@
 "use client";
 
 import { lazy, Suspense, useSyncExternalStore } from "react";
-import type { DocLabel } from "./TerrainScene";
 
 /**
  * Client-only, code-split loader for the Three.js hero scene — three.js
@@ -11,13 +10,7 @@ const TerrainScene = lazy(() => import("./TerrainScene"));
 
 const emptySubscribe = () => () => {};
 
-export function TerrainCanvas({
-  className = "",
-  docLabels,
-}: {
-  className?: string;
-  docLabels?: DocLabel[];
-}) {
+export function TerrainCanvas({ className = "" }: { className?: string }) {
   // false during SSR/first paint, true once hydrated on the client
   const mounted = useSyncExternalStore(
     emptySubscribe,
@@ -27,7 +20,7 @@ export function TerrainCanvas({
   if (!mounted) return null;
   return (
     <Suspense fallback={null}>
-      <TerrainScene className={className} docLabels={docLabels} />
+      <TerrainScene className={className} />
     </Suspense>
   );
 }

@@ -116,63 +116,6 @@ function makePointTexture(): THREE.Texture {
   return tex;
 }
 
-export interface DocLabel {
-  title: string;
-  meta: string;
-}
-
-const DEFAULT_LABELS: DocLabel[] = [
-  { title: "Проект № 2418", meta: "Имот 68134.905.211" },
-  { title: "Проект № 2431", meta: "Имот 68134.902.77" },
-];
-
-/**
- * Small project card pinned to a parcel: project + number on top, the
- * plot it concerns at the bottom, sealed — how Wolf ties work to land.
- */
-function makeDocTexture(label: DocLabel): THREE.Texture {
-  const c = document.createElement("canvas");
-  c.width = 320;
-  c.height = 240;
-  const ctx = c.getContext("2d")!;
-  ctx.beginPath();
-  if (typeof ctx.roundRect === "function") ctx.roundRect(6, 6, 308, 228, 24);
-  else ctx.rect(6, 6, 308, 228);
-  ctx.fillStyle = "rgba(11,16,27,0.86)";
-  ctx.fill();
-  ctx.strokeStyle = "rgba(237,154,87,0.55)";
-  ctx.lineWidth = 4;
-  ctx.stroke();
-  // project + number
-  ctx.fillStyle = "rgba(237,154,87,0.95)";
-  ctx.font = '600 26px "IBM Plex Mono", monospace';
-  ctx.fillText(label.title.toUpperCase(), 36, 70);
-  // hairline
-  ctx.fillStyle = "rgba(237,154,87,0.25)";
-  ctx.fillRect(36, 90, 248, 2);
-  // one abstract body line
-  ctx.fillStyle = "rgba(160,172,196,0.35)";
-  ctx.fillRect(36, 122, 172, 8);
-  // the plot the project concerns, at the bottom
-  ctx.fillStyle = "rgba(247,242,234,0.78)";
-  ctx.font = '400 23px "IBM Plex Sans", sans-serif';
-  ctx.fillText(label.meta, 36, 202);
-  // ember seal with check
-  ctx.beginPath();
-  ctx.arc(268, 158, 20, 0, Math.PI * 2);
-  ctx.strokeStyle = "rgba(237,154,87,0.85)";
-  ctx.lineWidth = 4;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(258, 158);
-  ctx.lineTo(265, 165);
-  ctx.lineTo(279, 150);
-  ctx.stroke();
-  const tex = new THREE.CanvasTexture(c);
-  tex.needsUpdate = true;
-  return tex;
-}
-
 // A cadastral parcel: jittered lattice cell with its centroid.
 interface Parcel {
   corners: [number, number][]; // [x, z] in draw order
@@ -229,33 +172,8 @@ function parcelOutline(p: Parcel, lift: number): number[] {
   return out;
 }
 
-export default function TerrainScene({
-  className = "",
-  docLabels,
-}: {
-  className?: string;
-  docLabels?: DocLabel[];
-}) {
+export default function TerrainScene({ className = "" }: { className?: string }) {
   const hostRef = useRef<HTMLDivElement>(null);
-  // Labels flow in from the locale; the scene reads them via refs so a
-  // language switch retextures the chips without rebuilding the scene.
-  const labelsRef = useRef<DocLabel[] | undefined>(docLabels);
-  const chipMatsRef = useRef<THREE.SpriteMaterial[]>([]);
-  const appliedKeyRef = useRef("");
-
-  const labelsKey = JSON.stringify(docLabels ?? []);
-  useEffect(() => {
-    labelsRef.current = docLabels;
-    if (!chipMatsRef.current.length || labelsKey === appliedKeyRef.current) return;
-    appliedKeyRef.current = labelsKey;
-    chipMatsRef.current.forEach((mat, i) => {
-      const label = labelsRef.current?.[i] ?? DEFAULT_LABELS[i];
-      if (!label) return;
-      const old = mat.map;
-      mat.map = makeDocTexture(label);
-      old?.dispose();
-    });
-  }, [docLabels, labelsKey]);
 
   useEffect(() => {
     const host = hostRef.current;
@@ -389,7 +307,7 @@ export default function TerrainScene({
     // ---- Cadastral parcels: the land, subdivided ----
     const parcels = buildParcels();
 
-    // Three parcels carry the product story: boundary lit, document attached.
+    // Three parcels carry the product story: boundary lit, faintly filled.
     // Anchors match actual (jittered) centroids that project inside the
     // above-the-fold viewport: lower-left, right flank, bottom-center.
     const featuredAt: [number, number][] = mobile
@@ -399,40 +317,6 @@ export default function TerrainScene({
           [13, -22],
           [2, -15],
         ];
-    // The chips flank the copy at the far left and right screen edges,
-    // mid-height. Screen placement is what matters, so their world
-    // anchors are solved against the actual camera and viewport aspect
-    // rather than hardcoded: unproject the target NDC point and walk the
-    // ray to the mid-field plane (same depth as the original design,
-    // which keeps their apparent size).
-    const CHIP_W = 2.1;
-    const CHIP_H = 1.58;
-    const CHIP_PLANE_Z = -6;
-    const CHIP_NDC_Y = -0.08; // just below vertical center
-    camera.lookAt(0, 1.2, -14);
-    camera.updateMatrixWorld();
-    camera.matrixWorldInverse.copy(camera.matrixWorld).invert();
-    const anchorAt = (ndcX: number): [number, number, number] => {
-      const dir = new THREE.Vector3(ndcX, CHIP_NDC_Y, 0.5)
-        .unproject(camera)
-        .sub(camera.position)
-        .normalize();
-      const k = (CHIP_PLANE_Z - camera.position.z) / dir.z;
-      return [
-        camera.position.x + dir.x * k,
-        camera.position.y + dir.y * k,
-        CHIP_PLANE_Z,
-      ];
-    };
-    // Edge inset that keeps the whole card on-screen with a margin —
-    // narrower viewports pull it in automatically.
-    const probeDepth = -new THREE.Vector3(...anchorAt(0)).applyMatrix4(
-      camera.matrixWorldInverse,
-    ).z;
-    const halfWidthNdc =
-      CHIP_W / 2 / (probeDepth * Math.tan(THREE.MathUtils.degToRad(55 / 2)) * camera.aspect);
-    const edgeX = Math.min(0.84, 1 - halfWidthNdc - 0.06);
-    const chipAnchors: [number, number, number][] = [anchorAt(-edgeX), anchorAt(edgeX)];
     const featured = featuredAt
       .map((q) => {
         let best: Parcel | null = null;
@@ -464,22 +348,16 @@ export default function TerrainScene({
     scene.add(new THREE.LineSegments(quietGeo, quietMat));
 
     // Featured parcels: own material (pulsed by the scan) + faint ember fill
-    const chipsEnabled = !mobile;
     interface Marker {
       cx: number;
       lineMat: THREE.LineBasicMaterial;
       fillMat: THREE.MeshBasicMaterial;
-      leaderMat: THREE.LineBasicMaterial | null;
-      leaderGeo: THREE.BufferGeometry | null;
-      sprite: THREE.Sprite | null;
-      baseY: number;
-      phase: number;
       pulse: number;
     }
     const markers: Marker[] = [];
     const featuredDisposables: (THREE.BufferGeometry | THREE.Material | THREE.Texture)[] = [];
 
-    featured.forEach((p, idx) => {
+    featured.forEach((p) => {
       const lineGeo = new THREE.BufferGeometry();
       lineGeo.setAttribute(
         "position",
@@ -529,59 +407,8 @@ export default function TerrainScene({
       scene.add(new THREE.Mesh(fillGeo, fillMat));
       featuredDisposables.push(lineGeo, lineMat, fillGeo, fillMat);
 
-      // Document chip on a slanted cartographic leader line (desktop only,
-      // first two parcels only).
-      let sprite: THREE.Sprite | null = null;
-      let leaderMat: THREE.LineBasicMaterial | null = null;
-      let leaderGeo: THREE.BufferGeometry | null = null;
-      const groundY = terrainHeight(p.cx, p.cz);
-      const [chipX, baseY, chipZ] = chipAnchors[idx] ?? [p.cx, groundY + 2, p.cz];
-      if (chipsEnabled && idx < chipAnchors.length) {
-        const label = labelsRef.current?.[idx] ?? DEFAULT_LABELS[idx] ?? DEFAULT_LABELS[0];
-        const spriteMat = new THREE.SpriteMaterial({
-          map: makeDocTexture(label),
-          transparent: true,
-          opacity: 0.62,
-          depthWrite: false,
-          fog: false, // keep the ember/ink colors true at depth
-        });
-        sprite = new THREE.Sprite(spriteMat);
-        sprite.scale.set(CHIP_W, CHIP_H, 1);
-        sprite.position.set(chipX, baseY, chipZ);
-        scene.add(sprite);
-        chipMatsRef.current.push(spriteMat);
-
-        leaderGeo = new THREE.BufferGeometry();
-        leaderGeo.setAttribute(
-          "position",
-          new THREE.Float32BufferAttribute(
-            [p.cx, groundY + 0.1, p.cz, chipX, baseY - CHIP_H * 0.65, chipZ],
-            3,
-          ),
-        );
-        leaderMat = new THREE.LineBasicMaterial({
-          color: tint.ember,
-          transparent: true,
-          opacity: 0.32,
-          blending: THREE.AdditiveBlending,
-        });
-        scene.add(new THREE.Line(leaderGeo, leaderMat));
-        featuredDisposables.push(spriteMat, leaderGeo, leaderMat);
-      }
-
-      markers.push({
-        cx: p.cx,
-        lineMat,
-        fillMat,
-        leaderMat,
-        leaderGeo,
-        sprite,
-        baseY,
-        phase: idx * 2.4,
-        pulse: 0,
-      });
+      markers.push({ cx: p.cx, lineMat, fillMat, pulse: 0 });
     });
-    appliedKeyRef.current = JSON.stringify(labelsRef.current ?? []);
 
     const updateScan = (t: number) => {
       // sweep x across the terrain every 11s, with a soft in/out
@@ -606,7 +433,6 @@ export default function TerrainScene({
         m.pulse += (target - m.pulse) * 0.12; // ease so the flare decays softly
         m.lineMat.opacity = 0.5 + m.pulse * 0.45;
         m.fillMat.opacity = 0.05 + m.pulse * 0.1;
-        if (m.leaderMat) m.leaderMat.opacity = 0.4 + m.pulse * 0.35;
       }
     };
 
@@ -637,20 +463,6 @@ export default function TerrainScene({
         (5.4 + Math.sin(t * 0.22) * 0.25 - target.y * 0.9 - camera.position.y) * 0.03;
       camera.lookAt(0, 1.2, -14);
       emberMat.opacity = 0.75 + Math.sin(t * 1.7) * 0.2;
-      // document chips bob like the hero's floating UI chips;
-      // their leader lines stay pinned to the card edge
-      for (const m of markers) {
-        if (!m.sprite) continue;
-        m.sprite.position.y = m.baseY + Math.sin(t * 0.8 + m.phase) * 0.12;
-        const s = 1 + m.pulse * 0.08;
-        m.sprite.scale.set(CHIP_W * s, CHIP_H * s, 1);
-        (m.sprite.material as THREE.SpriteMaterial).opacity = 0.62 + m.pulse * 0.28;
-        if (m.leaderGeo) {
-          const lp = m.leaderGeo.attributes.position as THREE.BufferAttribute;
-          lp.setY(1, m.sprite.position.y - CHIP_H * 0.65 * s);
-          lp.needsUpdate = true;
-        }
-      }
       renderer.render(scene, camera);
     };
 
@@ -722,8 +534,6 @@ export default function TerrainScene({
       quietGeo.dispose();
       quietMat.dispose();
       for (const d of featuredDisposables) d.dispose();
-      for (const mat of chipMatsRef.current) mat.map?.dispose();
-      chipMatsRef.current = [];
       pointTex.dispose();
       renderer.dispose();
       host.removeChild(renderer.domElement);

@@ -11,7 +11,6 @@ import { Container } from "@/components/ui/Section";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { TerrainCanvas } from "@/components/three/TerrainCanvas";
-import type { DocLabel } from "@/components/three/TerrainScene";
 import { ContourLines } from "@/components/motifs/GeodesyMotifs";
 
 /**
@@ -58,7 +57,7 @@ export function Hero() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* SVG contours: also the no-WebGL fallback */}
         <ContourLines className="absolute -top-1/4 left-1/2 h-[140%] w-[140%] -translate-x-1/2 text-ink-500 opacity-30" />
-        <TerrainCanvas docLabels={t<DocLabel[]>("hero.docChips")} />
+        <TerrainCanvas />
         {/* radial ember glow behind the headline */}
         <div
           className="absolute left-1/2 top-[16%] h-[42rem] w-[42rem] -translate-x-1/2 rounded-full opacity-50 blur-3xl"

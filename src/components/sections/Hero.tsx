@@ -72,12 +72,11 @@ export function Hero() {
 
       {/* ---- Viewport plate ---- */}
       <Container className="relative flex min-h-[100svh] flex-col justify-center pb-24 pt-28">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-5xl text-center">
           <p
             data-hero-intro
             className="intro-hide eyebrow mb-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 px-2 text-[0.6rem] sm:text-[0.78rem]"
           >
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-ember-500" />
             {t("hero.eyebrow")}
           </p>
 
@@ -87,13 +86,15 @@ export function Hero() {
             mode="load"
             delay={0.12}
             className="text-balance font-display"
-            style={{ fontSize: "var(--fs-display)", color: "var(--color-paper-50)" }}
+            // A step below --fs-display: the two-line headline is long
+            // enough that the full display size would wrap each line.
+            style={{
+              fontSize: "clamp(2rem, 0.9rem + 3.1vw, 3.7rem)",
+              color: "var(--color-paper-50)",
+            }}
           >
             <span className="block">{t("hero.titleA")}</span>
             <span className="block text-ink-300">{t("hero.titleB")}</span>
-            <span className="block italic" style={{ color: "var(--color-ember-400)" }}>
-              {t("hero.titleC")}
-            </span>
           </SplitHeading>
 
           <p

@@ -38,9 +38,8 @@ const bg = {
   },
   hero: {
     eyebrow: "Система за управление на проектантска практика",
-    titleA: "Цялата ви практика",
-    titleB: "в една система —",
-    titleC: "в реално време.",
+    titleA: "Цялата ви проектантска практика",
+    titleB: "— в единна софтуерна система",
     lead: "Wolf събира поръчките, имотите, документите за собственост, фактурите и задачите на практиката на едно място — и целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
     ctaSecondary: "Към видеото",
@@ -473,9 +472,8 @@ const en: typeof bg = {
   },
   hero: {
     eyebrow: "Design practice management system",
-    titleA: "Your whole practice",
-    titleB: "in one system —",
-    titleC: "in real time.",
+    titleA: "Your whole design practice",
+    titleB: "— in one unified software system",
     lead: "Wolf brings your orders, properties, ownership documents, invoices and tasks into one place — and the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
     ctaSecondary: "Watch the video",

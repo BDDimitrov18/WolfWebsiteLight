@@ -47,7 +47,7 @@ const bg = {
     ctaSecondary: "Към видеото",
     hookA:
       "Всеки може да използва Ексел, хвърчащи листи за организация и аларми за напомняне.",
-    hookB: "Организационната система Wolf е следващото ниво.",
+    hookB: "Организационната система Wolf решава този и още много проблеми.",
   },
   story: {
     eyebrow: "Историята",
@@ -462,7 +462,7 @@ const en: typeof bg = {
     ctaSecondary: "Watch the video",
     hookA:
       "Anyone can get by with Excel, loose paper sheets and reminder alarms.",
-    hookB: "The Wolf organizational system is the next level.",
+    hookB: "The Wolf organizational system solves this and many more problems.",
   },
   story: {
     eyebrow: "The story",

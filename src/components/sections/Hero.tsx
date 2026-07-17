@@ -1,58 +1,25 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { gsap } from "@/lib/gsap";
-import { useLocale, useT } from "@/lib/i18n/LocaleProvider";
+import { useT } from "@/lib/i18n/LocaleProvider";
 import { scrollToSection } from "@/lib/sectionScroll";
 import { CONTACT } from "@/lib/contact";
-import { useExperience } from "@/components/providers/ExperienceProvider";
 import { Container } from "@/components/ui/Section";
-import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { TerrainCanvas } from "@/components/three/TerrainCanvas";
 import { ContourLines } from "@/components/motifs/GeodesyMotifs";
 
 /**
- * Full-viewport hero over the living-survey terrain. The headline plots
- * itself in via SplitText once the preloader hands off; supporting copy
- * follows in a staggered rise. Product imagery starts with the film and
- * real screenshots further down — the hero stays pure statement.
+ * Hero over the living-survey terrain. All copy renders statically —
+ * load animations were removed (owner request, 2026-07-17). Product
+ * imagery starts with the film further down; the hero stays pure
+ * statement.
  */
 export function Hero() {
   const t = useT();
-  const { locale } = useLocale();
-  const { ready } = useExperience();
-  const rootRef = useRef<HTMLElement>(null);
-
-  // ---- Intro choreography (supporting elements) -------------------------
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root || !ready) return;
-    const els = Array.from(root.querySelectorAll<HTMLElement>("[data-hero-intro]"));
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      els.forEach((el) => el.classList.remove("intro-hide"));
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      els.forEach((el) => el.classList.remove("intro-hide"));
-      gsap.set(els, { autoAlpha: 0, y: 26 });
-      gsap.to(els, {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1.2,
-        ease: "expo.out",
-        stagger: 0.09,
-        delay: 0.55,
-      });
-    }, root);
-    return () => ctx.revert();
-  }, [ready]);
 
   return (
-    <section ref={rootRef} data-hud={t("nav.product")} className="relative overflow-hidden">
+    <section data-hud={t("nav.product")} className="relative overflow-hidden">
       {/* ---- Living survey background ---- */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* SVG contours: also the no-WebGL fallback */}
@@ -73,11 +40,7 @@ export function Hero() {
       {/* ---- Viewport plate ---- */}
       <Container className="relative flex min-h-[86svh] flex-col justify-center pb-14 pt-28">
         <div className="mx-auto max-w-5xl text-center">
-          <SplitHeading
-            key={`title-${locale}`}
-            as="h1"
-            mode="load"
-            delay={0.12}
+          <h1
             // The old eyebrow's grammar promoted to the headline: mono,
             // uppercase, tracked. Mono glyphs are a fixed 0.6em advance,
             // so the size cap is solved from the longer line's character
@@ -100,22 +63,16 @@ export function Hero() {
               <U>{t("hero.titleBMark")}</U>
               {t("hero.titleBPost")}
             </span>
-          </SplitHeading>
+          </h1>
 
-          <p
-            data-hero-intro
-            className="intro-hide mx-auto mt-7 max-w-2xl text-pretty lead"
-          >
+          <p className="mx-auto mt-7 max-w-2xl text-pretty lead">
             {t("hero.hookA")}{" "}
             <strong className="font-semibold text-paper-50">
               {t("hero.hookB")}
             </strong>
           </p>
 
-          <div
-            data-hero-intro
-            className="intro-hide mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
-          >
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Magnetic className="w-full sm:w-auto">
               <a href={CONTACT.demoHref} className="btn btn-primary w-full sm:w-auto">
                 {t("hero.ctaPrimary")}

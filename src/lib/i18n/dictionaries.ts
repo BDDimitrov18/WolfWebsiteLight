@@ -319,7 +319,7 @@ const bg = {
   },
   faq: {
     eyebrow: "Въпроси и отговори",
-    title: "Каквото бихте попитали на демонстрацията",
+    title: "Отговори на въпросите, които си задавате",
     items: [
       {
         q: "Как да видя системата, преди да реша?",
@@ -734,7 +734,7 @@ const en: typeof bg = {
   },
   faq: {
     eyebrow: "Questions & answers",
-    title: "What you would ask at the demo",
+    title: "Answers to the questions on your mind",
     items: [
       {
         q: "How do I see the system before deciding?",

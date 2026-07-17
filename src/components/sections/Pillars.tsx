@@ -21,7 +21,8 @@ export function Pillars() {
   const problems = t<Problem[]>("pillars.problems");
 
   return (
-    <Section id="why" hud={t("pillars.eyebrow")} className="relative overflow-hidden">
+    // pt override: sit tight under the film player.
+    <Section id="why" hud={t("pillars.eyebrow")} className="relative overflow-hidden pt-6! lg:pt-8!">
       {/* Millimeter grid along the sheet's left margin, fading out well
           before the section seams */}
       <div

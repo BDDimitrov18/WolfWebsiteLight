@@ -27,7 +27,8 @@ export function Film() {
   };
 
   return (
-    <Section id="film" hud={t("film.eyebrow")} className="relative">
+    // pb override: "Защо Wolf" starts just below the player.
+    <Section id="film" hud={t("film.eyebrow")} className="relative pb-6! lg:pb-8!">
       <Container>
         <SheetHeader label={t("film.eyebrow")} title={t("film.title")} />
 

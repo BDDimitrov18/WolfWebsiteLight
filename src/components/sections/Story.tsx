@@ -54,7 +54,7 @@ export function Story() {
             >
               {t("story.body")}
             </p>
-            <p className="mt-8 border-t pt-6 font-display text-xl italic text-paper-50">
+            <p className="mt-8 border-t pt-6 font-display text-lg text-paper-50">
               {t("story.closer")}
             </p>
           </Reveal>

@@ -115,8 +115,9 @@ export function SectionHeading({
         key={`sh-${locale}`}
         as="h2"
         mode="scroll"
-        className="text-balance"
-        style={{ fontSize: "var(--fs-h2)", color: headColor }}
+        // Uppercase + tracked, echoing the hero headline's grammar.
+        className="text-balance uppercase"
+        style={{ fontSize: "var(--fs-h2)", letterSpacing: "0.04em", color: headColor }}
       >
         {title}
       </SplitHeading>

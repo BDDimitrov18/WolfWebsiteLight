@@ -43,9 +43,6 @@ const bg = {
     titleBPre: "— в ",
     titleBMark: "единна софтуерна система",
     titleBPost: "",
-    leadPre:
-      "Wolf събира поръчките, имотите, документите за собственост, фактурите и задачите на практиката на едно място — и ",
-    leadMark: "целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
     ctaSecondary: "Към видеото",
     hookA:
@@ -467,9 +464,6 @@ const en: typeof bg = {
     titleBPre: "— in one ",
     titleBMark: "unified software system",
     titleBPost: "",
-    leadPre:
-      "Wolf brings your orders, properties, ownership documents, invoices and tasks into one place — and ",
-    leadMark: "the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
     ctaSecondary: "Watch the video",
     hookA:

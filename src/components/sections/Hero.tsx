@@ -106,8 +106,10 @@ export function Hero() {
             data-hero-intro
             className="intro-hide mx-auto mt-7 max-w-2xl text-pretty lead"
           >
-            {t("hero.leadPre")}
-            <U>{t("hero.leadMark")}</U>
+            {t("hero.hookA")}{" "}
+            <strong className="font-semibold text-paper-50">
+              {t("hero.hookB")}
+            </strong>
           </p>
 
           <div
@@ -130,15 +132,6 @@ export function Hero() {
               </Link>
             </Magnetic>
           </div>
-
-          {/* The hook — why "another tool" isn't the same thing. */}
-          <p
-            data-hero-intro
-            className="intro-hide mx-auto mt-12 max-w-2xl text-pretty leading-relaxed text-ink-300"
-          >
-            {t("hero.hookA")}{" "}
-            <span className="text-paper-50">{t("hero.hookB")}</span>
-          </p>
         </div>
       </Container>
     </section>

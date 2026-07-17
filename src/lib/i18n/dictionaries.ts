@@ -57,41 +57,34 @@ const bg = {
   },
   pillars: {
     eyebrow: "Защо Wolf",
-    title: "Специализирана, не обща CRM система",
-    subtitle:
-      "Wolf покрива основата, която всяка система дава — клиенти, поръчки, фактури и справки — и добавя специфичното за проектантската практика: имоти и документи за собственост, свързани с работата така, както са свързани в действителност.",
-    featured: {
-      title: "Всеки отчита своята работа",
-      body: "Wolf съчетава безпроблемно екипната работа с личната отчетност: целият екип работи по общи поръчки, без приносът на отделния човек да се губи в общото. Структурата поръчка → дейност → задача с изпълнител го прави естествено — работата е обща, задачите са лични, а разпределението на ресурсите стъпва на обективна основа.",
-      points: [
-        "Всеки служител отбелязва личния си приоритет по поръчките",
-        "Месечна справка по служител в Excel",
-        "Дневник кой какво е променил и кога",
-      ],
-    },
-    items: [
+    title: "Какви проблеми решаваме",
+    problems: [
       {
-        title: "Целият екип, по една поръчка",
-        body: "Няколко души работят едновременно по един проект — дори по една и съща дейност. Промяната на колегата се появява на вашия екран в мига, в който е направена, а системата пази от взаимно презаписване.",
+        q: "Кой по какво работи — и кой колко е свършил?",
+        a: "Всяка задача има изпълнител. Работата е обща, задачите — лични, а месечната справка показва приноса на всеки служител.",
       },
       {
-        title: "Без чакане",
-        body: "Търсене, филтри и списъци реагират мигновено — дори с хиляди поръчки, имоти и задачи.",
+        q: "Неразплатени суми се губят с месеци.",
+        a: "Всяка поръчка носи статус на плащане — платено, аванс или неплатено — и неплатеното излиза с един филтър, преди да се е изгубило.",
       },
       {
-        title: "Грижи се сам за себе си",
-        body: "Обикновено Windows приложение: инсталира се за минути и се обновява автоматично при нова версия.",
+        q: "Информацията е пръсната по папки, файлове и глави.",
+        a: "Поръчки, имоти, документи за собственост, клиенти и фактури живеят на едно място и са свързани помежду си — както са свързани и в действителност.",
       },
       {
-        title: "Справки, готови за счетоводителя",
-        body: "Финансовите и оперативните справки излизат директно като .xlsx файлове — отварят се навсякъде, без инсталиран Office. Фактурите излизат като готов PDF.",
+        q: "Двама души по една поръчка си пречат.",
+        a: "Целият екип работи едновременно: промяната на колегата се появява на екрана ви в мига, в който е направена, без взаимно презаписване.",
+      },
+      {
+        q: "Справките за счетоводителя отнемат часове.",
+        a: "Финансовите и оперативните справки излизат директно като .xlsx файлове, а фактурите — като готов PDF.",
       },
     ],
   },
   film: {
-    eyebrow: "Филмът",
+    eyebrow: "Видео",
     title: "Възможностите на Wolf — за три минути",
-    play: "Пусни филма",
+    play: "Пусни видеото",
     caption: "Демонстрация на възможностите · анимирана · 3:26",
   },
   features: {
@@ -476,41 +469,34 @@ const en: typeof bg = {
   },
   pillars: {
     eyebrow: "Why Wolf",
-    title: "A specialized system, not a generic CRM",
-    subtitle:
-      "Wolf covers the base every system gives you — clients, orders, invoices and reports — and adds what is specific to a design practice: properties and ownership documents, linked to the work the way they are linked in reality.",
-    featured: {
-      title: "Every person accounts for their own work",
-      body: "Wolf seamlessly combines teamwork with individual accountability: the whole team works on shared orders, without anyone's contribution getting lost in the whole. The order → activity → task structure, each task with its owner, makes it natural — the work is shared, the tasks are personal, and resource allocation rests on an objective basis.",
-      points: [
-        "Each person marks their own priority on orders",
-        "Monthly per-employee report in Excel",
-        "A log of who changed what, and when",
-      ],
-    },
-    items: [
+    title: "The problems we solve",
+    problems: [
       {
-        title: "The whole team, on one order",
-        body: "Several people work on the same project at once — even on the same activity. A colleague's change appears on your screen the moment it's made, and the system protects you from overwriting each other.",
+        q: "Who is working on what — and who has done how much?",
+        a: "Every task has an assignee. The work is shared, the tasks are personal, and the monthly report shows each person's contribution.",
       },
       {
-        title: "No waiting",
-        body: "Search, filters and lists respond instantly — even with thousands of orders, plots and tasks.",
+        q: "Unpaid amounts slip away for months.",
+        a: "Every order carries a payment status — paid, advance or unpaid — and the unpaid ones surface with a single filter, before they get lost.",
       },
       {
-        title: "Takes care of itself",
-        body: "A plain Windows application: installs in minutes and updates itself whenever a new version ships.",
+        q: "Information is scattered across folders, files and heads.",
+        a: "Orders, plots, ownership documents, clients and invoices live in one place, linked to each other the way they are linked in reality.",
       },
       {
-        title: "Reports your accountant can open",
-        body: "Financial and operational reports come out as ready .xlsx files — they open anywhere, no Office install needed. Invoices come out as a finished PDF.",
+        q: "Two people on one order get in each other's way.",
+        a: "The whole team works at once: a colleague's change appears on your screen the moment it is made, with no overwriting.",
+      },
+      {
+        q: "Reports for the accountant take hours.",
+        a: "Financial and operational reports come out directly as .xlsx files, and invoices as a finished PDF.",
       },
     ],
   },
   film: {
-    eyebrow: "The film",
+    eyebrow: "Video",
     title: "Wolf's capabilities — in three minutes",
-    play: "Play the film",
+    play: "Play the video",
     caption: "A functionality showcase · motion-designed · 3:26",
   },
   features: {

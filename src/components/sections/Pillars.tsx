@@ -6,7 +6,8 @@ import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
 interface Problem {
   q: string;
-  a: string;
+  aLead: string;
+  aRest: string;
 }
 
 /**
@@ -89,7 +90,11 @@ export function Pillars() {
                         "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
                     }}
                   >
-                    {p.a}
+                    <strong className="font-semibold text-paper-50">
+                      {p.aLead}
+                    </strong>
+                    {" — "}
+                    {p.aRest}
                   </p>
                 </li>
               ))}

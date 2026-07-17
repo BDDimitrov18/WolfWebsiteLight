@@ -64,23 +64,39 @@ const bg = {
     problems: [
       {
         q: "Кой по какво работи и колко е свършил",
-        a: "Всяка задача има изпълнител. Работата е обща, задачите — лични, а месечната справка показва приноса на всеки служител.",
+        aLead: "Всяка задача има изпълнител",
+        aRest:
+          "работата е обща, задачите — лични, а месечната справка показва приноса на всеки служител.",
       },
       {
         q: "Неразплатени суми се губят с месеци",
-        a: "Всяка поръчка носи статус на плащане — платено, аванс или неплатено — и неплатеното излиза с един филтър, преди да се е изгубило.",
+        aLead: "Статус на плащане на всяка поръчка",
+        aRest:
+          "платено, аванс или неплатено — неплатеното излиза с един филтър, преди да се е изгубило.",
       },
       {
         q: "Информацията е пръсната по папки, файлове и глави",
-        a: "Поръчки, имоти, документи за собственост, клиенти и фактури живеят на едно място и са свързани помежду си — както са свързани и в действителност.",
+        aLead: "Всичко на едно място",
+        aRest:
+          "поръчки, клиенти, фактури и задачи, свързани помежду си — както са свързани и в действителност.",
       },
       {
         q: "Двама души по една поръчка си пречат",
-        a: "Целият екип работи едновременно: промяната на колегата се появява на екрана ви в мига, в който е направена, без взаимно презаписване.",
+        aLead: "Целият екип работи едновременно",
+        aRest:
+          "промяната на колегата се появява на екрана ви в мига, в който е направена, без взаимно презаписване.",
       },
       {
         q: "Справките за счетоводителя отнемат часове",
-        a: "Финансовите и оперативните справки излизат директно като .xlsx файлове, а фактурите — като готов PDF.",
+        aLead: "Справки с един клик",
+        aRest:
+          "финансовите и оперативните излизат директно като .xlsx файлове, а фактурите — като готов PDF.",
+      },
+      {
+        q: "Липса на специализирани модули за проектантски данни",
+        aLead: "Създадена за проектантската практика",
+        aRest:
+          "имоти, документи за собственост и вериги на собственост, свързани с поръчките така, както са свързани в действителност.",
       },
     ],
   },
@@ -479,23 +495,39 @@ const en: typeof bg = {
     problems: [
       {
         q: "Who is working on what, and how much they have done",
-        a: "Every task has an assignee. The work is shared, the tasks are personal, and the monthly report shows each person's contribution.",
+        aLead: "Every task has an assignee",
+        aRest:
+          "the work is shared, the tasks are personal, and the monthly report shows each person's contribution.",
       },
       {
         q: "Unpaid amounts slip away for months",
-        a: "Every order carries a payment status — paid, advance or unpaid — and the unpaid ones surface with a single filter, before they get lost.",
+        aLead: "A payment status on every order",
+        aRest:
+          "paid, advance or unpaid — the unpaid ones surface with a single filter, before they get lost.",
       },
       {
         q: "Information is scattered across folders, files and heads",
-        a: "Orders, plots, ownership documents, clients and invoices live in one place, linked to each other the way they are linked in reality.",
+        aLead: "Everything in one place",
+        aRest:
+          "orders, clients, invoices and tasks, linked to each other the way they are linked in reality.",
       },
       {
         q: "Two people on one order get in each other's way",
-        a: "The whole team works at once: a colleague's change appears on your screen the moment it is made, with no overwriting.",
+        aLead: "The whole team works at once",
+        aRest:
+          "a colleague's change appears on your screen the moment it is made, with no overwriting.",
       },
       {
         q: "Reports for the accountant take hours",
-        a: "Financial and operational reports come out directly as .xlsx files, and invoices as a finished PDF.",
+        aLead: "Reports in one click",
+        aRest:
+          "financial and operational ones come out directly as .xlsx files, and invoices as a finished PDF.",
+      },
+      {
+        q: "No specialized modules for design-practice data",
+        aLead: "Built for the design practice",
+        aRest:
+          "plots, ownership documents and title chains, linked to the orders the way they are linked in reality.",
       },
     ],
   },

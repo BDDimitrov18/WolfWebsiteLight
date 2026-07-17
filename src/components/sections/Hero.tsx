@@ -7,7 +7,6 @@ import { useLocale, useT } from "@/lib/i18n/LocaleProvider";
 import { scrollToSection } from "@/lib/sectionScroll";
 import { useExperience } from "@/components/providers/ExperienceProvider";
 import { Container } from "@/components/ui/Section";
-import { ScreenshotFrame } from "@/components/ui/ScreenshotFrame";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { TerrainCanvas } from "@/components/three/TerrainCanvas";
@@ -17,15 +16,14 @@ import { ContourLines } from "@/components/motifs/GeodesyMotifs";
 /**
  * Full-viewport hero over the living-survey terrain. The headline plots
  * itself in via SplitText once the preloader hands off; supporting copy
- * follows in a staggered rise; the product frame parallax-drifts as you
- * scroll into the page.
+ * follows in a staggered rise. Product imagery starts with the film and
+ * real screenshots further down — the hero stays pure statement.
  */
 export function Hero() {
   const t = useT();
   const { locale } = useLocale();
   const { ready } = useExperience();
   const rootRef = useRef<HTMLElement>(null);
-  const shotRef = useRef<HTMLDivElement>(null);
 
   // ---- Intro choreography (supporting elements) -------------------------
   useEffect(() => {
@@ -52,37 +50,6 @@ export function Hero() {
     }, root);
     return () => ctx.revert();
   }, [ready]);
-
-  // ---- Scroll parallax on the product frame + chip bob -------------------
-  useEffect(() => {
-    const root = rootRef.current;
-    const shot = shotRef.current;
-    if (!root || !shot) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const ctx = gsap.context(() => {
-      gsap.to(shot, {
-        y: -64,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-      gsap.utils.toArray<HTMLElement>("[data-hero-chip]").forEach((chip, i) => {
-        gsap.to(chip, {
-          y: i % 2 ? 9 : -9,
-          duration: 3 + i,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
 
   return (
     <section ref={rootRef} data-hud={t("nav.product")} className="relative overflow-hidden">
@@ -152,8 +119,8 @@ export function Hero() {
             </Magnetic>
             <Magnetic className="w-full sm:w-auto">
               <Link
-                href="/#features"
-                onClick={(e) => scrollToSection(e, "/#features")}
+                href="/#film"
+                onClick={(e) => scrollToSection(e, "/#film")}
                 className="btn btn-ghost w-full sm:w-auto"
               >
                 {t("hero.ctaSecondary")}
@@ -166,42 +133,7 @@ export function Hero() {
           </p>
         </div>
       </Container>
-
-      {/* ---- Product frame with floating data chips ---- */}
-      <Container className="relative pb-24">
-        <div ref={shotRef} data-hero-intro className="intro-hide relative mx-auto max-w-5xl">
-          <ScreenshotFrame
-            slot="OrdersScreen"
-            alt={t("features.items.orders.title")}
-            title="Wolf — Поръчки"
-            preload
-          />
-          <Chip data-side="left" className="-left-3 top-10 sm:-left-8" label={t("hero.floatA")} />
-          <Chip data-side="right" className="-right-3 bottom-10 sm:-right-8" label={t("hero.floatB")} />
-          {/* The product reveal needs a sentence of context */}
-          <p className="mx-auto mt-5 max-w-xl text-center text-sm leading-relaxed text-ink-300">
-            {t("hero.shotCaption")}
-          </p>
-        </div>
-      </Container>
     </section>
-  );
-}
-
-function Chip({ label, className = "" }: { label: string; className?: string }) {
-  return (
-    <div
-      data-hero-chip
-      className={`absolute hidden items-center gap-2 rounded-full border px-4 py-2 backdrop-blur-md sm:flex ${className}`}
-      style={{
-        borderColor: "color-mix(in srgb, var(--color-ember-400) 40%, transparent)",
-        background: "color-mix(in srgb, var(--color-ink-900) 78%, transparent)",
-        boxShadow: "var(--shadow-ambient)",
-      }}
-    >
-      <span className="h-2 w-2 rounded-full bg-ember-500" />
-      <span className="font-mono text-xs tracking-wide text-paper-100">{label}</span>
-    </div>
   );
 }
 

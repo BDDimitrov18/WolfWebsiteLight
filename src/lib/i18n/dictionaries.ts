@@ -43,16 +43,12 @@ const bg = {
     titleC: "в реално време.",
     lead: "Wolf събира поръчките, имотите, документите за собственост, фактурите и задачите на практиката на едно място — и целият екип вижда всяка промяна в мига, в който се случи.",
     ctaPrimary: "Заявете демо",
-    ctaSecondary: "Разгледайте възможностите",
+    ctaSecondary: "Към видеото",
     note: "Изградено за проектантски практики в България.",
-    floatA: "Поръчка → дейности → задачи",
-    floatB: "Имот → документ → собственик",
     docChips: [
       { title: "Проект № 2418", meta: "Имот 68134.905.211" },
       { title: "Проект № 2431", meta: "Имот 68134.902.77" },
     ],
-    shotCaption:
-      "Екранът „Поръчки“ в Wolf — всяка поръчка на практиката със статус, плащане и срокове (данните са примерни). Кликнете, за да го разгледате отблизо.",
   },
   story: {
     eyebrow: "Историята",
@@ -482,16 +478,12 @@ const en: typeof bg = {
     titleC: "in real time.",
     lead: "Wolf brings your orders, properties, ownership documents, invoices and tasks into one place — and the whole team sees every change the moment it happens.",
     ctaPrimary: "Book a demo",
-    ctaSecondary: "Explore the features",
+    ctaSecondary: "Watch the video",
     note: "Built for design practices in Bulgaria.",
-    floatA: "Order → activities → tasks",
-    floatB: "Plot → document → owner",
     docChips: [
       { title: "Project No. 2418", meta: "Plot 68134.905.211" },
       { title: "Project No. 2431", meta: "Plot 68134.902.77" },
     ],
-    shotCaption:
-      "The Orders screen in Wolf — every order in the practice with its status, payment and deadlines (sample data). Click to take a closer look.",
   },
   story: {
     eyebrow: "The story",

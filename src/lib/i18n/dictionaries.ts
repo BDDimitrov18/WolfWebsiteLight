@@ -91,8 +91,6 @@ const bg = {
   film: {
     eyebrow: "Филмът",
     title: "Възможностите на Wolf — за три минути",
-    subtitle:
-      "Кратка демонстрация на възможностите на системата. Филмът е анимиран, а интерфейсът в него е опростен за прегледност. Снимки на реалния интерфейс са показани на страница „Функционалности“.",
     play: "Пусни филма",
     caption: "Демонстрация на възможностите · анимирана · 3:26",
   },
@@ -512,8 +510,6 @@ const en: typeof bg = {
   film: {
     eyebrow: "The film",
     title: "Wolf's capabilities — in three minutes",
-    subtitle:
-      "A short showcase of what the system can do. The film is motion-designed, with an interface simplified for watchability; on-screen text is in Bulgarian. Screenshots of the real interface are on the Features page.",
     play: "Play the film",
     caption: "A functionality showcase · motion-designed · 3:26",
   },

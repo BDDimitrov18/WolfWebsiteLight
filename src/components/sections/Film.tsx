@@ -29,11 +29,7 @@ export function Film() {
   return (
     <Section id="film" hud={t("film.eyebrow")} className="relative">
       <Container>
-        <SheetHeader
-          label={t("film.eyebrow")}
-          title={t("film.title")}
-          subtitle={t("film.subtitle")}
-        />
+        <SheetHeader label={t("film.eyebrow")} title={t("film.title")} />
 
         <figure
           className="relative mt-12 overflow-hidden rounded-xl border"

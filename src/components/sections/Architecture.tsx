@@ -69,7 +69,7 @@ export function Architecture() {
       <div ref={rootRef} className="contents">
         {/* xl only: at lg the net would run under the subtitle text */}
         <div data-draw aria-hidden className="pointer-events-none absolute right-0 top-10 hidden xl:block">
-          <TriangulationField className="h-96 w-96 text-ember-500/30" />
+          <TriangulationField className="h-96 w-96 text-steel-500/35" />
         </div>
 
         <Container className="relative">
@@ -94,7 +94,7 @@ export function Architecture() {
                     <span className="font-mono text-xs tracking-wider text-ember-400">
                       0{i + 1}
                     </span>
-                    <span className="border border-ember-500/30 bg-ember-500/10 px-2.5 py-1 font-mono text-[11px] tracking-wide text-ember-300">
+                    <span className="border border-steel-500/35 bg-steel-500/10 px-2.5 py-1 font-mono text-[11px] tracking-wide text-steel-300">
                       {layer.tech}
                     </span>
                   </div>
@@ -112,7 +112,7 @@ export function Architecture() {
                     // sits ON the divider, so its fill must match the section ground
                     <span
                       aria-hidden
-                      className="absolute -right-[4.5px] top-1/2 z-10 hidden h-2 w-2 -translate-y-1/2 rotate-45 border border-ember-500 bg-ink-950 lg:block"
+                      className="absolute -right-[4.5px] top-1/2 z-10 hidden h-2 w-2 -translate-y-1/2 rotate-45 border border-steel-400 bg-ink-950 lg:block"
                     />
                   )}
                 </article>

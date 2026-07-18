@@ -60,6 +60,13 @@
   --font-display: var(--font-plex-mono), ui-monospace, monospace;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
+  /* ---- Cool informational accent ------------------------------
+     Steel: reserved for diagrams and technical labels only. Never
+     on actions — ember stays the sole "act here" color. */
+  --color-steel-300: #a9cddb;
+  --color-steel-400: #7fb3c8;
+  --color-steel-500: #5891a8;
+
   /* ---- Type scale eyebrow -------------------------------- */
   --text-eyebrow: 0.78rem;
 

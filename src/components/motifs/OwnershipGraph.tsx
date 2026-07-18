@@ -186,7 +186,7 @@ export function OwnershipGraph({
           key={`p${i}`}
           data-pulse
           d={d}
-          stroke="var(--color-ember-400)"
+          stroke="var(--color-steel-400)"
           strokeWidth="1.8"
           strokeLinecap="round"
         />
@@ -205,14 +205,14 @@ export function OwnershipGraph({
             strokeWidth="1"
           />
           {n.root && (
-            <rect x={n.x} y={n.y} width={3} height={n.h} fill="var(--color-ember-500)" />
+            <rect x={n.x} y={n.y} width={3} height={n.h} fill="var(--color-steel-400)" />
           )}
           <text
             x={n.x + 14}
             y={n.y + 20}
             fontSize="8.6"
             letterSpacing="1"
-            fill="var(--color-ember-400)"
+            fill="var(--color-steel-300)"
             style={{ fontFamily: "var(--font-mono)", textTransform: "uppercase" }}
           >
             {n.eyebrow}

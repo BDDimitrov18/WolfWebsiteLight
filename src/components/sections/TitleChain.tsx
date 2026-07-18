@@ -59,7 +59,7 @@ export function TitleChain() {
             <figure>
               {/* the marks frame the drawing only, not the caption under it */}
               <div className="relative">
-                <CornerMarks className="text-ember-500/70" inset={-9} />
+                <CornerMarks className="text-steel-500/70" inset={-9} />
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 mm-grid"

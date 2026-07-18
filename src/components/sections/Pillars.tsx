@@ -45,9 +45,11 @@ export function Pillars() {
           {/* The owner's real desk, pre-Wolf. Faces, screen content and
               document text are blurred in the source file itself. */}
           <figure className="relative overflow-hidden rounded-xl border">
+            {/* Largest served variant is 1200px — the slot renders at
+                most 580 CSS px, so 2x retina is fully covered. */}
             <img
-              src={asset("/photos/desk-before.webp?v=4")}
-              srcSet={`${asset("/photos/desk-before-640.webp?v=4")} 640w, ${asset("/photos/desk-before.webp?v=4")} 1500w`}
+              src={asset("/photos/desk-before-1200.webp?v=5")}
+              srcSet={`${asset("/photos/desk-before-640.webp?v=5")} 640w, ${asset("/photos/desk-before-960.webp?v=5")} 960w, ${asset("/photos/desk-before-1200.webp?v=5")} 1200w`}
               sizes="(max-width: 1024px) 92vw, 580px"
               alt={t("pillars.photoAlt")}
               loading="lazy"

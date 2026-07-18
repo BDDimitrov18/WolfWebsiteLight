@@ -55,6 +55,12 @@ const bg = {
     eyebrow: "Историята",
     title: "Създадена в една реална практика",
     body: "Wolf започна в семейната ни проектантска практика — със задача всеки в екипа да отчита работата си и всяка поръчка да се вижда, от възлагането до плащането. Две години системата работи всеки ден и се усъвършенства по заявките на хората, които я ползват — докато всяко действие стане бързо и естествено. За това време направи приноса на всеки видим и неведнъж откри неразплатени суми, които иначе щяха да се изгубят.",
+    numbersLabel: "Измерено в практиката · юли 2026",
+    numbers: [
+      { n: "2", label: "години ежедневна употреба" },
+      { n: "1300+", label: "поръчки, водени в системата" },
+      { n: "6", label: "души работят в нея днес" },
+    ],
     closer: "Wolf не е построена по спецификация, а по нуждите на едно работещо бюро.",
   },
   pillars: {
@@ -652,6 +658,12 @@ const en: typeof bg = {
     eyebrow: "The story",
     title: "Built inside a working practice",
     body: "Wolf began in our family's design practice — with one task: every person accounts for their own work, and every order is visible from commission to payment. For two years the system has run daily, refined at the request of the people who use it — until every action became quick and natural. In that time it made each person's contribution measurable and more than once caught unpaid sums that would otherwise have slipped away.",
+    numbersLabel: "Measured in the practice · July 2026",
+    numbers: [
+      { n: "2", label: "years of daily use" },
+      { n: "1300+", label: "orders managed in the system" },
+      { n: "6", label: "people working in it today" },
+    ],
     closer: "Wolf wasn't built to a specification — it was built around the needs of a working office.",
   },
   pillars: {

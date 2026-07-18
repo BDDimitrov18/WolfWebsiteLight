@@ -54,6 +54,44 @@ export function Story() {
             >
               {t("story.body")}
             </p>
+
+            {/* The record of the install the story describes — set as a
+                dated instrument reading in the sheet's mono register
+                (owner-attested numbers, 2026-07-19), NOT stat cards:
+                the owner explicitly banned boxes twice. */}
+            <div className="mt-8">
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-300">
+                {t("story.numbersLabel")}
+              </p>
+              <p className="mt-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+                {t<{ n: string; label: string }[]>("story.numbers").map(
+                  (item, i) => (
+                    <span key={item.label} className="flex items-baseline gap-x-3">
+                      {i > 0 && (
+                        <span aria-hidden className="font-mono text-ink-400">
+                          ·
+                        </span>
+                      )}
+                      <span className="flex items-baseline gap-x-1.5">
+                        <span className="font-mono text-xl text-ember-400">
+                          {item.n}
+                        </span>
+                        <span
+                          className="text-base"
+                          style={{
+                            color:
+                              "color-mix(in srgb, var(--color-paper-100) 82%, transparent)",
+                          }}
+                        >
+                          {item.label}
+                        </span>
+                      </span>
+                    </span>
+                  ),
+                )}
+              </p>
+            </div>
+
             <p className="mt-8 border-t pt-6 font-display text-lg text-paper-50">
               {t("story.closer")}
             </p>

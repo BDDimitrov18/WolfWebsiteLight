@@ -519,3 +519,11 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
       ⚠️ OWNER TO CONFIRM: trial wording, migration-help promise, backup
       promise, lapse behaviour ("app keeps working without updates" is
       implied), Windows 10+ requirement.
+
+14. **Trust numbers in the Story band (2026-07-19).** Owner's statement,
+    verbatim from chat: "2 years use 1300+ orders, currently 6 users in
+    the firm". Rendered as a dated instrument-reading line („Измерено в
+    практиката · юли 2026") inside Story — deliberately NOT stat cards:
+    the owner explicitly banned "generic boxes". The 2-years claim was
+    already owner-attested in item „Origin story". Update the date label
+    and numbers only on the owner's word.

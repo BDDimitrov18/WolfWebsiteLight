@@ -46,6 +46,7 @@ export function Footer() {
     {
       title: t("footer.company"),
       links: [
+        { href: "/about", label: t("nav.about") },
         { href: "/demo", label: t("footer.links.demo") },
         { href: CONTACT.phoneHref, label: CONTACT.phoneDisplay, external: true },
         { href: `mailto:${CONTACT.email}`, label: CONTACT.email, external: true },

@@ -98,8 +98,9 @@ export function Navbar() {
     label: string;
     children?: { href: string; label: string }[];
   }[] = [
-    // Checklist item 07's standard order: about before services.
-    { href: "/#about", label: t("nav.about") },
+    // Checklist item 07's standard order: home, about, then services.
+    { href: "/", label: t("nav.home") },
+    { href: "/about", label: t("nav.about") },
     {
       href: "/features",
       label: t("nav.features"),
@@ -136,8 +137,9 @@ export function Navbar() {
             <Logo />
 
             {/* Inline links from lg: at md the Bulgarian labels + CTA
-                overflow the 64px bar and wrap — tablets get the burger. */}
-            <div className="hidden items-center gap-8 lg:flex">
+                overflow the 64px bar and wrap — tablets get the burger.
+                gap-6 (not 8): six tabs must fit the capped container. */}
+            <div className="hidden items-center gap-6 lg:flex">
               {links.map((l) =>
                 l.children ? (
                   <div key={l.href} className="group relative">

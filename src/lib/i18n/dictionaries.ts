@@ -28,6 +28,7 @@ const bg = {
   },
   nav: {
     product: "Продукт",
+    home: "Начало",
     about: "За нас",
     features: "Обиколка на софтуера",
     featuresTour: "Всички екрани",
@@ -657,13 +658,16 @@ const en: typeof bg = {
   },
   nav: {
     product: "Product",
+    home: "Home",
     about: "About us",
     features: "Software tour",
     featuresTour: "All screens",
     module: "Specialized module",
     architecture: "How it works",
     pricing: "Pricing",
-    docs: "Docs",
+    // Full word, mirroring the Bulgarian „Документация" — the short
+    // "Docs" made the navbar jump in width on language switch.
+    docs: "Documentation",
     cta: "Book a demo meeting",
     menu: "Menu",
     close: "Close",

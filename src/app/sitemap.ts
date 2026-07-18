@@ -15,6 +15,7 @@ const BASE = process.env.PAGES_BASE_PATH || "";
 // Every indexable route; trailing slashes match `trailingSlash: true`.
 const ROUTES: Array<{ path: string; priority: number }> = [
   { path: "", priority: 1 },
+  { path: "about", priority: 0.7 },
   { path: "features", priority: 0.9 },
   { path: "module", priority: 0.8 },
   { path: "architecture", priority: 0.8 },

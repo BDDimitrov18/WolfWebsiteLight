@@ -1,88 +1,50 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import Link from "next/link";
 import { Container } from "@/components/ui/Section";
+import { Navbar } from "@/components/layout/Navbar";
 import { Logo } from "@/components/layout/Logo";
-import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { DocsSidebar } from "./DocsSidebar";
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { track } from "@/lib/track";
 
+/**
+ * Docs chrome. The header is the SAME <Navbar> as every other page —
+ * one navigation, zero drift between the site and the documentation
+ * (the old docs-only header had its own tab set and kept falling out
+ * of sync). Docs-specific chrome lives in a slim strip beneath it:
+ * the "/ Документация" location label and, on small screens, the
+ * contents-drawer trigger.
+ */
 export function DocsShell({ children }: { children: ReactNode }) {
   const t = useT();
   const [open, setOpen] = useState(false);
 
-  // Same tab row as the site navbar — every tab navigates to its own
-  // page. Документация is not a tab but the page you're on (the button
-  // next to the CTA).
-  const links = [
-    { href: "/features", label: t("nav.features") },
-    { href: "/module", label: t("nav.module") },
-    { href: "/architecture", label: t("nav.architecture") },
-    { href: "/pricing", label: t("nav.pricing") },
-  ];
-
   return (
-    <div className="min-h-screen bg-ink-900">
-      {/* Docs header */}
-      <header className="sticky top-0 z-40 border-b border-ink-700 bg-ink-950/85 backdrop-blur-md">
+    // pt-16 clears the fixed navbar.
+    <div className="min-h-screen bg-ink-900 pt-16">
+      <Navbar />
+
+      {/* Docs strip: where you are + the mobile contents trigger */}
+      <div className="border-b border-ink-700 bg-ink-950">
         <Container>
-          <div className="flex h-16 items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => setOpen((v) => !v)}
-                aria-label={t("nav.menu")}
-                aria-expanded={open}
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-ink-600 text-paper-100 lg:hidden"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
-                  <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
-                </svg>
-              </button>
-              <Logo />
-              {/* xl+: below that, the tab row needs the width more
-                  than the location label does. */}
-              <span className="hidden flex-none whitespace-nowrap font-mono text-xs uppercase tracking-[0.2em] text-ink-300 xl:inline">
-                / {t("docs.title")}
-              </span>
-            </div>
-            {/* xl+: at lg the Bulgarian tab labels overflow the capped
-                container; the docs sidebar carries navigation there. */}
-            <div className="hidden items-center gap-8 xl:flex">
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="nav-link whitespace-nowrap text-sm text-ink-300 transition-colors hover:text-paper-50"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-            <div className="flex items-center gap-3">
-              {/* Checklist item 08: clickable phone in every header */}
-              {/* No phone here, unlike the main navbar: with the
-                  "/ Документация" label and four tabs, the capped
-                  container (max-w-7xl) can't fit it at any width.
-                  The footer carries the contacts on docs pages. */}
-              <LanguageToggle />
-              {/* No self-referential „Документация" button here — the
-                  "/ Документация" label after the logo already places
-                  you, and the freed width keeps the row from
-                  squeezing the logo. */}
-              <Link
-                href="/demo"
-                onClick={() => track("cta_demo_click", { location: "docs" })}
-                className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
-              >
-                {t("nav.cta")}
-              </Link>
-            </div>
+          <div className="flex h-11 items-center justify-between">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-ink-300">
+              / {t("docs.title")}
+            </span>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label={t("nav.menu")}
+              className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-ink-300 transition-colors hover:text-paper-50 lg:hidden"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+                <path d="M4 6h16M4 12h16M4 18h16" strokeLinecap="round" />
+              </svg>
+              {t("nav.menu")}
+            </button>
           </div>
         </Container>
-      </header>
+      </div>
 
       <Container>
         <div className="flex gap-10 py-12">
@@ -93,7 +55,8 @@ export function DocsShell({ children }: { children: ReactNode }) {
             </div>
           </aside>
 
-          {/* Sidebar — mobile drawer */}
+          {/* Sidebar — mobile drawer (docs contents only: the site
+              menu lives in the navbar's own burger) */}
           {open && (
             <div className="fixed inset-0 z-50 lg:hidden">
               <div
@@ -112,19 +75,6 @@ export function DocsShell({ children }: { children: ReactNode }) {
                   >
                     ✕
                   </button>
-                </div>
-                {/* Site tabs first — same set as the homepage navbar */}
-                <div className="mb-6 flex flex-col gap-1 border-b pb-6">
-                  {links.map((l) => (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className="rounded-md px-3 py-2 text-sm text-ink-300 transition-colors hover:bg-ink-800 hover:text-paper-50"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
                 </div>
                 <DocsSidebar onNavigate={() => setOpen(false)} />
               </div>

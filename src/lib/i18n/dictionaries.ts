@@ -314,6 +314,7 @@ const bg = {
       "Автоматични обновления на всички работни места",
       "Одитен дневник на всяка промяна",
     ],
+    note: "За автоматично потвърждение на абонамента сървърът прави периодична изходяща HTTPS връзка към лицензионната услуга на Wolf и изпраща само технически данни за лиценза, не ваши данни. Ежедневната работа и данните остават във вашата мрежа. Безсрочният лиценз продължава да работи и без връзка след активиране.",
   },
   pricing: {
     eyebrow: "Цени",
@@ -368,7 +369,7 @@ const bg = {
     notes: [
       "Цените са в евро, без ДДС (20%).",
       "Месечната цена е крайна и важи за цялата практика — не се плаща на потребител.",
-      "Еднократният лиценз е за цялата практика. Годишната поддръжка (по избор, ~18% от лиценза) включва обновленията и съпорта.",
+      "Еднократният лиценз е за цялата практика и остава напълно работоспособен безсрочно, дори без връзка с лицензионната услуга. Годишната поддръжка (по избор, ~18% от лиценза) включва обновленията и съпорта.",
     ],
   },
   faq: {
@@ -388,12 +389,16 @@ const bg = {
         a: "На сървър, който вие контролирате — машина в офиса или в облака, по ваш избор. Базата данни е ваша от първия ден. Достъпът е с потребител и парола, правата се прилагат на сървърно ниво, а одитният журнал пази следа кой какво е променил.",
       },
       {
+        q: "Свързва ли се приложението с външен сървър?",
+        a: "Ежедневната работа е изцяло във вашата мрежа — поръчки, документи, фактури и вход не напускат вашия сървър. За автоматично потвърждение на абонамента вашият сървър прави периодична изходяща HTTPS връзка към лицензионната услуга на Wolf и изпраща само технически данни за лиценза, не ваши данни. Настолните приложения изобщо не се свързват с нея — само с вашия сървър. Безсрочният лиценз продължава да работи и без връзка след активиране.",
+      },
+      {
         q: "Прави ли системата резервни копия?",
         a: "Да — при внедряването се конфигурират автоматични резервни копия на базата данни на вашия сървър, така че информацията на практиката да е защитена и от техническа повреда.",
       },
       {
         q: "Какво става, ако спра абонамента?",
-        a: "Базата данни е при вас и остава ваша — не губите информацията си. При спрян абонамент спират обновленията и поддръжката. Ако предпочитате безсрочно ползване, има и еднократен лиценз.",
+        a: "Базата данни е при вас и остава ваша — не губите нищо. След края на платения период има 14 дни толеранс; след тях приложението минава в режим само за четене — виждате и отваряте всичко, но не можете да създавате, редактирате или изтривате, докато не подновите. Еднократният лиценз не е обвързан с това: закупената версия остава напълно работоспособна безсрочно, дори ако лицензионната услуга е временно или трайно недостъпна — спират само обновленията и поддръжката.",
       },
       {
         q: "Какви са техническите изисквания?",
@@ -783,6 +788,7 @@ const en: typeof bg = {
       "Automatic updates on every workstation",
       "An audit trail of every change",
     ],
+    note: "To confirm a subscription automatically, the server makes a periodic outbound HTTPS connection to the Wolf licensing service, sending only technical license metadata, not your data. Your day-to-day work and data stay on your network. A one-time license keeps working without a connection once activated.",
   },
   pricing: {
     eyebrow: "Pricing",
@@ -837,7 +843,7 @@ const en: typeof bg = {
     notes: [
       "Prices are in EUR, excluding VAT (20%).",
       "The monthly price is final and covers the whole practice — you never pay per user.",
-      "The one-time license covers the whole firm. Optional annual maintenance (~18% of the license) includes updates and support.",
+      "The one-time license covers the whole firm and keeps working indefinitely, even without a connection to the licensing service. Optional annual maintenance (~18% of the license) includes updates and support.",
     ],
   },
   faq: {
@@ -857,12 +863,16 @@ const en: typeof bg = {
         a: "On a server you control — a machine in your office or in the cloud, your choice. The database is yours from day one. Access is by username and password, rights are enforced at the server layer, and the audit log keeps a trail of who changed what.",
       },
       {
+        q: "Does the app connect to an external server?",
+        a: "Your day-to-day work is entirely on your network — orders, documents, invoices and sign-in never leave your server. To confirm a subscription automatically, your server makes a periodic outbound HTTPS connection to the Wolf licensing service, sending only technical license metadata, not your data. The desktop apps don't connect to it at all — only to your server. A one-time license keeps working without a connection once activated.",
+      },
+      {
         q: "Are there backups?",
         a: "Yes — automatic database backups are configured on your server during rollout, so the practice's information is protected against technical failure too.",
       },
       {
         q: "What happens if I stop the subscription?",
-        a: "The database is on your server and stays yours — you don't lose your information. A lapsed subscription stops updates and support. If you prefer indefinite use, there is also a one-time license.",
+        a: "Your database is on your server and stays yours — you lose nothing. After the paid period there is a 14-day grace window; after it the app switches to read-only — you can view and open everything, but can't create, edit or delete until you renew. The one-time license isn't tied to this: the purchased version stays fully functional indefinitely, even if the licensing service is temporarily or permanently unavailable — only updates and support stop.",
       },
       {
         q: "What are the technical requirements?",

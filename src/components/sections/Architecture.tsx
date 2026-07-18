@@ -139,6 +139,16 @@ export function Architecture() {
               ))}
             </ul>
           </Reveal>
+
+          {/* Honest licensing disclosure: the one outbound connection. */}
+          <Reveal className="mt-6" delay={0.1}>
+            <p
+              className="max-w-3xl text-xs leading-relaxed"
+              style={{ color: "color-mix(in srgb, var(--color-paper-100) 60%, transparent)" }}
+            >
+              {t("architecture.note")}
+            </p>
+          </Reveal>
         </Container>
       </div>
     </Section>

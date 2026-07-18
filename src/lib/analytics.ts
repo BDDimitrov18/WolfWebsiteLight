@@ -5,4 +5,4 @@
  * emitted at all (zero bytes shipped to visitors). Paste the real ID from
  * the GA4 property (Admin → Data streams → Web) to go live.
  */
-export const GA_ID = "";
+export const GA_ID = "G-13JBTSR7PQ";

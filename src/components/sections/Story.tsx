@@ -5,13 +5,17 @@ import { Container, Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
 /**
- * The origin story: the reason Wolf exists — told dry and concrete,
- * because it is the site's only trust device and has to carry the
- * weight testimonials would.
+ * The "about us" band: the real firm behind Wolf — Геопроект
+ * Приморско, three decades of surveying work told as a year-marked
+ * record (facts extracted from the firm's own website, VERIFICATION
+ * §15), ending in why Wolf exists: growth demanded order. This is
+ * the site's trust device and has to carry the weight testimonials
+ * would; the numbers line is the owner-attested instrument reading.
  *
  * Visually it is the first step down off the hero: the ink lifts a
  * half-stop to ink-850 and the band is closed top and bottom by
- * hairlines — a tonal step, not a change of ground.
+ * hairlines — a tonal step, not a change of ground. Deliberately no
+ * boxes/cards anywhere (owner's standing rule).
  */
 export function Story() {
   const t = useT();
@@ -52,7 +56,38 @@ export function Story() {
                   "color-mix(in srgb, var(--color-paper-100) 88%, transparent)",
               }}
             >
-              {t("story.body")}
+              {t("story.intro")}
+            </p>
+
+            {/* The firm's record, year by year — a genuine sequence,
+                so the year markers carry real information. */}
+            <ul className="mt-7 space-y-3.5">
+              {t<{ y: string; text: string }[]>("story.timeline").map((e) => (
+                <li key={e.y} className="flex items-baseline gap-4">
+                  <span className="flex-none font-mono text-sm text-ember-400">
+                    {e.y}
+                  </span>
+                  <p
+                    className="text-pretty leading-relaxed"
+                    style={{
+                      color:
+                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
+                    }}
+                  >
+                    {e.text}
+                  </p>
+                </li>
+              ))}
+            </ul>
+
+            <p
+              className="mt-7 text-pretty text-lg leading-relaxed"
+              style={{
+                color:
+                  "color-mix(in srgb, var(--color-paper-100) 88%, transparent)",
+              }}
+            >
+              {t("story.growth")}
             </p>
 
             {/* The record of the install the story describes — set as a

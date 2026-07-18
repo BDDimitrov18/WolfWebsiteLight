@@ -527,3 +527,18 @@ Everything else on the site is directly traceable to `PROJECT_OVERVIEW.md`.
     the owner explicitly banned "generic boxes". The 2-years claim was
     already owner-attested in item „Origin story". Update the date label
     and numbers only on the owner's word.
+
+15. **Company history in the „За нас" band (2026-07-19).** All facts
+    sourced from the firm's own public website (repo
+    BDDimitrov18/GeoproektWebsite, „за-нас" page snapshot dated
+    2022-01-26), at the owner's direction ("Extract the info from
+    there"): 1993 ЕТ „Петков – Дамян Димитров" (land restitution);
+    2005 „Геопроект Приморско" ЕООД, ръководител инж. Дамян Петков
+    (кадастър/регулация/устройствено планиране, Созопол-Приморско-
+    Царево); 2013-2019 АГКК specialised maps of 55+ beaches + digital
+    settlement models Chernomorets-Rezovo; 2016 photogrammetry/drones,
+    3D models of settlements and archaeological sites. The 2024 entry
+    (Wolf enters daily use) follows from the owner-attested "2 years
+    of daily use" (§14). The source page also lists "Напълно
+    оборудвани работни места – 6 бр." — consistent with the attested
+    6 users.

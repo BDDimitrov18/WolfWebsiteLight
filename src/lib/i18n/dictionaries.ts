@@ -52,9 +52,34 @@ const bg = {
     hookB: "Организационната система Wolf решава този и още много проблеми.",
   },
   story: {
-    eyebrow: "Историята",
-    title: "Създадена в една реална практика",
-    body: "Wolf започна в семейната ни проектантска практика — със задача всеки в екипа да отчита работата си и всяка поръчка да се вижда, от възлагането до плащането. Две години системата работи всеки ден и се усъвършенства по заявките на хората, които я ползват — докато всяко действие стане бързо и естествено. За това време направи приноса на всеки видим и неведнъж откри неразплатени суми, които иначе щяха да се изгубят.",
+    eyebrow: "За нас",
+    title: "Практиката зад Wolf",
+    intro:
+      "Wolf е създадена в „Геопроект Приморско“ ЕООД — геодезическата практика на семейството ни, която работи по Южното Черноморие вече повече от три десетилетия.",
+    timeline: [
+      {
+        y: "1993",
+        text: "Началото: ЕТ „Петков – Дамян Димитров“ възстановява земеделски земи и приключва планове за земеразделяне.",
+      },
+      {
+        y: "2005",
+        text: "Фирмата става „Геопроект Приморско“ ЕООД с ръководител инж. Дамян Петков — кадастър, регулация и устройствено планиране за общините Созопол, Приморско и Царево.",
+      },
+      {
+        y: "2013",
+        text: "По договори с АГКК — специализирани карти на над 55 плажа в България; цифрови модели на населените места от Черноморец до Резово.",
+      },
+      {
+        y: "2016",
+        text: "Инвестиция в цифрова фотограметрия: дронове, 3D модели на населени места и археологически обекти.",
+      },
+      {
+        y: "2024",
+        text: "Порасналата работа поиска ред: Wolf влиза в ежедневието на бюрото — всяка поръчка, имот, документ и плащане в една система.",
+      },
+    ],
+    growth:
+      "Три десетилетия работата само растеше — услуги, обекти, хора. Тетрадките, папките и таблиците спряха да смогват. Wolf е отговорът на едно просто желание: да растем, без да губим контрол.",
     numbersLabel: "Измерено в практиката · юли 2026",
     numbers: [
       { n: "2", label: "години ежедневна употреба" },
@@ -655,9 +680,34 @@ const en: typeof bg = {
     hookB: "The Wolf organizational system solves this and many more problems.",
   },
   story: {
-    eyebrow: "The story",
-    title: "Built inside a working practice",
-    body: "Wolf began in our family's design practice — with one task: every person accounts for their own work, and every order is visible from commission to payment. For two years the system has run daily, refined at the request of the people who use it — until every action became quick and natural. In that time it made each person's contribution measurable and more than once caught unpaid sums that would otherwise have slipped away.",
+    eyebrow: "About us",
+    title: "The practice behind Wolf",
+    intro:
+      "Wolf was built inside Geoproekt Primorsko Ltd — our family's surveying practice, working along Bulgaria's southern Black Sea coast for more than three decades.",
+    timeline: [
+      {
+        y: "1993",
+        text: "The beginning: the sole-trader firm “Petkov – Damyan Dimitrov” restores agricultural land and completes land-redistribution plans.",
+      },
+      {
+        y: "2005",
+        text: "The firm becomes Geoproekt Primorsko Ltd, led by eng. Damyan Petkov — cadastre, regulation and urban planning for the Sozopol, Primorsko and Tsarevo municipalities.",
+      },
+      {
+        y: "2013",
+        text: "Under contracts with the national Geodesy, Cartography and Cadastre Agency — specialised maps of 55+ beaches across Bulgaria; digital models of every settlement from Chernomorets to Rezovo.",
+      },
+      {
+        y: "2016",
+        text: "Investment in digital photogrammetry: drones, 3D models of settlements and archaeological sites.",
+      },
+      {
+        y: "2024",
+        text: "The grown workload demanded order: Wolf enters the office's daily routine — every order, property, document and payment in one system.",
+      },
+    ],
+    growth:
+      "Across three decades the work only grew — services, sites, people. The notebooks, folders and spreadsheets stopped keeping up. Wolf is the answer to a simple desire: to grow without losing control.",
     numbersLabel: "Measured in the practice · July 2026",
     numbers: [
       { n: "2", label: "years of daily use" },

@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { scrollToSection } from "@/lib/sectionScroll";
 import { CONTACT } from "@/lib/contact";
 import { Container } from "@/components/ui/Section";
-import { Magnetic } from "@/components/ui/Magnetic";
+import { InquiryModal } from "@/components/ui/InquiryModal";
 import { TerrainCanvas } from "@/components/three/TerrainCanvas";
 import { ContourLines } from "@/components/motifs/GeodesyMotifs";
 
@@ -17,6 +16,7 @@ import { ContourLines } from "@/components/motifs/GeodesyMotifs";
  */
 export function Hero() {
   const t = useT();
+  const [inquiryOpen, setInquiryOpen] = useState(false);
 
   return (
     <section data-hud={t("nav.product")} className="relative overflow-hidden">
@@ -73,22 +73,20 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Magnetic className="w-full sm:w-auto">
-              <a href={CONTACT.demoHref} className="btn btn-primary w-full sm:w-auto">
-                {t("hero.ctaPrimary")}
-                <Arrow />
-              </a>
-            </Magnetic>
-            <Magnetic className="w-full sm:w-auto">
-              <Link
-                href="/#film"
-                onClick={(e) => scrollToSection(e, "/#film")}
-                className="btn btn-ghost w-full sm:w-auto"
-              >
-                {t("hero.ctaSecondary")}
-              </Link>
-            </Magnetic>
+            <a href={CONTACT.demoHref} className="btn btn-primary w-full sm:w-auto">
+              {t("hero.ctaPrimary")}
+              <Arrow />
+            </a>
+            <button
+              type="button"
+              onClick={() => setInquiryOpen(true)}
+              className="btn btn-ghost w-full sm:w-auto"
+            >
+              {t("hero.ctaSecondary")}
+            </button>
           </div>
+
+          {inquiryOpen && <InquiryModal onClose={() => setInquiryOpen(false)} />}
         </div>
       </Container>
     </section>

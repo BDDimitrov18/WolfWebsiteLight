@@ -142,9 +142,9 @@ const bg = {
   },
   film: {
     eyebrow: "Видео",
-    title: "Wolf в действие — за 30 секунди",
+    title: "Възможностите на Wolf — за три минути",
     play: "Пусни видеото",
-    caption: "Демонстрация в реалния интерфейс · примерни данни · 0:32",
+    caption: "Представяне на модулите · примерни данни · 3:15",
   },
   features: {
     eyebrow: "Обиколка на продукта",
@@ -739,9 +739,9 @@ const en: typeof bg = {
   },
   film: {
     eyebrow: "Video",
-    title: "Wolf in action — in 30 seconds",
+    title: "Wolf's capabilities — in three minutes",
     play: "Play the video",
-    caption: "A demo in the real interface · sample data · 0:32",
+    caption: "A module-by-module showcase · sample data · 3:15",
   },
   features: {
     eyebrow: "Product tour",

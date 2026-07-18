@@ -7,11 +7,12 @@ import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
 /**
- * The product video — 0:32 screen demo in the REAL interface (sample
- * data): dashboard → orders → template builder → outro. Self-hosted
- * and strictly click-to-play: with preload="none" and a poster, not a
- * single video byte moves until the visitor asks for it, and no
- * third-party player gets to phone home.
+ * The product video — the 3:15 launch film: a module-by-module
+ * showcase (clients, owners, roles & rights…) ending on the WOLF
+ * logo outro. Self-hosted and strictly click-to-play: with
+ * preload="none" and a poster, not a single video byte moves until
+ * the visitor asks for it, and no third-party player gets to phone
+ * home.
  */
 export function Film() {
   const t = useT();
@@ -45,10 +46,10 @@ export function Film() {
           <div className="relative aspect-video w-full">
             <video
               ref={videoRef}
-              // v3: the 0:32 real-interface demo + orders-scene poster.
+              // v4: the 3:15 launch film + logo-outro poster.
               // Bump on re-render — same filenames, browsers cache old bytes.
-              src={asset("/video/wolf-launch.mp4?v=3")}
-              poster={asset("/video/wolf-launch-poster.jpg?v=3")}
+              src={asset("/video/wolf-launch.mp4?v=4")}
+              poster={asset("/video/wolf-launch-poster.jpg?v=4")}
               preload="none"
               playsInline
               controls={playing}
@@ -88,8 +89,8 @@ export function Film() {
                 </span>
                 {/* Stacked lines so the label centers exactly on the
                     button's axis — a trailing duration in the same row
-                    would push it sideways. Dark pill behind them: the
-                    poster is a light app screen, bare text drowns on it. */}
+                    would push it sideways. Dark pill behind them keeps
+                    the label legible on any poster frame. */}
                 <span
                   className="relative mt-5 flex flex-col items-center gap-1 rounded-lg px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-paper-50"
                   style={{
@@ -98,7 +99,7 @@ export function Film() {
                   }}
                 >
                   {t("film.play")}
-                  <span className="text-ink-300">0:32</span>
+                  <span className="text-ink-300">3:15</span>
                 </span>
               </button>
             )}

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
 import { ExperienceProvider } from "@/components/providers/ExperienceProvider";
+import { CookieConsent } from "@/components/ui/CookieConsent";
 import { asset } from "@/lib/asset";
 import { GA_ID } from "@/lib/analytics";
 
@@ -66,6 +66,16 @@ export default function RootLayout({
             __html: `document.documentElement.classList.add("js");`,
           }}
         />
+        {/* Google Consent Mode v2: everything denied by default, before
+            any Google script could run. The banner upgrades the state
+            only after an explicit choice. */}
+        {GA_ID ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});`,
+            }}
+          />
+        ) : null}
         {/* Resilience: if JS is disabled, scroll-reveal content (rendered
             with initial opacity:0) must still be visible. */}
         <noscript>
@@ -73,10 +83,12 @@ export default function RootLayout({
         </noscript>
         <LocaleProvider>
           <ExperienceProvider>{children}</ExperienceProvider>
+          {/* Banner + consent-gated GA live together — analytics can
+              only load through the visitor's explicit choice. */}
+          <CookieConsent />
         </LocaleProvider>
         <div aria-hidden className="grain-overlay" />
       </body>
-      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   );
 }

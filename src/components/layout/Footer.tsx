@@ -4,6 +4,9 @@ import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { CONTACT } from "@/lib/contact";
+import { GA_ID } from "@/lib/analytics";
+import { CALENDAR_URL } from "@/lib/booking";
+import { openConsentSettings } from "@/lib/consent";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { CompassRose } from "@/components/motifs/GeodesyMotifs";
@@ -112,6 +115,15 @@ export function Footer() {
             >
               {t("footer.links.privacy")}
             </Link>
+            {(GA_ID || CALENDAR_URL) && (
+              <button
+                type="button"
+                onClick={openConsentSettings}
+                className="text-xs text-ink-300 underline-offset-4 transition-colors hover:text-paper-50 hover:underline"
+              >
+                {t("footer.links.cookies")}
+              </button>
+            )}
             <p className="font-mono text-xs tracking-wide text-ink-300">
               {t("footer.version")}
             </p>

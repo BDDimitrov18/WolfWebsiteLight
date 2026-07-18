@@ -1,19 +1,42 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { CONTACT } from "@/lib/contact";
+import { CALENDAR_URL } from "@/lib/booking";
 import { Container, Section } from "@/components/ui/Section";
 
 /**
- * The demo-meeting request page (modeled on the owner's reference: a
- * reassuring "no obligation" pitch + a clear booking action). The
- * site is static, so instead of a third-party calendar embed — which
- * would need cookies and break the privacy story — the form composes
- * a pre-filled email and opens the visitor's mail program, exactly as
- * the privacy policy describes.
+ * The demo-meeting request page: reassuring "no obligation" pitch +
+ * the booking action. When CALENDAR_URL is configured, the primary
+ * action is a Google Calendar appointment embed — loaded ONLY after
+ * an explicit click (it sets Google cookies; the privacy policy
+ * documents this), with the email form as the fallback below. Until
+ * then, the form is the primary action.
  */
 export function DemoRequest() {
   const t = useT();
+  const [calOpen, setCalOpen] = useState(false);
+
+  // A visitor who already chose to load the calendar once shouldn't
+  // have to re-consent on every visit.
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot post-mount storage read, intentional
+      if (localStorage.getItem("wolf.calendar-ok") === "1") setCalOpen(true);
+    } catch {
+      /* storage unavailable */
+    }
+  }, []);
+
+  const loadCalendar = () => {
+    try {
+      localStorage.setItem("wolf.calendar-ok", "1");
+    } catch {
+      /* best effort */
+    }
+    setCalOpen(true);
+  };
   const muted = "color-mix(in srgb, var(--color-paper-100) 84%, transparent)";
   const inputCls =
     "w-full rounded-md border bg-ink-950 px-3 py-2.5 text-sm text-paper-50 placeholder:text-ink-400";
@@ -87,7 +110,74 @@ export function DemoRequest() {
             </div>
           </div>
 
-          {/* ---- The request form ---- */}
+          {/* ---- Booking: calendar when configured, else the form ---- */}
+          {CALENDAR_URL ? (
+            <div className="h-fit overflow-hidden rounded-xl border bg-ink-900 shadow-ambient">
+              {calOpen ? (
+                <iframe
+                  src={CALENDAR_URL}
+                  title={t("demoPage.calTitle")}
+                  className="h-[680px] w-full border-0 bg-white"
+                />
+              ) : (
+                <div className="flex min-h-[420px] flex-col items-center justify-center gap-5 p-8 text-center">
+                  <p className="font-mono text-xs uppercase tracking-[0.16em] text-ember-400">
+                    {t("demoPage.calTitle")}
+                  </p>
+                  <p
+                    className="max-w-sm text-sm leading-relaxed"
+                    style={{
+                      color: "color-mix(in srgb, var(--color-paper-100) 82%, transparent)",
+                    }}
+                  >
+                    {t("demoPage.calNote")}
+                  </p>
+                  <button type="button" onClick={loadCalendar} className="btn btn-primary">
+                    {t("demoPage.calLoad")}
+                  </button>
+                  <a
+                    href={CALENDAR_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm text-ink-300 underline underline-offset-4 transition-colors hover:text-paper-50"
+                  >
+                    {t("demoPage.calOpenTab")} ↗
+                  </a>
+                </div>
+              )}
+            </div>
+          ) : (
+            <DemoForm t={t} inputCls={inputCls} onSubmit={onSubmit} />
+          )}
+        </div>
+
+        {/* With the calendar as primary, the form stays available as
+            the email fallback. */}
+        {CALENDAR_URL ? (
+          <details className="mt-12">
+            <summary className="cursor-pointer font-mono text-sm uppercase tracking-[0.14em] text-ink-300 transition-colors hover:text-paper-50">
+              {t("demoPage.altForm")}
+            </summary>
+            <div className="mt-6 max-w-2xl">
+              <DemoForm t={t} inputCls={inputCls} onSubmit={onSubmit} />
+            </div>
+          </details>
+        ) : null}
+      </Container>
+    </Section>
+  );
+}
+
+function DemoForm({
+  t,
+  inputCls,
+  onSubmit,
+}: {
+  t: ReturnType<typeof useT>;
+  inputCls: string;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}) {
+  return (
           <form
             onSubmit={onSubmit}
             className="h-fit rounded-xl border bg-ink-900 p-6 shadow-ambient sm:p-8"
@@ -151,9 +241,6 @@ export function DemoRequest() {
               </p>
             </div>
           </form>
-        </div>
-      </Container>
-    </Section>
   );
 }
 

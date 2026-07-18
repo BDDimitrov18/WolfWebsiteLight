@@ -8,7 +8,6 @@ import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { DocsSidebar } from "./DocsSidebar";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { track } from "@/lib/track";
-import { CONTACT } from "@/lib/contact";
 
 export function DocsShell({ children }: { children: ReactNode }) {
   const t = useT();
@@ -43,11 +42,15 @@ export function DocsShell({ children }: { children: ReactNode }) {
                 </svg>
               </button>
               <Logo />
-              <span className="hidden font-mono text-xs uppercase tracking-[0.2em] text-ink-300 sm:inline">
+              {/* xl+: below that, the tab row needs the width more
+                  than the location label does. */}
+              <span className="hidden flex-none whitespace-nowrap font-mono text-xs uppercase tracking-[0.2em] text-ink-300 xl:inline">
                 / {t("docs.title")}
               </span>
             </div>
-            <div className="hidden items-center gap-8 lg:flex">
+            {/* xl+: at lg the Bulgarian tab labels overflow the capped
+                container; the docs sidebar carries navigation there. */}
+            <div className="hidden items-center gap-8 xl:flex">
               {links.map((l) => (
                 <Link
                   key={l.href}
@@ -60,21 +63,15 @@ export function DocsShell({ children }: { children: ReactNode }) {
             </div>
             <div className="flex items-center gap-3">
               {/* Checklist item 08: clickable phone in every header */}
-              <a
-                href={CONTACT.phoneHref}
-                onClick={() => track("contact_phone_click", { location: "docs" })}
-                className="hidden whitespace-nowrap font-mono text-sm text-ink-300 transition-colors hover:text-paper-50 xl:inline"
-              >
-                {CONTACT.phoneDisplay}
-              </a>
+              {/* No phone here, unlike the main navbar: with the
+                  "/ Документация" label and four tabs, the capped
+                  container (max-w-7xl) can't fit it at any width.
+                  The footer carries the contacts on docs pages. */}
               <LanguageToggle />
-              <Link
-                href="/docs"
-                aria-current="page"
-                className="btn btn-ghost hidden h-9 whitespace-nowrap px-4 py-0 text-sm lg:inline-flex"
-              >
-                {t("nav.docs")}
-              </Link>
+              {/* No self-referential „Документация" button here — the
+                  "/ Документация" label after the logo already places
+                  you, and the freed width keeps the row from
+                  squeezing the logo. */}
               <Link
                 href="/demo"
                 onClick={() => track("cta_demo_click", { location: "docs" })}

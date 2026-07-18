@@ -28,6 +28,7 @@ const bg = {
   },
   nav: {
     product: "Продукт",
+    about: "За нас",
     features: "Обиколка на софтуера",
     featuresTour: "Всички екрани",
     module: "Специализиран модул",
@@ -656,6 +657,7 @@ const en: typeof bg = {
   },
   nav: {
     product: "Product",
+    about: "About us",
     features: "Software tour",
     featuresTour: "All screens",
     module: "Specialized module",

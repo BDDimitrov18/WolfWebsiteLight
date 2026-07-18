@@ -21,7 +21,10 @@ export function Story() {
   const t = useT();
 
   return (
-    <Section className="relative overflow-hidden border-y border-ink-700 bg-ink-850 py-20 sm:py-24 lg:py-28">
+    <Section
+      id="about"
+      className="relative overflow-hidden border-y border-ink-700 bg-ink-850 py-20 sm:py-24 lg:py-28"
+    >
       {/* Millimeter drafting grid, fading toward the content */}
       <div
         aria-hidden

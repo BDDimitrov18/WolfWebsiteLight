@@ -98,6 +98,8 @@ export function Navbar() {
     label: string;
     children?: { href: string; label: string }[];
   }[] = [
+    // Checklist item 07's standard order: about before services.
+    { href: "/#about", label: t("nav.about") },
     {
       href: "/features",
       label: t("nav.features"),

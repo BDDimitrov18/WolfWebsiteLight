@@ -38,7 +38,10 @@ export function Logo({
   };
 
   const inner = (
-    <span className="flex items-center gap-2.5">
+    // flex-none: in a crowded header row the logo must never be the
+    // element that shrinks — a squeezed link lets the wordmark paint
+    // over its neighbours (seen in the docs header).
+    <span className="flex flex-none items-center gap-2.5">
       <Image
         src={asset(src)}
         alt="Wolf"
@@ -49,7 +52,7 @@ export function Logo({
       />
       {withWordmark && (
         <span
-          className="font-display text-2xl tracking-tight"
+          className="whitespace-nowrap font-display text-2xl tracking-tight"
           style={{ color: tone === "light" ? "var(--color-paper-50)" : "var(--color-ink-900)" }}
         >
           Wolf
@@ -60,7 +63,12 @@ export function Logo({
 
   if (href === null) return inner;
   return (
-    <Link href={href} onClick={onClick} aria-label="Wolf — home" className="inline-flex">
+    <Link
+      href={href}
+      onClick={onClick}
+      aria-label="Wolf — home"
+      className="inline-flex flex-none"
+    >
       {inner}
     </Link>
   );

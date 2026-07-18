@@ -21,25 +21,27 @@ export function Faq() {
       <Container>
         <SheetHeader label={t("faq.eyebrow")} title={t("faq.title")} />
 
-        <div className="mt-10 max-w-3xl border-t">
+        {/* Two columns on desktop + tight rows: 8 questions in half the
+            scroll height of the old single column. */}
+        <div className="mt-8 grid border-t lg:grid-cols-2 lg:gap-x-14">
           {items.map((item, i) => (
             <details key={item.q} className="group border-b">
-              <summary className="flex cursor-pointer list-none items-baseline gap-4 py-5 pr-2 [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-baseline gap-3.5 py-3.5 pr-2 [&::-webkit-details-marker]:hidden">
                 <span className="font-mono text-xs tracking-wider text-ember-400">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="flex-1 font-display text-lg leading-snug text-paper-50">
+                <span className="flex-1 font-display text-base leading-snug text-paper-50">
                   {item.q}
                 </span>
                 <span
                   aria-hidden
-                  className="flex-none font-mono text-lg text-ink-300 transition-transform duration-300 group-open:rotate-45"
+                  className="flex-none font-mono text-base text-ink-300 transition-transform duration-300 group-open:rotate-45"
                 >
                   +
                 </span>
               </summary>
               <p
-                className="pb-6 pl-9 pr-8 leading-relaxed"
+                className="pb-5 pl-8 pr-6 text-sm leading-relaxed"
                 style={{
                   color:
                     "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",

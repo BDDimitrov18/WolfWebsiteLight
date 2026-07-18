@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { CONTACT } from "@/lib/contact";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
@@ -197,12 +196,12 @@ export function Navbar() {
               >
                 {t("nav.docs")}
               </Link>
-              <a
-                href={CONTACT.demoHref}
+              <Link
+                href="/demo"
                 className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
               >
                 {t("nav.cta")}
-              </a>
+              </Link>
               <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
@@ -272,13 +271,13 @@ export function Navbar() {
               </Link>
               <div className="mt-3 flex items-center justify-between px-3">
                 <LanguageToggle />
-                <a
-                  href={CONTACT.demoHref}
+                <Link
+                  href="/demo"
                   onClick={() => setOpen(false)}
                   className="btn btn-primary h-9 px-4 py-0 text-sm"
                 >
                   {t("nav.cta")}
-                </a>
+                </Link>
               </div>
             </div>
           </Container>

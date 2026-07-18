@@ -3,7 +3,6 @@
 import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Section";
-import { CONTACT } from "@/lib/contact";
 import { Logo } from "@/components/layout/Logo";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { DocsSidebar } from "./DocsSidebar";
@@ -66,12 +65,12 @@ export function DocsShell({ children }: { children: ReactNode }) {
               >
                 {t("nav.docs")}
               </Link>
-              <a
-                href={CONTACT.demoHref}
+              <Link
+                href="/demo"
                 className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
               >
                 {t("nav.cta")}
-              </a>
+              </Link>
             </div>
           </div>
         </Container>

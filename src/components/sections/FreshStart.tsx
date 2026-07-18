@@ -1,7 +1,7 @@
 "use client";
 
+import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { CONTACT } from "@/lib/contact";
 import { Container, Section } from "@/components/ui/Section";
 
 /**
@@ -33,7 +33,7 @@ export function FreshStart() {
           <p className="mt-3 text-pretty leading-relaxed" style={{ color: muted }}>
             {t("freshStart.body2")}
           </p>
-          <a href={CONTACT.demoHref} className="btn btn-primary mt-7">
+          <Link href="/demo" className="btn btn-primary mt-7">
             {t("freshStart.cta")}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
               <path
@@ -44,7 +44,7 @@ export function FreshStart() {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </Container>
     </Section>

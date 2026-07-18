@@ -1,7 +1,7 @@
 "use client";
 
+import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
-import { CONTACT } from "@/lib/contact";
 import { Container } from "@/components/ui/Section";
 
 /**
@@ -23,7 +23,7 @@ export function PageCta() {
         >
           {t("pageCta.line")}
         </p>
-        <a href={CONTACT.demoHref} className="btn btn-primary flex-none">
+        <Link href="/demo" className="btn btn-primary flex-none">
           {t("nav.cta")}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
             <path
@@ -34,7 +34,7 @@ export function PageCta() {
               strokeLinejoin="round"
             />
           </svg>
-        </a>
+        </Link>
       </Container>
     </section>
   );

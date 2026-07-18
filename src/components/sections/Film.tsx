@@ -7,10 +7,11 @@ import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
 /**
- * The launch film — one order (№ 2417) travelling through the whole
- * system. Self-hosted and strictly click-to-play: with preload="none"
- * and a poster, not a single video byte moves until the visitor asks
- * for it, and no third-party player gets to phone home.
+ * The product video — 0:32 screen demo in the REAL interface (sample
+ * data): dashboard → orders → template builder → outro. Self-hosted
+ * and strictly click-to-play: with preload="none" and a poster, not a
+ * single video byte moves until the visitor asks for it, and no
+ * third-party player gets to phone home.
  */
 export function Film() {
   const t = useT();
@@ -44,10 +45,10 @@ export function Film() {
           <div className="relative aspect-video w-full">
             <video
               ref={videoRef}
-              // v2: the 3:26 cut + the 1:06 orders-scene poster. Bump on
-              // re-render — same filenames, browsers cache the old bytes.
-              src={asset("/video/wolf-launch.mp4?v=2")}
-              poster={asset("/video/wolf-launch-poster.jpg?v=2")}
+              // v3: the 0:32 real-interface demo + orders-scene poster.
+              // Bump on re-render — same filenames, browsers cache old bytes.
+              src={asset("/video/wolf-launch.mp4?v=3")}
+              poster={asset("/video/wolf-launch-poster.jpg?v=3")}
               preload="none"
               playsInline
               controls={playing}
@@ -97,7 +98,7 @@ export function Film() {
                   }}
                 >
                   {t("film.play")}
-                  <span className="text-ink-300">3:26</span>
+                  <span className="text-ink-300">0:32</span>
                 </span>
               </button>
             )}

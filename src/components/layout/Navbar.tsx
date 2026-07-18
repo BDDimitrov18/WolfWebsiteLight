@@ -89,16 +89,30 @@ export function Navbar() {
   }, [open]);
 
   // The tab row is uniform: every tab navigates to its own page.
+  // "Обиколка на софтуера" additionally drops down to its two pages.
   // Документация lives with the actions on the right, styled as a
   // button.
-  const links = [
-    { href: "/features", label: t("nav.features") },
+  const links: {
+    href: string;
+    label: string;
+    children?: { href: string; label: string }[];
+  }[] = [
+    {
+      href: "/features",
+      label: t("nav.features"),
+      children: [
+        { href: "/features", label: t("nav.featuresTour") },
+        { href: "/module", label: t("nav.module") },
+      ],
+    },
     { href: "/architecture", label: t("nav.architecture") },
     { href: "/pricing", label: t("nav.pricing") },
   ];
 
   // The static export serves trailing-slash URLs (/features/).
   const isActive = (href: string) => pathname === href || pathname === `${href}/`;
+  const isBranchActive = (l: (typeof links)[number]) =>
+    isActive(l.href) || (l.children?.some((c) => isActive(c.href)) ?? false);
 
   return (
     <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 will-change-transform">
@@ -121,18 +135,58 @@ export function Navbar() {
             {/* Inline links from lg: at md the Bulgarian labels + CTA
                 overflow the 64px bar and wrap — tablets get the burger. */}
             <div className="hidden items-center gap-8 lg:flex">
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  aria-current={isActive(l.href) ? "page" : undefined}
-                  className={`nav-link whitespace-nowrap text-sm transition-colors hover:text-paper-50 ${
-                    isActive(l.href) ? "text-paper-50" : "text-ink-300"
-                  }`}
-                >
-                  {l.label}
-                </Link>
-              ))}
+              {links.map((l) =>
+                l.children ? (
+                  <div key={l.href} className="group relative">
+                    <Link
+                      href={l.href}
+                      aria-current={isBranchActive(l) ? "page" : undefined}
+                      className={`nav-link flex items-center gap-1.5 whitespace-nowrap text-sm transition-colors hover:text-paper-50 ${
+                        isBranchActive(l) ? "text-paper-50" : "text-ink-300"
+                      }`}
+                    >
+                      {l.label}
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden className="transition-transform duration-200 group-hover:rotate-180">
+                        <path d="m2 3.5 3 3 3-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </Link>
+                    {/* pt-3 bridges the hover gap between tab and panel */}
+                    <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                      <div
+                        className="min-w-52 rounded-lg border p-1.5 shadow-ambient"
+                        style={{
+                          background:
+                            "color-mix(in srgb, var(--color-ink-950) 96%, transparent)",
+                        }}
+                      >
+                        {l.children.map((c) => (
+                          <Link
+                            key={c.href}
+                            href={c.href}
+                            aria-current={isActive(c.href) ? "page" : undefined}
+                            className={`block whitespace-nowrap rounded-md px-3.5 py-2.5 text-sm transition-colors hover:bg-ink-800 hover:text-paper-50 ${
+                              isActive(c.href) ? "text-paper-50" : "text-ink-300"
+                            }`}
+                          >
+                            {c.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    aria-current={isActive(l.href) ? "page" : undefined}
+                    className={`nav-link whitespace-nowrap text-sm transition-colors hover:text-paper-50 ${
+                      isActive(l.href) ? "text-paper-50" : "text-ink-300"
+                    }`}
+                  >
+                    {l.label}
+                  </Link>
+                ),
+              )}
             </div>
 
             <div className="flex items-center gap-3">
@@ -179,16 +233,34 @@ export function Navbar() {
         >
           <Container>
             <div className="flex flex-col gap-1 py-4">
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-md px-3 py-3 text-base text-paper-100 transition-colors hover:bg-ink-800"
-                >
-                  {l.label}
-                </Link>
-              ))}
+              {links.map((l) =>
+                l.children ? (
+                  <div key={l.href}>
+                    <p className="px-3 pb-1 pt-3 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-300">
+                      {l.label}
+                    </p>
+                    {l.children.map((c) => (
+                      <Link
+                        key={c.href}
+                        href={c.href}
+                        onClick={() => setOpen(false)}
+                        className="block rounded-md py-3 pl-6 pr-3 text-base text-paper-100 transition-colors hover:bg-ink-800"
+                      >
+                        {c.label}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className="rounded-md px-3 py-3 text-base text-paper-100 transition-colors hover:bg-ink-800"
+                  >
+                    {l.label}
+                  </Link>
+                ),
+              )}
               {/* Separate destination, separated visually */}
               <Link
                 href="/docs"

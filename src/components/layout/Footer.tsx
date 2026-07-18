@@ -25,6 +25,7 @@ export function Footer() {
       title: t("footer.product"),
       links: [
         { href: "/features", label: t("footer.links.features") },
+        { href: "/module", label: t("footer.links.module") },
         { href: "/architecture", label: t("footer.links.architecture") },
         { href: "/pricing", label: t("footer.links.pricing") },
         { href: "/#faq", label: t("footer.links.faq") },
@@ -99,6 +100,12 @@ export function Footer() {
             © {year} Wolf · {t("footer.author")}. {t("footer.rights")}
           </p>
           <div className="flex items-center gap-6">
+            <Link
+              href="/terms"
+              className="text-xs text-ink-300 underline-offset-4 transition-colors hover:text-paper-50 hover:underline"
+            >
+              {t("footer.links.terms")}
+            </Link>
             <Link
               href="/privacy"
               className="text-xs text-ink-300 underline-offset-4 transition-colors hover:text-paper-50 hover:underline"

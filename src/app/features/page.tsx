@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FeatureTour } from "@/components/sections/FeatureTour";
-import { TitleChain } from "@/components/sections/TitleChain";
+import { PageCta } from "@/components/sections/PageCta";
 
 export const metadata: Metadata = {
-  title: "Функционалности",
+  title: "Обиколка на софтуера",
   description:
-    "Обиколка на продукта — всеки екран на Wolf със снимки на реалния интерфейс, плюс специализираният модул за вериги на собственост.",
+    "Обиколка на софтуера — всеки екран на Wolf със снимки на реалния интерфейс: поръчки, имоти, фактури, календар, справки и администрация.",
 };
 
 export default function FeaturesPage() {
@@ -16,7 +16,7 @@ export default function FeaturesPage() {
       <Navbar />
       <main>
         <FeatureTour />
-        <TitleChain />
+        <PageCta />
       </main>
       <Footer />
     </>

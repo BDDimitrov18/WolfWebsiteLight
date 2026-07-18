@@ -28,7 +28,9 @@ const bg = {
   },
   nav: {
     product: "Продукт",
-    features: "Функционалности",
+    features: "Обиколка на софтуера",
+    featuresTour: "Всички екрани",
+    module: "Специализиран модул",
     architecture: "Как работи",
     pricing: "Цени",
     docs: "Документация",
@@ -422,10 +424,12 @@ const bg = {
     resources: "Ресурси",
     company: "Контакти",
     links: {
-      features: "Функционалности",
+      features: "Обиколка на софтуера",
+      module: "Специализиран модул",
       architecture: "Как работи",
       pricing: "Цени",
       faq: "Често задавани въпроси",
+      terms: "Общи условия",
       docs: "Документация",
       gettingStarted: "Първи стъпки",
       model: "Модел на данните",
@@ -436,6 +440,75 @@ const bg = {
     },
     rights: "Всички права запазени.",
     version: "Документацията описва версия 1.0.26",
+  },
+  pageCta: {
+    line: "Искате ли да видите Wolf върху вашите работни процеси?",
+  },
+  termsPage: {
+    title: "Общи условия",
+    updated: "В сила от: юли 2026 г.",
+    intro:
+      "Настоящите общи условия уреждат ползването на софтуерната система Wolf — настолно приложение и сървърен компонент за управление на проектантска практика, предоставяни от Божидар Дамянов Димитров („доставчикът“). С използването на Wolf приемате тези условия. Въпроси: bddimitrov18@gmail.com, +359 877 139 712.",
+    sections: [
+      {
+        h: "1. Софтуерът",
+        ps: [
+          "Wolf се инсталира и работи в инфраструктурата на клиента: настолни приложения на работните места и сървърен компонент с база данни на сървър, контролиран от клиента. Данните на практиката се съхраняват при клиента и са негова собственост от първия ден.",
+        ],
+      },
+      {
+        h: "2. Планове и цени",
+        ps: [
+          "Wolf се предлага като абонамент или като еднократен (безсрочен) лиценз. Цената е за цялата практика според размера на екипа, а не на потребител. Обявените цени са без ДДС. Актуалните цени са публикувани на страница „Цени“; промени в цените не засягат вече заплатени периоди и издадени лицензи.",
+        ],
+      },
+      {
+        h: "3. Абонамент",
+        ps: [
+          "Абонаментът дава право на ползване на пълната функционалност за платения период, включително обновленията и поддръжката.",
+          "След края на платения период се прилага 14-дневен гратисен срок. След изтичането му приложението преминава в режим само за четене: наличните данни могат да се разглеждат и отварят, но не могат да се създават, редактират или изтриват записи до подновяване. Данните не се изтриват и остават при клиента.",
+        ],
+      },
+      {
+        h: "4. Еднократен (безсрочен) лиценз",
+        ps: [
+          "Еднократният лиценз дава безсрочно право на ползване на закупената версия за цялата практика. Закупената версия остава напълно работоспособна безсрочно — включително ако лицензионната услуга на Wolf е временно или трайно недостъпна.",
+          "Годишната поддръжка към еднократния лиценз е по избор и включва обновленията и съпорта. Изтекла поддръжка спира само обновленията и поддръжката — не и работата на приложението. Съвместимост с бъдещи версии на операционните системи не се гарантира след края на поддръжката.",
+        ],
+      },
+      {
+        h: "5. Лицензионна услуга",
+        ps: [
+          "За автоматично потвърждение на абонамента сървърният компонент на клиента прави периодична изходяща HTTPS връзка към лицензионната услуга на Wolf. Изпращат се само технически данни за лиценза — идентификатор на лиценза и на инсталацията, версия и срок — никога данни на практиката. Настолните приложения не се свързват с лицензионната услуга.",
+          "При безсрочен лиценз проверката е локална: невъзможност за връзка с лицензионната услуга никога не ограничава достъпа до приложението.",
+        ],
+      },
+      {
+        h: "6. Гаранция при прекратяване на продукта",
+        ps: [
+          "Ако развитието и предлагането на Wolf бъдат трайно прекратени, клиентите с еднократен лиценз получават безплатен офлайн инструмент или лиценз за миграция, който позволява активираната инсталация да бъде пренесена на нов хардуер и да продължи да работи без лицензионната услуга.",
+        ],
+      },
+      {
+        h: "7. Данни и резервни копия",
+        ps: [
+          "Базата данни е при клиента и е негова собственост. Доставчикът няма достъп до данните на практиката. Обработката на лични данни е описана в Политиката за поверителност.",
+          "Резервни копия се конфигурират при внедряването на сървъра на клиента; клиентът отговаря за поддържането на своята инфраструктура и за съхраняването на резервните копия.",
+        ],
+      },
+      {
+        h: "8. Отговорност",
+        ps: [
+          "Софтуерът се предоставя с грижата на добър търговец. Доколкото приложимото право позволява, доставчикът не носи отговорност за пропуснати ползи или косвени вреди, произтичащи от ползването или невъзможността за ползване на софтуера. Нищо в тези условия не ограничава отговорност, която по закон не може да бъде ограничена.",
+        ],
+      },
+      {
+        h: "9. Промени по условията",
+        ps: [
+          "Условията могат да бъдат актуализирани, като актуалната версия се публикува на тази страница. Съществени промени не се прилагат със задна дата към вече заплатени периоди и издадени лицензи.",
+        ],
+      },
+    ],
   },
   privacyPage: {
     title: "Политика за поверителност",
@@ -502,7 +575,9 @@ const en: typeof bg = {
   },
   nav: {
     product: "Product",
-    features: "Features",
+    features: "Software tour",
+    featuresTour: "All screens",
+    module: "Specialized module",
     architecture: "How it works",
     pricing: "Pricing",
     docs: "Docs",
@@ -896,10 +971,12 @@ const en: typeof bg = {
     resources: "Resources",
     company: "Contacts",
     links: {
-      features: "Features",
+      features: "Software tour",
+      module: "Specialized module",
       architecture: "How it works",
       pricing: "Pricing",
       faq: "FAQ",
+      terms: "Terms of use",
       docs: "Documentation",
       gettingStarted: "Getting started",
       model: "Data model",
@@ -910,6 +987,75 @@ const en: typeof bg = {
     },
     rights: "All rights reserved.",
     version: "The documentation describes version 1.0.26",
+  },
+  pageCta: {
+    line: "Want to see Wolf on your own workflows?",
+  },
+  termsPage: {
+    title: "Terms of use",
+    updated: "Effective: July 2026",
+    intro:
+      "These terms govern the use of the Wolf software system — a desktop application and server component for managing a design practice, provided by Bozhidar Damyanov Dimitrov (“the provider”). By using Wolf you accept these terms. Questions: bddimitrov18@gmail.com, +359 877 139 712.",
+    sections: [
+      {
+        h: "1. The software",
+        ps: [
+          "Wolf installs and runs in the customer's infrastructure: desktop applications on the workstations and a server component with a database on a server the customer controls. The practice's data is stored with the customer and is the customer's property from day one.",
+        ],
+      },
+      {
+        h: "2. Plans and prices",
+        ps: [
+          "Wolf is offered as a subscription or as a one-time (perpetual) license. The price covers the whole practice by team size, not per user. Listed prices exclude VAT. Current prices are published on the Pricing page; price changes do not affect already-paid periods or issued licenses.",
+        ],
+      },
+      {
+        h: "3. Subscription",
+        ps: [
+          "A subscription grants use of the full feature set for the paid period, including updates and support.",
+          "After the paid period a 14-day grace window applies. Once it expires, the application switches to read-only mode: existing data can be viewed and opened, but records cannot be created, edited or deleted until renewal. Data is never deleted and stays with the customer.",
+        ],
+      },
+      {
+        h: "4. One-time (perpetual) license",
+        ps: [
+          "The one-time license grants an indefinite right to use the purchased version for the whole practice. The purchased version remains fully functional indefinitely — including if the Wolf licensing service is temporarily or permanently unavailable.",
+          "Annual maintenance for the perpetual license is optional and includes updates and support. Expired maintenance stops only updates and support — not the application. Compatibility with future operating-system versions is not guaranteed after maintenance ends.",
+        ],
+      },
+      {
+        h: "5. Licensing service",
+        ps: [
+          "To confirm a subscription automatically, the customer's server component makes a periodic outbound HTTPS connection to the Wolf licensing service. Only technical license metadata is sent — license and installation identifiers, version and lease information — never the practice's data. Desktop applications never contact the licensing service.",
+          "For a perpetual license the check is local: failure to reach the licensing service never restricts access to the application.",
+        ],
+      },
+      {
+        h: "6. Product-discontinuation guarantee",
+        ps: [
+          "If the development and distribution of Wolf are permanently discontinued, customers with a one-time license receive a free offline migration tool or license that allows the activated installation to be moved to new hardware and to keep working without the licensing service.",
+        ],
+      },
+      {
+        h: "7. Data and backups",
+        ps: [
+          "The database is with the customer and is the customer's property. The provider has no access to the practice's data. The processing of personal data is described in the Privacy Policy.",
+          "Backups are configured on the customer's server during rollout; the customer is responsible for maintaining their infrastructure and for keeping the backups.",
+        ],
+      },
+      {
+        h: "8. Liability",
+        ps: [
+          "The software is provided with due professional care. To the extent permitted by applicable law, the provider is not liable for lost profits or indirect damages arising from the use or inability to use the software. Nothing in these terms limits liability that cannot be limited by law.",
+        ],
+      },
+      {
+        h: "9. Changes to these terms",
+        ps: [
+          "The terms may be updated; the current version is published on this page. Material changes do not apply retroactively to already-paid periods or issued licenses.",
+        ],
+      },
+    ],
   },
   privacyPage: {
     title: "Privacy policy",

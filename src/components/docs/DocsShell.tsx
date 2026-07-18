@@ -18,6 +18,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
   // next to the CTA).
   const links = [
     { href: "/features", label: t("nav.features") },
+    { href: "/module", label: t("nav.module") },
     { href: "/architecture", label: t("nav.architecture") },
     { href: "/pricing", label: t("nav.pricing") },
   ];

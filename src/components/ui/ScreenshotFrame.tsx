@@ -11,8 +11,9 @@ import { Lightbox } from "@/components/ui/Lightbox";
  * full-size lightbox — the desktop UI is dense, so the inline frame is
  * a preview, not the reading copy.
  *
- * `slot` is the clearly-named placeholder key (Deliverables §10): drop a
- * file named `<slot>.png` into /public/screenshots to replace the image.
+ * `slot` is the clearly-named placeholder key (Deliverables §10): to
+ * replace an image, convert the new capture to `<slot>.webp` in
+ * /public/screenshots (see screenshot() in lib/asset.ts).
  */
 export function ScreenshotFrame({
   src,

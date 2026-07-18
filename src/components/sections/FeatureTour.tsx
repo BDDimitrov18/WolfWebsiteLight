@@ -16,7 +16,7 @@ interface FeatureItem {
   bullets: string[];
 }
 
-// Each feature → its screenshot slot. Drop <slot>.png into /public/screenshots.
+// Each feature → its screenshot slot: <slot>.webp in /public/screenshots.
 // `pages` turns the stop into a carousel — labels come from features.<pagesKey>.
 const TOUR: { key: string; slot: string; pages?: string[]; pagesKey?: string }[] = [
   { key: "orders", slot: "OrdersScreen" },

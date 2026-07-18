@@ -17,9 +17,13 @@ export function asset(path: string): string {
  * that cached an old capture (or a placeholder plate) keep showing it.
  * Bump this once per screenshot batch — the query string changes every
  * /screenshots URL and forces a fresh fetch.
+ *
+ * Served as WebP (~47% lighter than the PNG originals). New captures
+ * arrive as PNG — convert with sharp ({ quality: 84 }) into
+ * /public/screenshots/<slot>.webp and bump the version.
  */
-const SCREENSHOT_VERSION = 2;
+const SCREENSHOT_VERSION = 3;
 
 export function screenshot(slot: string): string {
-  return asset(`/screenshots/${slot}.png?v=${SCREENSHOT_VERSION}`);
+  return asset(`/screenshots/${slot}.webp?v=${SCREENSHOT_VERSION}`);
 }

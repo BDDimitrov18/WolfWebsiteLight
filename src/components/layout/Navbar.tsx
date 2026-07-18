@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { track } from "@/lib/track";
+import { CONTACT } from "@/lib/contact";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
@@ -190,6 +191,15 @@ export function Navbar() {
             </div>
 
             <div className="flex items-center gap-3">
+              {/* Checklist item 08: a clickable phone belongs in the
+                  header — the audience likes to just call. */}
+              <a
+                href={CONTACT.phoneHref}
+                onClick={() => track("contact_phone_click", { location: "navbar" })}
+                className="hidden whitespace-nowrap font-mono text-sm text-ink-300 transition-colors hover:text-paper-50 xl:inline"
+              >
+                {CONTACT.phoneDisplay}
+              </a>
               <LanguageToggle />
               <Link
                 href="/docs"
@@ -271,6 +281,15 @@ export function Navbar() {
                 {t("nav.docs")}
                 <span aria-hidden className="font-mono text-xs text-ink-300">→</span>
               </Link>
+              {/* Direct line — same checklist item 08, mobile side */}
+              <a
+                href={CONTACT.phoneHref}
+                onClick={() => track("contact_phone_click", { location: "navbar_mobile" })}
+                className="mt-1 flex items-center justify-between rounded-md border border-ink-600 px-3 py-3 font-mono text-base text-paper-100 transition-colors hover:bg-ink-800"
+              >
+                {CONTACT.phoneDisplay}
+                <span aria-hidden className="font-mono text-xs text-ink-300">☎</span>
+              </a>
               <div className="mt-3 flex items-center justify-between px-3">
                 <LanguageToggle />
                 <Link

@@ -8,6 +8,7 @@ import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { DocsSidebar } from "./DocsSidebar";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { track } from "@/lib/track";
+import { CONTACT } from "@/lib/contact";
 
 export function DocsShell({ children }: { children: ReactNode }) {
   const t = useT();
@@ -58,6 +59,14 @@ export function DocsShell({ children }: { children: ReactNode }) {
               ))}
             </div>
             <div className="flex items-center gap-3">
+              {/* Checklist item 08: clickable phone in every header */}
+              <a
+                href={CONTACT.phoneHref}
+                onClick={() => track("contact_phone_click", { location: "docs" })}
+                className="hidden whitespace-nowrap font-mono text-sm text-ink-300 transition-colors hover:text-paper-50 xl:inline"
+              >
+                {CONTACT.phoneDisplay}
+              </a>
               <LanguageToggle />
               <Link
                 href="/docs"

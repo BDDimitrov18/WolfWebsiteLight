@@ -131,11 +131,11 @@ const bg = {
   freshStart: {
     eyebrow: "За работещи практики",
     title: "Практиката ви работи от години?",
-    lead: "Точно при вас Wolf носи най-много.",
+    lead: "Точно при вас Wolf носи най-много стойност.",
     body1:
       "Колкото по-отдавна работи една практика, толкова повече поръчки, плащания и документи зависят от паметта на хората и от папките по рафтовете. Всеки следващ месец без система добавя нови.",
     body2:
-      "А началото не е страшно: при внедряването получавате помощ за пренасянето на съществуващите данни и стартирате с подредена основа — без да губите натрупаното.",
+      "А началото не е страшно: при внедряването обучаваме екипа ви как да работи със системата и как да въведе съществуващите данни — стартирате с подредена основа, без да губите натрупаното.",
     cta: "Заявете демонстративна среща",
   },
   film: {
@@ -381,7 +381,7 @@ const bg = {
       },
       {
         q: "Как се пренасят съществуващите ни данни?",
-        a: "При внедряването екипът на разработчика съдейства за пренасянето на съществуващите ви записи — клиенти, поръчки, номенклатури. Работните ви файлове остават в познатите папки: Wolf пази пътя към папката на всяка поръчка и я отваря с един клик.",
+        a: "При внедряването обучаваме екипа ви как да въведе съществуващите записи — клиенти, поръчки, номенклатури — и как да работи със системата. Работните ви файлове остават в познатите папки: Wolf пази пътя към папката на всяка поръчка и я отваря с един клик.",
       },
       {
         q: "Къде стоят данните и чии са?",
@@ -600,11 +600,11 @@ const en: typeof bg = {
   freshStart: {
     eyebrow: "For established practices",
     title: "Been running your practice for years?",
-    lead: "That is exactly where Wolf brings the most.",
+    lead: "That is exactly where Wolf brings the most value.",
     body1:
       "The longer a practice has been running, the more orders, payments and documents depend on people's memory and the folders on the shelves. Every next month without a system adds more.",
     body2:
-      "And getting started isn't scary: during rollout you get help migrating your existing data, so you start on an ordered foundation — without losing what you've built up.",
+      "And getting started isn't scary: during rollout we train your team to work with the system and to enter your existing data — you start on an ordered foundation, without losing what you've built up.",
     cta: "Book a demo meeting",
   },
   film: {
@@ -850,7 +850,7 @@ const en: typeof bg = {
       },
       {
         q: "How does our existing data come across?",
-        a: "During rollout the developer's team helps migrate your existing records — clients, orders, nomenclatures. Your working files stay in the folders you know: Wolf keeps each order's folder path and opens it in one click.",
+        a: "During rollout we train your team to enter the existing records — clients, orders, nomenclatures — and to work with the system. Your working files stay in the folders you know: Wolf keeps each order's folder path and opens it in one click.",
       },
       {
         q: "Where does the data live, and whose is it?",

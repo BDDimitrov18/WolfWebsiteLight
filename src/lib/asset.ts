@@ -27,3 +27,15 @@ const SCREENSHOT_VERSION = 3;
 export function screenshot(slot: string): string {
   return asset(`/screenshots/${slot}.webp?v=${SCREENSHOT_VERSION}`);
 }
+
+/**
+ * Inline previews render at most ~900px wide, so they get a srcset
+ * with the pre-generated 960px variant (`<slot>-960.webp`, ~22KB vs
+ * ~70KB full) — the full capture stays reserved for the lightbox.
+ */
+export function screenshotSrcSet(slot: string): string {
+  return [
+    `${asset(`/screenshots/${slot}-960.webp?v=${SCREENSHOT_VERSION}`)} 960w`,
+    `${screenshot(slot)} 1919w`,
+  ].join(", ");
+}

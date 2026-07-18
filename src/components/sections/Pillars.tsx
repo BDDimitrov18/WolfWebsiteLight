@@ -47,6 +47,8 @@ export function Pillars() {
           <figure className="relative overflow-hidden rounded-xl border">
             <img
               src={asset("/photos/desk-before.webp?v=4")}
+              srcSet={`${asset("/photos/desk-before-640.webp?v=4")} 640w, ${asset("/photos/desk-before.webp?v=4")} 1500w`}
+              sizes="(max-width: 1024px) 92vw, 580px"
               alt={t("pillars.photoAlt")}
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"

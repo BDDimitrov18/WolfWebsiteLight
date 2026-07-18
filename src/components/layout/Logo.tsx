@@ -22,10 +22,12 @@ export function Logo({
   withWordmark?: boolean;
 }) {
   const pathname = usePathname();
+  // 128px WebP renders — the marks display at 36px, and the original
+  // PNGs were 168KB of header weight on every page.
   const src =
     tone === "light"
-      ? "/brand/wolf_logo_white_tight.png"
-      : "/brand/wolf_logo_black_transparent.png";
+      ? "/brand/wolf_logo_white_tight.webp"
+      : "/brand/wolf_logo_black_transparent.webp";
 
   const onClick = (e: React.MouseEvent) => {
     if (href !== "/" || pathname !== "/") return;

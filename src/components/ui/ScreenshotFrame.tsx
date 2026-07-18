@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { asset, screenshot } from "@/lib/asset";
+import { asset, screenshot, screenshotSrcSet } from "@/lib/asset";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Lightbox } from "@/components/ui/Lightbox";
 
@@ -12,8 +11,9 @@ import { Lightbox } from "@/components/ui/Lightbox";
  * a preview, not the reading copy.
  *
  * `slot` is the clearly-named placeholder key (Deliverables §10): to
- * replace an image, convert the new capture to `<slot>.webp` in
- * /public/screenshots (see screenshot() in lib/asset.ts).
+ * replace an image, convert the new capture to `<slot>.webp` AND a
+ * 960px-wide `<slot>-960.webp` in /public/screenshots (see
+ * screenshot()/screenshotSrcSet() in lib/asset.ts).
  */
 export function ScreenshotFrame({
   src,
@@ -68,13 +68,17 @@ export function ScreenshotFrame({
           aria-label={`${t("features.zoomHint")}: ${alt}`}
           className="relative block aspect-[1919/1032] w-full cursor-zoom-in"
         >
-          <Image
+          {/* Plain img: with the optimizer off, next/image can't emit a
+              srcset — the hand-built one serves the 960px preview at
+              inline sizes and keeps the full capture for large views. */}
+          <img
             src={resolved}
-            alt={alt}
-            fill
+            srcSet={src ? undefined : screenshotSrcSet(slot)}
             sizes="(max-width: 1024px) 100vw, 60vw"
-            preload={preload}
-            className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+            alt={alt}
+            loading={preload ? "eager" : "lazy"}
+            fetchPriority={preload ? "high" : undefined}
+            className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
           />
           {/* Zoom affordance: always visible on touch (no hover to reveal
               it), hover/focus-revealed on fine pointers */}

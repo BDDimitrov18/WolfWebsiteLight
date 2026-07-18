@@ -129,13 +129,13 @@ const bg = {
     close: "Затвори",
   },
   freshStart: {
-    eyebrow: "Чисто начало",
-    title: "Още нямате система за управление?",
-    lead: "За вас Wolf е дори по-изгоден.",
+    eyebrow: "За работещи практики",
+    title: "Практиката ви работи от години?",
+    lead: "Точно при вас Wolf носи най-много.",
     body1:
-      "Когато практиката тръгне с Wolf от самото начало, пропускате целия период на „някак си се справяме“. От първата поръчка знаете кой по какво работи, какво е платено и къде е всеки документ.",
+      "Колкото по-отдавна работи една практика, толкова повече поръчки, плащания и документи зависят от паметта на хората и от папките по рафтовете. Всеки следващ месец без система добавя нови.",
     body2:
-      "Практиките, които въвеждат система при вече натрупан архив, прекарват първите седмици в пренасяне на стари данни. Вие стартирате с чиста основа.",
+      "А началото не е страшно: при внедряването получавате помощ за пренасянето на съществуващите данни и стартирате с подредена основа — без да губите натрупаното.",
     cta: "Заявете демонстративна среща",
   },
   film: {
@@ -598,13 +598,13 @@ const en: typeof bg = {
     close: "Close",
   },
   freshStart: {
-    eyebrow: "A clean start",
-    title: "No management system yet?",
-    lead: "Wolf is an even better fit for you.",
+    eyebrow: "For established practices",
+    title: "Been running your practice for years?",
+    lead: "That is exactly where Wolf brings the most.",
     body1:
-      "When the practice starts on Wolf from day one, you skip the whole “we manage somehow” period. From the very first order you know who works on what, what has been paid and where every document is.",
+      "The longer a practice has been running, the more orders, payments and documents depend on people's memory and the folders on the shelves. Every next month without a system adds more.",
     body2:
-      "Practices that adopt a system with an archive already piled up spend their first weeks migrating old data. You start on a clean foundation.",
+      "And getting started isn't scary: during rollout you get help migrating your existing data, so you start on an ordered foundation — without losing what you've built up.",
     cta: "Book a demo meeting",
   },
   film: {

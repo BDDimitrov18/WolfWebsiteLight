@@ -8,4 +8,7 @@
  * "https://calendar.google.com/calendar/appointments/schedules/…"
  * embed URL) to activate the click-to-load calendar.
  */
-export const CALENDAR_URL = "";
+// Resolved from the owner's short link https://calendar.app.google/tNFKk62bBhp1U8TY8;
+// ?gv=true is Google's embed mode (frameable, no calendar chrome).
+export const CALENDAR_URL =
+  "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0_5K2jlsVcwhanF9IMah328ScF_FRw0I95hf5RFNWuPYLnQL5FLx6HWhj6Ye1ydYulSluB7Lqb?gv=true";

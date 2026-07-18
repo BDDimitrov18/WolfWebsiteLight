@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { dictionaries } from "@/lib/i18n/dictionaries";
 import { usePref } from "@/lib/prefs";
+import { track } from "@/lib/track";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
@@ -173,6 +174,9 @@ export function Pricing() {
                   </p>
                   <Link
                     href="/demo"
+                    onClick={() =>
+                      track("cta_demo_click", { location: "pricing", plan: card.name })
+                    }
                     className={`btn mt-6 w-full ${isHighlight ? "btn-primary" : "btn-ghost"}`}
                   >
                     {card.cta}

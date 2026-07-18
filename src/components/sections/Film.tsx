@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { asset } from "@/lib/asset";
+import { track } from "@/lib/track";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
 import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
@@ -18,14 +19,30 @@ export function Film() {
   const t = useT();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  // Watch-depth milestones already reported this session — each fires
+  // once even if the visitor seeks back and forth.
+  const milestones = useRef(new Set<number>());
 
   // play() must stay inside the click handler — it's the user gesture
   // that lets the film start with its sound design audible.
   const start = () => {
     const v = videoRef.current;
     if (!v) return;
+    track("video_play");
     setPlaying(true);
     void v.play();
+  };
+
+  const onTimeUpdate = () => {
+    const v = videoRef.current;
+    if (!v || !v.duration) return;
+    const pct = (v.currentTime / v.duration) * 100;
+    for (const m of [25, 50, 75]) {
+      if (pct >= m && !milestones.current.has(m)) {
+        milestones.current.add(m);
+        track("video_progress", { percent: m });
+      }
+    }
   };
 
   return (
@@ -53,7 +70,11 @@ export function Film() {
               preload="none"
               playsInline
               controls={playing}
-              onEnded={() => setPlaying(false)}
+              onTimeUpdate={onTimeUpdate}
+              onEnded={() => {
+                track("video_complete");
+                setPlaying(false);
+              }}
               className="absolute inset-0 h-full w-full"
               aria-label={t("film.title")}
             />

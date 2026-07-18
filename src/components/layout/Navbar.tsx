@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { track } from "@/lib/track";
 import { Container } from "@/components/ui/Section";
 import { Logo } from "./Logo";
 import { LanguageToggle } from "./LanguageToggle";
@@ -198,6 +199,7 @@ export function Navbar() {
               </Link>
               <Link
                 href="/demo"
+                onClick={() => track("cta_demo_click", { location: "navbar" })}
                 className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
               >
                 {t("nav.cta")}
@@ -273,7 +275,10 @@ export function Navbar() {
                 <LanguageToggle />
                 <Link
                   href="/demo"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    track("cta_demo_click", { location: "navbar_mobile" });
+                    setOpen(false);
+                  }}
                   className="btn btn-primary h-9 px-4 py-0 text-sm"
                 >
                   {t("nav.cta")}

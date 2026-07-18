@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { CONTACT } from "@/lib/contact";
+import { track } from "@/lib/track";
 
 /**
  * Inquiry dialog (owner reference: a classic contact modal, redrawn in
@@ -40,6 +41,7 @@ export function InquiryModal({ onClose }: { onClose: () => void }) {
       "",
       val("message"),
     ];
+    track("inquiry_submit");
     window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
       t("inquiry.subject"),
     )}&body=${encodeURIComponent(lines.join("\n"))}`;

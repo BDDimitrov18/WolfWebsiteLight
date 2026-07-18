@@ -7,6 +7,7 @@ import { Logo } from "@/components/layout/Logo";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { DocsSidebar } from "./DocsSidebar";
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { track } from "@/lib/track";
 
 export function DocsShell({ children }: { children: ReactNode }) {
   const t = useT();
@@ -67,6 +68,7 @@ export function DocsShell({ children }: { children: ReactNode }) {
               </Link>
               <Link
                 href="/demo"
+                onClick={() => track("cta_demo_click", { location: "docs" })}
                 className="btn btn-primary hidden h-9 whitespace-nowrap px-4 py-0 text-sm sm:inline-flex"
               >
                 {t("nav.cta")}

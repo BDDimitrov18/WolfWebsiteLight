@@ -1,6 +1,7 @@
 "use client";
 
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { track } from "@/lib/track";
 import { Container, Section, SheetHeader } from "@/components/ui/Section";
 
 interface FaqItem {
@@ -25,7 +26,14 @@ export function Faq() {
             scroll height of the old single column. */}
         <div className="mt-8 grid border-t lg:grid-cols-2 lg:gap-x-14">
           {items.map((item, i) => (
-            <details key={item.q} className="group border-b">
+            <details
+              key={item.q}
+              className="group border-b"
+              onToggle={(e) => {
+                if (e.currentTarget.open)
+                  track("faq_open", { question: `${i + 1}. ${item.q}`.slice(0, 100) });
+              }}
+            >
               <summary className="flex cursor-pointer list-none items-baseline gap-3.5 py-3.5 pr-2 [&::-webkit-details-marker]:hidden">
                 <span className="font-mono text-xs tracking-wider text-ember-400">
                   {String(i + 1).padStart(2, "0")}

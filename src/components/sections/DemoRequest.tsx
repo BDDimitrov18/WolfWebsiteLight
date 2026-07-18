@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { CONTACT } from "@/lib/contact";
 import { CALENDAR_URL } from "@/lib/booking";
+import { track } from "@/lib/track";
 import { Container, Section } from "@/components/ui/Section";
 
 /**
@@ -30,6 +31,7 @@ export function DemoRequest() {
   }, []);
 
   const loadCalendar = () => {
+    track("calendar_load");
     try {
       localStorage.setItem("wolf.calendar-ok", "1");
     } catch {
@@ -55,6 +57,7 @@ export function DemoRequest() {
       "",
       val("message"),
     ];
+    track("demo_form_submit");
     window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
       t("demoPage.subject"),
     )}&body=${encodeURIComponent(lines.join("\n"))}`;
@@ -100,10 +103,18 @@ export function DemoRequest() {
                 {t("demoPage.talk")}
               </p>
               <p className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-1 font-mono text-sm">
-                <a href={CONTACT.phoneHref} className="text-paper-50 underline-offset-4 hover:underline">
+                <a
+                  href={CONTACT.phoneHref}
+                  onClick={() => track("contact_phone_click", { location: "demo" })}
+                  className="text-paper-50 underline-offset-4 hover:underline"
+                >
                   {CONTACT.phoneDisplay}
                 </a>
-                <a href={`mailto:${CONTACT.email}`} className="text-paper-50 underline-offset-4 hover:underline">
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  onClick={() => track("contact_email_click", { location: "demo" })}
+                  className="text-paper-50 underline-offset-4 hover:underline"
+                >
                   {CONTACT.email}
                 </a>
               </p>
@@ -139,6 +150,7 @@ export function DemoRequest() {
                     href={CALENDAR_URL}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={() => track("calendar_open_tab")}
                     className="text-sm text-ink-300 underline underline-offset-4 transition-colors hover:text-paper-50"
                   >
                     {t("demoPage.calOpenTab")} ↗

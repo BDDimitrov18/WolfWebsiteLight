@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { track } from "@/lib/track";
 import { Container } from "@/components/ui/Section";
 
 /**
@@ -23,7 +24,11 @@ export function PageCta() {
         >
           {t("pageCta.line")}
         </p>
-        <Link href="/demo" className="btn btn-primary flex-none">
+        <Link
+          href="/demo"
+          onClick={() => track("cta_demo_click", { location: "page_cta" })}
+          className="btn btn-primary flex-none"
+        >
           {t("nav.cta")}
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
             <path

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { track } from "@/lib/track";
 import { Container, Section } from "@/components/ui/Section";
 
 /**
@@ -33,7 +34,11 @@ export function FreshStart() {
           <p className="mt-3 text-pretty leading-relaxed" style={{ color: muted }}>
             {t("freshStart.body2")}
           </p>
-          <Link href="/demo" className="btn btn-primary mt-7">
+          <Link
+            href="/demo"
+            onClick={() => track("cta_demo_click", { location: "fresh_start" })}
+            className="btn btn-primary mt-7"
+          >
             {t("freshStart.cta")}
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
               <path

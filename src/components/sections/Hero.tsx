@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
+import { track } from "@/lib/track";
 import { Container } from "@/components/ui/Section";
 import { InquiryModal } from "@/components/ui/InquiryModal";
 import { TerrainCanvas } from "@/components/three/TerrainCanvas";
@@ -73,13 +74,20 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/demo" className="btn btn-primary w-full sm:w-auto">
+            <Link
+              href="/demo"
+              onClick={() => track("cta_demo_click", { location: "hero" })}
+              className="btn btn-primary w-full sm:w-auto"
+            >
               {t("hero.ctaPrimary")}
               <Arrow />
             </Link>
             <button
               type="button"
-              onClick={() => setInquiryOpen(true)}
+              onClick={() => {
+                track("inquiry_open", { location: "hero" });
+                setInquiryOpen(true);
+              }}
               className="btn btn-ghost w-full sm:w-auto"
             >
               {t("hero.ctaSecondary")}

@@ -133,13 +133,14 @@ export function Navbar() {
         }}
       >
         <Container>
-          <nav className="flex h-16 items-center justify-between gap-4">
+          <nav className="flex h-16 items-center gap-4">
             <Logo />
 
             {/* Inline links from lg: at md the Bulgarian labels + CTA
                 overflow the 64px bar and wrap — tablets get the burger.
-                gap-6 (not 8): six tabs must fit the capped container. */}
-            <div className="hidden items-center gap-6 lg:flex">
+                gap-6 (not 8): six tabs must fit the capped container.
+                ml-auto ranges the whole tab+action cluster right. */}
+            <div className="ml-auto hidden items-center gap-6 lg:flex">
               {links.map((l) =>
                 l.children ? (
                   <div key={l.href} className="group relative">
@@ -194,7 +195,9 @@ export function Navbar() {
               )}
             </div>
 
-            <div className="flex items-center gap-3">
+            {/* ml-auto only below lg, where the tab row (which
+                otherwise carries the push) is hidden. */}
+            <div className="ml-auto flex items-center gap-3 lg:ml-0">
               {/* Checklist item 08: a clickable phone belongs in the
                   header — the audience likes to just call. */}
               <a

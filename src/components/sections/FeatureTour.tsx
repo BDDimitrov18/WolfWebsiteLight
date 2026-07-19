@@ -261,11 +261,11 @@ export function FeatureTour() {
           </div>
 
           {/* Right: sticky plate. The wrapper is viewport-height and sticks
-              at top-0 with its content flex-centered — this centers the
-              frame while stuck WITHOUT a translate, which would shift it up
-              into the section heading before sticking. */}
+              at top-0. justify-start + pt-20 (not centering): the plate's
+              top then lines up with the first station's text at rest —
+              centering parked it ~200px lower than the copy beside it. */}
           <div>
-            <div className="sticky top-0 flex h-screen flex-col justify-center">
+            <div className="sticky top-0 flex h-screen flex-col justify-start pt-20">
               <div className="mb-3 flex items-center justify-between gap-4 font-mono text-xs tracking-[0.18em]">
                 <span ref={tagRef} className="uppercase text-ember-400" />
                 <div className="flex items-center gap-5">

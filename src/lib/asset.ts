@@ -22,7 +22,7 @@ export function asset(path: string): string {
  * arrive as PNG — convert with sharp ({ quality: 84 }) into
  * /public/screenshots/<slot>.webp and bump the version.
  */
-const SCREENSHOT_VERSION = 3;
+const SCREENSHOT_VERSION = 4;
 
 export function screenshot(slot: string): string {
   return asset(`/screenshots/${slot}.webp?v=${SCREENSHOT_VERSION}`);

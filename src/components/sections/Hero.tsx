@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { track } from "@/lib/track";
+import { asset } from "@/lib/asset";
 import { Container } from "@/components/ui/Section";
 import { InquiryModal } from "@/components/ui/InquiryModal";
 import { TerrainCanvas } from "@/components/three/TerrainCanvas";
@@ -33,6 +34,14 @@ export function Hero() {
             background:
               "radial-gradient(circle, color-mix(in srgb, var(--color-ember-600) 22%, transparent), transparent 62%)",
           }}
+        />
+        {/* The brand mark as a survey-plate watermark behind the
+            headline — big enough to imprint, faint enough to stay
+            texture, not decoration. */}
+        <img
+          src={asset("/brand/wolf_logo_white_560.webp")}
+          alt=""
+          className="absolute left-1/2 top-[7%] h-[15rem] -translate-x-1/2 opacity-[0.07] sm:h-[19rem]"
         />
         {/* seat content on ink */}
         <div className="absolute inset-0 bg-gradient-to-b from-ink-950/50 via-transparent to-ink-900" />

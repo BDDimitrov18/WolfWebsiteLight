@@ -99,6 +99,20 @@ export function Footer() {
           ))}
         </div>
 
+        {/* Ghost wordmark — the brand stamped across the sheet's
+            foot, drafting-plate style: huge, quiet, unmistakable. */}
+        <p
+          aria-hidden
+          className="select-none overflow-hidden whitespace-nowrap pb-2 text-center font-mono font-semibold uppercase leading-none"
+          style={{
+            fontSize: "clamp(4.5rem, 15.5vw, 13.5rem)",
+            letterSpacing: "0.08em",
+            color: "color-mix(in srgb, var(--color-paper-100) 5%, transparent)",
+          }}
+        >
+          Wolf
+        </p>
+
         <div className="flex flex-col items-start justify-between gap-3 border-t border-ink-700 py-6 sm:flex-row sm:items-center">
           <p className="text-xs text-ink-300">
             © {year} Wolf · {t("footer.author")}. {t("footer.rights")}

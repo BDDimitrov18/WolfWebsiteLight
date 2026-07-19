@@ -54,6 +54,19 @@ export function FeatureTour() {
   const rootRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
   const tagRef = useRef<HTMLSpanElement>(null);
+  const flashRef = useRef<HTMLSpanElement>(null);
+
+  // Station navigation: scroll so the chosen block's centre sits on
+  // the 55% activation line the ScrollTriggers watch.
+  const jumpTo = (i: number) => {
+    const root = rootRef.current;
+    if (!root) return;
+    const block = root.querySelectorAll<HTMLElement>("[data-tour-block]")[i];
+    if (!block) return;
+    const r = block.getBoundingClientRect();
+    const top = window.scrollY + r.top + r.height / 2 - window.innerHeight * 0.55;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const root = rootRef.current;
@@ -65,24 +78,43 @@ export function FeatureTour() {
       const dur = reduce ? 0 : 0.6;
       const blocks = gsap.utils.toArray<HTMLElement>("[data-tour-block]", root);
       const frames = gsap.utils.toArray<HTMLElement>("[data-tour-img]", root);
+      const navBtns = gsap.utils.toArray<HTMLElement>("[data-tour-nav]", root);
       if (!blocks.length || !frames.length) return;
 
-      gsap.set(frames, { autoAlpha: 0, scale: 1.035 });
-      gsap.set(frames[0], { autoAlpha: 1, scale: 1 });
+      gsap.set(frames, { autoAlpha: 0 });
+      gsap.set(frames[0], { autoAlpha: 1 });
 
       let active = 0;
       const activate = (i: number) => {
         if (i === active) return;
+        // Review feedback: the old quiet crossfade read as a static
+        // image. The plate change is now a directional slide with an
+        // ember registration flash and a ticking counter.
+        const dirIn = i > active ? 44 : -44;
         active = i;
-        frames.forEach((f, j) =>
-          gsap.to(f, {
-            autoAlpha: j === i ? 1 : 0,
-            scale: j === i ? 1 : 1.035,
-            duration: dur,
-            ease: "power2.out",
-            overwrite: true,
-          }),
-        );
+        frames.forEach((f, j) => {
+          if (j === i) {
+            gsap.fromTo(
+              f,
+              { autoAlpha: 0, y: dirIn, scale: 0.98 },
+              { autoAlpha: 1, y: 0, scale: 1, duration: dur, ease: "power3.out", overwrite: true },
+            );
+          } else {
+            gsap.to(f, {
+              autoAlpha: 0,
+              y: -dirIn * 0.5,
+              duration: dur * 0.6,
+              ease: "power2.in",
+              overwrite: true,
+            });
+          }
+        });
+        if (!reduce && flashRef.current)
+          gsap.fromTo(
+            flashRef.current,
+            { opacity: 0.8 },
+            { opacity: 0, duration: 0.9, ease: "power2.out", overwrite: true },
+          );
         blocks.forEach((b, j) =>
           gsap.to(b, {
             // 0.73 keeps passive stations readable at WCAG AA on this
@@ -93,15 +125,28 @@ export function FeatureTour() {
             overwrite: true,
           }),
         );
-        if (counterRef.current)
+        navBtns.forEach((n, j) => {
+          n.dataset.active = j === i ? "true" : "false";
+        });
+        if (counterRef.current) {
           counterRef.current.textContent = String(i + 1).padStart(2, "0");
+          if (!reduce)
+            gsap.fromTo(
+              counterRef.current,
+              { yPercent: -45, opacity: 0 },
+              { yPercent: 0, opacity: 1, duration: 0.35, ease: "power2.out", overwrite: true },
+            );
+        }
         if (tagRef.current)
           tagRef.current.textContent =
             blocks[i].getAttribute("data-tour-tag") ?? "";
       };
 
-      // initial dim state for non-first blocks
+      // initial state for non-first blocks + the station navigation
       blocks.forEach((b, j) => gsap.set(b, { opacity: j === 0 ? 1 : 0.73 }));
+      navBtns.forEach((n, j) => {
+        n.dataset.active = j === 0 ? "true" : "false";
+      });
       if (tagRef.current)
         tagRef.current.textContent = blocks[0].getAttribute("data-tour-tag") ?? "";
 
@@ -221,18 +266,47 @@ export function FeatureTour() {
               into the section heading before sticking. */}
           <div>
             <div className="sticky top-0 flex h-screen flex-col justify-center">
-              <div className="mb-3 flex items-center justify-between font-mono text-xs tracking-[0.18em]">
+              <div className="mb-3 flex items-center justify-between gap-4 font-mono text-xs tracking-[0.18em]">
                 <span ref={tagRef} className="uppercase text-ember-400" />
-                <span className="text-ink-300">
-                  <span ref={counterRef} className="text-paper-50">01</span>
-                  {" / "}
-                  {String(TOUR.length).padStart(2, "0")}
-                </span>
+                <div className="flex items-center gap-5">
+                  {/* Station navigation — lives in the sticky plate so
+                      it is visible for the entire tour. */}
+                  <nav aria-label={t("features.navAria")} className="flex items-center">
+                    {TOUR.map((row, i) => {
+                      const f = t<FeatureItem>(`features.items.${row.key}`);
+                      return (
+                        <button
+                          key={row.key}
+                          type="button"
+                          data-tour-nav
+                          data-active={i === 0 ? "true" : "false"}
+                          onClick={() => jumpTo(i)}
+                          aria-label={f.tag}
+                          title={f.tag}
+                          className="px-1.5 py-1 text-ink-400 transition-colors hover:text-paper-50 data-[active=true]:font-semibold data-[active=true]:text-ember-400"
+                        >
+                          {i + 1}
+                        </button>
+                      );
+                    })}
+                  </nav>
+                  <span className="text-ink-300">
+                    <span ref={counterRef} className="inline-block text-paper-50">01</span>
+                    {" / "}
+                    {String(TOUR.length).padStart(2, "0")}
+                  </span>
+                </div>
               </div>
               <div className="relative">
                 <CornerMarks
                   className="text-ink-400"
                   inset={-11}
+                />
+                {/* Ember registration flash on plate change */}
+                <span
+                  ref={flashRef}
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 z-10 rounded-xl border-2 border-ember-500 opacity-0"
                 />
                 {TOUR.map((row, i) => {
                   const f = t<FeatureItem>(`features.items.${row.key}`);

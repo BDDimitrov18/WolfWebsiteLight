@@ -45,14 +45,14 @@ export function Logo({
       <Image
         src={asset(src)}
         alt="Wolf"
-        width={44}
-        height={44}
+        width={40}
+        height={40}
         preload
-        className="h-10 w-10 object-contain"
+        className="h-9 w-9 object-contain"
       />
       {withWordmark && (
         <span
-          className="whitespace-nowrap font-display text-[26px] tracking-tight"
+          className="whitespace-nowrap font-display text-2xl tracking-tight"
           style={{ color: tone === "light" ? "var(--color-paper-50)" : "var(--color-ink-900)" }}
         >
           Wolf

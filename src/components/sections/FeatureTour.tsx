@@ -9,11 +9,12 @@ import { ScreenshotCarousel } from "@/components/ui/ScreenshotCarousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
+// The stations show only tag + title (owner request, 2026-07-21: no
+// text below the heading). The body/bullets copy still lives in the
+// dictionaries under features.items.* if it's ever wanted back.
 interface FeatureItem {
   tag: string;
   title: string;
-  body: string;
-  bullets: string[];
 }
 
 // Each feature → its screenshot slot: <slot>.webp in /public/screenshots.
@@ -229,33 +230,7 @@ export function FeatureTour() {
                     style={{ fontSize: "var(--fs-h3)" }}
                   >
                     {f.title}
-                  </h3>
-                  <p
-                    className="mt-4 text-pretty leading-relaxed"
-                    style={{
-                      color:
-                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
-                    }}
-                  >
-                    {f.body}
-                  </p>
-                  <ul className="mt-6 space-y-3">
-                    {f.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3">
-                        <Check />
-                        <span
-                          className="text-sm"
-                          style={{
-                            color:
-                              "color-mix(in srgb, var(--color-paper-100) 90%, transparent)",
-                          }}
-                        >
-                          {b}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                  </h3>                </div>
               );
             })}
           </div>
@@ -345,33 +320,7 @@ export function FeatureTour() {
                     style={{ fontSize: "var(--fs-h3)" }}
                   >
                     {f.title}
-                  </h3>
-                  <p
-                    className="mt-4 text-pretty leading-relaxed"
-                    style={{
-                      color:
-                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
-                    }}
-                  >
-                    {f.body}
-                  </p>
-                  <ul className="mt-6 space-y-3">
-                    {f.bullets.map((b) => (
-                      <li key={b} className="flex items-start gap-3">
-                        <Check />
-                        <span
-                          className="text-sm"
-                          style={{
-                            color:
-                              "color-mix(in srgb, var(--color-paper-100) 90%, transparent)",
-                          }}
-                        >
-                          {b}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </Reveal>
+                  </h3>                </Reveal>
                 <Reveal delay={0.08}>
                   <TourShot row={row} f={f} />
                 </Reveal>
@@ -405,24 +354,5 @@ function TourShot({
   }
   return (
     <ScreenshotFrame slot={row.slot} alt={f.title} title={`Wolf — ${f.tag}`} />
-  );
-}
-
-function Check() {
-  return (
-    <span
-      className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full"
-      style={{ background: "color-mix(in srgb, var(--color-ember-500) 16%, transparent)" }}
-    >
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-        <path
-          d="M2.5 6.5 5 9l4.5-5.5"
-          stroke="var(--color-ember-400)"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </span>
   );
 }

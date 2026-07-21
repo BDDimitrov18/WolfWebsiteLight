@@ -9,12 +9,13 @@ import { ScreenshotCarousel } from "@/components/ui/ScreenshotCarousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { CornerMarks } from "@/components/motifs/GeodesyMotifs";
 
-// The stations show tag + title + the checkmark bullets — the body
-// paragraph is not rendered (owner request, 2026-07-21). Its copy
-// still lives in the dictionaries under features.items.*.body.
+// Station copy is deliberately SHORT (owner request, 2026-07-21:
+// "return the text but shorten the long texts") — keep bodies to
+// 1–2 sentences when editing the dictionaries.
 interface FeatureItem {
   tag: string;
   title: string;
+  body: string;
   bullets: string[];
 }
 
@@ -238,6 +239,15 @@ export function FeatureTour() {
                   >
                     {f.title}
                   </h3>
+                  <p
+                    className="mt-4 text-pretty leading-relaxed"
+                    style={{
+                      color:
+                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
+                    }}
+                  >
+                    {f.body}
+                  </p>
                   <ul className="mt-6 space-y-3">
                     {f.bullets.map((b) => (
                       <li key={b} className="flex items-start gap-3">
@@ -345,6 +355,15 @@ export function FeatureTour() {
                   >
                     {f.title}
                   </h3>
+                  <p
+                    className="mt-4 text-pretty leading-relaxed"
+                    style={{
+                      color:
+                        "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
+                    }}
+                  >
+                    {f.body}
+                  </p>
                   <ul className="mt-6 space-y-3">
                     {f.bullets.map((b) => (
                       <li key={b} className="flex items-start gap-3">

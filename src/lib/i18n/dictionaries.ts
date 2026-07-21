@@ -482,7 +482,7 @@ const bg = {
   demoPage: {
     eyebrow: "Демонстративна среща",
     title: "Запазете демонстративна среща",
-    lead: "Без ангажимент — 30 минути разговор и демонстрация на живо. Ако след срещата прецените, че Wolf не е за вашата практика — никакъв проблем.",
+    lead: "Без ангажимент — 30 минути разговор и демонстрация на живо.",
     points: [
       "Показваме Wolf на живо, с примерни данни — от поръчката до готовия документ.",
       "Минаваме през вашите работни процеси и отговаряме на въпросите ви.",
@@ -1115,7 +1115,7 @@ const en: typeof bg = {
   demoPage: {
     eyebrow: "Demo meeting",
     title: "Book a demo meeting",
-    lead: "No obligation — a 30-minute conversation and a live demo. If afterwards you decide Wolf isn't for your practice — no problem at all.",
+    lead: "No obligation — a 30-minute conversation and a live demo.",
     points: [
       "We show Wolf live, with sample data — from the order to the finished document.",
       "We walk through your own workflows and answer your questions.",

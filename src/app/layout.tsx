@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   description:
     "Wolf — многопотребителска система за управление на проектантска практика. Поръчки, дейности, имоти, документи за собственост, фактури и отчети в реално време.",
-  metadataBase: new URL("https://bddimitrov18.github.io"),
+  metadataBase: new URL("https://wolfsoft.bg"),
   openGraph: {
     // Bulgarian: the audience shares links on Facebook/Viber in BG —
     // an English preview card reads as a foreign product.

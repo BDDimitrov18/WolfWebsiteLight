@@ -9,7 +9,7 @@ export const dynamic = "force-static";
  * path the same way the deploy serves them. When the custom domain
  * arrives, change ORIGIN and the base path handles itself (empty).
  */
-const ORIGIN = "https://bddimitrov18.github.io";
+const ORIGIN = "https://wolfsoft.bg";
 const BASE = process.env.PAGES_BASE_PATH || "";
 
 // Every indexable route; trailing slashes match `trailingSlash: true`.

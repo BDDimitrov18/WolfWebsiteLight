@@ -60,11 +60,16 @@ function terrainHeight(x: number, z: number): number {
 
 // ---- Scene ----------------------------------------------------------------
 
-const INK_FOG = 0x0e1422; // --color-ink-900
-const LINE_COL = 0x3a465f; // --color-ink-500
-const STATION_COL = 0xc9d2e4; // cool paper
-const EMBER = 0xed9a57; // --color-ember-400
-const PARCEL_COL = 0xd8c9b4; // warm survey-paper — parcels read as drawn on the map
+// LIGHT edition: the terrain is drawn as ink on paper, not light on
+// ink. Fog must match the page background (ink-900, now warm cream)
+// so the horizon dissolves into the sheet; linework and stations go
+// DARK, and every material uses normal blending — additive blending
+// only brightens, which is invisible against a light ground.
+const INK_FOG = 0xf6f2ea; // --color-ink-900 (paper ground)
+const LINE_COL = 0x8a7d63; // drafting linework — warm ink-tan
+const STATION_COL = 0x47526c; // navy ink points
+const EMBER = 0xb4531d; // --color-ember-500 (red-pen accent)
+const PARCEL_COL = 0x9c8c6e; // parcels read as drawn on the map
 
 /**
  * The field at the visitor's hour. Surveying starts at first light —
@@ -88,16 +93,16 @@ function timeTint(hour: number): DayTint {
   // it, so it acts as the horizon's "sky". Deltas here are deliberately
   // sized to be seen — a tint nobody can perceive is dead code.
   if (hour >= 5 && hour < 9)
-    // dawn — first light: rose horizon, warm rock
-    return { line: 0x4c4763, station: 0xe6cdb9, ember: 0xf4a56e, fog: 0x241a29, wire: 0.33 };
+    // dawn — first light: rose-tinted sheet, warm ink
+    return { line: 0x94765a, station: 0x54465a, ember: 0xc25e2a, fog: 0xf8efe7, wire: 0.5 };
   if (hour >= 9 && hour < 17)
-    // working hours — clearer, cooler air, brighter stations
-    return { line: 0x51608a, station: 0xe9effc, ember: 0xf0b075, fog: 0x16223c, wire: 0.37 };
+    // working hours — clearer, cooler air, crisper linework
+    return { line: 0x74839b, station: 0x33415e, ember: 0xb4531d, fog: 0xf3f2ee, wire: 0.55 };
   if (hour >= 17 && hour < 21)
-    // dusk — the ember burns low and deep
-    return { line: 0x4d4160, station: 0xdcc4ac, ember: 0xe2793a, fog: 0x1e1220, wire: 0.33 };
-  // night — the original palette, byte-identical
-  return { line: LINE_COL, station: STATION_COL, ember: EMBER, fog: INK_FOG, wire: 0.3 };
+    // dusk — the red pen burns low and deep
+    return { line: 0x8f7455, station: 0x4d3f52, ember: 0xa4451a, fog: 0xf7ece0, wire: 0.5 };
+  // night — lamplit paper, the base palette
+  return { line: LINE_COL, station: STATION_COL, ember: EMBER, fog: INK_FOG, wire: 0.45 };
 }
 
 /** Soft round sprite so points render as glows, not squares. */
@@ -264,9 +269,9 @@ export default function TerrainScene({ className = "" }: { className?: string })
         size: 0.28,
         map: pointTex,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.7,
         depthWrite: false,
-        blending: THREE.AdditiveBlending,
+        blending: THREE.NormalBlending,
       }),
     );
     scene.add(stations);
@@ -283,7 +288,7 @@ export default function TerrainScene({ className = "" }: { className?: string })
       transparent: true,
       opacity: 0.9,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
     });
     const emberPoints = new THREE.Points(emberGeo, emberMat);
     scene.add(emberPoints);
@@ -299,7 +304,7 @@ export default function TerrainScene({ className = "" }: { className?: string })
       color: tint.ember,
       transparent: true,
       opacity: 0.0,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
     });
     const scan = new THREE.Line(scanGeo, scanMat);
     scene.add(scan);
@@ -366,8 +371,8 @@ export default function TerrainScene({ className = "" }: { className?: string })
       const lineMat = new THREE.LineBasicMaterial({
         color: tint.ember,
         transparent: true,
-        opacity: 0.5,
-        blending: THREE.AdditiveBlending,
+        opacity: 0.7,
+        blending: THREE.NormalBlending,
       });
       scene.add(new THREE.LineSegments(lineGeo, lineMat));
 
@@ -399,8 +404,8 @@ export default function TerrainScene({ className = "" }: { className?: string })
       const fillMat = new THREE.MeshBasicMaterial({
         color: tint.ember,
         transparent: true,
-        opacity: 0.05,
-        blending: THREE.AdditiveBlending,
+        opacity: 0.09,
+        blending: THREE.NormalBlending,
         depthWrite: false,
         side: THREE.DoubleSide,
       });

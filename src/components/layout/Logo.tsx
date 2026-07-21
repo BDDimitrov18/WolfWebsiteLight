@@ -24,10 +24,14 @@ export function Logo({
   const pathname = usePathname();
   // 128px WebP renders — the marks display at 36px, and the original
   // PNGs were 168KB of header weight on every page.
+  // LIGHT edition: `tone="light"` still means "the site's default
+  // surface" at every call site — but that surface is now paper, so
+  // it maps to the BLACK mark (the wordmark color already flips via
+  // the remapped paper-50/ink-900 tokens).
   const src =
     tone === "light"
-      ? "/brand/wolf_logo_white_tight.webp"
-      : "/brand/wolf_logo_black_transparent.webp";
+      ? "/brand/wolf_logo_black_transparent.webp"
+      : "/brand/wolf_logo_white_tight.webp";
 
   const onClick = (e: React.MouseEvent) => {
     if (href !== "/" || pathname !== "/") return;

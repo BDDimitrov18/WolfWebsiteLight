@@ -1,52 +1,60 @@
 @import "tailwindcss";
 
 /* ============================================================
-   WOLF — Design Tokens
+   WOLF — Design Tokens (LIGHT edition)
    Brand: land-surveying / cadastral / geodesy.
 
-   The site is drafted in ONE register — the FIELD (night): deep
-   navy ink stepping through ink-950/900/850, wireframe terrain,
-   the burnt-ember accent of the instrument. The drafting grammar
-   (hairline ledgers, millimeter grids, corner marks, dimension
-   rules, survey markers) is drawn in light on that ground rather
-   than in ink on paper.
+   This repo is the LIGHT twin of WolfWebsite. Same text, same
+   layout, one register flipped: instead of the FIELD at night
+   (light drawn on deep navy ink), this site is the DRAFTING
+   SHEET by day — the same hairline ledgers, millimeter grids,
+   corner marks and survey markers, now drawn in ink on warm
+   paper, the surveyor's red pen for the ember accent.
 
-   There is no paper register. An earlier build put whole sections
-   on a warm drafting sheet; the black-to-paper jump was rejected
-   twice by the owner. The `paper-*` tokens survive only as the
-   light end of the type/accent scale — do not reintroduce a light
-   ground. The only light plates on the site are the app's own
-   screenshots.
+   The trick that makes it a one-file conversion: every component
+   still says `bg-ink-900`, `text-paper-50`, etc. The SCALES are
+   remapped, not the class names —
+     ink-*   950→300 ran dark→light; now it runs light→dark.
+             Backgrounds (950/900/850/800) become paper surfaces,
+             borders (600/500) light tan hairlines, muted text
+             (400/300) readable warm grays.
+     paper-* 50→400 ran bright→dim text; now deep navy ink,
+             50 strongest. Headlines stay `text-paper-50`.
+     ember-* darkened across the board: what was a glow on ink
+             must hold ≥4.5:1 as text on cream.
+   Keep any future edits in the same key — never "fix" a
+   component back to literal colors.
    ============================================================ */
 
 @theme {
-  /* ---- Ink (deep navy) ------------------------------------ */
-  --color-ink-950: #090d15;
-  --color-ink-900: #0e1422;
-  --color-ink-850: #111829;
-  --color-ink-800: #141c2b;
-  --color-ink-700: #1c2434;
-  --color-ink-600: #283247;
-  --color-ink-500: #3a465f;
-  --color-ink-400: #5a6883;
-  --color-ink-300: #8593ad;
+  /* ---- Ink (now the paper ground: warm drafting sheet) ---- */
+  --color-ink-950: #fdfcf9;
+  --color-ink-900: #f6f2ea;
+  --color-ink-850: #f0ebe0;
+  --color-ink-800: #eae4d6;
+  --color-ink-700: #ddd4c1;
+  --color-ink-600: #c6bba4;
+  --color-ink-500: #a4977d;
+  --color-ink-400: #77694f;
+  --color-ink-300: #574c38;
 
-  /* ---- Ember (burnt orange — the pivot dot; deepens to
-          oxide, the surveyor's red pen on paper) ------------ */
-  --color-ember-800: #8a3a15;
-  --color-ember-700: #a84d22;
-  --color-ember-600: #c25e2a;
-  --color-ember-500: #d97a40;
-  --color-ember-400: #ed9a57;
-  --color-ember-300: #f4b77e;
-  --color-ember-200: #f9d4ad;
+  /* ---- Ember (the surveyor's red pen — darkened so accent
+          text keeps contrast on cream; hovers that step
+          400→300 now darken, which is correct on light) ----- */
+  --color-ember-800: #571f07;
+  --color-ember-700: #6e2c0e;
+  --color-ember-600: #8a3a15;
+  --color-ember-500: #b4531d;
+  --color-ember-400: #9c4415;
+  --color-ember-300: #7f350f;
+  --color-ember-200: #632809;
 
-  /* ---- Paper (warm cream surfaces) ----------------------- */
-  --color-paper-50: #fdfbf7;
-  --color-paper-100: #f7f2ea;
-  --color-paper-200: #efe6d7;
-  --color-paper-300: #e3d6c2;
-  --color-paper-400: #cdba9e;
+  /* ---- Paper (now the ink: deep navy type scale) ---------- */
+  --color-paper-50: #131a2c;
+  --color-paper-100: #1e2637;
+  --color-paper-200: #2f3950;
+  --color-paper-300: #47526c;
+  --color-paper-400: #64708c;
 
   /* ---- Semantic ------------------------------------------ */
   --color-background: var(--color-ink-900);
@@ -62,10 +70,13 @@
 
   /* ---- Cool informational accent ------------------------------
      Steel: reserved for diagrams and technical labels only. Never
-     on actions — ember stays the sole "act here" color. */
-  --color-steel-300: #a9cddb;
-  --color-steel-400: #7fb3c8;
-  --color-steel-500: #5891a8;
+     on actions — ember stays the sole "act here" color.
+     (300 was the lightest/most-readable step on ink; on paper the
+     most-readable step is the darkest, so the scale runs 300 dark
+     → 500 light to keep call sites unchanged.) */
+  --color-steel-300: #29607a;
+  --color-steel-400: #34718d;
+  --color-steel-500: #47829d;
 
   /* ---- Type scale eyebrow -------------------------------- */
   --text-eyebrow: 0.78rem;
@@ -78,12 +89,12 @@
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
 
-  /* ---- Shadows (warm-tinted, never pure black) ----------- */
-  --shadow-ambient: 0 1px 2px rgba(9, 13, 21, 0.4),
-    0 12px 40px -12px rgba(9, 13, 21, 0.55);
-  --shadow-frame: 0 30px 60px -30px rgba(9, 13, 21, 0.7),
-    0 8px 24px -12px rgba(9, 13, 21, 0.45);
-  --shadow-ember: 0 10px 30px -8px rgba(194, 94, 42, 0.45);
+  /* ---- Shadows (warm-tinted, much softer on paper) -------- */
+  --shadow-ambient: 0 1px 2px rgba(62, 50, 30, 0.1),
+    0 12px 40px -12px rgba(62, 50, 30, 0.18);
+  --shadow-frame: 0 30px 60px -30px rgba(62, 50, 30, 0.3),
+    0 8px 24px -12px rgba(62, 50, 30, 0.16);
+  --shadow-ember: 0 10px 30px -8px rgba(164, 69, 26, 0.3);
 
   /* ---- Easing -------------------------------------------- */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -95,7 +106,7 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
     /* Fluid heading sizes — trimmed for the mono display face: its
        fixed 0.6em advance runs ~15% wider than the old serif, so the
        caps come down to keep titles on the same line counts. */

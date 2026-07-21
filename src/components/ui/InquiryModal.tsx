@@ -1,20 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { CONTACT } from "@/lib/contact";
+import { sendInquiry } from "@/lib/inquiry";
 import { track } from "@/lib/track";
 
 /**
  * Inquiry dialog (owner reference: a classic contact modal, redrawn in
- * the site's drafting grammar). The site is static — on submit the
- * form composes a pre-filled email and opens the visitor's mail
- * program, exactly as the privacy policy describes. Nothing is sent
- * automatically.
+ * the site's drafting grammar). Submitting sends the inquiry directly
+ * to the owner's inbox via Web3Forms (see lib/inquiry.ts); if the
+ * service is unreachable the form falls back to composing a mailto in
+ * the visitor's mail program, so no inquiry is ever lost. The privacy
+ * policy documents the direct sending.
  */
 export function InquiryModal({ onClose }: { onClose: () => void }) {
   const t = useT();
   const panelRef = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
   // Esc closes; page behind must not scroll.
   useEffect(() => {
@@ -29,10 +32,27 @@ export function InquiryModal({ onClose }: { onClose: () => void }) {
     };
   }, [onClose]);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status !== "idle") return;
     const fd = new FormData(e.currentTarget);
     const val = (k: string) => String(fd.get(k) ?? "").trim();
+    track("inquiry_submit");
+    setStatus("sending");
+    const ok = await sendInquiry(t("inquiry.subject"), {
+      name: `${val("name")} ${val("lastName")}`.trim(),
+      email: val("email"),
+      phone: val("phone") || "—",
+      team: val("team") || "—",
+      message: val("message"),
+    });
+    if (ok) {
+      setStatus("sent");
+      return;
+    }
+    // Delivery service unreachable — the old path: compose the email
+    // in the visitor's own mail program instead.
+    setStatus("idle");
     const lines = [
       `${t("inquiry.name")}: ${val("name")} ${val("lastName")}`.trim(),
       `${t("inquiry.email")}: ${val("email")}`,
@@ -41,7 +61,6 @@ export function InquiryModal({ onClose }: { onClose: () => void }) {
       "",
       val("message"),
     ];
-    track("inquiry_submit");
     window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
       t("inquiry.subject"),
     )}&body=${encodeURIComponent(lines.join("\n"))}`;
@@ -91,6 +110,24 @@ export function InquiryModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
+        {status === "sent" ? (
+          <div className="mt-7 rounded-lg border p-6 text-center">
+            <p className="font-mono text-sm uppercase tracking-[0.16em] text-ember-400">
+              {t("formStatus.sentTitle")}
+            </p>
+            <p
+              className="mt-3 text-sm leading-relaxed"
+              style={{
+                color: "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
+              }}
+            >
+              {t("formStatus.sentBody")}
+            </p>
+            <button type="button" onClick={onClose} className="btn btn-ghost mt-6">
+              {t("inquiry.close")}
+            </button>
+          </div>
+        ) : (
         <form onSubmit={onSubmit} className="mt-7">
           <div className="grid gap-4 sm:grid-cols-3">
             <Field label={t("inquiry.name")} required>
@@ -127,8 +164,12 @@ export function InquiryModal({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <button type="submit" className="btn btn-primary">
-              {t("inquiry.submit")}
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="btn btn-primary disabled:opacity-60"
+            >
+              {status === "sending" ? t("formStatus.sending") : t("inquiry.submit")}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                 <path
                   d="M3 8h10M9 4l4 4-4 4"
@@ -144,6 +185,7 @@ export function InquiryModal({ onClose }: { onClose: () => void }) {
             </p>
           </div>
         </form>
+        )}
       </div>
     </div>
   );

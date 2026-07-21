@@ -160,7 +160,7 @@ const bg = {
     teamOptions: ["1–3 души", "4–10 души", "11–25 души", "Повече от 25"],
     message: "Вашето запитване",
     submit: "Изпращане",
-    note: "Формата отваря вашата пощенска програма с готово писмо — нищо не се изпраща автоматично от сайта.",
+    note: "Запитването се изпраща директно до нас — отговаряме до един работен ден.",
     close: "Затвори",
   },
   freshStart: {
@@ -506,7 +506,7 @@ const bg = {
       "Без значение",
     ],
     submit: "Изпратете заявката",
-    note: "Формата отваря вашата пощенска програма с готово писмо — нищо не се изпраща автоматично от сайта. Отговаряме до един работен ден.",
+    note: "Заявката се изпраща директно до нас. Отговаряме до един работен ден.",
     calTitle: "Изберете час директно",
     calNote:
       "Календарът се зарежда от Google Календар и поставя бисквитки на Google. Зарежда се само след като го поискате.",
@@ -592,6 +592,11 @@ const bg = {
       },
     ],
   },
+  formStatus: {
+    sending: "Изпращане…",
+    sentTitle: "Съобщението е изпратено",
+    sentBody: "Благодарим! Получихме запитването ви и ще се свържем с вас до един работен ден.",
+  },
   privacyPage: {
     title: "Политика за поверителност",
     updated: "Актуализирана: юли 2026 г.",
@@ -601,7 +606,7 @@ const bg = {
       {
         h: "Какво събира този сайт",
         ps: [
-          "Сайтът е статичен и няма собствен сървър за данни. Бутонът „Заявете демо“ не изпраща нищо към нас автоматично — той отваря вашата пощенска програма с предварително попълнено писмо, което вие решавате дали да изпратите.",
+          "Сайтът е статичен и няма собствен сървър за данни. Когато изпратите формуляр („Изпратете запитване“ или заявката за демонстрация), въведените от вас данни — име, имейл, телефон и съобщение — се предават до нас чрез услугата за формуляри Web3Forms, която ги обработва единствено за да достави съобщението в пощенската ни кутия. Ако услугата е недостъпна, сайтът вместо това отваря вашата пощенска програма с предварително попълнено писмо, което вие решавате дали да изпратите.",
           "Имейл, който ни изпратите, се използва единствено за да ви отговорим и да уговорим демонстрация. Не го споделяме с трети страни и не изпращаме маркетингови съобщения.",
           "Сайтът запомня няколко предпочитания в хранилището на вашия браузър: езика на интерфейса, че въвеждащата анимация е показана, последната прочетена глава от документацията и избран размер на екипа в страницата с цените. Те никога не напускат устройството ви, ние нямаме достъп до тях, а изчистването на данните за сайта в браузъра ги премахва.",
         ],
@@ -793,7 +798,7 @@ const en: typeof bg = {
     teamOptions: ["1–3 people", "4–10 people", "11–25 people", "More than 25"],
     message: "Your inquiry",
     submit: "Send",
-    note: "The form opens your mail program with a pre-filled message — nothing is sent automatically by the site.",
+    note: "Your inquiry is sent directly to us — we reply within one business day.",
     close: "Close",
   },
   freshStart: {
@@ -1139,7 +1144,7 @@ const en: typeof bg = {
       "Any time",
     ],
     submit: "Send the request",
-    note: "The form opens your mail program with a pre-filled message — nothing is sent automatically by the site. We reply within one business day.",
+    note: "Your request is sent directly to us. We reply within one business day.",
     calTitle: "Pick a time directly",
     calNote:
       "The calendar is loaded from Google Calendar and sets Google cookies. It loads only after you ask for it.",
@@ -1225,6 +1230,11 @@ const en: typeof bg = {
       },
     ],
   },
+  formStatus: {
+    sending: "Sending…",
+    sentTitle: "Message sent",
+    sentBody: "Thank you! We received your inquiry and will get back to you within one business day.",
+  },
   privacyPage: {
     title: "Privacy policy",
     updated: "Updated: July 2026",
@@ -1234,7 +1244,7 @@ const en: typeof bg = {
       {
         h: "What this site collects",
         ps: [
-          "The site is static and has no data server of its own. The “Book a demo” button sends nothing to us automatically — it opens your mail client with a pre-filled message that you decide whether to send.",
+          "The site is static and has no data server of its own. When you submit a form (“Send an inquiry” or the demo request), the data you enter — name, email, phone and message — is delivered to us via the Web3Forms form service, which processes it solely to deliver the message to our inbox. If the service is unavailable, the site instead opens your mail client with a pre-filled message that you decide whether to send.",
           "An email you send us is used solely to reply and arrange a demonstration. We do not share it with third parties and we do not send marketing messages.",
           "The site remembers a few preferences in your browser's own storage: the interface language, that the intro animation has been shown, the last documentation chapter you read, and a team size you pick on the pricing page. They never leave your device, we cannot read them, and clearing your browser's site data removes them.",
         ],

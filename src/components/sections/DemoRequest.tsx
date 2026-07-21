@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useT } from "@/lib/i18n/LocaleProvider";
 import { CONTACT } from "@/lib/contact";
 import { CALENDAR_URL } from "@/lib/booking";
+import { sendInquiry } from "@/lib/inquiry";
 import { track } from "@/lib/track";
 import { Container, Section } from "@/components/ui/Section";
 
@@ -18,6 +19,7 @@ import { Container, Section } from "@/components/ui/Section";
 export function DemoRequest() {
   const t = useT();
   const [calOpen, setCalOpen] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
   // A visitor who already chose to load the calendar once shouldn't
   // have to re-consent on every visit.
@@ -43,10 +45,29 @@ export function DemoRequest() {
   const inputCls =
     "w-full rounded-md border bg-ink-950 px-3 py-2.5 text-sm text-paper-50 placeholder:text-ink-400";
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status !== "idle") return;
     const fd = new FormData(e.currentTarget);
     const val = (k: string) => String(fd.get(k) ?? "").trim();
+    track("demo_form_submit");
+    setStatus("sending");
+    const ok = await sendInquiry(t("demoPage.subject"), {
+      name: val("name"),
+      practice: val("practice") || "—",
+      email: val("email"),
+      phone: val("phone") || "—",
+      team: val("team") || "—",
+      preferred_time: val("when") || "—",
+      message: val("message"),
+    });
+    if (ok) {
+      setStatus("sent");
+      return;
+    }
+    // Delivery service unreachable — fall back to composing the email
+    // in the visitor's own mail program.
+    setStatus("idle");
     const lines = [
       `${t("demoPage.fName")}: ${val("name")}`,
       `${t("demoPage.fPractice")}: ${val("practice") || "—"}`,
@@ -57,7 +78,6 @@ export function DemoRequest() {
       "",
       val("message"),
     ];
-    track("demo_form_submit");
     window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(
       t("demoPage.subject"),
     )}&body=${encodeURIComponent(lines.join("\n"))}`;
@@ -159,7 +179,7 @@ export function DemoRequest() {
               )}
             </div>
           ) : (
-            <DemoForm t={t} inputCls={inputCls} onSubmit={onSubmit} />
+            <DemoForm t={t} inputCls={inputCls} onSubmit={onSubmit} status={status} />
           )}
         </div>
 
@@ -171,7 +191,7 @@ export function DemoRequest() {
               {t("demoPage.altForm")}
             </summary>
             <div className="mt-6 max-w-2xl">
-              <DemoForm t={t} inputCls={inputCls} onSubmit={onSubmit} />
+              <DemoForm t={t} inputCls={inputCls} onSubmit={onSubmit} status={status} />
             </div>
           </details>
         ) : null}
@@ -184,11 +204,30 @@ function DemoForm({
   t,
   inputCls,
   onSubmit,
+  status,
 }: {
   t: ReturnType<typeof useT>;
   inputCls: string;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  status: "idle" | "sending" | "sent";
 }) {
+  if (status === "sent") {
+    return (
+      <div className="flex h-fit min-h-[260px] flex-col items-center justify-center gap-3 rounded-xl border bg-ink-900 p-8 text-center shadow-ambient">
+        <p className="font-mono text-sm uppercase tracking-[0.16em] text-ember-400">
+          {t("formStatus.sentTitle")}
+        </p>
+        <p
+          className="max-w-sm text-sm leading-relaxed"
+          style={{
+            color: "color-mix(in srgb, var(--color-paper-100) 84%, transparent)",
+          }}
+        >
+          {t("formStatus.sentBody")}
+        </p>
+      </div>
+    );
+  }
   return (
           <form
             onSubmit={onSubmit}
@@ -236,8 +275,12 @@ function DemoForm({
             </div>
 
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <button type="submit" className="btn btn-primary">
-                {t("demoPage.submit")}
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="btn btn-primary disabled:opacity-60"
+              >
+                {status === "sending" ? t("formStatus.sending") : t("demoPage.submit")}
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                   <path
                     d="M3 8h10M9 4l4 4-4 4"

@@ -530,7 +530,7 @@ const bg = {
     title: "Общи условия",
     updated: "В сила от: юли 2026 г.",
     intro:
-      "Настоящите общи условия уреждат ползването на софтуерната система Wolf — настолно приложение и сървърен компонент за управление на проектантска практика, предоставяни от Божидар Дамянов Димитров („доставчикът“). С използването на Wolf приемате тези условия. Въпроси: bddimitrov18@gmail.com, +359 877 139 712.",
+      "Настоящите общи условия уреждат ползването на софтуерната система Wolf — настолно приложение и сървърен компонент за управление на проектантска практика, предоставяни от Божидар Дамянов Димитров („доставчикът“). С използването на Wolf приемате тези условия. Въпроси: bozhidar@wolfsoft.bg, +359 877 139 712.",
     sections: [
       {
         h: "1. Софтуерът",
@@ -601,7 +601,7 @@ const bg = {
     title: "Политика за поверителност",
     updated: "Актуализирана: юли 2026 г.",
     intro:
-      "Тази страница описва какви данни събира сайтът на Wolf и как се използват. Администратор на данните е Божидар Дамянов Димитров — bddimitrov18@gmail.com, +359 877 139 712.",
+      "Тази страница описва какви данни събира сайтът на Wolf и как се използват. Администратор на данните е Божидар Дамянов Димитров — bozhidar@wolfsoft.bg, +359 877 139 712.",
     sections: [
       {
         h: "Какво събира този сайт",
@@ -623,7 +623,7 @@ const bg = {
       {
         h: "Вашите права",
         ps: [
-          "Съгласно ОРЗД (GDPR) можете да поискате достъп до данните, които съхраняваме за вас, тяхната корекция или изтриване. Пишете ни на bddimitrov18@gmail.com — отговаряме в разумен срок.",
+          "Съгласно ОРЗД (GDPR) можете да поискате достъп до данните, които съхраняваме за вас, тяхната корекция или изтриване. Пишете ни на bozhidar@wolfsoft.bg — отговаряме в разумен срок.",
           "Ако смятате, че правата ви са нарушени, можете да подадете жалба до Комисията за защита на личните данни (cpdp.bg).",
         ],
       },
@@ -1168,7 +1168,7 @@ const en: typeof bg = {
     title: "Terms of use",
     updated: "Effective: July 2026",
     intro:
-      "These terms govern the use of the Wolf software system — a desktop application and server component for managing a design practice, provided by Bozhidar Damyanov Dimitrov (“the provider”). By using Wolf you accept these terms. Questions: bddimitrov18@gmail.com, +359 877 139 712.",
+      "These terms govern the use of the Wolf software system — a desktop application and server component for managing a design practice, provided by Bozhidar Damyanov Dimitrov (“the provider”). By using Wolf you accept these terms. Questions: bozhidar@wolfsoft.bg, +359 877 139 712.",
     sections: [
       {
         h: "1. The software",
@@ -1239,7 +1239,7 @@ const en: typeof bg = {
     title: "Privacy policy",
     updated: "Updated: July 2026",
     intro:
-      "This page describes what data the Wolf website collects and how it is used. The data controller is Bozhidar Damyanov Dimitrov — bddimitrov18@gmail.com, +359 877 139 712.",
+      "This page describes what data the Wolf website collects and how it is used. The data controller is Bozhidar Damyanov Dimitrov — bozhidar@wolfsoft.bg, +359 877 139 712.",
     sections: [
       {
         h: "What this site collects",
@@ -1261,7 +1261,7 @@ const en: typeof bg = {
       {
         h: "Your rights",
         ps: [
-          "Under the GDPR you may request access to the data we hold about you, its correction or its deletion. Write to bddimitrov18@gmail.com — we reply within a reasonable time.",
+          "Under the GDPR you may request access to the data we hold about you, its correction or its deletion. Write to bozhidar@wolfsoft.bg — we reply within a reasonable time.",
           "If you believe your rights have been violated, you may lodge a complaint with the Bulgarian Commission for Personal Data Protection (cpdp.bg).",
         ],
       },

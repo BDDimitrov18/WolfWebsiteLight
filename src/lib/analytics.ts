@@ -14,3 +14,10 @@ export const GA_ID = "G-13JBTSR7PQ";
  * only ever loads with marketing consent (see CookieConsent).
  */
 export const ADS_ID = "AW-18345207747";
+
+/**
+ * Google Ads conversion label for a demo request ("AW-…/…" send_to).
+ * Fired by track() on the events that constitute an actual request,
+ * and only with marketing consent.
+ */
+export const ADS_CONVERSION_DEMO = "AW-18345207747/mAGvCN2Mv9UcEMPP1qtE";

@@ -614,7 +614,7 @@ const bg = {
       {
         h: "Бисквитки и анализ на посещенията",
         ps: [
-          "Сайтът използва Google Analytics 4, но само след вашето изрично съгласие от банера за бисквитки. Преди съгласие не се зарежда аналитичен скрипт и не се поставя нито една аналитична или маркетингова бисквитка (Google Consent Mode v2, с режим по подразбиране „отказано“).",
+          "Сайтът използва Google Analytics 4 (при съгласие „Аналитика“) и маркетинговия таг на Google Ads за измерване на реклами (при съгласие „Маркетинг“) — но само след вашия изричен избор от банера за бисквитки. Преди съгласие не се зарежда нито един от тези скриптове и не се поставя нито една аналитична или маркетингова бисквитка (Google Consent Mode v2, с режим по подразбиране „отказано“).",
           "Данните от аналитиката са обобщени — кои страници се четат и колко посетители има — и не ги свързваме с конкретни лица. Можете да промените избора си по всяко време от връзката „Бисквитки“ в долната част на сайта; самият избор се пази само във вашия браузър.",
           "Страницата „Демонстративна среща“ може да зареди календар на Google (Google Calendar) за избор на час. Той се зарежда единствено след като натиснете „Заредете календара“ и тогава поставя бисквитки на Google съгласно тяхната политика за поверителност. Формулярът и телефонът остават алтернатива без бисквитки.",
           "Хостингът (GitHub Pages) може да записва стандартни сървърни логове — IP адрес и заявена страница — съгласно политиката за поверителност на GitHub.",
@@ -1252,7 +1252,7 @@ const en: typeof bg = {
       {
         h: "Cookies and visit analytics",
         ps: [
-          "The site uses Google Analytics 4, but only after your explicit consent via the cookie banner. Before consent no analytics script loads and no analytics or marketing cookie is set (Google Consent Mode v2, defaulting to “denied”).",
+          "The site uses Google Analytics 4 (with “Analytics” consent) and the Google Ads marketing tag for ad measurement (with “Marketing” consent) — but only after your explicit choice via the cookie banner. Before consent neither script loads and no analytics or marketing cookie is set (Google Consent Mode v2, defaulting to “denied”).",
           "Analytics data is aggregate — which pages are read and how many visitors there are — and we do not tie it to individual people. You can change your choice at any time via the “Cookies” link at the bottom of the site; the choice itself is stored only in your browser.",
           "The “Demo meeting” page can load a Google Calendar for picking a time. It loads only after you press “Load the calendar”, and then sets Google cookies under Google's own privacy policy. The form and the phone remain a cookie-free alternative.",
           "The hosting provider (GitHub Pages) may record standard server logs — IP address and requested page — under GitHub's own privacy policy.",

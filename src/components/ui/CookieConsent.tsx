@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { GA_ID } from "@/lib/analytics";
+import { ADS_ID, GA_ID } from "@/lib/analytics";
 import { CALENDAR_URL } from "@/lib/booking";
 import {
   CONSENT_OPEN_EVENT,
@@ -12,6 +13,33 @@ import {
   type Consent,
 } from "@/lib/consent";
 import { useT } from "@/lib/i18n/LocaleProvider";
+
+/* gtag() must push the live `arguments` object — gtag.js ignores
+   plain arrays — hence the old-style function and the disables. */
+function gtag() {
+  const w = window as unknown as { dataLayer?: unknown[] };
+  w.dataLayer = w.dataLayer ?? [];
+  // eslint-disable-next-line prefer-rest-params
+  w.dataLayer.push(arguments);
+}
+
+/**
+ * Google Ads tag ("AW-…"), mounted only with marketing consent. GA and
+ * Ads are two destinations of the same Google tag, so when GA is already
+ * running this just adds a config; the script itself is only fetched for
+ * the visitor who granted marketing while declining analytics.
+ */
+function GoogleAds({ loadScript }: { loadScript: boolean }) {
+  useEffect(() => {
+    // @ts-expect-error -- gtag consumes untyped varargs by design
+    gtag("js", new Date());
+    // @ts-expect-error -- gtag consumes untyped varargs by design
+    gtag("config", ADS_ID);
+  }, []);
+  return loadScript ? (
+    <Script src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`} />
+  ) : null;
+}
 
 /**
  * The consent banner + the analytics loader, in one place so the
@@ -48,7 +76,7 @@ export function CookieConsent() {
   }, []);
 
   // Nothing external configured → no cookies exist → no banner.
-  if (!GA_ID && !CALENDAR_URL) return null;
+  if (!GA_ID && !ADS_ID && !CALENDAR_URL) return null;
   if (!mounted) return null;
 
   const decide = (a: boolean, m: boolean) => {
@@ -60,6 +88,9 @@ export function CookieConsent() {
   return (
     <>
       {GA_ID && consent?.analytics ? <GoogleAnalytics gaId={GA_ID} /> : null}
+      {ADS_ID && consent?.marketing ? (
+        <GoogleAds loadScript={!(GA_ID && consent.analytics)} />
+      ) : null}
 
       {visible && (
         <div

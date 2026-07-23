@@ -6,3 +6,11 @@
  * the GA4 property (Admin → Data streams → Web) to go live.
  */
 export const GA_ID = "G-13JBTSR7PQ";
+
+/**
+ * Google Ads tag ID ("AW-…"), from the same Google tag as GA above.
+ *
+ * Same switch semantics: empty string ships nothing. The tag itself
+ * only ever loads with marketing consent (see CookieConsent).
+ */
+export const ADS_ID = "AW-18345207747";
